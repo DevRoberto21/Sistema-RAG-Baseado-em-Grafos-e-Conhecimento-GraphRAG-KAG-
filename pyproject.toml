@@ -1,0 +1,33 @@
+[project]
+name = "graphrag-bulas"
+version = "0.1.0"
+description = "GraphRAG/KAG sobre bulas de medicamentos (Neo4j + LLM)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "neo4j>=5.25",
+    "langchain>=0.3",
+    "langchain-google-genai>=2.0",
+    "pydantic>=2.8",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+# Fora do core: torch é pesado e o CI não precisa dele.
+embeddings = ["sentence-transformers>=3.0"]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
