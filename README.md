@@ -17,6 +17,16 @@ uv run python scripts/check_setup.py
 
 Chave do Gemini (grátis): https://aistudio.google.com/apikey
 
+## Banco de dados
+
+Schema documentado em [`docs/modelagem.md`](docs/modelagem.md). Para criar constraints e índices
+(pode rodar de novo sem erro):
+
+```bash
+set -a; . ./.env; set +a
+docker exec -i graphrag-neo4j cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" < cypher/schema.cypher
+```
+
 ## Estrutura
 
 ```
