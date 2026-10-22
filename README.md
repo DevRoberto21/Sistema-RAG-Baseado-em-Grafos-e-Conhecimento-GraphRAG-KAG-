@@ -26,6 +26,7 @@ Schema documentado em [`docs/modelagem.md`](docs/modelagem.md). Para criar const
 set -a; . ./.env; set +a
 docker exec -i graphrag-neo4j cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" < cypher/schema.cypher
 docker exec -i graphrag-neo4j cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" < cypher/seed.cypher
+uv run python -m graphrag_bulas.embeddings   # grava embeddings que faltam (precisa --extra embeddings)
 uv run pytest tests/test_seed.py   # confere as perguntas-alvo no grafo semente
 ```
 
