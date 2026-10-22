@@ -3,23 +3,6 @@
 Precisa do Neo4j com cypher/schema.cypher e cypher/seed.cypher aplicados; senão é pulado.
 """
 
-import pytest
-
-from graphrag_bulas.config import get_driver
-
-
-@pytest.fixture(scope="module")
-def db():
-    driver = get_driver()
-    try:
-        driver.verify_connectivity()
-    except Exception:
-        pytest.skip("Neo4j indisponível")
-    if not consulta(driver, "MATCH (m:Medicamento {id: 'cozaar'}) RETURN count(m) AS n")[0]["n"]:
-        pytest.skip("grafo semente não carregado")
-    yield driver
-    driver.close()
-
 
 def consulta(driver, cypher, **params):
     return driver.execute_query(cypher, params).records
