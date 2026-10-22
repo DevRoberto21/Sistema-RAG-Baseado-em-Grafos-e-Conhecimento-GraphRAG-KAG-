@@ -25,7 +25,12 @@ Schema documentado em [`docs/modelagem.md`](docs/modelagem.md). Para criar const
 ```bash
 set -a; . ./.env; set +a
 docker exec -i graphrag-neo4j cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" < cypher/schema.cypher
+docker exec -i graphrag-neo4j cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" < cypher/seed.cypher
+uv run pytest tests/test_seed.py   # confere as perguntas-alvo no grafo semente
 ```
+
+O grafo semente (`cypher/seed.cypher`) tem 5 bulas (Cozaar, Renitec, Marevan, Advil, Aspirina)
+e serve para começar retrieval e UI antes da ingestão completa.
 
 ## Estrutura
 

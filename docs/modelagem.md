@@ -65,7 +65,7 @@ Todos os nós de domínio têm também o label `:Entidade` e estas propriedades:
 
 | Label | Propriedades | Observação |
 |---|---|---|
-| `Bula` | `id`, `url`, `data_publicacao`, `tipo` (`profissional`) | `id` = `bula_<id do medicamento>` |
+| `Bula` | `id`, `url`, `arquivo`, `data_publicacao`, `tipo` (`profissional`) | `id` = `bula_<id do medicamento>`; `arquivo` = caminho do PDF em `data/raw/` |
 | `Secao` | `id`, `tipo` | `tipo` ∈ `indicacoes`, `contraindicacoes`, `advertencias`, `interacoes`, `reacoes_adversas`, `posologia` |
 | `Chunk` | `id`, `texto`, `ordem`, `embedding` (1024) | `id` = `<id da secao>_<ordem>` |
 
@@ -93,7 +93,9 @@ Vocabulários fechados:
 
 Proveniência: toda relação de domínio (tudo menos `DESCREVE`, `TEM_SECAO`, `TEM_CHUNK`,
 `MENCIONA`) guarda `fonte_chunk_id`, `confianca` (0–1) e `metodo` (`manual` ou `llm`). No grafo
-semente, `confianca = 1.0` e `metodo = 'manual'`.
+semente, `confianca = 1.0` e `metodo = 'manual'`. `fonte_chunk_id` fica nulo só quando o fato vem
+da capa ou da composição da bula (`CONTEM`, `FABRICADO_POR`) ou de curadoria (`PERTENCE_A`).
+`MENCIONA` é derivada: cada chunk menciona as duas pontas das relações que ele sustenta.
 
 ## 5. Índices
 
@@ -140,12 +142,25 @@ Cinco bulas escolhidas para se cruzarem:
 | Advil | ibuprofeno | AINE |
 | Aspirina | ácido acetilsalicílico | AINE / antiagregante |
 
-Cruzamentos garantidos: varfarina com AINEs (risco de sangramento), AINEs reduzindo o efeito de
-anti-hipertensivos, IECA e BRA contraindicados na gravidez, efeitos adversos comuns a losartana
-e enalapril.
+Cruzamentos: varfarina com AINEs e salicilatos (risco de sangramento), AINEs reduzindo o efeito
+de anti-hipertensivos, efeitos adversos comuns a losartana e enalapril, contraindicações na
+gravidez.
 
-Os fatos do semente foram escritos à mão a partir do conhecimento geral dessas bulas. P2 confere
-contra o texto do Bulário Eletrônico da ANVISA antes de usá-los no gold set (E2.5, E7.1).
+Fonte: bulas do profissional do Bulário Eletrônico da ANVISA, em `data/raw/bula_<id>.pdf`. Os
+chunks são trechos literais das bulas, com cortes marcados por `(...)`. O chunk de reações
+adversas do Cozaar resume a Tabela 1 da bula.
+
+Achados das bulas que o grafo respeita:
+
+- Renitec não contraindica o uso na gravidez (seção 4); só diz "não recomendado" (categoria D).
+  Por isso, entre os anti-hipertensivos, só o Cozaar tem `CONTRAINDICADO_EM gestante`. O texto
+  do Renitec fica no chunk `bula_renitec_advertencias_0`.
+- Nenhuma bula classifica a gravidade das interações: `gravidade = 'desconhecida'` em todas.
+- `frequencia` usa a maior frequência citada na bula, e `desconhecida` quando a bula não
+  quantifica (ex.: Renitec e Marevan listam efeitos sem escala).
+- O PDF da Aspirina também traz a bula da Aspirina MicroAtiva; só a primeira foi usada.
+
+P2 revisa o semente antes de usá-lo no gold set (E2.5, E7.1).
 
 ## 8. Arquivos e uso
 
