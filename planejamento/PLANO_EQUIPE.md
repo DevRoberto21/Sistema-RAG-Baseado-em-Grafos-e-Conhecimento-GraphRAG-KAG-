@@ -107,7 +107,8 @@ Começa no grafo semente (E1.4); troca para o grafo completo depois de E4.4.
 | E5.4 | GDS: PageRank (ranquear nós do contexto), Louvain/Leiden (comunidades de efeitos/classes), Shortest Path (ligação entre dois medicamentos via princípio ativo/interação) | P5 | E1.4 | D10–D14 |
 | E5.5 | Montador de contexto: subgrafo + trechos de bula, ordenado por PageRank | P5 | E5.2, E5.4 | D13–D15 |
 | E5.6 | Geração da resposta: citar nós/caminhos usados; recusar quando o contexto não sustenta a resposta; score de confiança | P5 | E5.5, E5.3, E4.4 | D15–D18 |
-| E5.7 | API única `responder(pergunta)` → `{resposta, subgrafo, cypher, nos, confianca, trechos}` | P5, P6 | E5.6 | D16–D19 |
+| E5.7 | API única `responder(pergunta, modo)` → `{modo, resposta, subgrafo, cypher, nos, confianca, trechos}` | P5, P6 | E5.6 | D16–D19 |
+| E5.8 | Modo `rag` (RAG tradicional): top-k no índice `chunk_embedding`, sem grafo, mesma geração de E5.6. Ver `docs/superpowers/specs/2026-10-23-visao-graphrag-vs-rag-design.md` | P5 | E5.6, E5.7 | D17–D19 |
 
 ## E6 — Interface e visualização (P6) — D6–D21
 
@@ -115,11 +116,12 @@ Começa com dados falsos no formato do contrato E5.7; integra o real em D17.
 
 | ID | Tarefa | Resp. | Depende de | Dias |
 |---|---|---|---|---|
-| E6.1 | Fixar o contrato JSON de E5.7 com P5 e criar mock | P6, P5 | E1.2 | D6–D7 |
+| E6.1 | Fixar o contrato JSON de E5.7 com P5 (com campo `modo`) e criar mock dos dois modos | P6, P5 | E1.2 | D6–D7 |
 | E6.2 | App Streamlit: chat + histórico | P6 | E6.1 | D7–D10 |
 | E6.3 | Render interativo do subgrafo (pyvis ou streamlit-agraph); cor por label | P6 | E6.1 | D9–D13 |
 | E6.4 | Painel de proveniência: nós consultados, Cypher gerado, confiança, trechos da bula com link para a fonte | P6 | E6.1 | D11–D15 |
 | E6.5 | Integração com o backend real (E5.7) | P6, P5 | E5.7, E6.2–E6.4 | D17–D20 |
+| E6.7 | Visão lado a lado: GraphRAG (subgrafo, Cypher) vs RAG tradicional (top-k trechos, scores) para a mesma pergunta | P6 | E6.3, E6.4, E5.8 | D18–D21 |
 | E6.6 | Aviso "não substitui orientação médica", polimento, roteiro de demo | P6 | E6.5 | D20–D21 |
 
 ## E7 — Avaliação e testes (P2) — D8–D22
@@ -128,7 +130,7 @@ Começa com dados falsos no formato do contrato E5.7; integra o real em D17.
 |---|---|---|---|---|
 | E7.1 | Gold set de 40 perguntas com resposta esperada: 1-hop, multi-hop e sem resposta (para medir alucinação) | P2, P1 | E1.1, E2.3 | D8–D12 |
 | E7.2 | Testes pytest: parser, validação da extração, resolução, Cypher de leitura | Todos (cada um da sua parte) | — | D8–D20 |
-| E7.3 | Baselines: LLM puro e RAG só vetorial | P2 | E2.4, E0.3 | D12–D15 |
+| E7.3 | Baselines: LLM puro e RAG só vetorial (o RAG reutiliza o modo `rag` de E5.8) | P2 | E2.4, E0.3, E5.8 | D12–D19 |
 | E7.4 | Rodar GraphRAG vs baselines: acurácia, fidelidade às fontes, taxa de alucinação, taxa de recusa correta | P2, P5 | E5.6, E7.1, E7.3 | D18–D21 |
 | E7.5 | Tabelas e gráficos de resultado para o artigo | P2 | E7.4 | D21–D22 |
 

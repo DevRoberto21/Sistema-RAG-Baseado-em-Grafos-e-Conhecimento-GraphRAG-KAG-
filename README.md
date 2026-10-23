@@ -1,6 +1,8 @@
 # GraphRAG/KAG sobre bulas de medicamentos
 
 Sistema de perguntas e respostas sobre bulas, com grafo de conhecimento no Neo4j e LLM (Gemini).
+Responde em dois modos, mostrados lado a lado: GraphRAG (grafo multi-hop) e RAG tradicional
+(só busca vetorial). Design: [`docs/superpowers/specs/2026-10-23-visao-graphrag-vs-rag-design.md`](docs/superpowers/specs/2026-10-23-visao-graphrag-vs-rag-design.md).
 Planejamento da equipe: [`planejamento/PLANO_EQUIPE.md`](planejamento/PLANO_EQUIPE.md).
 
 ## Setup
