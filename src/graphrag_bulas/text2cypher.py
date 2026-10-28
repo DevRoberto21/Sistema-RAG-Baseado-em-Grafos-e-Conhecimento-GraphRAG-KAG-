@@ -3,7 +3,19 @@
 Spec: docs/superpowers/specs/2026-10-28-e5-text2cypher-design.md
 """
 
+import re
+
 from pydantic import BaseModel, Field
+
+from neo4j import READ_ACCESS
+
+TIMEOUT_S = 5
+MAX_LINHAS = 50
+SEM_CONSULTA = "sem_consulta"
+# Também rejeita essas palavras dentro de string literal: rejeição a mais, nunca escrita liberada.
+PROIBIDAS = re.compile(
+    r"\b(CALL|LOAD|CREATE|MERGE|SET|DELETE|DETACH|REMOVE|DROP|FOREACH)\b", re.IGNORECASE
+)
 
 REGRAS = """Você traduz perguntas sobre bulas de medicamentos em UMA consulta Cypher para o Neo4j.
 
@@ -83,6 +95,10 @@ class Consulta(BaseModel):
     cypher: str = Field(description="Consulta Cypher de leitura, ou vazio se o schema não responde")
 
 
+class CypherInvalido(Exception):
+    pass
+
+
 def gerar_cypher(llm, pergunta, seeds, anterior=None, erro=None):
     """Monta o prompt e pede ao LLM uma Consulta. Não acessa o Neo4j."""
     linhas = [f"{s['id']} ({', '.join(s['labels'])}): {s['nome']}" for s in seeds]
@@ -93,3 +109,26 @@ def gerar_cypher(llm, pergunta, seeds, anterior=None, erro=None):
             f"A consulta anterior falhou. Corrija.\nCypher anterior: {anterior}\nErro: {erro}"
         )
     return llm.with_structured_output(Consulta).invoke("\n\n".join(partes)).cypher.strip()
+
+
+def validar_cypher(driver, cypher):
+    """Levanta CypherInvalido se a consulta for vazia, proibida, inválida ou não for só leitura."""
+    if not cypher.strip():
+        raise CypherInvalido(SEM_CONSULTA)
+    if m := PROIBIDAS.search(cypher):
+        raise CypherInvalido(f"palavra proibida: {m.group(0)}")
+    try:
+        with driver.session(default_access_mode=READ_ACCESS) as s:
+            tipo = s.run("EXPLAIN " + cypher).consume().query_type
+    except Exception as e:
+        raise CypherInvalido(str(e)) from e
+    if tipo != "r":
+        raise CypherInvalido(f"consulta não é só leitura (tipo {tipo})")
+
+
+def _sem_embedding(v):
+    if isinstance(v, dict):
+        return {k: _sem_embedding(x) for k, x in v.items() if not k.startswith("embedding")}
+    if isinstance(v, list):
+        return [_sem_embedding(x) for x in v]
+    return v
