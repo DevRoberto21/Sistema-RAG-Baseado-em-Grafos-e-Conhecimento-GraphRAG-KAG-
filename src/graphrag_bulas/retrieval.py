@@ -105,3 +105,76 @@ def buscar_seeds(driver, pergunta, k_chunks=5):
         )
     ]
     return {"entidades": entidades, "chunks": chunks}
+
+
+def expandir(driver, seeds, saltos=2, max_nos=60):
+    """E5.2: vizinhança de até `saltos` saltos das seeds, só por relações de domínio."""
+    ids = [s["id"] for s in seeds["entidades"]]
+    nos, arestas = [], []
+    if ids:
+        rels = "|".join(RELACOES_DOMINIO)
+        nos = [
+            dict(r)
+            for r in _ler(
+                driver,
+                f"""
+                CALL {{
+                  MATCH (s:Entidade) WHERE s.id IN $ids RETURN s AS n, 0 AS d
+                  UNION ALL
+                  MATCH (s:Entidade) WHERE s.id IN $ids
+                  MATCH p = (s)-[:{rels}*1..{int(saltos)}]-(n:Entidade)
+                  RETURN n, length(p) AS d
+                }}
+                WITH n, min(d) AS dist
+                ORDER BY dist, n.id
+                LIMIT $max
+                RETURN elementId(n) AS eid, n.id AS id, n.nome AS nome,
+                       [lb IN labels(n) WHERE lb <> 'Entidade'] AS labels, dist
+                """,
+                ids=ids,
+                max=max_nos,
+            )
+        ]
+        # shortcut: aresta aponta por id, ambíguo se o id existe em 2 labels (ex.: cefaleia).
+        arestas = [
+            dict(r)
+            for r in _ler(
+                driver,
+                """
+                MATCH (a)-[r]->(b)
+                WHERE elementId(a) IN $eids AND elementId(b) IN $eids AND type(r) IN $tipos
+                RETURN a.id AS origem, b.id AS destino, type(r) AS tipo, properties(r) AS props
+                ORDER BY origem, tipo, destino
+                """,
+                eids=[n["eid"] for n in nos],
+                tipos=RELACOES_DOMINIO,
+            )
+        ]
+        for n in nos:
+            del n["eid"]
+    citados = list(
+        dict.fromkeys(
+            a["props"]["fonte_chunk_id"] for a in arestas if a["props"].get("fonte_chunk_id")
+        )
+    )
+    trechos = [
+        {**dict(r), "score": None}
+        for r in _ler(
+            driver,
+            """
+            UNWIND $ids AS cid
+            MATCH (c:Chunk {id: cid})
+            OPTIONAL MATCH (b:Bula)-[:TEM_SECAO]->(:Secao)-[:TEM_CHUNK]->(c)
+            RETURN c.id AS chunk_id, c.texto AS texto, b.id AS fonte
+            """,
+            ids=citados,
+        )
+    ]
+    vistos = {t["chunk_id"] for t in trechos}
+    trechos += [c for c in seeds["chunks"] if c["chunk_id"] not in vistos]
+    return {"seeds": ids, "subgrafo": {"nos": nos, "arestas": arestas}, "trechos": trechos}
+
+
+def recuperar(driver, pergunta):
+    """Pergunta -> seeds -> subgrafo + trechos. Entrada da parte 2 do E5."""
+    return expandir(driver, buscar_seeds(driver, pergunta))
