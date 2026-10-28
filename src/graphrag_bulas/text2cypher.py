@@ -16,8 +16,11 @@ TIMEOUT_S = 5
 MAX_LINHAS = 50
 SEM_CONSULTA = "sem_consulta"
 # Também rejeita essas palavras dentro de string literal: rejeição a mais, nunca escrita liberada.
+# SHOW/TERMINATE etc. são comandos administrativos que o Neo4j reporta como query_type "r".
 PROIBIDAS = re.compile(
-    r"\b(CALL|LOAD|CREATE|MERGE|SET|DELETE|DETACH|REMOVE|DROP|FOREACH)\b", re.IGNORECASE
+    r"\b(CALL|LOAD|CREATE|MERGE|SET|DELETE|DETACH|REMOVE|DROP|FOREACH"
+    r"|SHOW|TERMINATE|USE|ALTER|GRANT|DENY|REVOKE|START|STOP|APOC)\b",
+    re.IGNORECASE,
 )
 
 REGRAS = """Você traduz perguntas sobre bulas de medicamentos em UMA consulta Cypher para o Neo4j.

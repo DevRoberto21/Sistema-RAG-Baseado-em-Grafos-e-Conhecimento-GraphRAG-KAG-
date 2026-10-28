@@ -21,7 +21,7 @@
 - Testes com Neo4j usam a fixture `db` de `tests/conftest.py`: pulam sem Neo4j ou sem grafo semente.
 - Antes dos testes: Docker ligado e `docker compose up -d`; semente e embeddings já no banco. Rodar tudo com `uv run`.
 - Constantes da spec: `TIMEOUT_S = 5`, `MAX_LINHAS = 50`, `tentativas = 2`, `SEM_CONSULTA = "sem_consulta"`.
-- Palavras proibidas: `CALL`, `LOAD`, `CREATE`, `MERGE`, `SET`, `DELETE`, `DETACH`, `REMOVE`, `DROP`, `FOREACH`.
+- Palavras proibidas: `CALL`, `LOAD`, `CREATE`, `MERGE`, `SET`, `DELETE`, `DETACH`, `REMOVE`, `DROP`, `FOREACH`, `SHOW`, `TERMINATE`, `USE`, `ALTER`, `GRANT`, `DENY`, `REVOKE`, `START`, `STOP`, `APOC`.
 - `consultar` nunca levanta exceção. Retorno sempre `{"query": str | None, "linhas": list[dict], "erro": str | None}`.
 - Quem chama passa o LLM com `temperature=0` (ex.: `get_llm(temperature=0)`).
 

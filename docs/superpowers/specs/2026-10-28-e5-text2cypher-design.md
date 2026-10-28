@@ -112,8 +112,10 @@ A pergunta vem do usuário. Prompt injection pode levar o LLM a gerar escrita ou
 
 1. `cypher` vazio ou só espaços: mensagem `sem_consulta`.
 2. Palavra proibida, por regex sem diferenciar caixa e com fronteira de palavra: `CALL`, `LOAD`,
-   `CREATE`, `MERGE`, `SET`, `DELETE`, `DETACH`, `REMOVE`, `DROP`, `FOREACH`. `CALL` bloqueia
-   APOC, GDS, `dbms.*` e subqueries.
+   `CREATE`, `MERGE`, `SET`, `DELETE`, `DETACH`, `REMOVE`, `DROP`, `FOREACH`, `SHOW`,
+   `TERMINATE`, `USE`, `ALTER`, `GRANT`, `DENY`, `REVOKE`, `START`, `STOP`, `APOC`. `CALL` bloqueia
+   GDS, `dbms.*` e subqueries. `SHOW`/`TERMINATE` são comandos administrativos que o Neo4j reporta
+   como `query_type` "r", então a regex é a camada que os bloqueia; funções APOC rodam sem `CALL`.
 3. `EXPLAIN <cypher>` falha (sintaxe, label inexistente etc.): a mensagem do Neo4j vira `msg`.
 4. `summary.query_type != "r"`.
 

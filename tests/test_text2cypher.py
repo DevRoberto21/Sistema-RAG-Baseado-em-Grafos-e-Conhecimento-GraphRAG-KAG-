@@ -6,6 +6,7 @@ import pytest
 
 from graphrag_bulas.text2cypher import (
     IDS_EXEMPLOS,
+    PROIBIDAS,
     SEM_CONSULTA,
     Consulta,
     CypherInvalido,
@@ -72,6 +73,9 @@ def test_exemplos_do_prompt_estao_fora_do_grafo(db):
         "MATCH (n) MERGE (m)",
         "LOAD CSV FROM 'file:///x' AS l RETURN l",
         "MATCH (n) DETACH DELETE n",
+        "TERMINATE TRANSACTIONS 'neo4j-transaction-1'",
+        "SHOW TRANSACTIONS",
+        "RETURN apoc.version()",
         # limite documentado na spec: palavra proibida em string também é rejeitada
         "MATCH (n) WHERE n.nome = 'set' RETURN n",
     ],
@@ -79,6 +83,10 @@ def test_exemplos_do_prompt_estao_fora_do_grafo(db):
 def test_palavra_proibida_rejeitada_sem_tocar_no_neo4j(cypher):
     with pytest.raises(CypherInvalido, match="palavra proibida"):
         validar_cypher(None, cypher)  # driver None: a regex roda antes do EXPLAIN
+
+
+def test_starts_with_nao_e_barrado_por_start():
+    assert PROIBIDAS.search("MATCH (m) WHERE m.nome STARTS WITH 'A' RETURN m.nome") is None
 
 
 def test_cypher_vazio_e_sem_consulta():
