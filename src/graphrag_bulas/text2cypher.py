@@ -1,0 +1,95 @@
+"""Text-to-Cypher (E5.3): o LLM gera Cypher de leitura a partir da pergunta e das seeds.
+
+Spec: docs/superpowers/specs/2026-10-28-e5-text2cypher-design.md
+"""
+
+from pydantic import BaseModel, Field
+
+REGRAS = """Você traduz perguntas sobre bulas de medicamentos em UMA consulta Cypher para o Neo4j.
+
+Regras:
+- Só leitura: use MATCH, OPTIONAL MATCH, WHERE, WITH, RETURN, ORDER BY e LIMIT. Nunca use
+  CREATE, MERGE, SET, DELETE, REMOVE, DROP, CALL, FOREACH ou LOAD CSV.
+- Use só os labels, relações e propriedades do schema abaixo.
+- Filtre entidades por id, usando só os ids da lista de seeds. Escreva os ids literais, sem
+  parâmetros ($).
+- Leia INTERAGE_COM sem direção: (a)-[r:INTERAGE_COM]-(b).
+- INTERAGE_COM pode apontar para uma ClasseTerapeutica. Para achar os princípios ativos dessa
+  classe, desça por (classe)<-[:PERTENCE_A]-(pa:PrincipioAtivo).
+- Ao retornar um fato de uma relação r, retorne também r.fonte_chunk_id.
+- Retorne propriedades (m.nome, r.dose), nunca nós inteiros.
+- Termine com LIMIT 50.
+- Se o schema não responde à pergunta, devolva cypher vazio."""
+
+# Manter em sincronia com docs/modelagem.md, seções 3 e 4.
+SCHEMA = """Schema (todo nó abaixo também tem o label :Entidade).
+
+Nós, todos com id, nome e sinonimos:
+- Medicamento {registro_anvisa, generico: bool}
+- PrincipioAtivo
+- ClasseTerapeutica
+- Condicao
+- EfeitoAdverso
+- Fabricante
+- Populacao: id só pode ser 'gestante', 'lactante', 'pediatrico' ou 'idoso'
+
+Relações, todas com fonte_chunk_id, confianca e metodo:
+- (:Medicamento)-[:CONTEM {dose}]->(:PrincipioAtivo)
+- (:PrincipioAtivo)-[:PERTENCE_A]->(:ClasseTerapeutica)
+- (:Medicamento)-[:INDICADO_PARA]->(:Condicao)
+- (:Medicamento)-[:CONTRAINDICADO_EM]->(:Condicao|Populacao)
+- (:Medicamento)-[:PODE_CAUSAR {frequencia}]->(:EfeitoAdverso)
+- (:PrincipioAtivo)-[:INTERAGE_COM {gravidade, efeito}]->(:PrincipioAtivo|ClasseTerapeutica)
+- (:Medicamento)-[:FABRICADO_POR]->(:Fabricante)
+
+frequencia: muito_comum, comum, incomum, rara, muito_rara, desconhecida.
+gravidade: grave, moderada, leve, desconhecida."""
+
+# Remédios fora do grafo semente: não vazam as perguntas-alvo nem o gold set do E7.
+EXEMPLOS = """Exemplos:
+
+Pergunta: Quais efeitos raros a Novalgina pode causar?
+Seeds: novalgina (Medicamento): Novalgina
+Cypher:
+MATCH (m:Medicamento {id: 'novalgina'})-[r:PODE_CAUSAR]->(e:EfeitoAdverso)
+WHERE r.frequencia IN ['rara', 'muito_rara']
+RETURN e.nome AS efeito, r.frequencia AS frequencia, r.fonte_chunk_id AS fonte_chunk_id
+LIMIT 50
+
+Pergunta: Qual a dose de omeprazol no Losec?
+Seeds: losec (Medicamento): Losec; omeprazol (PrincipioAtivo): Omeprazol
+Cypher:
+MATCH (m:Medicamento {id: 'losec'})-[r:CONTEM]->(p:PrincipioAtivo {id: 'omeprazol'})
+RETURN m.nome AS medicamento, p.nome AS principio_ativo, r.dose AS dose,
+       r.fonte_chunk_id AS fonte_chunk_id
+LIMIT 50
+
+Pergunta: Algum remédio com dipirona é contraindicado para idosos?
+Seeds: dipirona (PrincipioAtivo): Dipirona; idoso (Populacao): Idoso
+Cypher:
+MATCH (m:Medicamento)-[:CONTEM]->(:PrincipioAtivo {id: 'dipirona'}),
+      (m)-[r:CONTRAINDICADO_EM]->(po:Populacao {id: 'idoso'})
+RETURN m.nome AS medicamento, po.nome AS populacao, r.fonte_chunk_id AS fonte_chunk_id
+LIMIT 50
+
+Pergunta: Qual a cor do comprimido de Losec?
+Seeds: losec (Medicamento): Losec
+Cypher: (vazio)"""
+
+IDS_EXEMPLOS = ["novalgina", "losec", "omeprazol", "dipirona"]
+
+
+class Consulta(BaseModel):
+    cypher: str = Field(description="Consulta Cypher de leitura, ou vazio se o schema não responde")
+
+
+def gerar_cypher(llm, pergunta, seeds, anterior=None, erro=None):
+    """Monta o prompt e pede ao LLM uma Consulta. Não acessa o Neo4j."""
+    linhas = [f"{s['id']} ({', '.join(s['labels'])}): {s['nome']}" for s in seeds]
+    partes = [REGRAS, SCHEMA, EXEMPLOS, "Seeds:\n" + ("\n".join(linhas) or "nenhuma")]
+    partes.append(f"Pergunta: {pergunta}")
+    if erro:
+        partes.append(
+            f"A consulta anterior falhou. Corrija.\nCypher anterior: {anterior}\nErro: {erro}"
+        )
+    return llm.with_structured_output(Consulta).invoke("\n\n".join(partes)).cypher.strip()
