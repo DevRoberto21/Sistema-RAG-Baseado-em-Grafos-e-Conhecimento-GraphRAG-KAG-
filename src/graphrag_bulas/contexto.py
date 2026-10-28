@@ -63,7 +63,8 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
         blocos.append(
             "Resultado da consulta Cypher:\n"
             + "\n".join(
-                "- " + json.dumps(linha, ensure_ascii=False, sort_keys=True) for linha in linhas
+                "- " + json.dumps(linha, ensure_ascii=False, sort_keys=True, default=str)
+                for linha in linhas
             )
         )
     if trechos:
@@ -75,7 +76,11 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
         "texto": "\n\n".join(blocos),
         "chunk_ids": {t["chunk_id"] for t in trechos}
         | set(fontes)
-        | {linha["fonte_chunk_id"] for linha in linhas if linha.get("fonte_chunk_id")},
+        | {
+            linha["fonte_chunk_id"]
+            for linha in linhas
+            if isinstance(linha.get("fonte_chunk_id"), str) and linha["fonte_chunk_id"]
+        },
         "nos": {a["origem"] for a in arestas} | {a["destino"] for a in arestas},
         "trechos": trechos,
         "sem_consulta": cypher.get("erro") == "sem_consulta",

@@ -1,5 +1,7 @@
 """Montador de contexto (E5.5). Função pura: r montado à mão, sem Neo4j."""
 
+import datetime
+
 from graphrag_bulas.contexto import montar_contexto
 
 
@@ -68,6 +70,13 @@ def test_linhas_do_cypher_entram_so_sem_erro():
     assert "c9" in ok["chunk_ids"]
     erro = montar_contexto(r_base(cypher={"query": "q", "linhas": [linha], "erro": "x"}))
     assert "Cypher" not in erro["texto"]
+
+
+def test_linha_com_data_e_fonte_nao_textual_nao_quebra():
+    linha = {"data": datetime.date(2020, 1, 2), "fonte_chunk_id": ["c1"]}
+    ctx = montar_contexto(r_base(cypher={"query": "q", "linhas": [linha], "erro": None}))
+    assert "2020-01-02" in ctx["texto"]
+    assert ctx["chunk_ids"] == set()
 
 
 def test_sem_consulta():
