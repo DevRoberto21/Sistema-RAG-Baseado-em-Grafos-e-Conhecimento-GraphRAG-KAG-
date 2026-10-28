@@ -91,7 +91,12 @@ def buscar_seeds(driver, pergunta, k_chunks=5):
     entidades = sorted(
         seeds.values(), key=lambda s: (-len(s["fontes"]), -(s["score_vetor"] or 0.0), s["id"])
     )
-    chunks = [
+    return {"entidades": entidades, "chunks": buscar_chunks(driver, v, k_chunks)}
+
+
+def buscar_chunks(driver, vetor, k):
+    """Top-k chunks do índice vetorial, com a bula de origem. Usado pelos modos graphrag e rag."""
+    return [
         dict(r)
         for r in _ler(
             driver,
@@ -101,11 +106,10 @@ def buscar_seeds(driver, pergunta, k_chunks=5):
             RETURN node.id AS chunk_id, node.texto AS texto, b.id AS fonte, score
             ORDER BY score DESC
             """,
-            k=k_chunks,
-            v=v,
+            k=k,
+            v=vetor,
         )
     ]
-    return {"entidades": entidades, "chunks": chunks}
 
 
 def expandir(driver, seeds, saltos=2, max_nos=60):
