@@ -8,7 +8,7 @@ O E5 foi dividido em três partes, cada uma com spec e plano próprios:
 
 1. **Retrieval (este documento):** E5.1 seeds + E5.2 expansão multi-hop. Sem LLM.
 2. GDS + montador de contexto: E5.4 + E5.5.
-3. Geração + API: E5.3 + E5.6 + E5.7 + E5.8 (`responder(pergunta, modo)`).
+3. Geração + API: E5.6 + E5.7 + E5.8 (`responder(pergunta, modo)`). O E5.3 (Text-to-Cypher) saiu para spec própria: `2026-10-28-e5-text2cypher-design.md`.
 
 A parte 1 transforma uma pergunta em um subgrafo com trechos de bula. As partes 2 e 3 consomem
 esse subgrafo. Tudo roda sobre o grafo semente (E1.4) e os embeddings bge-m3 já gravados.
