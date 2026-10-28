@@ -3,11 +3,14 @@
 Spec: docs/superpowers/specs/2026-10-28-e5-text2cypher-design.md
 """
 
+import logging
 import re
 
 from pydantic import BaseModel, Field
 
-from neo4j import READ_ACCESS
+from neo4j import READ_ACCESS, unit_of_work
+
+log = logging.getLogger(__name__)
 
 TIMEOUT_S = 5
 MAX_LINHAS = 50
@@ -132,3 +135,36 @@ def _sem_embedding(v):
     if isinstance(v, list):
         return [_sem_embedding(x) for x in v]
     return v
+
+
+@unit_of_work(timeout=TIMEOUT_S)
+def _ler_linhas(tx, cypher):
+    return [_sem_embedding(r.data()) for r in tx.run(cypher).fetch(MAX_LINHAS)]
+
+
+def _falha(query, erro):
+    log.warning("text2cypher falhou: %s | %s", erro, query)
+    return {"query": query, "linhas": [], "erro": erro}
+
+
+def consultar(driver, llm, pergunta, seeds, tentativas=2):
+    """Gera, valida e executa o Cypher. Nunca levanta exceção; falha vai em "erro"."""
+    cypher = erro = None
+    for _ in range(tentativas):
+        try:
+            cypher = gerar_cypher(llm, pergunta, seeds, cypher, erro)
+        except Exception as e:  # rede, cota ou saída inválida do LLM
+            return _falha(None, f"llm: {e}")
+        try:
+            validar_cypher(driver, cypher)
+            with driver.session(default_access_mode=READ_ACCESS) as s:
+                linhas = s.execute_read(_ler_linhas, cypher)
+        except CypherInvalido as e:
+            if str(e) == SEM_CONSULTA:
+                return _falha(None, SEM_CONSULTA)
+            erro = str(e)
+            continue
+        except Exception as e:  # timeout ou erro na execução: sem nova tentativa
+            return _falha(cypher, str(e))
+        return {"query": cypher, "linhas": linhas, "erro": None}
+    return _falha(cypher, erro)

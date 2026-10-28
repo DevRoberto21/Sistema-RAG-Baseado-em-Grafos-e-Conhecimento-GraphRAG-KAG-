@@ -8,6 +8,7 @@ from graphrag_bulas.text2cypher import (
     Consulta,
     CypherInvalido,
     _sem_embedding,
+    consultar,
     gerar_cypher,
     validar_cypher,
 )
@@ -95,3 +96,48 @@ def test_validar_aceita_leitura(db):
 def test_validar_rejeita_sintaxe_com_mensagem_do_neo4j(db):
     with pytest.raises(CypherInvalido, match="Invalid input"):
         validar_cypher(db, RUIM)
+
+
+def contagem(db):
+    q = "MATCH (n) WITH count(n) AS n MATCH ()-[r]->() RETURN n, count(r) AS r"
+    return dict(db.execute_query(q).records[0])
+
+
+def test_consultar_devolve_linhas(db):
+    r = consultar(db, LLMFalso(COZAAR), "x", SEEDS)
+    assert r == {
+        "query": COZAAR,
+        "linhas": [{"principio_ativo": "Losartana", "fonte_chunk_id": None}],
+        "erro": None,
+    }
+
+
+def test_consultar_tenta_de_novo_com_o_erro(db):
+    llm = LLMFalso(RUIM, COZAAR)
+    r = consultar(db, llm, "x", SEEDS)
+    assert r["erro"] is None and r["linhas"]
+    assert RUIM in llm.prompts[1] and "Invalid input" in llm.prompts[1]
+
+
+def test_consultar_desiste_apos_duas_falhas(db):
+    r = consultar(db, LLMFalso(RUIM, RUIM), "x", SEEDS)
+    assert r["query"] == RUIM and r["linhas"] == []
+    assert "Invalid input" in r["erro"]
+
+
+def test_consultar_vazio_nao_tenta_de_novo(db):
+    llm = LLMFalso("")
+    assert consultar(db, llm, "x", SEEDS) == {"query": None, "linhas": [], "erro": SEM_CONSULTA}
+    assert len(llm.prompts) == 1
+
+
+def test_consultar_bloqueia_escrita(db):
+    antes = contagem(db)
+    r = consultar(db, LLMFalso("CREATE (:X)", "CREATE (:X)"), "x", SEEDS)
+    assert "palavra proibida" in r["erro"]
+    assert contagem(db) == antes
+
+
+def test_consultar_sobrevive_a_falha_do_llm(db):
+    r = consultar(db, LLMFalso(RuntimeError("cota")), "x", SEEDS)
+    assert r == {"query": None, "linhas": [], "erro": "llm: cota"}
