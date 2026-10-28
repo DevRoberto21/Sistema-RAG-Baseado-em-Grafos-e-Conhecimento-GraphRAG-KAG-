@@ -37,6 +37,10 @@ gerado pelo Gemini (sem `llm=`, roda só a expansão):
 
     uv run python -c "from graphrag_bulas.config import get_driver, get_llm; from graphrag_bulas.retrieval import recuperar; import json; print(json.dumps(recuperar(get_driver(), 'Posso tomar Marevan com Advil?', llm=get_llm(temperature=0)), ensure_ascii=False, indent=2))"
 
+Resposta completa (E5.5 + E5.6 + E5.7), com citações, confiança e recusa:
+
+    uv run python -c "from graphrag_bulas.api import responder; import json; print(json.dumps(responder('Posso tomar Marevan com Advil?'), ensure_ascii=False, indent=2))"
+
 O grafo semente (`cypher/seed.cypher`) tem 5 bulas (Cozaar, Renitec, Marevan, Advil, Aspirina)
 e serve para começar retrieval e UI antes da ingestão completa.
 
