@@ -33,7 +33,7 @@ destrava a API para a UI e para a avaliação antes do E5.4.
 
 | Arquivo | Épico | Responsabilidade |
 |---|---|---|
-| `src/graphrag_bulas/contexto.py` | E5.5 | `montar_contexto(r, max_fatos=40, max_trechos=8)`. Função pura, sem Neo4j. |
+| `src/graphrag_bulas/contexto.py` | E5.5 | `montar_contexto(r, max_fatos=100, max_trechos=20)`. Função pura, sem Neo4j. |
 | `src/graphrag_bulas/geracao.py` | E5.6 | `Resposta`, `RECUSA`, `gerar_resposta(llm, pergunta, contexto)`. Não acessa o Neo4j. |
 | `src/graphrag_bulas/api.py` | E5.7 | `responder(pergunta, modo="graphrag", driver=None, llm=None)`. |
 
@@ -89,7 +89,12 @@ Trechos de bula:
   entraram.
 - **Vazio.** Sem fatos, sem linhas e sem trechos, `texto == ""`.
 
-Os limites 40/8 deixam o prompt em uns 4–6 mil tokens. São parâmetros para o E7 ajustar.
+Limites 100/20. Com 40/8, a sondagem no grafo semente perdeu a pergunta-alvo: "Posso tomar
+Marevan com Advil?" tem 33 fatos a `dist` 0 (indicações, efeitos de cada remédio), e os fatos
+de `INTERAGE_COM` (a `dist` 1) e o trecho `bula_marevan_interacoes_0` ficavam de fora. Com
+100/20, o semente cabe inteiro: o maior contexto medido tem 89 fatos, 21 trechos e ~18 mil
+caracteres (~5 mil tokens). Um teste com o semente confere que a interação entra no contexto;
+quando o M2 aumentar o grafo e o teste falhar, o corte passa a depender do PageRank (E5.4).
 
 ## E5.6 — `gerar_resposta`
 
@@ -183,7 +188,7 @@ Text-to-Cypher, `Resposta` para a geração), guardando os prompts.
 
 | Arquivo | Neo4j | Casos |
 |---|---|---|
-| `tests/test_contexto.py` | não; `r` montado à mão | ordem dos fatos por `dist` e `confianca`; corte em `max_fatos` e `max_trechos`; trechos citados pelos fatos vêm primeiro; `fonte_chunk_id`/`confianca`/`metodo` fora do texto; linhas do Cypher só com `erro is None`; `sem_consulta`; contexto vazio dá `texto == ""` |
+| `tests/test_contexto.py` | não (`r` montado à mão), menos um caso com `db` | ordem dos fatos por `dist` e `confianca`; corte em `max_fatos` e `max_trechos`; com o semente (fixture `db`), a interação Marevan↔Advil entra no contexto; trechos citados pelos fatos vêm primeiro; `fonte_chunk_id`/`confianca`/`metodo` fora do texto; linhas do Cypher só com `erro is None`; `sem_consulta`; contexto vazio dá `texto == ""` |
 | `tests/test_geracao.py` | não | resposta feliz com confiança 1.0; citação inventada descartada e confiança reduzida; `suporte="nenhum"` recusa; nenhum chunk válido recusa; contexto vazio recusa sem chamar o LLM; nota de `sem_consulta` no prompt; exceção do LLM propaga |
 | `tests/test_api.py` | sim (fixture `db`) | contrato com todas as chaves; `trechos[].citado`; `modo="rag"` levanta `NotImplementedError`; modo inválido levanta `ValueError` |
 | `tests/test_api.py` | Gemini real, opcional (`GRAPHRAG_TESTAR_LLM=1`) | "Posso tomar Marevan com Advil?" não recusa e cita chunk; "Qual a cor do comprimido de Cozaar?" recusa |
