@@ -110,3 +110,15 @@ def test_so_leitura(db):
     antes = contagem()
     recuperar(db, MAREVAN_ADVIL)
     assert contagem() == antes
+
+
+def test_recuperar_sem_llm_nao_gera_cypher(db):
+    assert recuperar(db, MAREVAN_ADVIL)["cypher"] is None
+
+
+def test_recuperar_com_llm_traz_linhas_do_cypher(db):
+    from test_text2cypher import COZAAR, LLMFalso
+
+    r = recuperar(db, MAREVAN_ADVIL, llm=LLMFalso(COZAAR))
+    assert r["cypher"]["linhas"] and r["cypher"]["erro"] is None
+    assert r["subgrafo"]["nos"]  # a expansão continua rodando

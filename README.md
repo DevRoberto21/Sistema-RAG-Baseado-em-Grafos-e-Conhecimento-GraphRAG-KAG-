@@ -32,9 +32,10 @@ uv run python -m graphrag_bulas.embeddings   # grava embeddings que faltam (prec
 uv run pytest tests/test_seed.py   # confere as perguntas-alvo no grafo semente
 ```
 
-Retrieval do GraphRAG (E5.1 + E5.2), pergunta → seeds → subgrafo + trechos:
+Retrieval do GraphRAG (E5.1 + E5.2 + E5.3), pergunta → seeds → subgrafo + trechos + Cypher
+gerado pelo Gemini (sem `llm=`, roda só a expansão):
 
-    uv run python -c "from graphrag_bulas.config import get_driver; from graphrag_bulas.retrieval import recuperar; import json; print(json.dumps(recuperar(get_driver(), 'Posso tomar Marevan com Advil?'), ensure_ascii=False, indent=2))"
+    uv run python -c "from graphrag_bulas.config import get_driver, get_llm; from graphrag_bulas.retrieval import recuperar; import json; print(json.dumps(recuperar(get_driver(), 'Posso tomar Marevan com Advil?', llm=get_llm(temperature=0)), ensure_ascii=False, indent=2))"
 
 O grafo semente (`cypher/seed.cypher`) tem 5 bulas (Cozaar, Renitec, Marevan, Advil, Aspirina)
 e serve para começar retrieval e UI antes da ingestão completa.

@@ -1,5 +1,7 @@
 """Text-to-Cypher (E5.3). LLM falso: determinístico e sem cota. Neo4j via fixture db."""
 
+import os
+
 import pytest
 
 from graphrag_bulas.text2cypher import (
@@ -141,3 +143,17 @@ def test_consultar_bloqueia_escrita(db):
 def test_consultar_sobrevive_a_falha_do_llm(db):
     r = consultar(db, LLMFalso(RuntimeError("cota")), "x", SEEDS)
     assert r == {"query": None, "linhas": [], "erro": "llm: cota"}
+
+
+@pytest.mark.skipif(
+    os.getenv("GRAPHRAG_TESTAR_LLM") != "1",
+    reason="Gemini real: defina GRAPHRAG_TESTAR_LLM=1 (gasta cota, não determinístico)",
+)
+def test_gemini_real_gera_cypher_com_fonte(db):
+    from graphrag_bulas.config import get_llm
+    from graphrag_bulas.retrieval import buscar_seeds
+
+    seeds = buscar_seeds(db, MAREVAN_ADVIL)["entidades"]
+    r = consultar(db, get_llm(temperature=0), MAREVAN_ADVIL, seeds)
+    assert r["erro"] is None, r
+    assert any(linha.get("fonte_chunk_id") for linha in r["linhas"]), r
