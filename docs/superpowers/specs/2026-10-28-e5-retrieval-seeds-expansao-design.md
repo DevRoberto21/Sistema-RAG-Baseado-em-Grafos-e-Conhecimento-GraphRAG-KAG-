@@ -57,7 +57,8 @@ Todas as funções só leem o grafo (`execute_query` com `routing_="r"`).
    `score >= MIN_SCORE_VETOR` (0.75).
 3. **Entidades por fulltext:** `db.index.fulltext.queryNodes('entidade_nomes', $termos)`, top 10,
    sem corte de score. `$termos` = palavras da pergunta (`\w+`) com **4 letras ou mais**, cada
-   uma escapada para Lucene, unidas por espaço (OR). O índice usa `standard-no-stop-words`: sem
+   uma unida por espaço (OR). Sem escape: `\w+` já descarta os caracteres especiais do Lucene
+   e o filtro de tamanho descarta `AND`/`OR`/`NOT`. O índice usa `standard-no-stop-words`: sem
    o filtro, "a" casa com "Farmoquímica S/A" e "de" com "dor de cabeça". Com o filtro, a 2ª
    sondagem (abaixo) só traz acertos, mais `aine` em "anti-hipertensivos" (ruído tolerável). Um
    corte relativo de score perderia `aine` em "Varfarina interage com algum AINE?" (0.78 contra
@@ -65,7 +66,8 @@ Todas as funções só leem o grafo (`execute_query` com `routing_="r"`).
 4. **União das entidades** por `id`. Cada seed guarda `fontes` (`["vetor"]`, `["fulltext"]` ou as
    duas) e os dois scores (ou `None`). Ordem: seeds nas duas fontes primeiro, depois maior score
    vetorial.
-5. **Chunks por vetor:** `db.index.vector.queryNodes('chunk_embedding', k_chunks, $v)`, sem corte.
+5. **Chunks por vetor:** `db.index.vector.queryNodes('chunk_embedding', k_chunks, $v)`, sem corte,
+   com `fonte` = `id` da `Bula` dona do chunk.
    Os chunks servem de texto de apoio; o corte nas entidades é o que controla o subgrafo.
 
 Retorno:
@@ -74,7 +76,7 @@ Retorno:
 {
   "entidades": [{"id": "marevan", "nome": "Marevan", "labels": ["Medicamento"],
                  "fontes": ["vetor", "fulltext"], "score_vetor": 0.83, "score_fulltext": 1.94}],
-  "chunks": [{"chunk_id": "bula_marevan_indicacoes_0", "texto": "...", "score": 0.79}]
+  "chunks": [{"chunk_id": "bula_marevan_indicacoes_0", "texto": "...", "fonte": "bula_marevan", "score": 0.79}]
 }
 ```
 
@@ -164,9 +166,9 @@ Arquivo novo: `tests/test_retrieval.py`. Usa a fixture `db` (pula sem Neo4j/seme
 | `max_nos` | `len(nos) <= max_nos` e seeds sempre presentes |
 | só leitura | contagem de nós e relações igual antes e depois de `recuperar` |
 | pergunta vazia | `buscar_seeds(db, "?")` devolve listas vazias |
-| escape Lucene | pergunta com `"`, `(`, `:`, `/` não levanta erro |
+| caracteres especiais | pergunta com `"`, `(`, `:`, `/`, `~`, `*`, `[` não levanta erro e acha as seeds |
 
-Teste sem Neo4j: função de escape Lucene (unitário puro).
+Teste sem Neo4j: `termos_fulltext` (unitário puro).
 
 ## Fora do escopo
 
