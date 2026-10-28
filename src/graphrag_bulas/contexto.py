@@ -1,6 +1,7 @@
 """Montador de contexto (E5.5): subgrafo + linhas do Cypher + trechos -> texto do prompt.
 
-Spec: docs/superpowers/specs/2026-10-28-e5-contexto-geracao-api-design.md
+Specs: docs/superpowers/specs/2026-10-28-e5-contexto-geracao-api-design.md
+       docs/superpowers/specs/2026-10-28-e5-gds-modo-rag-design.md (PageRank e caminhos)
 """
 
 import json
@@ -22,15 +23,30 @@ def _fato(a, nomes):
     )
 
 
+def _caminho(ids, nomes, arestas):
+    partes = [nomes.get(ids[0], ids[0])]
+    for a, b in zip(ids, ids[1:], strict=False):
+        e = next((x for x in arestas if {x["origem"], x["destino"]} == {a, b}), None)
+        if e is None:
+            seta = "-[?]-"
+        elif e["origem"] == a:
+            seta = f"-[{e['tipo']}]->"
+        else:
+            seta = f"<-[{e['tipo']}]-"
+        partes += [seta, nomes.get(b, b)]
+    return "- " + " ".join(partes)
+
+
 def montar_contexto(r, max_fatos=100, max_trechos=20):
     """Monta o texto do prompt e os ids que a resposta pode citar. Não acessa o Neo4j."""
     nos = r["subgrafo"]["nos"]
     nomes = {n["id"]: n["nome"] for n in nos}
     dist = {n["id"]: n["dist"] for n in nos}
-    # shortcut: ordena por dist/confianca; E5.4 troca por PageRank
+    pr = {n["id"]: n.get("pagerank") or 0 for n in nos}
     arestas = sorted(
         r["subgrafo"]["arestas"],
         key=lambda a: (
+            -max(pr.get(a["origem"], 0), pr.get(a["destino"], 0)),
             min(dist.get(a["origem"], 99), dist.get(a["destino"], 99)),
             -(a["props"].get("confianca") or 0),
             a["origem"],
@@ -56,7 +72,13 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
         unicos.setdefault(t["chunk_id"], t)
     trechos = list(unicos.values())[:max_trechos]
 
+    caminhos = (r.get("gds") or {}).get("caminhos", [])
     blocos = []
+    if caminhos:
+        blocos.append(
+            "Caminhos entre medicamentos:\n"
+            + "\n".join(_caminho(c, nomes, r["subgrafo"]["arestas"]) for c in caminhos)
+        )
     if arestas:
         blocos.append("Fatos do grafo:\n" + "\n".join(_fato(a, nomes) for a in arestas))
     if linhas:
@@ -81,7 +103,9 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
             for linha in linhas
             if isinstance(linha.get("fonte_chunk_id"), str) and linha["fonte_chunk_id"]
         },
-        "nos": {a["origem"] for a in arestas} | {a["destino"] for a in arestas},
+        "nos": {a["origem"] for a in arestas}
+        | {a["destino"] for a in arestas}
+        | {i for c in caminhos for i in c},
         "trechos": trechos,
         "sem_consulta": cypher.get("erro") == "sem_consulta",
     }

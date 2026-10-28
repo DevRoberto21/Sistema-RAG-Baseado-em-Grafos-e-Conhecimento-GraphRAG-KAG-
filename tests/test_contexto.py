@@ -97,3 +97,31 @@ def test_contexto_do_semente_traz_a_interacao_marevan_advil(db):
     ctx = montar_contexto(recuperar(db, "Posso tomar Marevan com Advil?"))
     assert {"bula_marevan_interacoes_0", "bula_advil_interacoes_1"} <= ctx["chunk_ids"]
     assert "- Varfarina -[INTERAGE_COM" in ctx["texto"]
+
+
+def test_pagerank_maior_vem_primeiro_mesmo_com_dist_maior():
+    r = r_base(
+        [
+            aresta("marevan", "CONTEM", "varfarina", "c1"),  # dist 0
+            aresta("varfarina", "INTERAGE_COM", "aine", "c3"),  # dist 1
+        ]
+    )
+    pr = {"marevan": 0.1, "varfarina": 0.2, "aine": 0.9}
+    for n in r["subgrafo"]["nos"]:
+        n["pagerank"] = pr[n["id"]]
+    texto = montar_contexto(r)["texto"]
+    assert texto.index("INTERAGE_COM") < texto.index("CONTEM")
+
+
+def test_bloco_de_caminhos_com_nomes_tipos_e_direcao():
+    r = r_base(
+        [
+            aresta("marevan", "CONTEM", "varfarina", "c1"),
+            aresta("aine", "INTERAGE_COM", "varfarina", "c3"),
+        ]
+    )
+    r["gds"] = {"caminhos": [["marevan", "varfarina", "aine", "x"]], "erro": None}
+    ctx = montar_contexto(r)
+    linha = "- Marevan -[CONTEM]-> Varfarina <-[INTERAGE_COM]- AINEs -[?]- x"
+    assert ctx["texto"].startswith("Caminhos entre medicamentos:\n" + linha)
+    assert "x" in ctx["nos"]
