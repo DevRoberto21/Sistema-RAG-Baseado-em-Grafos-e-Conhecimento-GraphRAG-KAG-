@@ -38,6 +38,8 @@ Retorno, igual nos dois modos:
 
 `recusou` e `trechos[].citado` vieram do E5.6/E5.7 (`2026-10-28-e5-contexto-geracao-api-design.md`).
 `trechos` são os trechos que entraram no contexto; `citado` marca os que a resposta cita.
+No modo `graphrag`, cada item de `subgrafo.nos[]` tem `pagerank` (float ou `null`) e `comunidade`
+(int ou `null`), calculados pelo GDS (`2026-10-28-e5-gds-modo-rag-design.md`).
 
 No modo `rag`:
 

@@ -9,8 +9,9 @@ O retrieval já existe: `recuperar(driver, pergunta, llm=None)` devolve `seeds`,
 
 Esta spec cobre a parte 3 do E5, menos o modo `rag`:
 
-- **E5.5**: montador de contexto. Versão simples, sem GDS. O PageRank do E5.4 entra depois e
-  só troca a ordenação.
+- **E5.5**: montador de contexto. Nasceu sem GDS, ordenando por `dist` e `confianca`. O E5.4
+  (`2026-10-28-e5-gds-modo-rag-design.md`) trocou a ordenação para PageRank e acrescentou o
+  bloco de caminhos.
 - **E5.6**: geração da resposta com citação, recusa e score de confiança.
 - **E5.7**: `responder(pergunta, modo)` com o contrato de
   `2026-10-23-visao-graphrag-vs-rag-design.md`.
@@ -22,7 +23,7 @@ destrava a API para a UI e para a avaliação antes do E5.4.
 
 | Decisão | Escolha | Motivo |
 |---|---|---|
-| Ordenação do contexto | `dist` e `confianca` das arestas, sem GDS | Destrava o E5.6. O E5.4 troca só a função de ordenação. |
+| Ordenação do contexto | `dist` e `confianca` das arestas, sem GDS (o E5.4 passou a ordenar por PageRank) | Destrava o E5.6. O E5.4 trocou só a função de ordenação. |
 | Chamadas ao LLM na geração | Uma, com structured output | Barato em cota e reproduzível no E7. Um verificador separado dobraria custo e latência; o E7 já mede fidelidade por fora. |
 | Confiança | O LLM declara `suporte` e as citações; o código confere as citações e calcula o número | Auditável. LLM é mal calibrado para devolver um número direto. |
 | Contexto vazio | Recusa sem chamar o LLM | Não gasta cota quando não há o que citar. |
@@ -76,9 +77,14 @@ Trechos de bula:
   `fonte_chunk_id`, `confianca` e `metodo` não entram nas chaves; a fonte aparece como
   `[chunk_id]` no fim, e some se a aresta não tiver fonte. Sem outras props, sai `-[TIPO]->`.
   Os ids da origem e do destino entram em `nos`.
-- **Ordem dos fatos.** Menor `dist` entre as duas pontas primeiro, depois maior `confianca`
-  (ausente conta como 0), depois origem, tipo e destino. Corte em `max_fatos`. Comentário no
-  código: `shortcut: ordena por dist/confianca; E5.4 troca por PageRank`.
+- **Ordem dos fatos.** Maior `pagerank` entre as duas pontas primeiro (ausente conta como 0),
+  depois menor `dist`, maior `confianca` (ausente conta como 0), origem, tipo e destino. Corte
+  em `max_fatos`. Sem `pagerank` nos nós (modo sem GDS ou GDS com erro), a ordem é a original do
+  E5.5: `dist`, `confianca`, origem, tipo, destino. Detalhes no spec do E5.4.
+- **Caminhos.** Quando `r["gds"]["caminhos"]` não é vazio, o bloco `Caminhos entre medicamentos:`
+  vem antes dos fatos, uma linha por caminho com nomes, tipo e direção das arestas
+  (`A -[TIPO]-> B <-[TIPO]- C`). Os ids dos caminhos entram em `nos`. Sem caminhos, o bloco
+  não aparece.
 - **Linhas do Cypher.** Só quando `r["cypher"]` existe e `erro is None`. Uma linha por registro,
   em JSON compacto (`ensure_ascii=False`, chaves ordenadas). O `fonte_chunk_id` de cada linha,
   quando houver, entra em `chunk_ids`.
@@ -202,6 +208,6 @@ O teste com o Gemini real confere o prompt; não é gate.
 
 ## Fora do escopo
 
-- GDS e PageRank (E5.4). A ordenação do E5.5 é trocada quando ele existir.
+- GDS e PageRank: entraram no E5.4 (`2026-10-28-e5-gds-modo-rag-design.md`).
 - Modo `rag` (E5.8).
 - Streaming da resposta, cache de driver, histórico de conversa.
