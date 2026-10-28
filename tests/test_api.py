@@ -38,9 +38,16 @@ def test_responder_sem_cypher_e_com_recusa(db):
     assert "não cobre" in llm.prompts[-1]  # sem_consulta chegou à geração
 
 
-def test_modo_rag_ainda_nao_existe():
-    with pytest.raises(NotImplementedError, match="E5.8"):
-        responder("x", modo="rag")
+def test_responder_modo_rag(db):
+    llm = LLMFalso(Resposta=[resp(chunks=["bula_marevan_indicacoes_0"], nos=["marevan"])])
+    r = responder(MAREVAN_ADVIL, modo="rag", driver=db, llm=llm)
+    assert set(r) == CHAVES and r["modo"] == "rag"
+    assert r["subgrafo"] == {"nos": [], "arestas": []} and r["cypher"] is None
+    assert r["nos"] == [] and r["recusou"] is False and r["confianca"] == 1.0
+    scores = [t["score"] for t in r["trechos"]]
+    assert scores == sorted(scores, reverse=True)
+    assert [t["chunk_id"] for t in r["trechos"] if t["citado"]] == ["bula_marevan_indicacoes_0"]
+    assert len(llm.prompts) == 1  # só a geração; sem Text-to-Cypher
 
 
 def test_modo_invalido():

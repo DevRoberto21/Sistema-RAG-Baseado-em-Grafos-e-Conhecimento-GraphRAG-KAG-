@@ -47,7 +47,8 @@ def gerar_resposta(llm, pergunta, contexto):
     nos = [n for n in dict.fromkeys(r.nos) if n in contexto["nos"]]
     if r.suporte == "nenhum" or not chunks:
         return _recusa()
-    citadas = len(set(r.chunks)) + len(set(r.nos))
+    # Sem nós no contexto (modo rag), ids de entidade citados não contam contra a confiança.
+    citadas = len(set(r.chunks)) + (len(set(r.nos)) if contexto["nos"] else 0)
     confianca = round(PESO_SUPORTE[r.suporte] * (len(chunks) + len(nos)) / citadas, 2)
     return {
         "resposta": r.resposta,

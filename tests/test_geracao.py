@@ -82,3 +82,9 @@ def test_nota_sem_consulta_no_prompt():
 def test_falha_do_llm_propaga():
     with pytest.raises(RuntimeError, match="cota"):
         gerar_resposta(LLMFalso(Resposta=[RuntimeError("cota")]), "p", CTX)
+
+
+def test_contexto_sem_nos_nao_penaliza_nos_citados():
+    llm = LLMFalso(Resposta=[resp(chunks=["c1"], nos=["marevan", "x"])])
+    g = gerar_resposta(llm, "p", {**CTX, "nos": set()})
+    assert g["confianca"] == 1.0 and g["nos"] == []
