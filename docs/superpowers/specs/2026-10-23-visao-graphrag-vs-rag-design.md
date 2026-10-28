@@ -31,9 +31,13 @@ Retorno, igual nos dois modos:
   "cypher": "MATCH ...",
   "nos": ["..."],
   "confianca": 0.86,
-  "trechos": [{"chunk_id": "...", "texto": "...", "fonte": "...", "score": 0.81}]
+  "recusou": false,
+  "trechos": [{"chunk_id": "...", "texto": "...", "fonte": "...", "score": 0.81, "citado": true}]
 }
 ```
+
+`recusou` e `trechos[].citado` vieram do E5.6/E5.7 (`2026-10-28-e5-contexto-geracao-api-design.md`).
+`trechos` são os trechos que entraram no contexto; `citado` marca os que a resposta cita.
 
 No modo `rag`:
 
