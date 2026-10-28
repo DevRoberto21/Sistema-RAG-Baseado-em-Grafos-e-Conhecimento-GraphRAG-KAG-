@@ -14,8 +14,13 @@ O pipeline do GraphRAG já responde ponta a ponta: `recuperar` → `montar_conte
 
 Sondagem de 2026-10-28 no grafo semente (GDS 2.13, 104 nós, 251 relações): projeção por Cypher,
 `gds.pageRank.stream`, `gds.louvain.stream` e `gds.shortestPath.dijkstra.stream` rodam numa
-transação só leitura (`routing_="r"`). Marevan → Advil sai
-`marevan, varfarina, anticoagulante, ibuprofeno, advil`.
+transação só leitura (`routing_="r"`).
+
+O caminho mais curto sem filtro de tipo liga os remédios por um efeito ou contraindicação em
+comum: Marevan → Advil sai `marevan, tontura, advil` (Yen com k=4 dá só caminhos desse tipo).
+Restrito a `CONTEM`, `PERTENCE_A` e `INTERAGE_COM`, como o PLANO_EQUIPE descreve o E5.4 ("ligação
+entre dois medicamentos via princípio ativo/interação"), sai
+`marevan, varfarina, aine, ibuprofeno, advil`.
 
 ## Decisões
 
@@ -24,7 +29,7 @@ transação só leitura (`routing_="r"`). Marevan → Advil sai
 | O que o GDS projeta | Só o subgrafo expandido da pergunta (até 60 nós), uma projeção por chamada | Sempre reflete o grafo atual, sem cache para invalidar depois da ingestão (M2). Projetar 60 nós é barato. |
 | PageRank | Personalizado, com as seeds como `sourceNodes` | Ranqueia o que é central *para a pergunta*, não o hub global do grafo. |
 | Uso do PageRank | Ordena os fatos do contexto | Troca o `shortcut` do E5.5 (`dist`/`confianca`). |
-| Shortest Path | Dijkstra sem peso entre pares de seeds `Medicamento` | Mostra ao LLM a ligação entre os remédios da pergunta ("posso tomar X com Y?"). |
+| Shortest Path | Dijkstra sem peso entre pares de seeds `Medicamento`, só por `CONTEM`, `PERTENCE_A` e `INTERAGE_COM` | Mostra ao LLM a ligação entre os remédios da pergunta ("posso tomar X com Y?"). |
 | Uso do caminho | Bloco próprio no contexto, antes dos fatos | O LLM vê a cadeia inteira de uma vez, sem montar o caminho a partir de fatos soltos. |
 | Louvain | Só anota `comunidade` em cada nó do subgrafo | Serve para a cor na UI (E6.3) e para o artigo. Não muda o prompt. |
 | Falha do GDS | O retrieval segue sem ranking; o erro fica em `r["gds"]["erro"]` | Mesmo padrão do `consultar` (E5.3): o GDS melhora o contexto, mas não pode derrubar a resposta. |
@@ -59,12 +64,13 @@ Passos, todos com `routing_="r"`:
 1. Sem nós no subgrafo, devolve `caminhos = []` e não chama o GDS.
 2. **Projeção** com nome único (`ctx_<uuid4 hex>`), por agregação Cypher:
    - nós: as `Entidade` cujo `id` está em `subgrafo.nos`;
-   - relações: as de `RELACOES_DOMINIO` entre esses nós, não direcionadas;
+   - relações: as de `subgrafo.arestas` (já são só de domínio), com o tipo como
+     `relationshipType`, não direcionadas;
    - nós isolados (uma seed sem aresta) entram com `OPTIONAL MATCH`.
 3. **PageRank** (`gds.pageRank.stream`) com `sourceNodes` = os nós das seeds (`r["seeds"]`).
 4. **Louvain** (`gds.louvain.stream`).
 5. **Caminhos**: para cada par de seeds com label `Medicamento`, `gds.shortestPath.dijkstra.stream`
-   sem peso. No máximo `MAX_MEDICAMENTOS = 3` seeds `Medicamento`, ou seja até 3 pares. Par sem
+   sem peso e com `relationshipTypes = RELACOES_CAMINHO = ["CONTEM", "PERTENCE_A", "INTERAGE_COM"]`. No máximo `MAX_MEDICAMENTOS = 3` seeds `Medicamento`, ou seja até 3 pares. Par sem
    caminho é omitido.
 6. `finally`: `CALL gds.graph.drop($nome, false)`, que apaga a projeção mesmo com erro.
 
@@ -92,7 +98,7 @@ grafo:":
 
 ```
 Caminhos entre medicamentos:
-- Marevan -[CONTEM]-> Varfarina -[PERTENCE_A]-> Anticoagulante <-[INTERAGE_COM]- Ibuprofeno <-[CONTEM]- Advil
+- Marevan -[CONTEM]-> Varfarina -[INTERAGE_COM]-> Anti-inflamatório não esteroide <-[PERTENCE_A]- Ibuprofeno <-[CONTEM]- Advil
 ```
 
 - Nomes vêm de `subgrafo.nos`. O tipo e a direção de cada passo vêm da aresta de
