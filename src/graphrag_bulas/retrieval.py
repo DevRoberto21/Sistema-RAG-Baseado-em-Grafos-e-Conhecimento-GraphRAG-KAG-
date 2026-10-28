@@ -6,6 +6,7 @@ Spec: docs/superpowers/specs/2026-10-28-e5-retrieval-seeds-expansao-design.md
 import re
 
 from graphrag_bulas.embeddings import embed
+from graphrag_bulas.gds import ranquear
 from graphrag_bulas.text2cypher import consultar
 
 # Limiares calibrados na sondagem de 2026-10-28 sobre o grafo semente; recalibrar após o M2.
@@ -184,8 +185,9 @@ def expandir(driver, seeds, saltos=2, max_nos=60):
 
 
 def recuperar(driver, pergunta, llm=None):
-    """Pergunta -> seeds -> subgrafo + trechos, e o Cypher do LLM se houver llm (E5.3)."""
+    """Pergunta -> seeds -> subgrafo ranqueado (E5.4) + trechos, e o Cypher do LLM (E5.3)."""
     seeds = buscar_seeds(driver, pergunta)
     r = expandir(driver, seeds)
+    ranquear(driver, r)
     r["cypher"] = consultar(driver, llm, pergunta, seeds["entidades"]) if llm else None
     return r

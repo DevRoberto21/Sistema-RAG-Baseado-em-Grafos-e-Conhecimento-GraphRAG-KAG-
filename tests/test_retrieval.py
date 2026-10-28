@@ -122,3 +122,9 @@ def test_recuperar_com_llm_traz_linhas_do_cypher(db):
     r = recuperar(db, MAREVAN_ADVIL, llm=LLMFalso(COZAAR))
     assert r["cypher"]["linhas"] and r["cypher"]["erro"] is None
     assert r["subgrafo"]["nos"]  # a expansão continua rodando
+
+
+def test_recuperar_ranqueia_com_gds(db):
+    r = recuperar(db, MAREVAN_ADVIL)
+    assert r["gds"]["erro"] is None and r["gds"]["caminhos"]
+    assert all(n["pagerank"] is not None for n in r["subgrafo"]["nos"])
