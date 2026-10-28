@@ -108,7 +108,10 @@ def buscar_seeds(driver, pergunta, k_chunks=5):
 
 
 def expandir(driver, seeds, saltos=2, max_nos=60):
-    """E5.2: vizinhança de até `saltos` saltos das seeds, só por relações de domínio."""
+    """E5.2: vizinhança de até `saltos` saltos das seeds, só por relações de domínio.
+
+    Seeds são mantidas (dist 0 primeiro) enquanto o número de seeds não passar de `max_nos`.
+    """
     ids = [s["id"] for s in seeds["entidades"]]
     nos, arestas = [], []
     if ids:
@@ -118,7 +121,7 @@ def expandir(driver, seeds, saltos=2, max_nos=60):
             for r in _ler(
                 driver,
                 f"""
-                CALL {{
+                CALL () {{
                   MATCH (s:Entidade) WHERE s.id IN $ids RETURN s AS n, 0 AS d
                   UNION ALL
                   MATCH (s:Entidade) WHERE s.id IN $ids
