@@ -1,10 +1,11 @@
 """Extração NER/RE de um chunk por LLM (E3.2): prompt por seção, few-shot e saída estruturada.
 
-A saída segue modelos.Extracao (E3.1), com `confianca` por relação. Descartar relações com
-pontas de label errado é tarefa da validação (E3.3); rodar no corpus é E3.4.
+A saída segue modelos.Extracao (E3.1), com `confianca` por relação. `validar` (E3.3) limpa o
+que o schema não aceita; rodar no corpus é E3.4.
 """
 
-from graphrag_bulas.modelos import Entidade, Extracao, Relacao
+from graphrag_bulas.chunks import slug
+from graphrag_bulas.modelos import POPULACOES, RELACOES, Entidade, Extracao, Relacao
 
 REGRAS = """Você extrai entidades e relações de um trecho (chunk) de bula de medicamento da ANVISA.
 
@@ -150,3 +151,55 @@ def montar_prompt(chunk):
 def extrair(llm, chunk) -> Extracao:
     """Pede ao LLM a Extracao de um chunk. Falha do LLM propaga (cache/retry ficam no E3.4)."""
     return llm.with_structured_output(Extracao).invoke(montar_prompt(chunk))
+
+
+# Propriedade -> único tipo de relação que a aceita.
+PROPS = {"frequencia": "PODE_CAUSAR", "gravidade": "INTERAGE_COM", "efeito": "INTERAGE_COM",
+         "dose": "CONTEM"}
+
+
+def validar(extracao: Extracao, med: str) -> tuple[Extracao, list[str]]:
+    """Descarta o que o schema não aceita (E3.3). Devolve a extração limpa e os motivos.
+
+    Tipo, label, vocabulário e faixa de confianca já são barrados pelo Pydantic (E3.1).
+    Aqui: ids viram slug; sai Populacao fora das 4, Medicamento que não é o da bula, relação
+    com ponta ausente, de label errado ou laço; propriedade em relação errada é apagada;
+    relação repetida fica com a maior confianca; entidade sem relação sai.
+    """
+    descartes, ents = [], {}
+    for e in extracao.entidades:
+        e = e.model_copy(update={"id": slug(e.id)})
+        if e.label == "Populacao" and e.id not in POPULACOES:
+            descartes.append(f"Populacao {e.id!r} fora de {sorted(POPULACOES)}")
+        elif e.label == "Medicamento" and e.id != med:
+            descartes.append(f"Medicamento {e.id!r} não é o da bula ({med!r})")
+        else:
+            ents.setdefault(e.id, e)
+    rels = {}
+    for r in extracao.relacoes:
+        r = r.model_copy(update={"origem": slug(r.origem), "destino": slug(r.destino)})
+        origens, destinos = RELACOES[r.tipo]
+        o, d = ents.get(r.origem), ents.get(r.destino)
+        onde = f"{r.tipo} {r.origem}->{r.destino}"
+        if not o or not d:
+            descartes.append(f"{onde}: ponta fora das entidades")
+        elif o.label not in origens or d.label not in destinos:
+            descartes.append(f"{onde}: pontas {o.label}->{d.label} fora do schema")
+        elif r.origem == r.destino:
+            descartes.append(f"{onde}: laço")
+        else:
+            limpa = {p: None for p, tipo in PROPS.items() if tipo != r.tipo and getattr(r, p)}
+            descartes += [f"{onde}: {p} apagada" for p in limpa]
+            if r.tipo == "PODE_CAUSAR" and not r.frequencia:
+                limpa["frequencia"] = "desconhecida"
+            if r.tipo == "INTERAGE_COM" and not r.gravidade:
+                limpa["gravidade"] = "desconhecida"
+            r = r.model_copy(update=limpa)
+            chave = (r.tipo, r.origem, r.destino)
+            if chave in rels:
+                descartes.append(f"{onde}: repetida")
+            if chave not in rels or r.confianca > rels[chave].confianca:
+                rels[chave] = r
+    usadas = {i for r in rels.values() for i in (r.origem, r.destino)}
+    return Extracao(entidades=[e for i, e in ents.items() if i in usadas],
+                    relacoes=list(rels.values())), descartes
