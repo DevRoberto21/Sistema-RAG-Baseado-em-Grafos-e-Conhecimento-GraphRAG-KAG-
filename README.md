@@ -19,6 +19,15 @@ uv run python scripts/check_setup.py
 
 Chave do Gemini (grátis): https://aistudio.google.com/apikey
 
+## Corpus
+
+PDFs das bulas em `data/raw/` (precisa do `pdftotext`, do poppler: `brew install poppler`):
+
+```bash
+uv run python scripts/gerar_manifesto.py   # metadados -> data/raw/manifesto.jsonl (E2.2)
+uv run python -m graphrag_bulas.secoes     # texto por seção -> data/processed/secoes.jsonl (E2.3)
+```
+
 ## Banco de dados
 
 Schema documentado em [`docs/modelagem.md`](docs/modelagem.md). Para criar constraints e índices
