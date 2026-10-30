@@ -1,0 +1,370 @@
+{
+  "bula": "bula_renitec",
+  "anotador": null,
+  "chunks": [
+    {
+      "id": "bula_renitec_indicacoes_0",
+      "tipo": "indicacoes",
+      "texto": "RENITEC® é indicado para o tratamento de todos os graus de hipertensão essencial, tratamento da hipertensão renovascular e todos os graus de insuficiência cardíaca. Em pacientes com insuficiência cardíaca sintomática, RENITEC® também é indicado para aumentar a sobrevida, retardar a progressão da insuficiência cardíaca e reduzir as hospitalizações por insuficiência cardíaca. Prevenção de insuficiência cardíaca sintomática: em pacientes com disfunção ventricular esquerda assintomáticos, RENITEC® é indicado para retardar o desenvolvimento de insuficiência cardíaca sintomática e reduzir as hospitalizações por insuficiência cardíaca. Prevenção de eventos coronarianos isquêmicos: em pacientes com disfunção ventricular esquerda, RENITEC® é indicado para reduzir a incidência de infarto do miocárdio e as hospitalizações por angina instável.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_contraindicacoes_0",
+      "tipo": "contraindicacoes",
+      "texto": "RENITEC® é contraindicado para pacientes com hipersensibilidade a qualquer um de seus componentes, pacientes com histórico de edema angioneurótico relacionado a utilização de inibidores da enzima conversora de angiotensina e pacientes com angioedema hereditário ou idiopático. RENITEC® não deve ser administrado com alisquireno em pacientes com diabetes (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). RENITEC® é contraindicado em combinação com um inibidor de neprilisina (por exemplo, sacubitril). Não administre RENITEC® dentro de 36 horas antes ou depois de utilizar sacubitril/valsartana, um produto contendo um inibidor de neprilisina (Veja os itens 5. ADVERTÊNCIAS E PRECAUÇÕES e 6. INTERAÇÕES MEDICAMENTOSAS).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_0",
+      "tipo": "advertencias",
+      "texto": "Hipotensão sintomática: raramente foi observada hipotensão sintomática em pacientes com hipertensão não complicada; em pacientes hipertensos tratados com RENITEC®, existe maior probabilidade de ocorrer hipotensão quando houver depleção de volume consequente, por exemplo, à terapia diurética, restrição de sal na dieta, diálise, diarreia ou vômitos (veja o item 6. INTERAÇÕES MEDICAMENTOSAS e 9. REAÇÕES ADVERSAS). Observou-se hipotensão sintomática em pacientes com insuficiência cardíaca, com ou sem insuficiência renal associada; essa ocorrência é mais comum em pacientes com graus mais avançados de insuficiência cardíaca, conforme indicado pelo uso de altas doses de diuréticos de alça, hiponatremia ou comprometimento da função renal. Nesses pacientes, a terapia deve ser iniciada sob supervisão médica e quaisquer ajustes da dose de RENITEC® e/ou do diurético devem ser cuidadosamente monitorizados. Considerações semelhantes podem aplicar-se a pacientes com doença isquêmica cardíaca ou vascular cerebral, nos quais a queda excessiva da pressão arterial poderia resultar em infarto do miocárdio ou acidente vascular cerebral.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_1",
+      "tipo": "advertencias",
+      "texto": "Se ocorrer hipotensão, o paciente deve ser colocado em posição supina e, se necessário, receber infusão intravenosa de solução salina. Uma resposta hipotensora transitória não representa contraindicação para novas doses, as quais podem ser administradas, geralmente sem dificuldade, depois que a pressão arterial responder à expansão de volume. Em alguns pacientes com insuficiência cardíaca, cuja pressão arterial é normal ou baixa, podem ocorrer reduções adicionais da pressão arterial sistêmica com o uso de RENITEC®; esse efeito é esperado e geralmente não constitui razão para a interrupção do tratamento. Se a hipotensão tornar-se sintomática, podem ser necessárias redução da dose e/ou descontinuação do diurético e/ou de RENITEC®. Estenose aórtica/cardiomiopatia hipertrófica: a exemplo de todos os vasodilatadores, deve-se ter cuidado ao administrar inibidores da ECA a pacientes com obstrução da via de saída do ventrículo esquerdo.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_2",
+      "tipo": "advertencias",
+      "texto": "Comprometimento da função renal: em alguns pacientes, a hipotensão decorrente do início da terapia com inibidores da ECA pode ocasionar certo grau adicional de deterioração da função renal; foi relatada, nessa situação, insuficiência renal aguda, em geral, reversível. Pacientes com insuficiência renal podem requerer doses mais baixas e/ou menos frequentes de RENITEC® (veja o item 8. POSOLOGIA E MODO DE USAR). Em alguns pacientes com estenose da artéria renal bilateral ou estenose da artéria renal de rim único, foram observados aumentos dos níveis séricos de ureia e creatinina, geralmente reversíveis com a interrupção da terapia. Isso é particularmente provável em pacientes com insuficiência renal. Alguns pacientes sem patologia renal preexistente evidente apresentaram aumentos geralmente discretos e transitórios de ureia e creatinina sanguíneas quando receberam RENITEC® concomitantemente com um diurético; pode ser necessária a redução da posologia e/ou a interrupção do diurético e/ou de RENITEC®.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_3",
+      "tipo": "advertencias",
+      "texto": "Hipersensibilidade/edema angioneurótico: edema angioneurótico de face, lábios, língua, glote e/ou laringe e extremidades, que pode ocorrer em qualquer momento do tratamento, foi relatado raramente em pacientes tratados com inibidores da ECA, inclusive com RENITEC®. Nessas situações, RENITEC® deve ser imediatamente descontinuado e o paciente deve ser observado até a resolução completa dos sintomas antes de receber alta. Mesmo nos casos em que haja somente inchaço da língua, sem comprometimento respiratório, os pacientes podem necessitar de observação prolongada, uma vez que o tratamento com anti-histamínicos e corticosteroides pode não ser suficiente. Muito raramente, foram relatadas mortes em razão de angioedema associado com edema de laringe ou língua. Os pacientes com envolvimento de língua, glote ou laringe estão suscetíveis a apresentar obstrução das vias aéreas, especialmente aqueles com histórico de cirurgia das vias aéreas.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_4",
+      "tipo": "advertencias",
+      "texto": "Quando houver envolvimento de língua, glote ou laringe e possibilidade de obstrução das vias aéreas, o tratamento adequado, que pode incluir a administração de solução de epinefrina 1:1.000 (0,3 a 0,5 mL) por via subcutânea e/ou medidas que assegurem a desobstrução das vias aéreas, deve ser instituído imediatamente. Foi relatada incidência mais alta de angioedema em pacientes negros que recebiam inibidores da ECA do que em pacientes de outras raças. Pacientes com histórico de angioedema não relacionado ao tratamento com inibidores da ECA correm maior risco de apresentar angioedema durante o tratamento com esses agentes (veja o item 4. CONTRAINDICAÇÕES). Pacientes que recebem coadministração de um inibidor da ECA e um inibidor de mTOR (proteína-alvo da rapamicina em mamíferos) (por exemplo, tensirolimo, sirolimo, everolimo) podem apresentar maior risco de angioedema. Pacientes que recebem terapia concomitante com um inibidor da ECA e um inibidor da neprilisina podem apresentar maior risco de angioedema (Veja os itens 4. CONTRAINDICAÇÕES e 6. INTERAÇÕES MEDICAMENTOSAS).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_5",
+      "tipo": "advertencias",
+      "texto": "Pacientes que recebem terapia concomitante com um inibidor da ECA e vildagliptina podem apresentar risco aumentado de angioedema (Veja os itens 4. CONTRAINDICAÇÕES e 6. INTERAÇÕES MEDICAMENTOSAS). Reações anafilactoides durante dessensibilização com himenóptero: pacientes que recebiam inibidores da ECA raramente apresentaram reações anafilactoides com risco de morte durante dessensibilização com veneno de himenóptero. Essas reações foram evitadas com a suspensão temporária do inibidor da ECA antes de cada dessensibilização. Pacientes sob hemodiálise: foi relatada a ocorrência de reações anafilactoides em pacientes submetidos à diálise com membranas de alto fluxo (por exemplo, AN 69) que recebiam concomitantemente um inibidor da ECA. Nesses pacientes, deve-se considerar a utilização de um outro tipo de membrana de diálise ou de uma classe diferente de agente anti-hipertensivo. Tosse: foi relatada tosse com o uso dos inibidores da ECA. Caracteristicamente, a tosse é não produtiva, persistente e desaparece com a descontinuação do tratamento. A tosse induzida por inibidores da ECA deve ser incluída no diagnóstico diferencial de tosse.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_6",
+      "tipo": "advertencias",
+      "texto": "Cirurgia/anestesia: em pacientes submetidos a cirurgias importantes ou sob anestesia com agentes hipotensores, o enalapril bloqueia a formação de angiotensina II consequente à liberação compensatória de renina. Se ocorrer hipotensão atribuível a esse mecanismo, a pressão arterial poderá ser normalizada pela expansão de volume. Hipercalemia (veja também o item 6. INTERAÇÕES MEDICAMENTOSAS, Potássio sérico): os fatores de risco para desenvolvimento da hipercalemia incluem insuficiência renal, diabetes mellitus e uso concomitante de diuréticos poupadores de potássio (por exemplo, espironolactona, eplerenona, triantereno ou amilorida), suplementos de potássio, substitutos do sal que contenham potássio, ou outros medicamentos que possam aumentar o potássio sérico (por exemplo, produtos que contenham trimetoprima). O uso de suplementos de potássio, diuréticos poupadores de potássio ou substitutos do sal que contenham potássio, particularmente em pacientes com função renal comprometida, pode levar a aumento significativo dos níveis séricos de potássio. A hipercalemia pode causar arritmias sérias, algumas vezes fatais.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_7",
+      "tipo": "advertencias",
+      "texto": "Se o uso concomitante de RENITEC com qualquer um dos agentes mencionados acima for considerado apropriado, deverá ser feito com cautela e com monitoramento frequente dos níveis séricos de potássio. Hipoglicemia: pacientes diabéticos tratados com agentes antidiabéticos orais ou insulina que estiverem iniciando tratamento com um inibidor da ECA devem ser orientados a monitorar rigorosamente a hipoglicemia, particularmente durante o primeiro mês de uso combinado (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Gravidez e amamentação: categoria de risco D. Este medicamento não deve ser utilizado por mulheres grávidas sem orientação médica. Informe imediatamente seu médico em caso de suspeita de gravidez. O uso de RENITEC® durante a gravidez não é recomendado. O tratamento com RENITEC® deve ser suspenso o mais rápido possível depois da confirmação de gravidez, a menos que seja considerado vital para a mãe.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_8",
+      "tipo": "advertencias",
+      "texto": "Em um estudo epidemiológico retrospectivo publicado, os recém-nascidos cujas mães receberam um inibidor da ECA durante o primeiro trimestre de gravidez pareceram ter risco aumentado de importantes malformações congênitas em comparação com recém-nascidos de mães não expostas a inibidores da ECA no primeiro trimestre. O número de casos de defeitos congênitos é pequeno e os achados desse estudo ainda não foram repetidos. Os inibidores da ECA podem causar morbidade e mortalidade fetal e neonatal quando administrados a mulheres no segundo e terceiro trimestres da gravidez. A utilização de inibidores da ECA durante esse período foi associada a danos para o feto e para o recém-nascido, incluindo hipotensão, insuficiência renal, hipercalemia e/ou hipoplasia de crânio no recém-nascido. Ocorreu oligoidrâmnio materno, presumivelmente representando redução da função renal fetal, podendo resultar em contraturas de membros, deformidades craniofaciais e desenvolvimento de pulmão hipoplásico. Se RENITEC® for utilizado nesses casos, as pacientes devem ser devidamente informadas sobre o risco potencial que o medicamento acarreta para o feto.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_9",
+      "tipo": "advertencias",
+      "texto": "Essas reações adversas para o embrião e para o feto não parecem ter ocorrido quando a exposição intrauterina ao inibidor da ECA restringiu-se ao primeiro trimestre. Nos raros casos em que a utilização de inibidores da ECA durante a gravidez for considerada essencial, deve-se solicitar ultrassonografias seriadas para avaliação do meio intra-amniótico. Se for detectado oligoidrâmnio, o tratamento com RENITEC® deve ser suspenso, a menos que seja considerado vital para a mãe. Pacientes e médicos devem, contudo, estar cientes de que o oligoidrâmnio pode não ser detectado antes de o feto ter sofrido danos irreversíveis. Os recém-nascidos de mães que tomaram RENITEC® devem ser observados cuidadosamente, a fim de verificar a ocorrência de hipotensão, oligúria e hipercalemia. O enalapril, que atravessa a placenta, foi removido da circulação neonatal por diálise peritoneal com algum benefício clínico e, teoricamente, pode ser removido por exsanguineotransfusão. O enalapril e o enalaprilato são secretados no leite humano, em quantidades vestigiais. Deve-se ter cuidado ao prescrever RENITEC® a mulheres que estejam amamentando.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_10",
+      "tipo": "advertencias",
+      "texto": "Uso criterioso no aleitamento ou na doação de leite humano: o uso deste medicamento no período da lactação depende da avaliação e acompanhamento do seu médico ou cirurgião-dentista. Uso pediátrico: a segurança e a eficácia de RENITEC® foram estabelecidas em pacientes hipertensos de 1 mês a 16 anos de idade. O uso de RENITEC® comprimidos nesse grupo etário é apoiado por evidências de estudos adequados e bem controlados de RENITEC® em pacientes pediátricos e adultos, bem como por estudos publicados que envolviam pacientes pediátricos. Em um estudo de farmacocinética de dose múltipla realizado em 40 pacientes pediátricos hipertensos (excluindo neonatos), RENITEC® foi geralmente bem tolerado. A farmacocinética após administração oral do enalapril foi semelhante nesses pacientes e comparável aos valores históricos em adultos. Em um estudo clínico que envolveu 110 pacientes hipertensos com idade entre 6 e 16 anos, os pacientes com peso < 50 kg receberam diariamente 0,625 mg, 2,5 mg ou 20 mg de enalapril e os pacientes com peso ≥ 50 kg receberam 1,25 mg, 5 mg ou 40 mg, também diariamente.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_11",
+      "tipo": "advertencias",
+      "texto": "A administração do enalapril uma vez ao dia diminuiu a pressão sanguínea no vale de modo dependente da dose e a eficácia anti-hipertensiva foi consistente em todos os subgrupos (idade, estágio de Tanner, sexo e raça). Entretanto, a eficácia anti-hipertensiva parece não ter sido consistente com as doses mais baixas estudadas: 0,625 mg e 1,25 mg, correspondentes a uma média de 0,02 mg/kg uma vez ao dia. A dose máxima estudada foi de 0,58 mg/kg (até 40 mg) uma vez ao dia. Nesse estudo, RENITEC® foi geralmente bem tolerado. O perfil de reações adversas em pacientes pediátricos não é diferente do observado em pacientes adultos. RENITEC® não é recomendado a neonatos e pacientes pediátricos com taxa de filtração glomerular < 30 mL/min/1,73 m2, já que não existem dados disponíveis para essa população de pacientes. Efeito sobre a capacidade de dirigir e operar máquinas: ao dirigir veículos ou operar máquinas, deve-se considerar que eventualmente podem ocorrer tontura ou cansaço. Informe ao seu paciente que ele deve evitar se levantar rapidamente, dirigir veículos e/ou operar máquinas, principalmente no início do tratamento e ao aumentar a dose. Atenção:",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_advertencias_12",
+      "tipo": "advertencias",
+      "texto": "Contém lactose (tipo de açúcar) abaixo de 0,25g/comprimido. Este medicamento não deve ser usado por pessoas com síndrome de má-absorção de glicose-galactose. Atenção: Contém os corantes óxido de ferro vermelho (RENITEC® 10 mg e 20 mg) e óxido de ferro amarelo (RENITEC® 20 mg).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_interacoes_0",
+      "tipo": "interacoes",
+      "texto": "Terapia anti-hipertensiva: a administração de RENITEC® com outro anti-hipertensivo pode causar efeito aditivo. Potássio sérico: (veja também o item 5. ADVERTÊNCIAS E PRECAUÇÕES, Hipercalemia) em estudos clínicos, o potássio sérico geralmente permaneceu nos limites da normalidade. Em pacientes hipertensos que receberam apenas RENITEC® durante até 48 semanas, foram observados aumentos médios do potássio sérico de aproximadamente 0,2 mEq/L. Nos pacientes que receberam RENITEC® associado a um diurético tiazídico, o efeito espoliador de potássio do diurético foi, em geral, atenuado pelo efeito do enalapril. Se RENITEC® for administrado com um diurético espoliador de potássio, a hipocalemia induzida pelo diurético pode ser atenuada. Os fatores de risco para o desenvolvimento de hipercalemia incluem insuficiência renal, diabetes mellitus e uso concomitante de diuréticos poupadores de potássio (por exemplo, espironolactona, eplerenona, triantereno ou amilorida), suplementos de potássio, substitutos do sal que contenham potássio, ou outros medicamentos que possam aumentar o potássio sérico (por exemplo, produtos que contenham trimetoprima).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_interacoes_1",
+      "tipo": "interacoes",
+      "texto": "O uso de suplementos de potássio, diuréticos poupadores de potássio, substitutos do sal que contenham potássio, ou outros medicamentos que possam aumentar o potássio sérico particularmente em pacientes com comprometimento da função renal, pode resultar em aumentos significativos do potássio sérico. Caso essa conduta seja considerada apropriada, RENITEC e esses agentes deverão ser usados com cuidado e o potássio sérico, monitorizado com frequência. Antidiabéticos: estudos epidemiológicos sugeriram que a administração concomitante de inibidores da ECA com medicamentos antidiabéticos (insulinas, agentes hipoglicemiantes orais) pode causar aumento do efeito redutor da glicemia com risco de hipoglicemia. Esse fenômeno pareceu ser mais provável durante as primeiras semanas de tratamento combinado e em pacientes com insuficiência renal. Em pacientes diabéticos tratados com agentes antidiabéticos orais ou insulina, o controle glicêmico deve ser monitorado com atenção quanto à hipoglicemia, particularmente durante o primeiro mês de tratamento com um inibidor da ECA.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_interacoes_2",
+      "tipo": "interacoes",
+      "texto": "Lítio sérico: a exemplo de outros medicamentos que eliminam sódio, pode ocorrer redução da depuração do lítio, portanto os níveis séricos de lítio devem ser monitorados cuidadosamente se houver necessidade de administrar sais de lítio. Agentes anti-inflamatórios não esteroides, incluindo inibidores seletivos da ciclooxigenase-2: agentes antiinflamatórios não esteroides, incluindo os inibidores seletivos da ciclooxigenase-2 (inibidores da COX-2), podem reduzir o efeito de diuréticos e de outros agentes anti-hipertensivos. Portanto, os efeitos antihipertensivos dos antagonistas dos receptores da angiotensina II ou dos inibidores da ECA podem ser atenuados pelos anti-inflamatórios não esteroides, incluindo os inibidores seletivos da COX-2. Em alguns pacientes com disfunção renal (por exemplo, pacientes idosos ou hipovolêmicos, incluindo aqueles em tratamento com diuréticos) sob tratamento com anti-inflamatórios não esteroides, incluindo inibidores seletivos da ciclooxigenase-2, a coadministração de antagonistas dos receptores da angiotensina II ou de inibidores da ECA pode agravar a deterioração da função renal, incluindo possível falência renal aguda.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_interacoes_3",
+      "tipo": "interacoes",
+      "texto": "Esses efeitos em geral são reversíveis. Portanto, a combinação deve ser administrada com cautela em pacientes com a função renal comprometida. Bloqueio duplo do sistema renina-angiotensina-aldosterona: em pacientes com doença aterosclerótica estabelecida, insuficiência cardíaca ou diabetes com dano final em órgãos-alvo, o bloqueio duplo do sistema renina-angiotensina-aldosterona com antagonista de receptor da angiotensina, inibidor da ECA ou diretamente com inibidores da renina (como o alisquireno) está associado com um maior risco de hipotensão, síncope, hipercalemia e alterações na função renal (incluindo insuficiência renal aguda) comparado a monoterapia. Devese monitorar atentamente a pressão sanguínea, a função renal e os eletrólitos em pacientes tratados com RENITEC® e outros agentes que afetem o sistema renina-angiotensina-aldosterona. Não coadministrar alisquireno com RENITEC® em pacientes com diabetes. Evitar o uso de alisquireno com RENITEC® em pacientes com comprometimento renal (TFG < 60mL/min).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_interacoes_4",
+      "tipo": "interacoes",
+      "texto": "Ouro: reações nitritoides (os sintomas incluem rubor facial, náuseas, vômitos e hipotensão) foram relatadas raramente em pacientes recebendo terapia com ouro injetável (aurotiomalato de sódio) e terapia concomitante com inibidores da ECA, incluindo enalapril. Álcool: o álcool aumenta o efeito hipotensor dos inibidores da ECA. Inibidores da proteína-alvo da rapamicina em mamíferos (mTOR): os pacientes em terapia concomitante com inibidores da mTOR (por exemplo, tensirolimo, sirolimo, everolimo) podem apresentar maior risco de angioedema (veja o item 5. ADVERTÊNCIAS E PRECAUÇÕES). Inibidores de neprilisina: os pacientes que utilizam concomitantemente um inibidor da neprilisina (por exemplo, sacubitril) podem apresentar maior risco de angioedema (Veja os itens 4. CONTRAINDICAÇÕES e 5. ADVERTÊNCIAS E PRECAUÇÕES). Vildagliptina: os pacientes que utilizam concomitantemente vildagliptina podem apresentar maior risco de angioedema (Veja os itens 4. CONTRAINDICAÇÕES e 5. ADVERTÊNCIAS E PRECAUÇÕES).",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_reacoes_adversas_0",
+      "tipo": "reacoes_adversas",
+      "texto": "Em geral, RENITEC® é bem tolerado. Em estudos clínicos, a incidência global de reações adversas não foi maior com RENITEC® do que com placebo. Na maioria dos casos, as reações adversas foram leves e transitórias e não requereram a interrupção do tratamento. As seguintes reações adversas foram associadas ao uso de RENITEC®: tontura e cefaleia foram as reações mais comumente relatadas; fadiga e astenia foram relatadas por 2% a 3% dos pacientes. Outras reações adversas ocorreram em menos de 2% dos pacientes e incluíram hipotensão, hipotensão ortostática, síncope, náuseas, diarreia, cãibras musculares, erupções cutâneas e tosse; menos frequentemente, houve relatos de disfunção renal, insuficiência renal e oligúria. Hipersensibilidade/edema angioneurótico: edema angioneurótico de face, lábios, língua, glote e/ou laringe e extremidades foi relatado raramente (veja o item 5. ADVERTÊNCIAS E PRECAUÇÕES). Em casos muito raros, foi relatado angioedema intestinal com inibidores da enzima conversora de angiotensina, inclusive com o enalapril. Reações adversas que ocorreram muito raramente em estudos clínicos controlados ou após a comercialização incluem:",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_reacoes_adversas_1",
+      "tipo": "reacoes_adversas",
+      "texto": "Cardiovasculares: infarto do miocárdio ou acidente vascular cerebral (possivelmente decorrentes de hipotensão excessiva em pacientes de alto risco (veja o item 5. ADVERTÊNCIAS E PRECAUÇÕES), dor torácica, distúrbios do ritmo cardíaco, palpitações, angina pectoris e fenômeno de Raynaud. Endócrino: síndrome da secreção inapropriada do hormônio antidiurético (SIADH). Gastrintestinais: íleo paralítico, pancreatite, insuficiência hepática, hepatite (hepatocelular ou colestática), icterícia, vômitos, constipação, estomatite, dor abdominal, dispepsia, anorexia. Sistemas nervoso/psiquiátrico: depressão, confusão mental, sonolência, insônia, nervosismo, parestesia, vertigem, anormalidades no padrão de sonhos. Metabolismo: foram relatados casos de hipoglicemia em pacientes diabéticos recebendo agentes antidiabéticos orais ou insulina (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Respiratórios: infiltrados pulmonares, broncoespasmo/asma, dispneia, rinorreia, dor de garganta e rouquidão. Pele: diaforese, eritema polimorfo, dermatite esfoliativa, síndrome de Stevens-Johnson, necrólise epidérmica tóxica, pênfigo, prurido, urticária, alopecia.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_reacoes_adversas_2",
+      "tipo": "reacoes_adversas",
+      "texto": "Outros: impotência, rubor (vermelhidão repentina da pele, principalmente no rosto, pescoço e parte superior do tórax), alteração do paladar, visão embaçada, glossite e zumbido. Foi relatado um complexo sintomático que pode incluir alguns, ou todos, dos seguintes sintomas: febre, serosite, vasculite, mialgia/miosite, artralgia/artrite, fator antinúcleo positivo, VHS elevada, eosinofilia e leucocitose. Podem ocorrer erupções cutâneas, fotossensibilidade ou outras manifestações dermatológicas. Achados de testes laboratoriais: alterações clinicamente importantes dos parâmetros laboratoriais padrão raramente foram associadas com a administração de RENITEC®. Foram observados aumentos de ureia sanguínea e creatinina sérica e elevações das enzimas hepáticas e/ou da bilirrubina sérica, geralmente reversíveis com a descontinuação de RENITEC®. Ocorreram hipercalemia e hiponatremia. Foram relatadas reduções de hemoglobina e hematócrito. Após a comercialização, foram relatados alguns casos de neutropenia, trombocitopenia, depressão de medula óssea e agranulocitose nos quais não se pôde excluir relação causal com o uso de RENITEC®.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_reacoes_adversas_3",
+      "tipo": "reacoes_adversas",
+      "texto": "Em casos de eventos adversos, notifique pelo Sistema VigiMed, disponível no Portal da Anvisa.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_posologia_0",
+      "tipo": "posologia",
+      "texto": "Uma vez que a absorção dos comprimidos de RENITEC® não é afetada pela ingestão de alimentos, os comprimidos podem ser administrados antes, durante ou após as refeições. A dose de 2,5 mg é citada apenas para informação. Embora os comprimidos de 2,5 mg de enalapril estejam disponíveis no mercado, RENITEC® não é mais comercializado na concentração de 2,5 mg. Hipertensão essencial: a dose inicial é de 10 mg a 20 mg uma vez ao dia, dependendo do grau de hipertensão. A dose inicial recomendada para a hipertensão leve é de 10 mg ao dia. Para outros graus de hipertensão, a dose inicial é de 20 mg ao dia. A dose usual de manutenção é de um comprimido de 20 mg ao dia. A posologia deve ser ajustada de acordo com a necessidade do paciente até o máximo de 40 mg ao dia. Hipertensão renovascular: uma vez que a pressão arterial e a função renal nesses pacientes podem ser particularmente sensíveis à inibição da ECA, o tratamento deve ser iniciado com uma dose menor (por exemplo, 5 mg ou menos). A posologia, então, deve ser ajustada de acordo com a necessidade do paciente; espera-se que a maioria dos pacientes responda a um comprimido de 20 mg ao dia.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_posologia_1",
+      "tipo": "posologia",
+      "texto": "Para os pacientes hipertensos que receberam diuréticos recentemente, recomenda-se cautela (veja a seguir). Terapia diurética concomitante na hipertensão: pode ocorrer hipotensão sintomática após a dose inicial de RENITEC®, principalmente em pacientes tratados concomitantemente com diuréticos, portanto recomenda-se cuidado nesses casos, pois esses pacientes podem apresentar depleção de volume ou de sal. A terapia diurética deve ser descontinuada por 2 a 3 dias antes do início da terapia com RENITEC®. Se isso não for possível, a dose inicial de RENITEC® deve ser baixa (5 mg ou menos) para determinar o efeito inicial na pressão arterial. A posologia, então, deve ser ajustada de acordo com as necessidades do paciente. Posologia na insuficiência renal: geralmente, o intervalo entre as doses de enalapril deve ser prolongado e/ou a posologia diminuída. Disfunção renal Leve Moderada Depuração plasmática de creatinina (mL/min) Menor que 80 e maior que 30 mL/min Menor ou igual a 30 e maior que 10 mL/min Menor ou igual a 10 mL/min Dose inicial (mg/dia) 5 mg – 10 mg 2,5 mg – 5 mg Grave 2,5 mg nos dias de (normalmente esses pacientes diálise†† † estão sob diálise ) † Veja o item 5.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_posologia_2",
+      "tipo": "posologia",
+      "texto": "ADVERTÊNCIAS E PRECAUÇÕES, Pacientes sob hemodiálise. †† O enalaprilato é dialisável. Nos dias em que o paciente não for submetido à diálise, a posologia deverá ser ajustada à resposta da pressão arterial. Insuficiência cardíaca/disfunção ventricular esquerda assintomática: a dose inicial para pacientes com insuficiência cardíaca sintomática ou disfunção ventricular esquerda assintomática é de 2,5 mg e deve ser administrada sob rígida supervisão médica para se determinar o efeito inicial na pressão arterial. RENITEC® pode ser utilizado para o controle da insuficiência cardíaca sintomática, geralmente com diuréticos e, quando apropriado, com digitálicos. Na ausência de hipotensão sintomática, após o início da terapia de insuficiência cardíaca com RENITEC® ou após o controle efetivo da hipotensão, a dose deve ser aumentada gradualmente até a dose de manutenção usual de 20 mg, administrada em dose única diária ou dividida em duas doses, conforme tolerado pelo paciente. Essa titulação da dose pode ser realizada em um período de 2 a 4 semanas ou menos, quando a presença de sinais ou sintomas residuais de insuficiência cardíaca indicar.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_renitec_posologia_3",
+      "tipo": "posologia",
+      "texto": "Em pacientes com insuficiência cardíaca sintomática, esse esquema posológico foi eficaz para reduzir a mortalidade. A pressão arterial e a função renal devem ser rigorosamente monitorizadas antes e depois de iniciado o tratamento com RENITEC® (veja o item 5. ADVERTÊNCIAS E PRECAUÇÕES), pois foram relatadas hipotensão e, mais raramente, consequente insuficiência renal. Em pacientes que utilizam diuréticos, a dose deverá ser reduzida, se possível, antes do início do tratamento com RENITEC®. O aparecimento de hipotensão após a dose inicial de RENITEC® não implica que ela voltará a ocorrer durante a terapia crônica e não impede o uso continuado de RENITEC®. O potássio sérico também deverá ser monitorizado (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Este medicamento não deve ser partido, aberto ou mastigado.",
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        }
+      ],
+      "relacoes": []
+    }
+  ]
+}

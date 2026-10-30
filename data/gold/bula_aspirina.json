@@ -1,0 +1,214 @@
+{
+  "bula": "bula_aspirina",
+  "anotador": null,
+  "chunks": [
+    {
+      "id": "bula_aspirina_indicacoes_0",
+      "tipo": "indicacoes",
+      "texto": "• para o alívio sintomático da cefaleia, odontalgia, dor de garganta relacionada a resfriados, dismenorreia, mialgia ou artralgia, lombalgia e dor artrítica de pequena intensidade; • no resfriado comum ou na gripe, para o alívio sintomático da dor e da febre.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_contraindicacoes_0",
+      "tipo": "contraindicacoes",
+      "texto": "• hipersensibilidade ao ácido acetilsalicílico, a outros salicilatos ou a qualquer outro componente do produto; • história de asma induzida pela administração de salicilatos ou substâncias com ação similar, principalmente anti-inflamatórios não-esteroides; • úlceras gastrintestinais agudas; • diátese hemorrágica; • insuficiência renal grave; • insuficiência hepática grave; • insuficiência cardíaca grave; • associado ao metotrexato em doses iguais ou maiores que 15 mg/semana (veja item “6. Interações medicamentosas”); • último trimestre de gravidez (veja item “5. Advertências e precauções”, Gravidez). Este medicamento não deve ser utilizado por mulheres grávidas sem orientação médica. Informe imediatamente seu médico em caso de suspeita de gravidez Este medicamento é contraindicado em caso de suspeita de dengue, pois pode aumentar o risco de sangramentos.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_0",
+      "tipo": "advertencias",
+      "texto": "Aspirina® deve ser utilizada com cautela nos seguintes casos: - hipersensibilidade a analgésicos, agentes anti-inflamatórios ou anti-reumáticos, ou na presença de outras alergias; - história de úlceras gastrintestinais, incluindo úlcera crônica ou recorrente, ou história de sangramentos gastrintestinais; - tratamento concomitante com anticoagulantes (veja item “6. Interações medicamentosas”); - pacientes com comprometimento da função renal ou da circulação cardiovascular (por exemplo: doença reno-vascular, insuficiência cardíaca congestiva, depleção de volume, cirurgia de grande porte, sepsis ou eventos hemorrágicos graves) uma vez que o ácido RESTRICTED acetilsalicílico pode aumentar o risco de comprometimento renal e insuficiência renal aguda; - comprometimento da função hepática. O ácido acetilsalicílico pode desencadear broncoespasmo e crises de asma ou outras reações de hipersensibilidade. Os fatores de risco são: asma pré-existente, rinite alérgica, pólipos nasais ou doença respiratória crônica. Este conceito também se aplica para pacientes que apresentem reações alérgicas (por exemplo, reações cutâneas, prurido e urticária) a outras substâncias.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_1",
+      "tipo": "advertencias",
+      "texto": "Foram relatados casos de isquemia miocárdica aguda com ou sem infarto do miocárdio como parte de uma reação de hipersensibilidade (síndrome de Kounis). Em caso de síndrome de Kounis durante o tratamento com ácido acetilsalicílico, interrompa imediatamente o uso de Aspirina®. Foram relatados com frequência desconhecida casos de Trombocitopenia (caracterizada por uma contagem de plaquetas inferior ao limite normal estabelecido), consistente com uma reação idiossincrática. Devido ao efeito inibitório da agregação plaquetária, o qual persiste por vários dias após a administração, o ácido acetilsalicílico pode levar a um aumento da tendência a sangramentos durante e após intervenções cirúrgicas (inclusive cirurgias de pequeno porte, como por exemplo, extrações dentárias). Em doses baixas, o ácido acetilsalicílico reduz a excreção do ácido úrico, podendo desencadear crises de gota em pacientes predispostos. Em pacientes que sofrem de deficiência grave de glicose-6- fosfato desidrogenase (G6PD), o ácido acetilsalicílico pode induzir a hemólise ou anemia hemolítica. Dose elevada, febre ou infecções agudas são fatores que podem aumentar o risco de hemólise.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_2",
+      "tipo": "advertencias",
+      "texto": "Não use este medicamento caso tenha histórico de asma causada por uso anterior deste ou de outro medicamento com ação parecida ou caso tenha problema estomacal. O tratamento com este medicamento por mais de 7 dias aumenta o risco de ocorrência de graves efeitos renais, cardiovasculares e gastrintestinais. - Crianças Produtos contendo ácido acetilsalicílico não devem ser utilizados por crianças e adolescentes para quadros de infecções virais, com ou sem febre, sem antes consultar um médico. Em determinadas doenças virais, especialmente as causadas por varicela e vírus influenza A e B, há o risco da Síndrome de Reye, uma doença muito rara, mas com possível risco de morte, que requer intervenção médica imediata. Embora a relação causal não tenha sido comprovada, o risco pode aumentar com o uso de ácido acetilsalicílico. A ocorrência de vômitos persistentes na vigência destas doenças pode ser um sinal da Síndrome de Reye. O uso de ácido acetilsalicílico em crianças ou adolescentes pode causar a Síndrome de Reye, uma doença rara, mas grave.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_3",
+      "tipo": "advertencias",
+      "texto": "A Síndrome de Reye pode manifestar-se de 3 a 5 dias após o início ou durante a fase de recuperação de qualquer infecção viral, tendo sua frequência aumentada após exposição a medicamentos que contenham salicilatos.  Gravidez, lactação e fertilidade Gravidez O uso do ácido acetilsalicílico é contraindicado no último trimestre de gestação, apresentando categoria de risco na gravidez D para tal período. Durante os dois primeiros trimestres de gestação, o ácido acetilsalicílico deve ser utilizado com cautela, se realmente necessário, apresentando categoria de risco na gravidez C para tal período. Este medicamento não deve ser utilizado por mulheres grávidas sem orientação médica. RESTRICTED Informe imediatamente seu médico em caso de suspeita de gravidez. A inibição da síntese das prostagladinas pode afetar adversamente a gravidez e/ou o desenvolvimento embrionário/fetal. Dados de estudos epidemiológicos levantam a questão de um aumento do risco de aborto e de malformações após o uso de inibidores da síntese de prostaglandinas no início da gravidez. Acredita-se que o risco aumente com a dose e a duração do tratamento.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_4",
+      "tipo": "advertencias",
+      "texto": "Os dados disponíveis não confirmam qualquer associação entre a ingestão do ácido acetilsalicílico e um aumento do risco de aborto. Para o ácido acetilsalicílico, os dados epidemiológicos disponíveis sobre malformações não são consistentes, mas não se pode excluir um risco aumentado de gastroquise. Um estudo prospectivo com aproximadamente 14.800 gestantes expostas precocemente durante a gestação (1° ao 4° mês) não demonstrou qualquer associação com uma elevada taxa de malformação. Estudos em animais têm demonstrado toxicidade reprodutiva (veja item “3. Características Farmacológicas”, Dados de Segurança PréClínicos). Houve relatos de constrição do ducto arterioso seguido do tratamento no segundo trimestre, mas a maioria deles foram resolvidos após a interrupção do tratamento. Durante o primeiro e segundo trimestre da gravidez, medicamentos contendo ácido acetilsalicílico não devem ser administrados, exceto se realmente necessários. Durante o primeiro e segundo trimestre da gravidez ou em mulheres que estejam tentando engravidar, as doses e o tempo de tratamento com medicamentos contendo ácido acetilsalicílico devem ser os menores possíveis.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_5",
+      "tipo": "advertencias",
+      "texto": "Deve-se considerar o monitoramento pré-natal para avaliar constrição do ducto arterioso após a exposição ao ácido acetilsalicílico, a partir da 20ª semana de gestação. Caso seja confirmada a constrição do ducto arterioso, o tratamento com ácido acetilsalicílico deve ser descontinuado. Durante o terceiro trimestre de gravidez, todos os inibidores da síntese de prostaglandinas podem expor: • o feto a: - toxicidade cardiopulmonar (com constrição/fechamento prematuro do ducto arterioso e hipertensão pulmonar); - disfunção renal, que pode progredir para insuficiência renal com oligohidramnio. • a mãe e a criança no final da gravidez a: - possível aumento do tempo de sangramento, um efeito antiagregante plaquetário que pode ocorrer até mesmo após doses muito baixas; - inibição das contrações uterinas provocando trabalho de parto prolongado. Consequentemente, o ácido acetilsalicílico é contraindicado durante o terceiro trimestre de gestação. Lactação Os salicilatos e seus metabólitos são excretados no leite materno em pequenas quantidades. Como não foram observados até o momento efeitos adversos no lactente após uso eventual, a interrupção da amamentação é geralmente desnecessária.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_advertencias_6",
+      "tipo": "advertencias",
+      "texto": "Entretanto, a amamentação deve ser descontinuada durante o uso regular (contínuo) ou de altas doses deste medicamento. Fertilidade Com base nos dados publicados limitados disponíveis, os estudos em humanos não mostraram nenhum efeito consistente do ácido acetilsalicílico no comprometimento da fertilidade e não há evidências conclusivas de estudos em animais. RESTRICTED  Efeitos sobre a capacidade para dirigir veículos e operar máquinas Não foram observados efeitos sobre a capacidade de dirigir veículos e operar máquinas. Não há necessidade de recomendações especiais para o uso do produto em idosos, crianças (acima de 12 anos) ou pacientes de grupos de risco, desde que observadas as advertências, precauções e posologia mencionadas nesta bula.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_interacoes_0",
+      "tipo": "interacoes",
+      "texto": " Interações contraindicadas - Metotrexato em doses iguais ou maiores que 15 mg/semana Aumento da toxicidade hematológica do metotrexato (diminuição da depuração renal do metotrexato por agentes anti-inflamatórios em geral e deslocamento do metotrexato, ligado às proteínas plasmáticas, pelos salicilatos) (veja item “4. Contraindicações”).  Interações que requerem precaução para o uso - Metotrexato em doses inferiores a 15 mg/semana Aumento da toxicidade hematológica do metotrexato (diminuição da depuração renal do metotrexato por agentes anti-inflamatórios em geral e deslocamento do metotrexato, ligado às proteínas plasmáticas, pelos salicilatos). - Anticoagulantes, trombolíticos/ outros inibidores da agregação plaquetária/ homeostasia Aumento do risco de sangramento. - Outros anti-inflamatórios não-esteroides com salicilatos em altas doses Aumento do risco de úlceras e sangramento gastrintestinal devido ao efeito sinérgico. - Inibidores seletivos da recaptação de serotonina (SSRIs) Aumento do risco de sangramento gastrintestinal alto devido a possível efeito sinérgico. - Digoxina Aumento da concentração plasmática de digoxina devido a diminuição na excreção renal.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_interacoes_1",
+      "tipo": "interacoes",
+      "texto": "- Medicamentos para diabetes, como por exemplo, insulina e sulfonilureias Aumento do efeito hipoglicemiante por altas doses do ácido acetilsalicílico via ação hipoglicêmica do ácido acetilsalicílico e deslocamento da sulfonilureia de sua ligação à proteína plasmática. - Diuréticos em associação com o ácido acetilsalicílico em altas doses Diminuição da filtração glomerular por diminuição da síntese das prostaglandinas renais. - Glicocorticoides sistêmicos, exceto hidrocortisona usada como terapia de reposição na doença de Addison Diminuição dos níveis de salicilato plasmático durante o tratamento com corticosteroides e risco de sobredose de salicilato após interrupção do tratamento, por aumento da eliminação de salicilatos pelos corticosteroides. - Inibidores da enzima conversora de angiotensina (ECA) em associação com o ácido acetilsalicílico em altas doses Diminuição da filtração glomerular por inibição das prostaglandinas vasodilatadoras. Além disso, diminuição do efeito anti-hipertensivo. - Ácido valproico Aumento da toxicidade do ácido valproico devido ao deslocamento dos sítios de ligação às proteínas.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_interacoes_2",
+      "tipo": "interacoes",
+      "texto": "- Álcool Aumento do dano à mucosa gastrintestinal e prolongamento do tempo de sangramento devido a RESTRICTED efeitos aditivos do ácido acetilsalicílico e do álcool. - Uricosúricos como benzobromarona e probenecida Diminuição do efeito uricosúrico (competição pela eliminação de ácido úrico no túbulo renal).",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_reacoes_adversas_0",
+      "tipo": "reacoes_adversas",
+      "texto": "Distúrbios do trato gastrintestinal superior e inferior como sinais e sintomas de dispepsia, dor gastrintestinal e abdominal, raramente inflamação gastrintestinal, úlcera gastrintestinal, levando potencialmente, mas muito raramente, a úlcera gastrintestinal com hemorragia e perfuração, com respectivos sinais e sintomas clínicos e laboratoriais, doença do diafragma intestinal com frequência desconhecida, especialmente no tratamento de longo prazo. Devido a seu efeito inibitório sobre a agregação plaquetária, o ácido acetilsalicílico pode estar associado com o aumento do risco de sangramento. Foram observadas hemorragias tais como hemorragia intra e pós-operatória, hematomas, epistaxe, hemorragias urogenitais e sangramento gengival. Foram raros a muito raros os relatos de hemorragias graves, como hemorragia do trato gastrintestinal e hemorragia cerebral (especialmente em pacientes com hipertensão não controlada e/ ou em uso concomitante de agentes anti-hemostáticos), que em casos isolados podem ter potencial risco de morte.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_reacoes_adversas_1",
+      "tipo": "reacoes_adversas",
+      "texto": "A hemorragia pode provocar anemia pós-hemorrágica/ anemia por deficiência de ferro (por exemplo, sangramento oculto) com respectivos sinais e sintomas clínicos e laboratoriais, tais como astenia, palidez e hipoperfusão. Reações de hipersensibilidade com suas respectivas manifestações clínicas e laboratoriais incluem doença respiratória exacerbada por aspirina, reações leves a moderadas que afetam potencialmente a pele, o trato respiratório, o trato gastrintestinal e o sistema cardiovascular, com sintomas tais RESTRICTED como rash cutâneo, urticária, edema, prurido, rinite, congestão nasal, alterações cardiorrespiratórias e, muito raramente, reações graves, como choque anafilático. Síndrome de Kounis (isquemia miocárdica aguda com ou sem infarto do miocárdio como parte de uma reação de hipersensibilidade) com frequência desconhecida. Trombocitopenia (caracterizada por uma contagem de plaquetas inferior ao limite normal estabelecido) foi relatada com frequência desconhecida. Disfunção hepática transitória com aumento das transaminases hepáticas tem sido relatada muito raramente. Há relatos de tinitos e tonturas, que podem ser indicativos de uma sobredose.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_reacoes_adversas_2",
+      "tipo": "reacoes_adversas",
+      "texto": "Há relatos de hemólise e anemia hemolítica em pacientes que sofrem de deficiência grave de glicose-6-fosfato desidrogenase (G6PD). Há relatos de comprometimento renal e doença dos rins aguda. Ácido acetil salicílico deve ser usado com cautela em pacientes com função hepática anormal e com função renal anormal. Em casos de eventos adversos, notifique pelo Sistema VigiMed, disponível no Portal da Anvisa.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_aspirina_posologia_0",
+      "tipo": "posologia",
+      "texto": "Tomar os comprimidos preferencialmente após as refeições, com bastante líquido. Adultos: 1 a 2 comprimidos. Se necessário, repetir a cada 4 a 8 horas, não excedendo 8 comprimidos por dia. Crianças a partir de 12 anos: 1 comprimido. Se necessário, repetir a cada 4 a 8 horas, até 3 vezes por dia. Aspirina® não deve ser administrada por mais de 3 a 5 dias sem consultar seu médico ou cirurgiãodentista. No caso de administração acidental ou uso em crianças, veja o item “5. Advertências e precauções”.",
+      "entidades": [
+        {
+          "id": "aspirina",
+          "label": "Medicamento",
+          "nome": "Aspirina"
+        }
+      ],
+      "relacoes": []
+    }
+  ]
+}

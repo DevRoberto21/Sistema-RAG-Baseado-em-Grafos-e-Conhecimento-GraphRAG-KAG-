@@ -1,0 +1,162 @@
+{
+  "bula": "bula_marevan",
+  "anotador": null,
+  "chunks": [
+    {
+      "id": "bula_marevan_indicacoes_0",
+      "tipo": "indicacoes",
+      "texto": "Marevan® é indicado para a prevenção primária e secundária do tromboembolismo venoso, na prevenção do embolismo sistêmico em pacientes com prótese de válvulas cardíacas ou fibrilação atrial e na prevenção do acidente vascular cerebral, do infarto agudo do miocárdio e da recorrência do infarto. Os anticoagulantes orais também estão indicados na prevenção do embolismo sistêmico em pacientes com doença valvular cardíaca.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_contraindicacoes_0",
+      "tipo": "contraindicacoes",
+      "texto": "• Durante as primeiras 24 horas antes ou após cirurgia ou parto. • Gravidez, especialmente durante o primeiro trimestre, devido à possibilidade de má-formação fetal. A administração a gestantes em estágios mais avançados está associada à hemorragia fetal e aumento na taxa de aborto. • Aborto incompleto. • Doenças hepáticas ou renais graves. • Hemorragias. • Hipertensão arterial grave não controlada. • Endocardite bacteriana. • Aneurisma cerebral ou aórtico. • Hemofilia. • Doença ulcerativa ativa do trato gastrointestinal. • Feridas ulcerativas abertas. • Hipersensibilidade a qualquer um dos componentes da fórmula. Este medicamento não deve ser usado por pessoas com síndrome de má-absorção de glicose-galactose. Gravidez Se administrado no primeiro trimestre da gravidez, Marevan® pode causar pontilhado ósseo no feto e anormalidades faciais e do sistema nervoso central, que também podem se desenvolver após administração no segundo e terceiro trimestres. A administração a gestante, em estágios mais avançados da gravidez, está associada à hemorragia fetal e aumento da taxa de aborto. Categoria X de risco na gravidez:",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_contraindicacoes_1",
+      "tipo": "contraindicacoes",
+      "texto": "Em estudos em animais e mulheres grávidas, o fármaco provocou anomalias fetais, havendo clara evidência de risco para o feto que é maior do que qualquer benefício possível para a paciente. Este medicamento não deve ser utilizado por mulheres grávidas ou que possam ficar grávidas durante o tratamento. A varfarina é reconhecidamente teratogênica.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_advertencias_0",
+      "tipo": "advertencias",
+      "texto": "• Marevan® não deve ser administrado a pacientes que apresentem sangramento ativo. Em geral, não deve ser prescrito a pacientes com risco de hemorragia, embora possa ser usado com extrema precaução. • Os idosos e pacientes com deficiência de vitamina K requerem cuidado especial, assim como aqueles com hipertireoidismo. • Se houver interação medicamentosa com outro fármaco e risco de hemorragia grave, um deles deve ser suspenso. • Em caso de suspeita de alteração do efeito do fármaco, a atividade anticoagulante deve ser cuidadosamente monitorada, a fim de se aumentar ou diminuir a sua dose, se necessário. O período crítico é aquele em que pacientes estabilizados com um anticoagulante iniciam o tratamento com um fármaco interagente ou quando se retira o fármaco interagente em pacientes antes estabilizados com a interação medicamentosa. • Em caso de perda ou ganho de peso, o ajuste de dosagem deve ser considerado. Concentração 2,5mg - Atenção: Contém o corante amarelo quinoleína. Atenção: Contém 86,72mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Concentração 5mg - Atenção: Contém o corante vermelho de ponceau. Atenção:",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_advertencias_1",
+      "tipo": "advertencias",
+      "texto": "Contém 85,50mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Concentração 7,5mg - Atenção: Contém o corante azul FDC nº1. Atenção: Contém 82,33mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Idosos A administração de varfarina em idosos deve ser realizada com muita cautela e monitoramento frequente. Lactação Com base na publicação de dados de quinze mulheres lactantes, a varfarina não foi detectada no leite humano. Dentre os quinze lactentes, seis apresentaram tempo de protombina dentro da faixa esperada. No entanto, o tempo de protombina não foi alcançado nos outros nove. Os lactentes devem ser monitorados quanto ao aparecimento de hematomas e sangramentos. Os efeitos em bebês prematuros não foram avaliados. Devem ser tomadas precauções quando Marevan® for administrado a mulheres lactantes. O uso deste medicamento no período da lactação depende da avaliação e acompanhamento do seu médico ou cirurgião-dentista.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_interacoes_0",
+      "tipo": "interacoes",
+      "texto": "Interação medicamento-medicamento Deve-se ter cuidado no uso em conjunto de qualquer fármaco em pacientes recebendo tratamento com anticoagulante oral. • A atividade da varfarina pode ser potencializada por esteroides anabólicos (como: etilestranol, metandrostenolona, noretrandolona), amiodarona, amitriptilina/nortriptilina, azapropazona, aztreonam, benzafibrato, cefamandol, cloranfenicol, hidrato de coral, cimetidina, ciprofloxacino, clofibrato, cotrimoxazol, danazol, destropropoxifeno, destrotiroxina, dipiridamol, eritromicina, neomicina, feprazona, fluconazol, glucagon, metronidazol, miconazol, oxifenilbutazona, fenformina, fenilbutazona, feniramidol, quinidina, salicilatos, tolbutamida, sulfonamidas (ex: sulfafenazol, sulfinpirazona), tamoxifeno, triclofos, diflunisal, flurbiprofeno, indometacina, ácido mefenâmico, piroxicam, sulindaco e, possivelmente, outros analgésicos anti-inflamatórios, cetoconazol, ácido nalidíxico, norfloxacino, tetraciclinas e outros antibióticos de largo espectro, alopurinol, dissulfiram, metilfenidato, paracetamol, fármacos para tratamento de disfunções da tireoide e qualquer fármaco potencialmente tóxico ao fígado.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_interacoes_1",
+      "tipo": "interacoes",
+      "texto": "• Mulheres em uso de varfarina devem consultar o médico antes do uso concomitante de creme vaginal ou supositório de miconazol, pois pode haver potencialização do efeito anticoagulante. • Tanto a potencialização quanto a inibição do efeito anticoagulante têm sido relatadas com fenitoína, ACTH e corticosteroides. • A colestiramina e o sulcralfato acarretam diminuição da atividade da varfarina. A colestiramina pode também diminuir a absorção de vitamina K sem, no entanto, aumentar a atividade anticoagulante da varfarina. O efeito anticoagulante pode ser diminuído pela administração de vitamina K, inclusive como constituinte de alguns alimentos, como saladas verdes. • A atividade anticoagulante da varfarina pode ser inibida por alguns fármacos, tais como: aminoglutetimida, barbiturato, carbamazepina, etclorvinol, glutatimida, griseofulvina, dicloralfenazona, primidona, rifampicina e contraceptivos orais. Em caso de suspeita de dengue, ou quando associado a outros medicamentos que aumentem o efeito hemorrágico, a prescrição deste medicamento ou a manutenção do tratamento com ele deve ser reavaliada, devido a seu potencial hemorrágico.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_interacoes_2",
+      "tipo": "interacoes",
+      "texto": "Interação medicamento-substância A atividade anticoagulante pode também ser aumentada com grandes quantidades ou ingestão crônica de álcool, particularmente em pacientes com insuficiência hepática. Interação medicamento-alimento Alimentos contendo vitamina K alteram a eficácia anticoagulante. Interação medicamento-exame laboratorial Com exceção dos exames relacionados aos fatores da coagulação dependentes da vitamina K, que são deprimidos pela varfarina, não há referência de interferência significativa com outros exames laboratoriais.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_reacoes_adversas_0",
+      "tipo": "reacoes_adversas",
+      "texto": "Hemorragia de menor ou maior intensidade pode ocorrer durante a terapia com Marevan®, em qualquer tecido ou órgão, manifestando-se como sangramento externo ou interno, associado a sintomas e complicações dependentes do órgão ou sistema afetado. Pode ocorrer também necrose da pele e de outros tecidos, êmbolos aterotrombóticos sistêmicos e microêmbolos de colesterol. Algumas complicações hemorrágicas podem apresentar sinais e sintomas que não são imediatamente identificados como resultantes da hemorragia. Estas reações adversas estão marcadas na tabela abaixo com um asterisco (*).",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_reacoes_adversas_1",
+      "tipo": "reacoes_adversas",
+      "texto": "Classe de sistemas de Órgãos Termo do MedDRA Desordens do sistema linfático e sanguíneo Anemia* Desordens cardíacas Dor no peito*, hemorragia pericárdica Desordens endócrinas Hemorragia da suprarrenal Desordens oculares Hemorragia ocular Desordens gastrintestinais Distensão abdominal, dor abdominal*, diarreia, disgeusia, disfagia*, flatulência, sangramento gengival, hematêmese, hematoquezia, melena, hemorragia retal, hemorragia retroperitonial, vômito Desordens gerais e condições no local de Astenia*, calafrios, fadiga*, mal-estar*, dor*, administração palidez*, inchaço* Desordens hepatobiliares Hemorragia hepática, hepatite Desordens do sistema imune Reação anafilática, hipersensibilidade Sistema musculoesquelético, tecido conjuntivo e Artralgia*, hemartrose, mialgia* desordens ósseas Desordens do sistema nervoso Tonturas*, cefaleias*, hemorragia intracraniana, parestesia*, paralisia*, hematoma espinhal Desordens psiquiátricas Letargia Desordens urinárias Hematúria Desordens do sistema reprodutor e mama Menorragia, hemorragia vaginal Desordens respiratórias, torácicas e mediastinais Epistaxe, dispneia*, hemoptise, hemotórax, hemorragia pulmonar alveolar, calcificação pulmonar",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_reacoes_adversas_2",
+      "tipo": "reacoes_adversas",
+      "texto": "Desordens do tecido subcutâneo e pele Alopecia, dermatite, dermatite bolhosa, petéquias, prurido, erupção cutânea, necrose da pele, urticária Desordens vasculares Síndrome dos dedos roxos*, embolismo arterial, embolia gordurosa, hemorragia, hipotensão*, necrose, choque*, síncope*, vasculite (*) sintomas ou condições médicas resultantes de complicações hemorrágicas. Em casos de eventos adversos, notifique pelo Sistema VigiMed, disponível no Portal da Anvisa.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    },
+    {
+      "id": "bula_marevan_posologia_0",
+      "tipo": "posologia",
+      "texto": "A posologia de Marevan® deve ser individualizada para cada paciente, de acordo com a resposta de TP/RNI (valores obtidos através de exames de sangue) do paciente ao medicamento. • Dosagem inicial: recomenda-se que a terapia com Marevan® seja iniciada com uma dose de 2,5 mg a 5 mg ao dia, com ajustes posológicos baseados nos resultados de TP/RNI. • Manutenção: na maioria dos pacientes, a resposta é satisfatoriamente mantida com uma dose de 2,5 a 10 mg ao dia. • Dose perdida: o efeito anticoagulante de Marevan® persiste por mais de 24 horas. Caso o paciente esqueça de tomar a dose prescrita de Marevan® no horário marcado, esta deve ser tomada, assim que possível, no mesmo dia. No dia seguinte, a dose esquecida não deve ser adicionalmente ingerida e o tratamento deve ser seguido normalmente. A dose nunca deve ser duplicada. A duração da terapia para cada paciente deve ser individualizada. De modo geral, a terapia com anticoagulante deve ser continuada até que o risco de trombose e embolia seja eliminado. Este medicamento não deve ser partido, aberto ou mastigado.",
+      "entidades": [
+        {
+          "id": "marevan",
+          "label": "Medicamento",
+          "nome": "Marevan"
+        }
+      ],
+      "relacoes": []
+    }
+  ]
+}
