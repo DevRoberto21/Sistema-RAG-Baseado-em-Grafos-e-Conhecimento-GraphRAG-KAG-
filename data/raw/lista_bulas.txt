@@ -1,14 +1,14 @@
 Norvasc
-Atenol
+Atenolol
 Lasix
-Higroton
+Higroton (sem PDF no Bulário)
 Aldactone
 Diovan
 Micardis
 Benicar
-Capoten
+Capoten (sem PDF no Bulário)
 Selozok
-Adalat
+Adalat (sem PDF no Bulário)
 Aradois
 Clorana
 Cataflam
@@ -39,10 +39,10 @@ Lipitor
 Zocor
 Crestor
 Ancoron
-Diflucan
+Diflucan (sem PDF no Bulário)
 Losec
 Nexium
-Prozac
+Prozac (sem PDF no Bulário)
 Zoloft
 Glifage
 Puran T4
