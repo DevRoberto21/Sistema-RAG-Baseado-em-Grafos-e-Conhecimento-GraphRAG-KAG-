@@ -26,6 +26,7 @@ PDFs das bulas em `data/raw/` (precisa do `pdftotext`, do poppler: `brew install
 ```bash
 uv run python scripts/gerar_manifesto.py   # metadados -> data/raw/manifesto.jsonl (E2.2)
 uv run python -m graphrag_bulas.secoes     # texto por seção -> data/processed/secoes.jsonl (E2.3)
+uv run python -m graphrag_bulas.chunks     # chunks com ID estável -> data/processed/chunks.jsonl (E2.4)
 ```
 
 ## Banco de dados
