@@ -27,7 +27,14 @@ PDFs das bulas em `data/raw/` (precisa do `pdftotext`, do poppler: `brew install
 uv run python scripts/gerar_manifesto.py   # metadados -> data/raw/manifesto.jsonl (E2.2)
 uv run python -m graphrag_bulas.secoes     # texto por seção -> data/processed/secoes.jsonl (E2.3)
 uv run python -m graphrag_bulas.chunks     # chunks com ID estável -> data/processed/chunks.jsonl (E2.4)
+uv run python -m graphrag_bulas.extracao_corpus --bulas 10   # piloto da extração por LLM (E3.4)
+uv run python -m graphrag_bulas.extracao_corpus              # corpus inteiro -> data/processed/extracoes.jsonl
 ```
+
+A extração guarda cada resposta do LLM em `data/processed/cache_llm/`. Rodar de novo só chama o LLM
+para chunks novos, que falharam ou cujo prompt mudou. `--max-chamadas N` limita o gasto da rodada.
+`--pausa S` espaça as chamadas para respeitar o limite por minuto do plano grátis. `--modelo X`
+troca o modelo só da extração (ex.: `gemini-3.5-flash-lite` quando o flash está sobrecarregado).
 
 ## Banco de dados
 

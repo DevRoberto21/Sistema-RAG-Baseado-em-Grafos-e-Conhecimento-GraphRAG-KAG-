@@ -21,8 +21,8 @@ def get_driver():
     return GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
 
-def get_llm(**kwargs):
+def get_llm(model=None, **kwargs):
     """Troca de provedor = trocar LLM_PROVIDER/LLM_MODEL no .env."""
     from langchain.chat_models import init_chat_model
 
-    return init_chat_model(LLM_MODEL, model_provider=LLM_PROVIDER, **kwargs)
+    return init_chat_model(model or LLM_MODEL, model_provider=LLM_PROVIDER, **kwargs)
