@@ -13,29 +13,10 @@ import sys
 from pathlib import Path
 
 from graphrag_bulas.chunks import PROCESSADOS
+from graphrag_bulas.modelos import LABELS, POPULACOES, RELACOES, VOCAB
 
 GOLD = Path(__file__).resolve().parents[2] / "data" / "gold"
 BULAS = ["cozaar", "marevan", "advil", "renitec", "aspirina"]
-
-# Espelha docs/modelagem.md, seções 3 e 4.
-LABELS = {
-    "Medicamento", "PrincipioAtivo", "ClasseTerapeutica", "Condicao",
-    "EfeitoAdverso", "Fabricante", "Populacao",
-}
-POPULACOES = {"gestante", "lactante", "pediatrico", "idoso"}
-RELACOES = {  # tipo -> (labels de origem, labels de destino)
-    "CONTEM": ({"Medicamento"}, {"PrincipioAtivo"}),
-    "PERTENCE_A": ({"PrincipioAtivo"}, {"ClasseTerapeutica"}),
-    "INDICADO_PARA": ({"Medicamento"}, {"Condicao"}),
-    "CONTRAINDICADO_EM": ({"Medicamento"}, {"Condicao", "Populacao"}),
-    "PODE_CAUSAR": ({"Medicamento"}, {"EfeitoAdverso"}),
-    "INTERAGE_COM": ({"PrincipioAtivo"}, {"PrincipioAtivo", "ClasseTerapeutica"}),
-    "FABRICADO_POR": ({"Medicamento"}, {"Fabricante"}),
-}
-VOCAB = {
-    "frequencia": {"muito_comum", "comum", "incomum", "rara", "muito_rara", "desconhecida"},
-    "gravidade": {"grave", "moderada", "leve", "desconhecida"},
-}
 
 
 def preparar() -> None:
