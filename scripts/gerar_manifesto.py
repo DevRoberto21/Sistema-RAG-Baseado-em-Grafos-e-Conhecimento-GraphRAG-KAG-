@@ -42,8 +42,8 @@ def empresa_e_cnpj(txt: str) -> tuple[str | None, str | None]:
     resto = txt[m.end():]
     # Descarta ruído de rodapé ("16", "- 8 de 9 -", "Internal", "VV-REG-...").
     linhas = [
-        l.strip() for l in resto.splitlines()[:12]
-        if re.search(r"[A-Za-zÀ-ú]{3}", l) and not re.match(r"\s*(Internal|VV-)", l)
+        linha.strip() for linha in resto.splitlines()[:12]
+        if re.search(r"[A-Za-zÀ-ú]{3}", linha) and not re.match(r"\s*(Internal|VV-)", linha)
     ]
     janela = " ".join(linhas[:4])
     sufixo = RE_EMPRESA.match(janela)
