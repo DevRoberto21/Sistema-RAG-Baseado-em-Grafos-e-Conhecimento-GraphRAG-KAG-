@@ -117,7 +117,9 @@ def main(argv=None):
 
     # Retry fica aqui (ESPERAS_S), não no cliente: o retry interno travou minutos num 503.
     # Ollama ignora timeout/max_retries; o num_ctx padrão (4096) corta prompt + saída longa.
-    extra = {"num_ctx": 8192} if config.LLM_PROVIDER == "ollama" else {}
+    # Sem num_predict o modelo pode entrar em laço e gerar por horas (bactrim_interacoes_5).
+    extra = {"num_ctx": 8192, "num_predict": 3072, "client_kwargs": {"timeout": 600}}
+    extra = extra if config.LLM_PROVIDER == "ollama" else {}
     llm = config.get_llm(a.modelo, temperature=0, max_retries=0, timeout=120, **extra)
     linhas, conta = rodar(chunks, llm, a.modelo, a.max_chamadas, a.pausa)
     with SAIDA.open("w") as f:
