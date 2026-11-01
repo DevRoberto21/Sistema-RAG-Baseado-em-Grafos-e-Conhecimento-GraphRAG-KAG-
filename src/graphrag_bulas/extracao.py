@@ -15,6 +15,10 @@ Regras:
 - Liste em entidades só o que é ponta de alguma relação.
 - O medicamento da bula já tem id definido (abaixo). Use esse id para ele.
 - id: slug minúsculo, sem acento, com _ no lugar de espaço (insuficiencia_renal).
+- id em português, com as palavras inteiras da bula (hiperaldosteronismo_primario, não
+  hiperaldosteronismo_prima).
+- Condicao é doença ou estado do paciente, nunca substância: "intolerância à galactose", não
+  "galactose".
 - PrincipioAtivo: id pelo nome DCB sem sal (losartana, não losartana potássica).
 - Populacao: só gestante, lactante, pediatrico ou idoso. Gravidez vira gestante; amamentação vira
   lactante; criança vira pediatrico.
@@ -41,8 +45,9 @@ Regras:
 FOCO = {
     "indicacoes": "INDICADO_PARA: doenças e sintomas que o medicamento trata ou previne.",
     "contraindicacoes": "CONTRAINDICADO_EM: condições e populações em que o uso é proibido.",
-    "advertencias": "CONTRAINDICADO_EM só quando o trecho proíbe o uso (\"não deve ser usado\"). "
-    "Cuidado, ajuste de dose ou monitoramento não é contraindicação.",
+    "advertencias": "CONTRAINDICADO_EM só quando o trecho proíbe o uso (\"não deve ser usado\", "
+    "confianca 1.0) ou desaconselha (\"não é recomendado\", confianca 0.7). Cautela, atenção, "
+    "falta de dados, ajuste de dose ou monitoramento não é contraindicação: sem relação.",
     "interacoes": "INTERAGE_COM entre o princípio ativo da bula e outros fármacos ou classes. "
     "PERTENCE_A quando o trecho diz a classe de um fármaco.",
     "reacoes_adversas": "PODE_CAUSAR com a frequencia que o trecho dá a cada reação.",
@@ -90,6 +95,28 @@ EXEMPLOS = [
                 Relacao(tipo="INTERAGE_COM", origem="dipirona", destino="metotrexato",
                         gravidade="grave", efeito="contraindicado em insuficiência renal",
                         confianca=1.0),
+            ],
+        ),
+    ),
+    (
+        "novalgina", "advertencias",
+        "Pacientes com asma têm maior risco de reações anafilactoides; use com cautela. Em idosos, "
+        "monitorar a função renal. Novalgina não deve ser usada por pacientes com deficiência de "
+        "glicose-6-fosfato-desidrogenase. Contém sacarose: não deve ser usado por pessoas com "
+        "intolerância à frutose.",
+        Extracao(
+            entidades=[
+                Entidade(id="novalgina", label="Medicamento", nome="Novalgina"),
+                Entidade(id="deficiencia_de_glicose_6_fosfato_desidrogenase", label="Condicao",
+                         nome="Deficiência de glicose-6-fosfato-desidrogenase"),
+                Entidade(id="intolerancia_a_frutose", label="Condicao",
+                         nome="Intolerância à frutose"),
+            ],
+            relacoes=[
+                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
+                        destino="deficiencia_de_glicose_6_fosfato_desidrogenase", confianca=1.0),
+                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
+                        destino="intolerancia_a_frutose", confianca=1.0),
             ],
         ),
     ),

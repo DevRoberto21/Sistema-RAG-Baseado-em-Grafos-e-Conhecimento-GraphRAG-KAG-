@@ -3,6 +3,7 @@
 Uso:
   uv run python -m graphrag_bulas.extracao_corpus --bulas 10   # piloto: 10 primeiras bulas
   uv run python -m graphrag_bulas.extracao_corpus              # corpus inteiro
+  caffeinate -i uv run python -m graphrag_bulas.extracao_corpus  # macOS: não dorme no meio
   opções: --bula cozaar (repetível)  --max-chamadas N  --pausa S  --modelo gemini-3.5-flash-lite
 
 Lê data/processed/chunks.jsonl (E2.4) e grava data/processed/extracoes.jsonl, uma linha por
@@ -115,7 +116,9 @@ def main(argv=None):
     chunks = [c for c in chunks if c["bula"] in set(bulas)]
 
     # Retry fica aqui (ESPERAS_S), não no cliente: o retry interno travou minutos num 503.
-    llm = config.get_llm(a.modelo, temperature=0, max_retries=0, timeout=120)
+    # Ollama ignora timeout/max_retries; o num_ctx padrão (4096) corta prompt + saída longa.
+    extra = {"num_ctx": 8192} if config.LLM_PROVIDER == "ollama" else {}
+    llm = config.get_llm(a.modelo, temperature=0, max_retries=0, timeout=120, **extra)
     linhas, conta = rodar(chunks, llm, a.modelo, a.max_chamadas, a.pausa)
     with SAIDA.open("w") as f:
         f.writelines(json.dumps(linha, ensure_ascii=False) + "\n" for linha in linhas)
