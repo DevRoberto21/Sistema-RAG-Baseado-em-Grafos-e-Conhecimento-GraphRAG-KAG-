@@ -30,6 +30,8 @@ Regras:
   comum") vira a mais frequente.
 - gravidade: grave, moderada, leve ou desconhecida. Sem gravidade explícita, use desconhecida.
 - efeito: curto, com as palavras da bula.
+- Uso proibido só junto com outro fármaco ("com X, contraindicado em Y") não é CONTRAINDICADO_EM
+  Y: vira INTERAGE_COM do princípio ativo com X, gravidade grave.
 - Interação citando uma classe ("AINEs", "anticoagulantes") aponta para a ClasseTerapeutica.
 - confianca: 1.0 se o trecho afirma o fato com todas as letras; 0.7 se afirma com ressalva ou
   exige ligar duas frases; 0.4 ou menos se é só sugerido.
@@ -69,19 +71,25 @@ EXEMPLOS = [
     (
         "novalgina", "contraindicacoes",
         "Novalgina não deve ser utilizada durante os três primeiros meses de gravidez nem por "
-        "pacientes com porfiria hepática aguda intermitente.",
+        "pacientes com porfiria hepática aguda intermitente. O uso de dipirona com metotrexato é "
+        "contraindicado em pacientes com insuficiência renal.",
         Extracao(
             entidades=[
                 Entidade(id="novalgina", label="Medicamento", nome="Novalgina"),
                 Entidade(id="gestante", label="Populacao", nome="Gestante"),
                 Entidade(id="porfiria_hepatica_aguda_intermitente", label="Condicao",
                          nome="Porfiria hepática aguda intermitente"),
+                Entidade(id="dipirona", label="PrincipioAtivo", nome="Dipirona"),
+                Entidade(id="metotrexato", label="PrincipioAtivo", nome="Metotrexato"),
             ],
             relacoes=[
                 Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina", destino="gestante",
                         confianca=1.0),
                 Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
                         destino="porfiria_hepatica_aguda_intermitente", confianca=1.0),
+                Relacao(tipo="INTERAGE_COM", origem="dipirona", destino="metotrexato",
+                        gravidade="grave", efeito="contraindicado em insuficiência renal",
+                        confianca=1.0),
             ],
         ),
     ),
