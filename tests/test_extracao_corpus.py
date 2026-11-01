@@ -1,6 +1,7 @@
 """Extração no corpus (E3.4). LLM falso, cache em diretório temporário."""
 
 import pytest
+from langchain_core.exceptions import OutputParserException
 
 from graphrag_bulas import extracao_corpus as ec
 from graphrag_bulas.modelos import Extracao
@@ -85,3 +86,9 @@ def test_cota_diaria_para_a_rodada_sem_retry():
     linhas, conta = rodar([chunk(0), chunk(1), chunk(2)], llm)
     assert llm.chamadas == 2 and len(linhas) == 1
     assert conta["sem_cota"] == 2 and conta["falhas"] == 0
+
+
+def test_json_quebrado_pula_chunk_sem_retry():
+    llm = LLMFalso(OutputParserException("Failed to parse Extracao"), BOA)
+    linhas, conta = rodar([chunk(0), chunk(1)], llm)
+    assert llm.chamadas == 2 and conta["falhas"] == 1 and len(linhas) == 1

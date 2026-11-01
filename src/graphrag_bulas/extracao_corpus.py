@@ -21,6 +21,8 @@ import json
 import logging
 import time
 
+from langchain_core.exceptions import OutputParserException
+
 from graphrag_bulas import config
 from graphrag_bulas.chunks import PROCESSADOS
 from graphrag_bulas.extracao import extrair, montar_prompt, validar
@@ -53,7 +55,8 @@ def extrair_com_retry(llm, chunk, esperas=ESPERAS_S, dormir=time.sleep):
         except Exception as e:  # rede, cota, 503 ou JSON fora do schema
             if _cota_diaria(e):
                 raise CotaDiaria(str(e)) from e
-            if espera is None:
+            # Com temperature=0 a resposta se repete: tentar de novo o mesmo JSON quebrado é perda.
+            if espera is None or isinstance(e, OutputParserException):
                 raise
             log.warning("%s: %s; nova tentativa em %ss", chunk["id"], e, espera)
             dormir(espera)
