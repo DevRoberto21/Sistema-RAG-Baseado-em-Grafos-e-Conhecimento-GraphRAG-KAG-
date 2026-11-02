@@ -83,9 +83,10 @@ como no seed.
 Uma linha por item:
 
 - nó: `{"tipo": "no", "label", "id", "nome", "sinonimos"}`
-- relação: `{"tipo": "rel", "rel", "origem", "destino", "frequencia", "gravidade", "efeito",
-  "dose", "confianca", "fonte_chunk_id", "chunks"}`. `chunks` é a lista de todos os chunks que
-  sustentam a relação.
+- relação: `{"tipo": "rel", "rel", "label_origem", "origem", "label_destino", "destino",
+  "frequencia", "gravidade", "efeito", "dose", "confianca", "fonte_chunk_id", "chunks"}`.
+  Os labels das pontas entram porque o `MATCH` da carga precisa deles. `chunks` é a lista de
+  todos os chunks que sustentam a relação.
 
 Relação cuja ponta some depois do mapeamento é descartada e contada no relatório.
 
