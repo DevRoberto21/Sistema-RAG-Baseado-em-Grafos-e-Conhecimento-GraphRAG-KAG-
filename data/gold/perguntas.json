@@ -1,0 +1,611 @@
+{
+ "anotador": "claude (sem revisão humana)",
+ "perguntas": [
+  {
+   "id": "q01",
+   "tipo": "1hop",
+   "pergunta": "Para que o Cozaar é indicado?",
+   "fatos": [
+    [
+     "hipertensao"
+    ],
+    [
+     "insuficiencia cardiaca"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_indicacoes_0"
+   ]
+  },
+  {
+   "id": "q02",
+   "tipo": "1hop",
+   "pergunta": "Para quais infecções o Flagyl é indicado?",
+   "fatos": [
+    [
+     "tricomon"
+    ],
+    [
+     "giardiase"
+    ],
+    [
+     "amebiase"
+    ]
+   ],
+   "fontes": [
+    "bula_flagyl_indicacoes_0"
+   ]
+  },
+  {
+   "id": "q03",
+   "tipo": "1hop",
+   "pergunta": "Para que serve o Carbolitium?",
+   "fatos": [
+    [
+     "mania",
+     "maniaco"
+    ],
+    [
+     "bipolar"
+    ]
+   ],
+   "fontes": [
+    "bula_carbolitium_indicacoes_0"
+   ]
+  },
+  {
+   "id": "q04",
+   "tipo": "1hop",
+   "pergunta": "Para que o atenolol é indicado?",
+   "fatos": [
+    [
+     "hipertensao"
+    ],
+    [
+     "angina"
+    ],
+    [
+     "arritmia"
+    ]
+   ],
+   "fontes": [
+    "bula_atenolol_indicacoes_0"
+   ]
+  },
+  {
+   "id": "q05",
+   "tipo": "1hop",
+   "pergunta": "O Clexane é usado para tratar trombose?",
+   "fatos": [
+    [
+     "trombose venosa profunda"
+    ]
+   ],
+   "fontes": [
+    "bula_clexane_indicacoes_0"
+   ]
+  },
+  {
+   "id": "q06",
+   "tipo": "1hop",
+   "pergunta": "Quais são as reações adversas comuns do Amoxil?",
+   "fatos": [
+    [
+     "diarreia"
+    ],
+    [
+     "nausea"
+    ],
+    [
+     "rash",
+     "erupcao"
+    ]
+   ],
+   "fontes": [
+    "bula_amoxil_reacoes_adversas_0"
+   ]
+  },
+  {
+   "id": "q07",
+   "tipo": "1hop",
+   "pergunta": "O Marevan pode causar sangramento?",
+   "fatos": [
+    [
+     "hemorragia",
+     "sangramento"
+    ]
+   ],
+   "fontes": [
+    "bula_marevan_reacoes_adversas_0"
+   ]
+  },
+  {
+   "id": "q08",
+   "tipo": "1hop",
+   "pergunta": "Qual reação cardíaca comum o atenolol pode causar?",
+   "fatos": [
+    [
+     "bradicardia"
+    ]
+   ],
+   "fontes": [
+    "bula_atenolol_reacoes_adversas_0"
+   ]
+  },
+  {
+   "id": "q09",
+   "tipo": "1hop",
+   "pergunta": "O Renitec pode causar tosse?",
+   "fatos": [
+    [
+     "tosse"
+    ]
+   ],
+   "fontes": [
+    "bula_renitec_reacoes_adversas_0"
+   ]
+  },
+  {
+   "id": "q10",
+   "tipo": "1hop",
+   "pergunta": "Quem tem alergia a que substância não pode usar Ancoron?",
+   "fatos": [
+    [
+     "iodo"
+    ]
+   ],
+   "fontes": [
+    "bula_ancoron_contraindicacoes_0"
+   ]
+  },
+  {
+   "id": "q11",
+   "tipo": "1hop",
+   "pergunta": "O Celebra é contraindicado para quem tem alergia a quê?",
+   "fatos": [
+    [
+     "sulfonamida"
+    ]
+   ],
+   "fontes": [
+    "bula_celebra_contraindicacoes_0"
+   ]
+  },
+  {
+   "id": "q12",
+   "tipo": "1hop",
+   "pergunta": "Por que a Aspirina é contraindicada na suspeita de dengue?",
+   "fatos": [
+    [
+     "sangramento",
+     "hemorragia"
+    ]
+   ],
+   "fontes": [
+    "bula_aspirina_contraindicacoes_0"
+   ]
+  },
+  {
+   "id": "q13",
+   "tipo": "1hop",
+   "pergunta": "O Benicar pode ser usado durante a gravidez?",
+   "fatos": [
+    [
+     "contraindicad",
+     "nao deve",
+     "nao pode"
+    ]
+   ],
+   "fontes": [
+    "bula_benicar_contraindicacoes_0"
+   ]
+  },
+  {
+   "id": "q14",
+   "tipo": "1hop",
+   "pergunta": "O que pode acontecer se eu beber álcool durante o tratamento com Flagyl?",
+   "fatos": [
+    [
+     "dissulfiram",
+     "antabuse",
+     "rubor",
+     "vomito",
+     "taquicardia"
+    ]
+   ],
+   "fontes": [
+    "bula_flagyl_interacoes_0"
+   ]
+  },
+  {
+   "id": "q15",
+   "tipo": "1hop",
+   "pergunta": "O ciprofloxacino pode causar problemas no tendão?",
+   "fatos": [
+    [
+     "tendinite",
+     "ruptura"
+    ]
+   ],
+   "fontes": [
+    "bula_cipro_advertencias_4"
+   ]
+  },
+  {
+   "id": "m01",
+   "tipo": "multihop",
+   "pergunta": "Quais medicamentos do corpus são indicados para hipertensão?",
+   "fatos": [
+    [
+     "cozaar",
+     "losartana"
+    ],
+    [
+     "renitec",
+     "enalapril"
+    ],
+    [
+     "atenolol"
+    ],
+    [
+     "norvasc",
+     "anlodipino"
+    ],
+    [
+     "benicar",
+     "olmesartana"
+    ],
+    [
+     "lasix",
+     "furosemida"
+    ],
+    [
+     "aldactone",
+     "espironolactona"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_indicacoes_0",
+    "bula_renitec_indicacoes_0",
+    "bula_atenolol_indicacoes_0",
+    "bula_norvasc_indicacoes_0",
+    "bula_benicar_indicacoes_0",
+    "bula_lasix_indicacoes_0",
+    "bula_aldactone_indicacoes_0",
+    "bula_aradois_indicacoes_0"
+   ]
+  },
+  {
+   "id": "m02",
+   "tipo": "multihop",
+   "pergunta": "Quais antibióticos do corpus aumentam o efeito de anticoagulantes como a varfarina?",
+   "fatos": [
+    [
+     "flagyl",
+     "metronidazol"
+    ],
+    [
+     "bactrim",
+     "sulfametoxazol",
+     "trimetoprima"
+    ]
+   ],
+   "fontes": [
+    "bula_flagyl_interacoes_0",
+    "bula_bactrim_interacoes_2"
+   ]
+  },
+  {
+   "id": "m03",
+   "tipo": "multihop",
+   "pergunta": "O Ancoron interage com o princípio ativo do Marevan? Qual o efeito?",
+   "fatos": [
+    [
+     "varfarina"
+    ],
+    [
+     "anticoagul"
+    ]
+   ],
+   "fontes": [
+    "bula_ancoron_interacoes_3"
+   ]
+  },
+  {
+   "id": "m04",
+   "tipo": "multihop",
+   "pergunta": "O Lasix pode alterar o efeito do Carbolitium?",
+   "fatos": [
+    [
+     "litio"
+    ],
+    [
+     "toxicidade",
+     "niveis sericos",
+     "nivel serico",
+     "concentracao"
+    ]
+   ],
+   "fontes": [
+    "bula_lasix_interacoes_1",
+    "bula_carbolitium_interacoes_2"
+   ]
+  },
+  {
+   "id": "m05",
+   "tipo": "multihop",
+   "pergunta": "Quem toma Carbolitium precisa de cuidado ao usar um inibidor da ECA como o Renitec?",
+   "fatos": [
+    [
+     "inibidores da eca",
+     "inibidor da eca",
+     "ieca",
+     "enalapril"
+    ],
+    [
+     "concentracao",
+     "toxicidade",
+     "nivel",
+     "niveis"
+    ]
+   ],
+   "fontes": [
+    "bula_carbolitium_interacoes_2"
+   ]
+  },
+  {
+   "id": "m06",
+   "tipo": "multihop",
+   "pergunta": "O Cozaar pode ser usado junto com o Aldactone?",
+   "fatos": [
+    [
+     "potassio"
+    ],
+    [
+     "espironolactona"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_interacoes_0",
+    "bula_aldactone_advertencias_0"
+   ]
+  },
+  {
+   "id": "m07",
+   "tipo": "multihop",
+   "pergunta": "Quais anti-inflamatórios aumentam o risco de sangramento com o Clexane?",
+   "fatos": [
+    [
+     "acido acetilsalicilico",
+     "aspirina",
+     "aas"
+    ],
+    [
+     "aine",
+     "anti inflamatorio"
+    ]
+   ],
+   "fontes": [
+    "bula_clexane_interacoes_0"
+   ]
+  },
+  {
+   "id": "m08",
+   "tipo": "multihop",
+   "pergunta": "O Cozaar e o Aradois têm o mesmo princípio ativo?",
+   "fatos": [
+    [
+     "losartana"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_posologia_1",
+    "bula_aradois_posologia_1"
+   ]
+  },
+  {
+   "id": "m09",
+   "tipo": "multihop",
+   "pergunta": "Quais medicamentos do corpus são indicados para insuficiência cardíaca?",
+   "fatos": [
+    [
+     "cozaar",
+     "losartana"
+    ],
+    [
+     "renitec",
+     "enalapril"
+    ],
+    [
+     "aradois"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_indicacoes_0",
+    "bula_renitec_indicacoes_0",
+    "bula_aradois_indicacoes_0"
+   ]
+  },
+  {
+   "id": "m10",
+   "tipo": "multihop",
+   "pergunta": "Quais medicamentos do corpus são indicados para febre?",
+   "fatos": [
+    [
+     "advil",
+     "ibuprofeno"
+    ],
+    [
+     "tylenol",
+     "paracetamol"
+    ],
+    [
+     "aspirina",
+     "acido acetilsalicilico"
+    ]
+   ],
+   "fontes": [
+    "bula_advil_indicacoes_0",
+    "bula_tylenol_indicacoes_0",
+    "bula_aspirina_indicacoes_0"
+   ]
+  },
+  {
+   "id": "m11",
+   "tipo": "multihop",
+   "pergunta": "Quais antibióticos do corpus tratam sinusite?",
+   "fatos": [
+    [
+     "keflex",
+     "cefalexina"
+    ],
+    [
+     "bactrim",
+     "sulfametoxazol"
+    ]
+   ],
+   "fontes": [
+    "bula_keflex_indicacoes_0",
+    "bula_bactrim_indicacoes_1"
+   ]
+  },
+  {
+   "id": "m12",
+   "tipo": "multihop",
+   "pergunta": "Quais anti-inflamatórios do corpus tratam osteoartrite?",
+   "fatos": [
+    [
+     "arcoxia",
+     "etoricoxibe"
+    ],
+    [
+     "celebra",
+     "celecoxibe"
+    ]
+   ],
+   "fontes": [
+    "bula_arcoxia_indicacoes_0",
+    "bula_celebra_indicacoes_0"
+   ]
+  },
+  {
+   "id": "m13",
+   "tipo": "multihop",
+   "pergunta": "Que efeito adverso o Cozaar e o Norvasc têm em comum?",
+   "fatos": [
+    [
+     "tontura"
+    ]
+   ],
+   "fontes": [
+    "bula_cozaar_reacoes_adversas_0",
+    "bula_norvasc_reacoes_adversas_0"
+   ]
+  },
+  {
+   "id": "m14",
+   "tipo": "multihop",
+   "pergunta": "O Brilinta é usado junto com qual outro medicamento do corpus?",
+   "fatos": [
+    [
+     "acido acetilsalicilico",
+     "acido acetil salicilico",
+     "aas",
+     "aspirina"
+    ]
+   ],
+   "fontes": [
+    "bula_brilinta_indicacoes_0"
+   ]
+  },
+  {
+   "id": "m15",
+   "tipo": "multihop",
+   "pergunta": "Quais medicamentos do corpus são contraindicados na gravidez?",
+   "fatos": [
+    [
+     "marevan",
+     "varfarina"
+    ],
+    [
+     "benicar",
+     "olmesartana"
+    ]
+   ],
+   "fontes": [
+    "bula_marevan_contraindicacoes_0",
+    "bula_benicar_contraindicacoes_0"
+   ]
+  },
+  {
+   "id": "s01",
+   "tipo": "sem_resposta",
+   "pergunta": "Qual a dose de Rivotril para ansiedade?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s02",
+   "tipo": "sem_resposta",
+   "pergunta": "O Viagra interage com nitratos?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s03",
+   "tipo": "sem_resposta",
+   "pergunta": "O Ozempic causa pancreatite?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s04",
+   "tipo": "sem_resposta",
+   "pergunta": "Qual o preço do Cozaar na farmácia?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s05",
+   "tipo": "sem_resposta",
+   "pergunta": "O Roacutan pode ser usado por gestantes?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s06",
+   "tipo": "sem_resposta",
+   "pergunta": "Quem inventou o Marevan?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s07",
+   "tipo": "sem_resposta",
+   "pergunta": "O Dramin dá sono?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s08",
+   "tipo": "sem_resposta",
+   "pergunta": "O Buscopan alivia cólica menstrual?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s09",
+   "tipo": "sem_resposta",
+   "pergunta": "O Allegra pode ser usado por crianças de 2 anos?",
+   "fatos": [],
+   "fontes": []
+  },
+  {
+   "id": "s10",
+   "tipo": "sem_resposta",
+   "pergunta": "Em que ano o Advil foi lançado no Brasil?",
+   "fatos": [],
+   "fontes": []
+  }
+ ]
+}

@@ -84,3 +84,20 @@ sem saber a origem de cada item. Critérios aplicados:
 - Variantes do mesmo fato ficam com um id só, de preferência o do grafo semente (`ieca`, `bra`, `aine`).
 
 O gold não passou por revisão de especialista da área.
+
+## Perguntas (E7.1)
+
+`perguntas.json` tem 40 perguntas para comparar GraphRAG, RAG e LLM puro
+(spec: `docs/superpowers/specs/2026-11-02-e7-avaliacao-design.md`):
+
+- 15 `1hop`: um fato de uma bula.
+- 15 `multihop`: cruza bulas ou seções (ex.: quais remédios do corpus tratam febre).
+- 10 `sem_resposta`: remédio fora do corpus ou dado que nenhuma bula traz (preço, ano de lançamento).
+
+Cada pergunta lista `fatos` (cada fato aceita variantes, comparadas sem acento e sem maiúscula) e
+`fontes` (chunk_ids que sustentam a resposta). Em algumas perguntas multihop, o nome do remédio vem da
+bula de origem do chunk, e não do texto dele.
+
+Confira com `uv run python -m graphrag_bulas.avaliacao validar`.
+
+**Sem revisão humana**: as perguntas foram escritas pelo Claude a partir do texto das bulas.
