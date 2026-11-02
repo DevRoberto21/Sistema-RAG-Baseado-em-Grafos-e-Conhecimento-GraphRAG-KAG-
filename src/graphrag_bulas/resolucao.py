@@ -11,11 +11,16 @@ Spec: docs/superpowers/specs/2026-11-01-e4-resolucao-ingestao-design.md
 
 import csv
 import json
+import logging
 import re
+from collections import Counter, defaultdict
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from graphrag_bulas.chunks import PROCESSADOS, slug
 from graphrag_bulas.extracao import COMPOSICAO
+
+log = logging.getLogger(__name__)
 
 RAIZ = PROCESSADOS.parents[1]
 DICIONARIO = RAIZ / "data" / "curadoria" / "sinonimos.json"
@@ -139,3 +144,189 @@ def ler_rotulados(path: Path = ROTULADOS):
             for r in csv.DictReader(f)
             if r["mesmo"].strip()
         ]
+
+
+@dataclass
+class Resolucao:
+    nos: list[dict]
+    rels: list[dict]
+    antes: Counter
+    passos: Counter = field(default_factory=Counter)  # (label, passo) -> ids fundidos
+    fusoes: list = field(default_factory=list)  # (label, de, para, cos)
+    pares: list = field(default_factory=list)  # (label, id, representante, cos)
+    rels_antes: Counter = field(default_factory=Counter)
+    lacos: int = 0
+    unicos: list = field(default_factory=list)  # (label, id) visto 1 vez e sem fusão
+
+
+def resolver(linhas, dicionario, embed, limiar) -> Resolucao:
+    """Resolve as entidades de extracoes.jsonl e junta as relações repetidas.
+
+    embed(textos) -> vetores normalizados (embeddings.embed nos scripts; falso nos testes).
+    """
+    freq, nomes = Counter(), defaultdict(Counter)
+    for linha in linhas:
+        for e in linha["entidades"]:
+            freq[e["label"], e["id"]] += 1
+            nomes[e["label"], e["id"]][e["nome"]] += 1
+    antes = Counter(label for label, _ in freq)
+
+    res = Resolucao(nos=[], rels=[], antes=antes)
+    passo1 = {}
+    for label, i in freq:
+        n = normalizar(i, label)
+        d = dicionario.get(label, {}).get(n, n)
+        passo1[label, i] = d
+        if n != i:
+            res.passos[label, "regra"] += 1
+        if d != n:
+            res.passos[label, "dicionario"] += 1
+
+    por_label = defaultdict(Counter)
+    nomes2 = defaultdict(Counter)
+    for (label, i), d in passo1.items():
+        por_label[label][d] += freq[label, i]
+        nomes2[label, d].update(nomes[label, i])
+
+    final = {}
+    for label, itens in por_label.items():
+        if label in SEM_EMBEDDING:
+            final.update({(label, d): d for d in itens})
+            continue
+        ids = sorted(itens)
+        textos = [nomes2[label, d].most_common(1)[0][0] for d in ids]
+        vetores = dict(zip(ids, embed(textos), strict=True))
+        canonicos = set(dicionario.get(label, {}).values())
+        mapa, fusoes, pares = agrupar(itens, canonicos, vetores, limiar)
+        final.update({(label, d): r for d, r in mapa.items()})
+        res.passos[label, "embedding"] += len(fusoes)
+        res.fusoes += [(label, *f) for f in fusoes]
+        res.pares += [(label, *p) for p in pares]
+        fundidos = {f[0] for f in fusoes} | {f[1] for f in fusoes}
+        res.unicos += [(label, d) for d in ids if itens[d] == 1 and d not in fundidos]
+
+    agrupados = defaultdict(Counter)
+    for (label, d), r in final.items():
+        agrupados[label, r].update(nomes2[label, d])
+    for (label, r), cont in sorted(agrupados.items()):
+        nome = cont.most_common(1)[0][0]
+        res.nos.append(
+            {
+                "tipo": "no",
+                "label": label,
+                "id": r,
+                "nome": nome,
+                "sinonimos": sorted(n for n in cont if n != nome),
+            }
+        )
+
+    def mapear(label, i):
+        return final[label, passo1[label, i]]
+
+    rels = {}
+    for linha in linhas:
+        labels = {e["id"]: e["label"] for e in linha["entidades"]}
+        for r in linha["relacoes"]:
+            res.rels_antes[r["tipo"]] += 1
+            lo, ld = labels[r["origem"]], labels[r["destino"]]
+            o, d = mapear(lo, r["origem"]), mapear(ld, r["destino"])
+            if (lo, o) == (ld, d):
+                res.lacos += 1
+                continue
+            chave = (r["tipo"], lo, o, ld, d)
+            props = {p: r.get(p) for p in ("frequencia", "gravidade", "efeito", "dose")}
+            nova = {
+                "tipo": "rel",
+                "rel": r["tipo"],
+                "label_origem": lo,
+                "origem": o,
+                "label_destino": ld,
+                "destino": d,
+                **props,
+                "confianca": r["confianca"],
+                "fonte_chunk_id": linha["chunk_id"],
+                "chunks": [linha["chunk_id"]],
+            }
+            atual = rels.get(chave)
+            if atual is None:
+                rels[chave] = nova
+                continue
+            chunks = sorted({*atual["chunks"], linha["chunk_id"]})
+            if nova["confianca"] > atual["confianca"]:
+                rels[chave] = nova
+            rels[chave]["chunks"] = chunks
+    res.rels = list(rels.values())
+    return res
+
+
+def relatorio(res: Resolucao, limiar: float, fonte_limiar: str) -> str:
+    depois = Counter(n["label"] for n in res.nos)
+    rels_depois = Counter(r["rel"] for r in res.rels)
+    linhas = [
+        "# Relatório E4 — resolução e ingestão",
+        "",
+        f"Limiar de embedding: {limiar:.3f} ({fonte_limiar}).",
+        "",
+        "## Nós por label",
+        "",
+        "| Label | Antes | Depois | Regra | Dicionário | Embedding |",
+        "|---|---|---|---|---|---|",
+    ]
+    for label in sorted(res.antes):
+        linhas.append(
+            f"| {label} | {res.antes[label]} | {depois[label]} | "
+            f"{res.passos[label, 'regra']} | {res.passos[label, 'dicionario']} | "
+            f"{res.passos[label, 'embedding']} |"
+        )
+    linhas += ["", "## Relações por tipo", "", "| Tipo | Antes | Depois |", "|---|---|---|"]
+    for tipo in sorted(res.rels_antes):
+        linhas.append(f"| {tipo} | {res.rels_antes[tipo]} | {rels_depois[tipo]} |")
+    linhas += [
+        "",
+        f"Relações descartadas por laço depois da fusão: {res.lacos}.",
+        "",
+        "## 30 maiores fusões por embedding",
+        "",
+        "| Label | De | Para | Cosseno |",
+        "|---|---|---|---|",
+    ]
+    for label, de, para, cos in sorted(res.fusoes, key=lambda f: -f[3])[:30]:
+        linhas.append(f"| {label} | {de} | {para} | {cos:.3f} |")
+    linhas += ["", f"## Ids vistos uma vez e sem fusão ({len(res.unicos)})", ""]
+    linhas += [f"- {label}: {i}" for label, i in sorted(res.unicos)]
+    return "\n".join(linhas) + "\n"
+
+
+def main():
+    from graphrag_bulas.embeddings import embed
+
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S"
+    )
+    linhas = [json.loads(x) for x in ENTRADA.open()]
+    rotulados = ler_rotulados()
+    if rotulados:
+        limiar, fonte = escolher_limiar(rotulados), f"{len(rotulados)} pares rotulados"
+    else:
+        limiar, fonte = LIMIAR_PADRAO, "padrão; sem data/curadoria/pares_rotulados.csv"
+        log.warning("sem pares rotulados: limiar padrão %.2f", limiar)
+    res = resolver(linhas, carregar_dicionario(), embed, limiar)
+
+    with SAIDA.open("w") as f:
+        for item in [*res.nos, *res.rels]:
+            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    PARES.parent.mkdir(exist_ok=True)
+    with PARES.open("w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["label", "id_a", "id_b", "cosseno", "mesmo"])
+        for label, a, b, cos in sorted(res.pares, key=lambda p: -p[3]):
+            w.writerow([label, a, b, f"{cos:.4f}", ""])
+    RELATORIO.write_text(relatorio(res, limiar, fonte))
+    print(
+        f"{SAIDA.name}: {len(res.nos)} nós, {len(res.rels)} relações; "
+        f"{len(res.pares)} pares candidatos; relatório em {RELATORIO}"
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -94,3 +94,97 @@ def test_ler_rotulados(tmp_path):
     arq = tmp_path / "pares.csv"
     arq.write_text("label,id_a,id_b,cosseno,mesmo\nX,a,b,0.9,s\nX,c,d,0.85,n\nX,e,f,0.82,\n")
     assert rz.ler_rotulados(arq) == [(0.9, True), (0.85, False)]
+
+
+def _ent(i, label, nome):
+    return {"id": i, "label": label, "nome": nome}
+
+
+def _rel(tipo, o, d, confianca, **kw):
+    base = {"frequencia": None, "gravidade": None, "efeito": None, "dose": None}
+    return {"tipo": tipo, "origem": o, "destino": d, "confianca": confianca, **base, **kw}
+
+
+LINHAS = [
+    {
+        "chunk_id": "bula_cozaar_interacoes_0",
+        "bula": "bula_cozaar",
+        "entidades": [
+            _ent("losartana", "PrincipioAtivo", "Losartana"),
+            _ent("aines", "ClasseTerapeutica", "AINEs"),
+        ],
+        "relacoes": [_rel("INTERAGE_COM", "losartana", "aines", 0.7, gravidade="desconhecida")],
+    },
+    {
+        "chunk_id": "bula_cozaar_interacoes_1",
+        "bula": "bula_cozaar",
+        "entidades": [
+            _ent("losartana_potassica", "PrincipioAtivo", "Losartana potássica"),
+            _ent(
+                "anti_inflamatorios_nao_esteroides",
+                "ClasseTerapeutica",
+                "Anti-inflamatórios não esteroides",
+            ),
+        ],
+        "relacoes": [
+            _rel(
+                "INTERAGE_COM",
+                "losartana_potassica",
+                "anti_inflamatorios_nao_esteroides",
+                1.0,
+                gravidade="grave",
+            )
+        ],
+    },
+    {
+        "chunk_id": "bula_marevan_interacoes_0",
+        "bula": "bula_marevan",
+        "entidades": [
+            _ent("varfarina", "PrincipioAtivo", "Varfarina"),
+            _ent("varfarina_sodica", "PrincipioAtivo", "Varfarina sódica"),
+        ],
+        "relacoes": [_rel("INTERAGE_COM", "varfarina", "varfarina_sodica", 1.0)],
+    },
+]
+DIC = {
+    "ClasseTerapeutica": {"aine": "aine", "anti_inflamatorio_nao_esteroide": "aine"},
+    "PrincipioAtivo": {"losartana": "losartana"},
+}
+
+
+def _embed_ortogonal(textos):
+    """Um vetor por texto, todos ortogonais: o passo de embedding não funde nada."""
+    return [[1.0 if j == i else 0.0 for j in range(len(textos))] for i in range(len(textos))]
+
+
+def test_resolver_funde_entidades_e_junta_relacoes_repetidas():
+    res = rz.resolver(LINHAS, DIC, _embed_ortogonal, limiar=0.92)
+    assert len(res.rels) == 1
+    r = res.rels[0]
+    assert (r["rel"], r["label_origem"], r["origem"], r["label_destino"], r["destino"]) == (
+        "INTERAGE_COM",
+        "PrincipioAtivo",
+        "losartana",
+        "ClasseTerapeutica",
+        "aine",
+    )
+    assert r["confianca"] == 1.0 and r["gravidade"] == "grave"
+    assert r["fonte_chunk_id"] == "bula_cozaar_interacoes_1"
+    assert r["chunks"] == ["bula_cozaar_interacoes_0", "bula_cozaar_interacoes_1"]
+    assert res.lacos == 1  # varfarina -> varfarina_sodica vira laço
+    aine = next(n for n in res.nos if n["id"] == "aine")
+    assert aine["sinonimos"] and aine["nome"] not in aine["sinonimos"]
+    assert res.antes["PrincipioAtivo"] == 4
+    assert {n["id"] for n in res.nos if n["label"] == "PrincipioAtivo"} == {
+        "losartana",
+        "varfarina",
+    }
+    assert res.passos["ClasseTerapeutica", "dicionario"] == 1
+
+
+def test_relatorio_tem_tabela_antes_depois():
+    res = rz.resolver(LINHAS, DIC, _embed_ortogonal, limiar=0.92)
+    texto = rz.relatorio(res, 0.92, "padrão")
+    assert "| ClasseTerapeutica | 2 | 1 |" in texto
+    assert "| INTERAGE_COM | 3 | 1 |" in texto
+    assert "laço depois da fusão: 1" in texto
