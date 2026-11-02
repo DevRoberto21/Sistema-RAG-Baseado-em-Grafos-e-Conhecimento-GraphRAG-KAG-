@@ -6,7 +6,7 @@ Spec: docs/superpowers/specs/2026-10-28-e5-retrieval-seeds-expansao-design.md
 import re
 
 from graphrag_bulas.embeddings import embed
-from graphrag_bulas.gds import ranquear
+from graphrag_bulas.gds import RELACOES_CAMINHO, ranquear
 from graphrag_bulas.text2cypher import consultar
 
 # Limiares calibrados na sondagem de 2026-10-28 sobre o grafo semente; recalibrar após o M2.
@@ -116,7 +116,7 @@ def buscar_chunks(driver, vetor, k):
 def expandir(driver, seeds, saltos=2, max_nos=60):
     """E5.2: vizinhança de até `saltos` saltos das seeds, só por relações de domínio.
 
-    Seeds são mantidas (dist 0 primeiro) enquanto o número de seeds não passar de `max_nos`.
+    Seeds são mantidas (vêm primeiro) enquanto o número de seeds não passar de `max_nos`.
     """
     ids = [s["id"] for s in seeds["entidades"]]
     nos, arestas = [], []
@@ -128,20 +128,31 @@ def expandir(driver, seeds, saltos=2, max_nos=60):
                 driver,
                 f"""
                 CALL () {{
-                  MATCH (s:Entidade) WHERE s.id IN $ids RETURN s AS n, 0 AS d
+                  MATCH (s:Entidade) WHERE s.id IN $ids
+                  RETURN s AS n, 0 AS d, true AS nucleo, 0 AS c, s.id AS seed
                   UNION ALL
                   MATCH (s:Entidade) WHERE s.id IN $ids
                   MATCH p = (s)-[:{rels}*1..{int(saltos)}]-(n:Entidade)
-                  RETURN n, length(p) AS d
+                  RETURN n, length(p) AS d,
+                         all(r IN relationships(p) WHERE type(r) = 'CONTEM') AS nucleo,
+                         size([r IN relationships(p) WHERE NOT type(r) IN $caminho]) AS c,
+                         s.id AS seed
                 }}
-                WITH n, min(d) AS dist
-                ORDER BY dist, n.id
+                WITH n, min(d) AS dist, max(toInteger(nucleo)) AS nucleo, min(c) AS custo,
+                     count(DISTINCT seed) AS pontes
+                // Corte: no corpus, PODE_CAUSAR etc. dão centenas de vizinhos a 1 salto e
+                // (dist, id) expulsava o caminho da resposta (marevan→varfarina→aine). Ordem:
+                // seeds; marca/princípio ativo da seed (CONTEM = mesma substância); depois
+                // saltos fora de RELACOES_CAMINHO menos seeds ligadas (seed a mais vale 1 salto).
+                ORDER BY CASE WHEN dist = 0 THEN 0 WHEN nucleo = 1 THEN 1 ELSE 2 END,
+                         custo - pontes, dist, n.id
                 LIMIT $max
                 RETURN elementId(n) AS eid, n.id AS id, n.nome AS nome,
                        [lb IN labels(n) WHERE lb <> 'Entidade'] AS labels, dist
                 """,
                 ids=ids,
                 max=max_nos,
+                caminho=RELACOES_CAMINHO,
             )
         ]
         # shortcut: aresta aponta por id, ambíguo se o id existe em 2 labels (ex.: cefaleia).
