@@ -17,8 +17,7 @@ def test_embed_missing_cobre_tudo_e_busca_vetorial(db):
     assert embed_missing(db) == {"Entidade": 0, "Chunk": 0}  # idempotente
 
     rows = db.execute_query(
-        "CALL db.index.vector.queryNodes('chunk_embedding', 30, $v) "
-        "YIELD node RETURN node.id AS id",
+        "CALL db.index.vector.queryNodes('chunk_embedding', 3, $v) YIELD node RETURN node.id AS id",
         v=embed(["risco de sangramento com anticoagulante e anti-inflamatório"])[0],
     ).records
     assert any("interacoes" in r["id"] for r in rows)
