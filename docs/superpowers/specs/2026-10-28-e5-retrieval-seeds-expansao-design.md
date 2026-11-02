@@ -113,8 +113,10 @@ LIMIT $max_nos
 ...
 ```
 
-Corte por `max_nos` (60): fica com os nós mais próximos das seeds (`dist`, depois `id` para ser
-determinístico). Seeds entram sempre. As arestas retornadas são só as que ligam dois nós
+Corte por `max_nos` (60), revisto após o M2 (no corpus, `(dist, id)` enchia o corte com
+`PODE_CAUSAR` a 1 salto): seeds; vizinhos por `CONTEM` a 1 salto de uma seed; depois menor
+`custo - pontes` (`custo` = saltos fora de `RELACOES_CAMINHO`, `pontes` = seeds que alcançam o
+nó), `dist` e `id` para ser determinístico. Seeds entram sempre. As arestas retornadas são só as que ligam dois nós
 mantidos.
 
 **Trechos:** a união de
