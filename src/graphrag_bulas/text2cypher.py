@@ -74,10 +74,10 @@ WHERE r.frequencia IN ['rara', 'muito_rara']
 RETURN e.nome AS efeito, r.frequencia AS frequencia, r.fonte_chunk_id AS fonte_chunk_id
 LIMIT 50
 
-Pergunta: Qual a dose de omeprazol no Losec?
-Seeds: losec (Medicamento): Losec; omeprazol (PrincipioAtivo): Omeprazol
+Pergunta: Qual a dose de pantoprazol no Pantozol?
+Seeds: pantozol (Medicamento): Pantozol; pantoprazol (PrincipioAtivo): Pantoprazol
 Cypher:
-MATCH (m:Medicamento {id: 'losec'})-[r:CONTEM]->(p:PrincipioAtivo {id: 'omeprazol'})
+MATCH (m:Medicamento {id: 'pantozol'})-[r:CONTEM]->(p:PrincipioAtivo {id: 'pantoprazol'})
 RETURN m.nome AS medicamento, p.nome AS principio_ativo, r.dose AS dose,
        r.fonte_chunk_id AS fonte_chunk_id
 LIMIT 50
@@ -90,11 +90,11 @@ MATCH (m:Medicamento)-[:CONTEM]->(:PrincipioAtivo {id: 'dipirona'}),
 RETURN m.nome AS medicamento, po.nome AS populacao, r.fonte_chunk_id AS fonte_chunk_id
 LIMIT 50
 
-Pergunta: Qual a cor do comprimido de Losec?
-Seeds: losec (Medicamento): Losec
+Pergunta: Qual a cor do comprimido de Pantozol?
+Seeds: pantozol (Medicamento): Pantozol
 Cypher: (vazio)"""
 
-IDS_EXEMPLOS = ["novalgina", "losec", "omeprazol", "dipirona"]
+IDS_EXEMPLOS = ["novalgina", "pantozol", "pantoprazol", "dipirona"]
 
 
 class Consulta(BaseModel):
