@@ -55,7 +55,8 @@ RELATORIO = RAIZ / "logs" / "avaliacao_e7.md"
 MODOS = ("graphrag", "rag", "llm_puro")
 
 PROMPT_PURO = """Você responde perguntas sobre medicamentos, em português, com o seu conhecimento.
-Se não souber responder com segurança, use suporte = nenhum. Deixe chunks e nos vazios.
+Não há contexto nem trechos de bula: use só o que você sabe. Deixe chunks e nos vazios.
+suporte: total se você sabe a resposta, parcial se sabe só parte, nenhum só se não sabe.
 Em pergunta sobre interação, contraindicação ou dose, oriente procurar médico ou farmacêutico.
 
 Pergunta: {pergunta}"""

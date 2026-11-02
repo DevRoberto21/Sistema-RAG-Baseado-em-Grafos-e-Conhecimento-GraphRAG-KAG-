@@ -25,4 +25,8 @@ def get_llm(model=None, **kwargs):
     """Troca de provedor = trocar LLM_PROVIDER/LLM_MODEL no .env."""
     from langchain.chat_models import init_chat_model
 
+    if LLM_PROVIDER == "ollama":
+        # O num_ctx padrão (4096) corta o contexto do GraphRAG; sem num_predict o modelo pode
+        # entrar em laço (visto na extração).
+        kwargs = {"num_ctx": 8192, "num_predict": 2048, **kwargs}
     return init_chat_model(model or LLM_MODEL, model_provider=LLM_PROVIDER, **kwargs)
