@@ -79,7 +79,7 @@ def bloqueado(a: str, b: str) -> bool:
 
 def carregar_dicionario(path: Path = DICIONARIO) -> dict[str, dict[str, str]]:
     """{label: {variante normalizada: id canônico}}. Inclui nome comercial -> princípio ativo."""
-    bruto = json.loads(path.read_text())
+    bruto = json.loads(path.read_text(encoding="utf-8"))
     bruto.setdefault("PrincipioAtivo", {})
     for med, pas in COMPOSICAO.items():
         if len(pas) == 1:
@@ -138,7 +138,7 @@ def escolher_limiar(rotulados, alvo=0.95, padrao=LIMIAR_PADRAO) -> float:
 def ler_rotulados(path: Path = ROTULADOS):
     if not path.exists():
         return None
-    with path.open() as f:
+    with path.open(encoding="utf-8") as f:
         return [
             (float(r["cosseno"]), r["mesmo"].strip().lower() == "s")
             for r in csv.DictReader(f)
@@ -209,14 +209,16 @@ def resolver(linhas, dicionario, embed, limiar) -> Resolucao:
     for (label, d), r in final.items():
         agrupados[label, r].update(nomes2[label, d])
     for (label, r), cont in sorted(agrupados.items()):
-        nome = cont.most_common(1)[0][0]
+        # nome que contradiz o id por prefixo oposto (hipo/hiper) não vale
+        ok = Counter({n: c for n, c in cont.items() if not bloqueado(r, slug(n))})
+        nome = ok.most_common(1)[0][0] if ok else r.replace("_", " ").capitalize()
         res.nos.append(
             {
                 "tipo": "no",
                 "label": label,
                 "id": r,
                 "nome": nome,
-                "sinonimos": sorted(n for n in cont if n != nome),
+                "sinonimos": sorted(n for n in ok if n != nome),
             }
         )
 
@@ -303,7 +305,7 @@ def main():
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S"
     )
-    linhas = [json.loads(x) for x in ENTRADA.open()]
+    linhas = [json.loads(x) for x in ENTRADA.open(encoding="utf-8")]
     rotulados = ler_rotulados()
     if rotulados:
         limiar, fonte = escolher_limiar(rotulados), f"{len(rotulados)} pares rotulados"
@@ -312,16 +314,18 @@ def main():
         log.warning("sem pares rotulados: limiar padrão %.2f", limiar)
     res = resolver(linhas, carregar_dicionario(), embed, limiar)
 
-    with SAIDA.open("w") as f:
+    tmp = SAIDA.with_name(SAIDA.name + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
         for item in [*res.nos, *res.rels]:
             f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    tmp.replace(SAIDA)
     PARES.parent.mkdir(exist_ok=True)
-    with PARES.open("w", newline="") as f:
+    with PARES.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["label", "id_a", "id_b", "cosseno", "mesmo"])
         for label, a, b, cos in sorted(res.pares, key=lambda p: -p[3]):
             w.writerow([label, a, b, f"{cos:.4f}", ""])
-    RELATORIO.write_text(relatorio(res, limiar, fonte))
+    RELATORIO.write_text(relatorio(res, limiar, fonte), encoding="utf-8")
     print(
         f"{SAIDA.name}: {len(res.nos)} nós, {len(res.rels)} relações; "
         f"{len(res.pares)} pares candidatos; relatório em {RELATORIO}"

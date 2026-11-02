@@ -188,3 +188,18 @@ def test_relatorio_tem_tabela_antes_depois():
     assert "| ClasseTerapeutica | 2 | 1 |" in texto
     assert "| INTERAGE_COM | 3 | 1 |" in texto
     assert "laço depois da fusão: 1" in texto
+
+
+def test_resolver_descarta_nome_que_contradiz_o_id():
+    linhas = [
+        {
+            "chunk_id": f"c{k}",
+            "bula": "b",
+            "entidades": [_ent("hipocalcemia", "EfeitoAdverso", nome)],
+            "relacoes": [],
+        }
+        for k, nome in enumerate(["Hipercalemia", "Hipercalemia", "Hipocalcemia"])
+    ]
+    res = rz.resolver(linhas, {}, _embed_ortogonal, limiar=0.92)
+    no = next(n for n in res.nos if n["id"] == "hipocalcemia")
+    assert no["nome"] == "Hipocalcemia" and no["sinonimos"] == []

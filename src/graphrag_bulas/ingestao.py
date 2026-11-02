@@ -44,7 +44,7 @@ def lotes(itens, n=LOTE):
 
 def ler_grafo(path=SAIDA):
     nos, rels = [], []
-    for linha in path.open():
+    for linha in path.read_text(encoding="utf-8").splitlines():
         item = json.loads(linha)
         (nos if item["tipo"] == "no" else rels).append(item)
     return nos, rels
@@ -168,14 +168,16 @@ def carregar_nos(driver, nos):
     for n in nos:
         por_label[n["label"]].append(n)
     for label, rows in por_label.items():
-        assert label in LABELS, label  # label entra na query por f-string
+        if label not in LABELS:  # label entra na query por f-string
+            raise ValueError(label)
         _rodar(
             driver,
             f"""
             UNWIND $rows AS r
             MERGE (n:{label} {{id: r.id}})
             ON CREATE SET n:Entidade, n.nome = r.nome, n.sinonimos = []
-            SET n.sinonimos = n.sinonimos + [s IN r.sinonimos WHERE NOT s IN n.sinonimos]
+            SET n.sinonimos = n.sinonimos + [s IN r.sinonimos + [r.nome]
+                WHERE NOT s IN n.sinonimos AND s <> n.nome]
             """,
             rows,
         )
@@ -205,7 +207,8 @@ def carregar_rels(driver, rels):
             {"origem": r["origem"], "destino": r["destino"], "props": props}
         )
     for (rel, lo, ld), rows in grupos.items():
-        assert rel in RELACOES and lo in LABELS and ld in LABELS, (rel, lo, ld)
+        if rel not in RELACOES or lo not in LABELS or ld not in LABELS:
+            raise ValueError((rel, lo, ld))
         _rodar(
             driver,
             f"""
@@ -220,7 +223,8 @@ def carregar_rels(driver, rels):
 
 def carregar_menciona(driver, rels):
     for label, rows in linhas_menciona(rels).items():
-        assert label in LABELS, label
+        if label not in LABELS:
+            raise ValueError(label)
         _rodar(
             driver,
             f"""
@@ -285,9 +289,11 @@ def main(argv=None):
     from graphrag_bulas.embeddings import embed_missing
 
     nos, rels = ler_grafo()
-    bulas = {json.loads(x)["bula"] for x in (PROCESSADOS / "extracoes.jsonl").open()}
-    chunks = [json.loads(x) for x in (PROCESSADOS / "chunks.jsonl").open()]
-    manifesto = [json.loads(x) for x in MANIFESTO.open()]
+    bulas = {
+        json.loads(x)["bula"] for x in (PROCESSADOS / "extracoes.jsonl").open(encoding="utf-8")
+    }
+    chunks = [json.loads(x) for x in (PROCESSADOS / "chunks.jsonl").open(encoding="utf-8")]
+    manifesto = [json.loads(x) for x in MANIFESTO.open(encoding="utf-8")]
     dic_fab = carregar_dicionario().get("Fabricante", {})
 
     with get_driver() as driver:
@@ -295,7 +301,7 @@ def main(argv=None):
         if a.recriar:
             driver.execute_query("MATCH (n) DETACH DELETE n")
         for arq in ("schema.cypher", "seed.cypher"):
-            for s in statements((CYPHER / arq).read_text()):
+            for s in statements((CYPHER / arq).read_text(encoding="utf-8")):
                 driver.execute_query(s)
         alterados = carregar_documentos(
             driver, linhas_bulas(manifesto, bulas, dic_fab), linhas_chunks(chunks, bulas)
@@ -307,7 +313,7 @@ def main(argv=None):
         print("embeddings:", embed_missing(driver))
         nos_db, rels_db = contar(driver)
 
-    with RELATORIO.open("a") as f:
+    with RELATORIO.open("a", encoding="utf-8") as f:
         f.write(relatorio_carga(alterados, nos_db, rels_db, nos, rels))
     print(f"nós: {nos_db}\nrelações: {rels_db}")
 

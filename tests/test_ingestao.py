@@ -169,8 +169,17 @@ def _carregar(db):
 def test_carga_idempotente_e_preserva_seed(db):
     db.execute_query("MERGE (:Chunk {id: 'zz_teste_chunk', texto: 'zz'})")
     try:
+        # nó pré-existente (como os do seed): o nome do LLM deve virar sinônimo
+        db.execute_query(
+            "MERGE (n:ClasseTerapeutica:Entidade {id: 'zz_teste_classe'}) "
+            "SET n.nome = 'Seed Classe', n.sinonimos = []"
+        )
         _carregar(db)
         _carregar(db)
+        sin = db.execute_query(
+            "MATCH (n {id: 'zz_teste_classe'}) RETURN n.nome AS nome, n.sinonimos AS sin"
+        ).records[0]
+        assert sin["nome"] == "Seed Classe" and sin["sin"] == ["ZZ Classe"]
         n = db.execute_query("""
             MATCH (p:PrincipioAtivo:Entidade {id: 'zz_teste_pa'})
             OPTIONAL MATCH (p)-[i:INTERAGE_COM]->(:ClasseTerapeutica {id: 'zz_teste_classe'})
