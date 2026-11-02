@@ -91,8 +91,10 @@ def test_validar_mantem_relacao_valida_e_preenche_desconhecida():
     ([COZAAR], rel("PODE_CAUSAR", "cozaar", "tontura"), "ponta fora"),
     ([COZAAR, {"id": "hipertensao", "label": "Condicao", "nome": "H"}],
      rel("PODE_CAUSAR", "cozaar", "hipertensao"), "fora do schema"),
-    ([COZAAR, {"id": "crianca", "label": "Populacao", "nome": "Criança"}],
-     rel("CONTRAINDICADO_EM", "cozaar", "crianca"), "Populacao"),
+    ([COZAAR, {"id": "adulto", "label": "Populacao", "nome": "Adulto"}],
+     rel("CONTRAINDICADO_EM", "cozaar", "adulto"), "Populacao"),
+    ([COZAAR, {"id": "losartana_potassica", "label": "PrincipioAtivo", "nome": "L"}],
+     rel("CONTRAINDICADO_EM", "cozaar", "losartana_potassica"), "fora do schema"),
     ([{"id": "renitec", "label": "Medicamento", "nome": "Renitec"}, TONTURA],
      rel("PODE_CAUSAR", "renitec", "tontura"), "não é o da bula"),
     ([{"id": "losartana", "label": "PrincipioAtivo", "nome": "Losartana"}],
@@ -120,3 +122,21 @@ def test_exemplos_passam_na_validacao_sem_descarte():
     for med, _, _, saida in EXEMPLOS:
         limpa, descartes = validar(saida, med)
         assert descartes == [] and len(limpa.relacoes) == len(saida.relacoes)
+
+
+def test_validar_corrige_populacao_e_ponta_medicamento():
+    ents = [COZAAR, {"id": "Gravidez", "label": "Populacao", "nome": "Gravidez"},
+            {"id": "varfarina", "label": "PrincipioAtivo", "nome": "Varfarina"},
+            {"id": "alisquireno", "label": "PrincipioAtivo", "nome": "Alisquireno"},
+            {"id": "bra", "label": "ClasseTerapeutica", "nome": "BRA"}]
+    rels = [rel("CONTRAINDICADO_EM", "cozaar", "Gravidez"),
+            rel("INTERAGE_COM", "cozaar", "varfarina"),
+            rel("CONTRAINDICADO_EM", "cozaar", "alisquireno"),
+            rel("PERTENCE_A", "cozaar", "bra")]
+    e, descartes = validar(_ext(ents, rels), "cozaar")
+    assert descartes == []
+    assert {(r.tipo, r.origem, r.destino, r.gravidade) for r in e.relacoes} == {
+        ("CONTRAINDICADO_EM", "cozaar", "gestante", None),
+        ("INTERAGE_COM", "losartana", "varfarina", "desconhecida"),
+        ("INTERAGE_COM", "losartana", "alisquireno", "grave"),
+        ("PERTENCE_A", "losartana", "bra", None)}

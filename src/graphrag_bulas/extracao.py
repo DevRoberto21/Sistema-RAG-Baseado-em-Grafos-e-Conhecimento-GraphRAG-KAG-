@@ -188,6 +188,32 @@ def extrair(llm, chunk) -> Extracao:
     return llm.with_structured_output(Extracao).invoke(montar_prompt(chunk))
 
 
+# Princípios ativos de cada bula, da composição (fora dos chunks; fonte do CONTEM no E4).
+# Conferido: cada id aparece no texto da bula.
+COMPOSICAO = {
+    "advil": ["ibuprofeno"], "aldactone": ["espironolactona"], "amoxil": ["amoxicilina"],
+    "ancoron": ["amiodarona"], "aradois": ["losartana"], "arcoxia": ["etoricoxibe"],
+    "aspirina": ["acido_acetilsalicilico"], "atenolol": ["atenolol"],
+    "bactrim": ["sulfametoxazol", "trimetoprima"], "benicar": ["olmesartana"],
+    "brilinta": ["ticagrelor"], "carbolitium": ["litio"], "cataflam": ["diclofenaco"],
+    "celebra": ["celecoxibe"], "cipro": ["ciprofloxacino"],
+    "clavulin": ["amoxicilina", "clavulanato"], "clexane": ["enoxaparina"],
+    "cozaar": ["losartana"], "flagyl": ["metronidazol"], "keflex": ["cefalexina"],
+    "lasix": ["furosemida"], "marevan": ["varfarina"], "norvasc": ["anlodipino"],
+    "renitec": ["enalapril"], "tylenol": ["paracetamol"],
+}
+
+# Sinônimos que o LLM usa para as 4 populações.
+POP_SINONIMOS = {
+    "gravidez": "gestante", "gravida": "gestante", "gravidas": "gestante",
+    "gestacao": "gestante", "gestantes": "gestante",
+    "lactacao": "lactante", "amamentacao": "lactante", "aleitamento": "lactante",
+    "lactantes": "lactante",
+    "crianca": "pediatrico", "criancas": "pediatrico", "pacientes_pediatricos": "pediatrico",
+    "pediatria": "pediatrico",
+    "idosos": "idoso", "geriatria": "idoso",
+}
+
 # Propriedade -> único tipo de relação que a aceita.
 PROPS = {"frequencia": "PODE_CAUSAR", "gravidade": "INTERAGE_COM", "efeito": "INTERAGE_COM",
          "dose": "CONTEM"}
@@ -197,24 +223,41 @@ def validar(extracao: Extracao, med: str) -> tuple[Extracao, list[str]]:
     """Descarta o que o schema não aceita (E3.3). Devolve a extração limpa e os motivos.
 
     Tipo, label, vocabulário e faixa de confianca já são barrados pelo Pydantic (E3.1).
-    Aqui: ids viram slug; sai Populacao fora das 4, Medicamento que não é o da bula, relação
-    com ponta ausente, de label errado ou laço; propriedade em relação errada é apagada;
-    relação repetida fica com a maior confianca; entidade sem relação sai.
+    Aqui: ids viram slug; sinônimo de Populacao vira uma das 4 e o resto sai; sai Medicamento
+    que não é o da bula, relação com ponta ausente, de label errado ou laço; propriedade em
+    relação errada é apagada; relação repetida fica com a maior confianca; entidade sem
+    relação sai. Bula de um só princípio ativo: INTERAGE_COM/PERTENCE_A que o LLM pôs no
+    Medicamento passa para o princípio ativo, e CONTRAINDICADO_EM com fármaco ou classe vira
+    INTERAGE_COM grave (regra "com X, contraindicado").
     """
-    descartes, ents = [], {}
+    descartes, ents, nomes = [], {}, {}
     for e in extracao.entidades:
-        e = e.model_copy(update={"id": slug(e.id)})
+        i = slug(e.id)
+        if e.label == "Populacao":
+            nomes[i] = POP_SINONIMOS.get(i, i)
+        e = e.model_copy(update={"id": nomes.get(i, i)})
         if e.label == "Populacao" and e.id not in POPULACOES:
             descartes.append(f"Populacao {e.id!r} fora de {sorted(POPULACOES)}")
         elif e.label == "Medicamento" and e.id != med:
             descartes.append(f"Medicamento {e.id!r} não é o da bula ({med!r})")
         else:
             ents.setdefault(e.id, e)
+    pas = COMPOSICAO.get(med, [])
     rels = {}
     for r in extracao.relacoes:
-        r = r.model_copy(update={"origem": slug(r.origem), "destino": slug(r.destino)})
-        origens, destinos = RELACOES[r.tipo]
+        r = r.model_copy(update={"origem": nomes.get(slug(r.origem), slug(r.origem)),
+                                 "destino": nomes.get(slug(r.destino), slug(r.destino))})
         o, d = ents.get(r.origem), ents.get(r.destino)
+        if len(pas) == 1 and o and o.label == "Medicamento" and d and d.label in (
+                "PrincipioAtivo", "ClasseTerapeutica") and not r.destino.startswith(pas[0]):
+            # destino = o próprio princípio ativo (olmesartana_medoxomila): é alergia, não interação
+            if r.tipo == "CONTRAINDICADO_EM":
+                r = r.model_copy(update={"tipo": "INTERAGE_COM", "gravidade": "grave"})
+            if r.tipo in ("INTERAGE_COM", "PERTENCE_A"):
+                o = ents.setdefault(pas[0], Entidade(id=pas[0], label="PrincipioAtivo",
+                                                     nome=pas[0]))
+                r = r.model_copy(update={"origem": o.id})
+        origens, destinos = RELACOES[r.tipo]
         onde = f"{r.tipo} {r.origem}->{r.destino}"
         if not o or not d:
             descartes.append(f"{onde}: ponta fora das entidades")
