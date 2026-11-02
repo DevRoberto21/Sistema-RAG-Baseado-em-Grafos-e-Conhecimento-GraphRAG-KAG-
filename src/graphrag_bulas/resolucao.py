@@ -9,6 +9,7 @@ logs/pares_candidatos.csv e a primeira parte de logs/relatorio_e4.md.
 Spec: docs/superpowers/specs/2026-11-01-e4-resolucao-ingestao-design.md
 """
 
+import csv
 import json
 import re
 from pathlib import Path
@@ -85,3 +86,56 @@ def carregar_dicionario(path: Path = DICIONARIO) -> dict[str, dict[str, str]]:
             for v in [canon, *variantes]:
                 dic[label][normalizar(v, label)] = canon
     return dic
+
+
+def _cos(a, b) -> float:
+    return sum(x * y for x, y in zip(a, b, strict=True))  # vetores já normalizados
+
+
+def agrupar(itens, canonicos, vetores, limiar):
+    """Funde ids parecidos de um label. Devolve ({id: representante}, fusões, pares).
+
+    itens: {id: frequência}; canonicos: ids do dicionário; vetores: {id: vetor normalizado}.
+    Ordem: canônicos primeiro, depois os mais frequentes; cada id vai para o representante mais
+    parecido já visto, se o cosseno passa do limiar e o par não é bloqueado. Dois canônicos
+    nunca se fundem. fusões: [(de, para, cos)]; pares: [(id, representante, cos)] na FAIXA_PARES.
+    """
+    ordem = sorted(itens, key=lambda i: (i not in canonicos, -itens[i], i))
+    mapa, reps, fusoes, pares = {}, [], [], []
+    for i in ordem:
+        melhor, cos = None, -1.0
+        for r in reps:
+            if bloqueado(i, r) or (i in canonicos and r in canonicos):
+                continue
+            c = _cos(vetores[i], vetores[r])
+            if c > cos:
+                melhor, cos = r, c
+        if melhor and FAIXA_PARES[0] <= cos < FAIXA_PARES[1]:
+            pares.append((i, melhor, cos))
+        if melhor and cos >= limiar:
+            mapa[i] = melhor
+            fusoes.append((i, melhor, cos))
+        else:
+            mapa[i] = i
+            reps.append(i)
+    return mapa, fusoes, pares
+
+
+def escolher_limiar(rotulados, alvo=0.95, padrao=LIMIAR_PADRAO) -> float:
+    """Menor cosseno de corte com precisão >= alvo nos pares rotulados [(cos, mesmo)]."""
+    for t in sorted({c for c, _ in rotulados}):
+        acima = [m for c, m in rotulados if c >= t]
+        if sum(acima) / len(acima) >= alvo:
+            return t
+    return padrao
+
+
+def ler_rotulados(path: Path = ROTULADOS):
+    if not path.exists():
+        return None
+    with path.open() as f:
+        return [
+            (float(r["cosseno"]), r["mesmo"].strip().lower() == "s")
+            for r in csv.DictReader(f)
+            if r["mesmo"].strip()
+        ]
