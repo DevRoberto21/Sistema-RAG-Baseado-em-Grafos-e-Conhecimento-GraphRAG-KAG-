@@ -16,8 +16,9 @@ def test_embed_missing_cobre_tudo_e_busca_vetorial(db):
     assert faltando == 0
     assert embed_missing(db) == {"Entidade": 0, "Chunk": 0}  # idempotente
 
+    # Com o corpus, "risco de sangramento" casa com Brilinta/Clexane; a pergunta mira um chunk só.
     rows = db.execute_query(
         "CALL db.index.vector.queryNodes('chunk_embedding', 3, $v) YIELD node RETURN node.id AS id",
-        v=embed(["risco de sangramento com anticoagulante e anti-inflamatório"])[0],
+        v=embed(["medicamentos que potencializam a atividade da varfarina"])[0],
     ).records
-    assert any("interacoes" in r["id"] for r in rows)
+    assert "bula_marevan_interacoes_0" in [r["id"] for r in rows]
