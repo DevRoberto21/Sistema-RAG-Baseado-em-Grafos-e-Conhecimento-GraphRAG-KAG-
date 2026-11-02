@@ -89,7 +89,7 @@ def rodar(chunks, llm, modelo, max_chamadas=None, pausa=0.0, dormir=time.sleep):
                 conta["falhas"] += 1
                 continue
             arq.write_text(bruta.model_dump_json())
-        limpa, descartes = validar(bruta, chunk["bula"].removeprefix("bula_"))
+        limpa, descartes = validar(bruta, chunk["bula"].removeprefix("bula_"), chunk)
         log.info("[%d/%d] %s: %d relações, %d descartes", i, len(chunks), chunk["id"],
                  len(limpa.relacoes), len(descartes))
         linhas.append({"chunk_id": chunk["id"], "bula": chunk["bula"], **limpa.model_dump(),

@@ -4,6 +4,8 @@ A saída segue modelos.Extracao (E3.1), com `confianca` por relação. `validar`
 que o schema não aceita; rodar no corpus é E3.4.
 """
 
+import re
+
 from graphrag_bulas.chunks import slug
 from graphrag_bulas.modelos import POPULACOES, RELACOES, Entidade, Extracao, Relacao
 
@@ -219,7 +221,13 @@ PROPS = {"frequencia": "PODE_CAUSAR", "gravidade": "INTERAGE_COM", "efeito": "IN
          "dose": "CONTEM"}
 
 
-def validar(extracao: Extracao, med: str) -> tuple[Extracao, list[str]]:
+# Proibição explícita; "cautela", "não é recomendado" e risco-benefício não contam (gold E3.5).
+PROIBE = re.compile(r"contra-?indica|não deve(m)? (ser )?(usad|utilizad|tomad|administrad)"
+                    r"|não (use|utilize|tome)", re.I)
+
+
+def validar(extracao: Extracao, med: str, chunk: dict | None = None
+            ) -> tuple[Extracao, list[str]]:
     """Descarta o que o schema não aceita (E3.3). Devolve a extração limpa e os motivos.
 
     Tipo, label, vocabulário e faixa de confianca já são barrados pelo Pydantic (E3.1).
@@ -228,8 +236,11 @@ def validar(extracao: Extracao, med: str) -> tuple[Extracao, list[str]]:
     relação errada é apagada; relação repetida fica com a maior confianca; entidade sem
     relação sai. Bula de um só princípio ativo: INTERAGE_COM/PERTENCE_A que o LLM pôs no
     Medicamento passa para o princípio ativo, e CONTRAINDICADO_EM com fármaco ou classe vira
-    INTERAGE_COM grave (regra "com X, contraindicado").
+    INTERAGE_COM grave (regra "com X, contraindicado"). Com o chunk: CONTRAINDICADO_EM fora
+    da seção de contraindicações sai se o texto não tem proibição explícita (PROIBE).
     """
+    sem_proibicao = bool(chunk) and chunk["tipo"] != "contraindicacoes" and not PROIBE.search(
+        chunk["texto"])
     descartes, ents, nomes = [], {}, {}
     for e in extracao.entidades:
         i = slug(e.id)
@@ -265,6 +276,8 @@ def validar(extracao: Extracao, med: str) -> tuple[Extracao, list[str]]:
             descartes.append(f"{onde}: pontas {o.label}->{d.label} fora do schema")
         elif r.origem == r.destino:
             descartes.append(f"{onde}: laço")
+        elif r.tipo == "CONTRAINDICADO_EM" and sem_proibicao:
+            descartes.append(f"{onde}: chunk sem proibição explícita")
         else:
             limpa = {p: None for p, tipo in PROPS.items() if tipo != r.tipo and getattr(r, p)}
             descartes += [f"{onde}: {p} apagada" for p in limpa]

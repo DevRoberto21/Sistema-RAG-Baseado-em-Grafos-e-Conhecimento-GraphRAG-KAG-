@@ -140,3 +140,13 @@ def test_validar_corrige_populacao_e_ponta_medicamento():
         ("INTERAGE_COM", "losartana", "varfarina", "desconhecida"),
         ("INTERAGE_COM", "losartana", "alisquireno", "grave"),
         ("PERTENCE_A", "losartana", "bra", None)}
+
+
+def test_validar_descarta_contraindicacao_sem_proibicao_no_chunk():
+    ents = [COZAAR, {"id": "estenose_mitral", "label": "Condicao", "nome": "Estenose mitral"}]
+    ext = _ext(ents, [rel("CONTRAINDICADO_EM", "cozaar", "estenose_mitral")])
+    cautela = {"tipo": "advertencias", "texto": "Recomenda-se atenção na estenose mitral."}
+    proibe = {"tipo": "advertencias", "texto": "Não deve ser usado na estenose mitral."}
+    assert validar(ext, "cozaar", cautela)[0].relacoes == []
+    assert len(validar(ext, "cozaar", proibe)[0].relacoes) == 1
+    assert len(validar(ext, "cozaar", {**cautela, "tipo": "contraindicacoes"})[0].relacoes) == 1
