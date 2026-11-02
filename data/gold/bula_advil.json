@@ -1,6 +1,6 @@
 {
   "bula": "bula_advil",
-  "anotador": "rascunho-claude (revisar)",
+  "anotador": "adjudicado-claude (sem revisão humana)",
   "chunks": [
     {
       "id": "bula_advil_indicacoes_0",
@@ -38,16 +38,6 @@
           "nome": "Enxaqueca"
         },
         {
-          "id": "dismenorreia",
-          "label": "Condicao",
-          "nome": "Dismenorreia"
-        },
-        {
-          "id": "gripes_e_resfriados_comuns",
-          "label": "Condicao",
-          "nome": "Gripes e resfriados comuns"
-        },
-        {
           "id": "artrite",
           "label": "Condicao",
           "nome": "Artrite"
@@ -56,6 +46,21 @@
           "id": "dor_de_dente",
           "label": "Condicao",
           "nome": "Dor de dente"
+        },
+        {
+          "id": "resfriado_comum",
+          "label": "Condicao",
+          "nome": "Resfriados comuns"
+        },
+        {
+          "id": "dismenorreia",
+          "label": "Condicao",
+          "nome": "Dismenorreia"
+        },
+        {
+          "id": "gripe",
+          "label": "Condicao",
+          "nome": "Gripes"
         }
       ],
       "relacoes": [
@@ -87,22 +92,37 @@
         {
           "tipo": "INDICADO_PARA",
           "origem": "advil",
-          "destino": "dismenorreia"
-        },
-        {
-          "tipo": "INDICADO_PARA",
-          "origem": "advil",
-          "destino": "gripes_e_resfriados_comuns"
-        },
-        {
-          "tipo": "INDICADO_PARA",
-          "origem": "advil",
           "destino": "artrite"
         },
         {
           "tipo": "INDICADO_PARA",
           "origem": "advil",
           "destino": "dor_de_dente"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "advil",
+          "destino": "resfriado_comum",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "advil",
+          "destino": "dismenorreia"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "advil",
+          "destino": "gripe",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -115,11 +135,6 @@
           "id": "advil",
           "label": "Medicamento",
           "nome": "Advil"
-        },
-        {
-          "id": "hipersensibilidade_ao_ibuprofeno",
-          "label": "Condicao",
-          "nome": "Hipersensibilidade ao ibuprofeno"
         },
         {
           "id": "asma",
@@ -147,21 +162,6 @@
           "nome": "gestante"
         },
         {
-          "id": "ulcera_peptica",
-          "label": "Condicao",
-          "nome": "Úlcera péptica"
-        },
-        {
-          "id": "sangramento_gastrointestinal",
-          "label": "Condicao",
-          "nome": "Sangramento gastrointestinal"
-        },
-        {
-          "id": "perfuracao_gastrointestinal",
-          "label": "Condicao",
-          "nome": "Perfuração gastrointestinal"
-        },
-        {
           "id": "insuficiencia_hepatica",
           "label": "Condicao",
           "nome": "Insuficiência hepática"
@@ -185,14 +185,24 @@
           "id": "dengue",
           "label": "Condicao",
           "nome": "Dengue"
+        },
+        {
+          "id": "hipersensibilidade",
+          "label": "Condicao",
+          "nome": "Hipersensibilidade"
+        },
+        {
+          "id": "historico_de_sangramento_ou_perfuracao_gastrointestinal",
+          "label": "Condicao",
+          "nome": "Histórico de sangramento ou perfuração gastrointestinal superior"
+        },
+        {
+          "id": "ulcera_peptica",
+          "label": "Condicao",
+          "nome": "Úlcera péptica"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "advil",
-          "destino": "hipersensibilidade_ao_ibuprofeno"
-        },
         {
           "tipo": "CONTRAINDICADO_EM",
           "origem": "advil",
@@ -221,21 +231,6 @@
         {
           "tipo": "CONTRAINDICADO_EM",
           "origem": "advil",
-          "destino": "ulcera_peptica"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "advil",
-          "destino": "sangramento_gastrointestinal"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "advil",
-          "destino": "perfuracao_gastrointestinal"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "advil",
           "destino": "insuficiencia_hepatica"
         },
         {
@@ -257,6 +252,31 @@
           "tipo": "CONTRAINDICADO_EM",
           "origem": "advil",
           "destino": "dengue"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "advil",
+          "destino": "hipersensibilidade",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "advil",
+          "destino": "historico_de_sangramento_ou_perfuracao_gastrointestinal",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "advil",
+          "destino": "ulcera_peptica"
         }
       ]
     },
@@ -264,19 +284,36 @@
       "id": "bula_advil_advertencias_0",
       "tipo": "advertencias",
       "texto": "Deve-se levar em consideração a relação risco-benefício antes de iniciar o tratamento para pacientes com as seguintes condições: história de doença ulcerosa péptica, sangramento ou perfuração gastrintestinal, disfunção renal, cirrose, asma, ou outras afecções alérgicas, hipertensão ou cardiopatia agravada por retenção hídrica e edema, disfunção hepática, história de distúrbios da coagulação ou lúpus eritematoso sistêmico, ou que estejam utilizando outros AINEs. A menos que orientado por um profissional de saúde, o uso deve ser suspenso e consultar um médico se: • • • • A febre apresente piora, ou persista por mais de 3 dias; A dor apresente piora, ou persista por mais de 10 dias; Apresentar uma reação alérgica grave, incluindo vermelhidão da pele, erupção cutânea ou bolhas; Apresentar vômito com sangue ou fezes sanguinolentas ou escuras. O uso contínuo pode aumentar o risco de doença de coração, ataque cardíaco ou apoplexia. O uso deve ser feito com cautela em pacientes idosos que são mais propensos a eventos adversos. Os efeitos indesejáveis podem ser minimizados utilizando a dose mínima eficaz durante o menor período de tempo possível.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "ibuprofeno",
+          "label": "PrincipioAtivo",
+          "nome": "ibuprofeno"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "AINEs"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "aine",
+          "frequencia": null,
+          "gravidade": "grave",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_advil_advertencias_1",
       "tipo": "advertencias",
       "texto": "O uso concomitante de Advil com outros AINEs sistêmicos, incluindo inibidores seletivos da ciclooxigenase-2, deve ser evitado devido ao potencial de efeitos indesejáveis aditivos. Infecções: Como outros AINEs, o ibuprofeno pode mascarar os sinais e sintomas de infecção devido às suas propriedades antiinflamatórias, analgésicas e antipiréticas. Asma pré-existente: O broncoespasmo pode ser precipitado em pacientes que sofrem ou com história prévia de asma ou doença alérgica ou pólipos nasais. Efeito hepático: recomenda-se cautela e acompanhamento regular pelo prescritor no caso de uso de ibuprofeno em pacientes com função hepática prejudicada, pois sua condição pode ser exacerbada. Efeitos renais: O uso de anti-inflamatórios não esteróides (AINEs) pode resultar na deterioração da função renal. Tal como acontece com outros AINEs, a administração prolongada de ibuprofeno resultou em necrose papilar renal e outras alterações patológicas renais. A toxicidade renal também foi observada em pacientes nos quais as prostaglandinas renais desempenham um papel compensatório na manutenção da perfusão renal.",
       "entidades": [
-        {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
         {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
@@ -325,14 +362,14 @@
       "texto": "Nesses pacientes, a administração de um AINE pode causar uma redução dependente da dose na formação de prostaglandinas e, secundariamente, no fluxo sanguíneo renal, o que pode precipitar uma descompensação renal evidente. Como retenção de líquidos e edema foram relatados em associação com AINEs, incluindo ibuprofeno, é necessária cautela em pacientes com insuficiência cardíaca ou renal, história de hipertensão, idosos, pacientes recebendo tratamento concomitante com diuréticos ou medicamentos que podem afetar significativamente a função renal , e naqueles pacientes com depleção substancial do volume extracelular de qualquer causa, por ex. antes ou depois de uma grande cirurgia. O monitoramento da função renal é recomendado como medida de precaução ao usar ibuprofeno nesses casos. A descontinuação da terapia com AINEs geralmente é seguida pela recuperação do estado pré-tratamento. Efeitos cardiovasculares e cerebrovasculares:",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
-          "nome": "ibuprofeno"
+          "nome": "Ibuprofeno"
+        },
+        {
+          "id": "diuretico",
+          "label": "ClasseTerapeutica",
+          "nome": "Diuréticos"
         },
         {
           "id": "aine",
@@ -341,6 +378,16 @@
         }
       ],
       "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "diuretico",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": "redução dependente da dose na formação de prostaglandinas e, secundariamente, no fluxo sanguíneo renal",
+          "dose": null,
+          "confianca": 1.0
+        },
         {
           "tipo": "PERTENCE_A",
           "origem": "ibuprofeno",
@@ -352,8 +399,30 @@
       "id": "bula_advil_advertencias_3",
       "tipo": "advertencias",
       "texto": "Ensaios clínicos e dados epidemiológicos sugerem que o uso de ibuprofeno, particularmente em altas doses (2.400 mg por dia) e em tratamento prolongado, pode estar associado a um pequeno aumento do risco de eventos trombóticos arteriais (por exemplo, infarto do miocárdio ou acidente vascular cerebral). No geral, os estudos epidemiológicos não sugerem que uma dose baixa de ibuprofeno (por exemplo, ≤1200 mg por dia) esteja associada a um risco aumentado de infarto do miocárdio. Pacientes com hipertensão não controlada, insuficiência cardíaca congestiva estabelecida (NYHA II-IV), doença cardíaca isquêmica, doença arterial periférica e/ou doença cerebrovascular só devem ser tratados com ibuprofeno após consideração cuidadosa e altas doses (ou seja, 2.400 mg/dia) devem ser evitado. Considerações semelhantes devem ser feitas antes de iniciar o tratamento de longo prazo com ibuprofeno em pacientes com fatores de risco para eventos cardiovasculares (por exemplo, hipertensão, hiperlipidemia, diabetes mellitus e tabagismo). Foram relatados casos de síndrome de Kounis em pacientes tratados com ibuprofeno.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "advil",
+          "label": "Medicamento",
+          "nome": "Advil"
+        },
+        {
+          "id": "sindrome_de_kounis",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome de Kounis"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "sindrome_de_kounis",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_advil_advertencias_4",
@@ -368,11 +437,6 @@
       "texto": "O risco de hemorragia, ulceração ou perfuração gastrointestinal é maior com doses crescentes de AINEs, em pacientes com histórico de úlcera, particularmente se complicada com hemorragia ou perfuração, e em idosos. Como com todos os AINEs, incluindo o ibuprofeno, os prescritores devem ter cautela e garantir acompanhamento regular ao prescrever ibuprofeno a pacientes com sintomas indicativos de distúrbios gastrointestinais. Quando ocorrer sangramento ou ulceração gastrointestinal, o tratamento com ibuprofeno deve ser interrompido e os pacientes devem consultar um médico. A terapia combinada com agentes protetores (por exemplo, misoprostol ou inibidores da bomba de prótons) deve ser considerada para esses pacientes e também para pacientes que necessitam concomitantemente de baixa dose de ácido acetilsalicílico (AAS) ou outros medicamentos que possam aumentar o risco de efeitos gastrointestinais. Usar com cautela em pacientes recebendo medicação concomitante que possa aumentar o risco de gastrotoxicidade ou sangramento, como corticosteróides, ou anticoagulantes como a varfarina ou agentes antiplaquetários como o ácido acetilsalicílico.",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
           "nome": "ibuprofeno"
@@ -383,6 +447,11 @@
           "nome": "Corticosteroide"
         },
         {
+          "id": "varfarina",
+          "label": "PrincipioAtivo",
+          "nome": "varfarina"
+        },
+        {
           "id": "anticoagulante",
           "label": "ClasseTerapeutica",
           "nome": "Anticoagulante"
@@ -391,11 +460,6 @@
           "id": "antiplaquetario",
           "label": "ClasseTerapeutica",
           "nome": "Antiplaquetário"
-        },
-        {
-          "id": "varfarina",
-          "label": "PrincipioAtivo",
-          "nome": "varfarina"
         }
       ],
       "relacoes": [
@@ -407,6 +471,11 @@
             "gravidade": "desconhecida",
             "efeito": "risco de gastrotoxicidade ou sangramento"
           }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "varfarina",
+          "destino": "anticoagulante"
         },
         {
           "tipo": "INTERAGE_COM",
@@ -425,11 +494,6 @@
             "gravidade": "desconhecida",
             "efeito": "risco de gastrotoxicidade ou sangramento"
           }
-        },
-        {
-          "tipo": "PERTENCE_A",
-          "origem": "varfarina",
-          "destino": "anticoagulante"
         }
       ]
     },
@@ -437,8 +501,105 @@
       "id": "bula_advil_advertencias_6",
       "tipo": "advertencias",
       "texto": "Usar com cautela em pacientes com doença intestinal inflamatória crônica (colite ulcerativa, doença de Crohn), pois essas condições podem ser exacerbadas. Distúrbios da pele: descontinuar ao primeiro aparecimento de erupção cutânea, lesões nas mucosas ou qualquer outro sinal de hipersensibilidade. Como reações cutâneas graves, algumas delas fatais, incluindo dermatite esfoliativa, síndrome de StevensJohnson e necrólise epidérmica tóxica, foram relatadas muito raramente em associação com o uso de AINEs. Os pacientes parecem estar sob maior risco dessas reações no início do tratamento, ocorrendo o início da reação na maioria dos casos no primeiro mês de tratamento. Reações cutâneas graves, algumas delas fatais – como dermatite esfoliativa, eritema multiforme, síndrome de Stevens-Johnson, necrólise epidérmica tóxica, reação medicamentosa com eosinofilia e sintomas sistêmicos (síndrome de DRESS) e pustulose exantemática generalizada aguda - foram relatadas com o uso de ibuprofeno. A maioria dessas reações ocorreu no primeiro mês de uso do ibuprofeno. O Advil deve ser descontinuado imediatamente, aos primeiros sinais ou sintomas sugestivos dessas reações cutâneas graves.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "advil",
+          "label": "Medicamento",
+          "nome": "Advil"
+        },
+        {
+          "id": "necrolise_epidermica_toxica",
+          "label": "EfeitoAdverso",
+          "nome": "Necrólise epidérmica tóxica"
+        },
+        {
+          "id": "sindrome_de_dress",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome de DRESS"
+        },
+        {
+          "id": "eritema_multiforme",
+          "label": "EfeitoAdverso",
+          "nome": "Eritema multiforme"
+        },
+        {
+          "id": "sindrome_de_stevens_johnson",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome de Stevens-Johnson"
+        },
+        {
+          "id": "dermatite_esfoliativa",
+          "label": "EfeitoAdverso",
+          "nome": "Dermatite esfoliativa"
+        },
+        {
+          "id": "pustulose_exantematica_generalizada_aguda",
+          "label": "EfeitoAdverso",
+          "nome": "Pustulose exantemática generalizada aguda"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "necrolise_epidermica_toxica",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "sindrome_de_dress",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "eritema_multiforme",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "sindrome_de_stevens_johnson",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "dermatite_esfoliativa",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "pustulose_exantematica_generalizada_aguda",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_advil_advertencias_7",
@@ -533,6 +694,11 @@
           "nome": "Úlcera estomacal"
         },
         {
+          "id": "asma",
+          "label": "EfeitoAdverso",
+          "nome": "Asma"
+        },
+        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
           "nome": "ibuprofeno"
@@ -548,6 +714,16 @@
           "tipo": "CONTRAINDICADO_EM",
           "origem": "advil",
           "destino": "ulcera_estomacal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "asma",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         },
         {
           "tipo": "CONTEM",
@@ -569,11 +745,6 @@
       "texto": "O ibuprofeno não deve ser usado em combinação com outros medicamentos anti-inflamatórios não esteróides (AINEs), incluindo ácido acetilsalicílico e inibidores específicos da ciclo-oxigenase-2, pois podem aumentar o risco de efeitos adversos. O ibuprofeno pode inibir o efeito antiplaquetário do ácido acetilsalicílico. Pacientes sob tratamento antiplaquetário com ácido acetilsalicílico devem ser instruídos a consultar seu médico ou farmacêutico antes de tomar ibuprofeno. Interações medicamento-medicamento O ibuprofeno deve ser usado com cautela em combinação com os seguintes medicamentos, pois foram relatadas interações: - Anticoagulantes: os AINEs podem potencializar os efeitos dos anticoagulantes, como a varfarina; - Aminoglicosídeos: redução da função renal em indivíduos susceptíveis, diminuição da eliminação do aminoglicosídeo e aumento das concentrações plasmáticas; - Diuréticos e anti-hipertensivos: como outros AINEs, o uso concomitante de ibuprofeno com diuréticos ou agentes anti-hipertensivos (por exemplo, betabloqueadores, inibidores da enzima de conversão da angiotensina (ECA)) pode causar uma diminuição no seu efeito anti-hipertensivo.",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
           "nome": "ibuprofeno"
@@ -589,34 +760,14 @@
           "nome": "Ácido acetilsalicílico"
         },
         {
-          "id": "inibidor_cox2",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor seletivo da ciclooxigenase-2"
-        },
-        {
           "id": "anticoagulante",
           "label": "ClasseTerapeutica",
           "nome": "Anticoagulante"
         },
         {
-          "id": "varfarina",
-          "label": "PrincipioAtivo",
-          "nome": "varfarina"
-        },
-        {
-          "id": "aminoglicosideo",
+          "id": "inibidor_cox2",
           "label": "ClasseTerapeutica",
-          "nome": "Aminoglicosídeo"
-        },
-        {
-          "id": "diuretico",
-          "label": "ClasseTerapeutica",
-          "nome": "Diurético"
-        },
-        {
-          "id": "anti_hipertensivo",
-          "label": "ClasseTerapeutica",
-          "nome": "Anti-hipertensivo"
+          "nome": "Inibidor seletivo da ciclooxigenase-2"
         },
         {
           "id": "betabloqueador",
@@ -624,9 +775,29 @@
           "nome": "Betabloqueador"
         },
         {
-          "id": "inibidor_eca",
+          "id": "varfarina",
+          "label": "PrincipioAtivo",
+          "nome": "varfarina"
+        },
+        {
+          "id": "diuretico",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético"
+        },
+        {
+          "id": "ieca",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor da enzima de conversão da angiotensina"
+        },
+        {
+          "id": "aminoglicosideo",
+          "label": "ClasseTerapeutica",
+          "nome": "Aminoglicosídeo"
+        },
+        {
+          "id": "anti_hipertensivo",
+          "label": "ClasseTerapeutica",
+          "nome": "Anti-hipertensivo"
         }
       ],
       "relacoes": [
@@ -651,6 +822,15 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
+          "destino": "anticoagulante",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencializar os efeitos dos anticoagulantes"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
           "destino": "inibidor_cox2",
           "props": {
             "gravidade": "desconhecida",
@@ -660,16 +840,34 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "anticoagulante",
+          "destino": "betabloqueador",
           "props": {
             "gravidade": "desconhecida",
-            "efeito": "potencializar os efeitos dos anticoagulantes"
+            "efeito": "diminuição do efeito anti-hipertensivo"
           }
         },
         {
           "tipo": "PERTENCE_A",
           "origem": "varfarina",
           "destino": "anticoagulante"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "diuretico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição do efeito anti-hipertensivo"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição do efeito anti-hipertensivo"
+          }
         },
         {
           "tipo": "INTERAGE_COM",
@@ -683,34 +881,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "diuretico",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "diminuição do efeito anti-hipertensivo"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
           "destino": "anti_hipertensivo",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "diminuição do efeito anti-hipertensivo"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "betabloqueador",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "diminuição do efeito anti-hipertensivo"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "inibidor_eca",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "diminuição do efeito anti-hipertensivo"
@@ -724,34 +895,9 @@
       "texto": "Portanto, a combinação deve ser administrada com cautela e os pacientes, principalmente os idosos, devem ter sua pressão arterial monitorada periodicamente. Os pacientes devem ser adequadamente hidratados e deve-se considerar o monitoramento da função renal após o início da terapia concomitante e periodicamente, a partir de então, particularmente para diuréticos e inibidores da ECA devido ao risco aumentado de nefrotoxicidade. O tratamento concomitante com medicamentos poupadores de potássio pode estar associado ao aumento dos níveis séricos de potássio, que devem, portanto, ser monitorados com frequência; - Antiplaquetários: aumento do risco de sangramento gastrointestinal; - Digoxina: os AINEs podem exacerbar a insuficiência cardíaca, reduzir a TFG e aumentar os níveis plasmáticos de digoxina. Recomendase o monitoramento dos níveis séricos de glicosídeos; - Corticosteróides: pode aumentar o risco de reações adversas no trato gastrointestinal; - Ciclosporina: Aumento do risco de nefrotoxicidade; - Inibidores CYP2C9: a administração concomitante de ibuprofeno com inibidores do CYP2C9 pode aumentar a exposição ao ibuprofeno (substrato do CYP2C9).",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
           "nome": "ibuprofeno"
-        },
-        {
-          "id": "diuretico",
-          "label": "ClasseTerapeutica",
-          "nome": "Diurético"
-        },
-        {
-          "id": "inibidor_eca",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor da enzima de conversão da angiotensina"
-        },
-        {
-          "id": "poupador_de_potassio",
-          "label": "ClasseTerapeutica",
-          "nome": "Medicamento poupador de potássio"
-        },
-        {
-          "id": "antiplaquetario",
-          "label": "ClasseTerapeutica",
-          "nome": "Antiplaquetário"
         },
         {
           "id": "digoxina",
@@ -759,58 +905,42 @@
           "nome": "Digoxina"
         },
         {
-          "id": "corticosteroide",
-          "label": "ClasseTerapeutica",
-          "nome": "Corticosteroide"
-        },
-        {
           "id": "ciclosporina",
           "label": "PrincipioAtivo",
           "nome": "Ciclosporina"
         },
         {
+          "id": "diuretico",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético"
+        },
+        {
+          "id": "antiplaquetario",
+          "label": "ClasseTerapeutica",
+          "nome": "Antiplaquetário"
+        },
+        {
+          "id": "poupador_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Medicamento poupador de potássio"
+        },
+        {
           "id": "inibidor_cyp2c9",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor do CYP2C9"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da enzima de conversão da angiotensina"
+        },
+        {
+          "id": "corticosteroide",
+          "label": "ClasseTerapeutica",
+          "nome": "Corticosteroide"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "diuretico",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "risco aumentado de nefrotoxicidade"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "inibidor_eca",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "risco aumentado de nefrotoxicidade"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "poupador_de_potassio",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento dos níveis séricos de potássio"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "antiplaquetario",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do risco de sangramento gastrointestinal"
-          }
-        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
@@ -818,15 +948,6 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "exacerbar a insuficiência cardíaca, reduzir a TFG e aumentar os níveis plasmáticos de digoxina"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "corticosteroide",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "pode aumentar o risco de reações adversas no trato gastrointestinal"
           }
         },
         {
@@ -841,10 +962,55 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
+          "destino": "diuretico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "risco aumentado de nefrotoxicidade"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "antiplaquetario",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do risco de sangramento gastrointestinal"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "poupador_de_potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento dos níveis séricos de potássio"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
           "destino": "inibidor_cyp2c9",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "pode aumentar a exposição ao ibuprofeno"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "risco aumentado de nefrotoxicidade"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "corticosteroide",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "pode aumentar o risco de reações adversas no trato gastrointestinal"
           }
         }
       ]
@@ -855,24 +1021,14 @@
       "texto": "Num estudo com voriconazol e fluconazol (inibidores do CYP2C9), foi demonstrado um aumento da exposição total (AUC) do S(+)-ibuprofeno em aproximadamente 80 a 100%. A redução da dose de ibuprofeno deve ser considerada quando inibidores potentes do CYP2C9 são administrados concomitantemente, particularmente quando altas doses de ibuprofeno são administradas com voriconazol ou fluconazol; - Agentes hipoglicemiantes orais: inibição do metabolismo das sulfoniluréias, meia-vida prolongada e risco aumentado de hipoglicemia. Em caso de uso concomitante com ibuprofeno, recomenda-se o monitoramento do nível de glicose no sangue; - Lítio: há evidências de aumentos potenciais nos níveis plasmáticos de lítio. Recomenda-se o monitoramento do nível sérico de lítio; - Metotrexato: há evidências de aumentos potenciais nos níveis plasmáticos de metotrexato e aumento de seu efeito tóxico. Em caso de uso concomitante com ibuprofeno, a função renal deve ser monitorada; - Quinolonas: os AINEs podem aumentar o risco de convulsões associadas aos antibióticos quinolonas; - Zidovudina: aumento do risco de hemartrose e hematoma em hemofílicos HIV (+);",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
-          "id": "voriconazol",
+          "id": "fluconazol",
           "label": "PrincipioAtivo",
-          "nome": "Voriconazol"
+          "nome": "Fluconazol"
         },
         {
           "id": "inibidor_cyp2c9",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor do CYP2C9"
-        },
-        {
-          "id": "fluconazol",
-          "label": "PrincipioAtivo",
-          "nome": "Fluconazol"
         },
         {
           "id": "ibuprofeno",
@@ -885,19 +1041,24 @@
           "nome": "Agente hipoglicemiante oral"
         },
         {
-          "id": "litio",
-          "label": "PrincipioAtivo",
-          "nome": "Lítio"
-        },
-        {
           "id": "metotrexato",
           "label": "PrincipioAtivo",
           "nome": "Metotrexato"
         },
         {
+          "id": "voriconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Voriconazol"
+        },
+        {
           "id": "quinolona",
           "label": "ClasseTerapeutica",
           "nome": "Quinolona"
+        },
+        {
+          "id": "litio",
+          "label": "PrincipioAtivo",
+          "nome": "Lítio"
         },
         {
           "id": "zidovudina",
@@ -908,21 +1069,16 @@
       "relacoes": [
         {
           "tipo": "PERTENCE_A",
-          "origem": "voriconazol",
-          "destino": "inibidor_cyp2c9"
-        },
-        {
-          "tipo": "PERTENCE_A",
           "origem": "fluconazol",
           "destino": "inibidor_cyp2c9"
         },
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "voriconazol",
+          "destino": "hipoglicemiante_oral",
           "props": {
             "gravidade": "desconhecida",
-            "efeito": "aumento da exposição total (AUC) do S(+)-ibuprofeno em aproximadamente 80 a 100%"
+            "efeito": "inibição do metabolismo das sulfoniluréias, meia-vida prolongada e risco aumentado de hipoglicemia"
           }
         },
         {
@@ -937,10 +1093,24 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "hipoglicemiante_oral",
+          "destino": "metotrexato",
           "props": {
             "gravidade": "desconhecida",
-            "efeito": "inibição do metabolismo das sulfoniluréias, meia-vida prolongada e risco aumentado de hipoglicemia"
+            "efeito": "aumentos potenciais nos níveis plasmáticos de metotrexato e aumento de seu efeito tóxico"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "voriconazol",
+          "destino": "inibidor_cyp2c9"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "quinolona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumentar o risco de convulsões associadas aos antibióticos quinolonas"
           }
         },
         {
@@ -955,28 +1125,19 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "metotrexato",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumentos potenciais nos níveis plasmáticos de metotrexato e aumento de seu efeito tóxico"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "quinolona",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumentar o risco de convulsões associadas aos antibióticos quinolonas"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
           "destino": "zidovudina",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumento do risco de hemartrose e hematoma em hemofílicos HIV (+)"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "voriconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento da exposição total (AUC) do S(+)-ibuprofeno em aproximadamente 80 a 100%"
           }
         }
       ]
@@ -987,19 +1148,9 @@
       "texto": "- Inibidores seletivos da recaptação da serotonina (ISRSs): aumento do risco de sangramento gastrointestinal. O uso concomitante de qualquer AINE com os seguintes fármacos deve ser evitado, especialmente nos casos de administração crônica: ácido acetilsalicílico por problema do coração ou acidente vascular cerebral (AVC), já que, nesses casos, o ibuprofeno pode diminuir o efeito esperado, outros AINEs, corticosteroides, glicocorticoides, agentes anticoagulantes ou trombolíticos, inibidores de agregação plaquetária, hipoglicemiantes orais ou insulina, anti-hipertensivos e diuréticos, ácido valproico, ciclosporina, metotrexato, probenecida e digoxina. Interação medicamento-substância química: Desaconselha-se o uso concomitante com bebida alcoólica. Interação com alimentos: A taxa de absorção do ibuprofeno pode ser retardada e a concentração de pico sérico reduzida quando administrado com alimentos, no entanto, sua biodisponibilidade não é significativamente afetada. Interação com exames de laboratório:",
       "entidades": [
         {
-          "id": "advil",
-          "label": "Medicamento",
-          "nome": "Advil"
-        },
-        {
           "id": "ibuprofeno",
           "label": "PrincipioAtivo",
           "nome": "ibuprofeno"
-        },
-        {
-          "id": "isrs",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor seletivo da recaptação da serotonina"
         },
         {
           "id": "acido_acetilsalicilico",
@@ -1032,19 +1183,9 @@
           "nome": "Trombolítico"
         },
         {
-          "id": "inibidor_agregacao_plaquetaria",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor de agregação plaquetária"
-        },
-        {
           "id": "hipoglicemiante_oral",
           "label": "ClasseTerapeutica",
           "nome": "Hipoglicemiante oral"
-        },
-        {
-          "id": "insulina",
-          "label": "PrincipioAtivo",
-          "nome": "Insulina"
         },
         {
           "id": "anti_hipertensivo",
@@ -1080,18 +1221,29 @@
           "id": "digoxina",
           "label": "PrincipioAtivo",
           "nome": "Digoxina"
+        },
+        {
+          "id": "alcool",
+          "label": "PrincipioAtivo",
+          "nome": "Bebida alcoólica"
+        },
+        {
+          "id": "inibidor_agregacao_plaquetaria",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de agregação plaquetária"
+        },
+        {
+          "id": "insulina",
+          "label": "PrincipioAtivo",
+          "nome": "Insulina"
+        },
+        {
+          "id": "isrs",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor seletivo da recaptação da serotonina"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "isrs",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do risco de sangramento gastrointestinal"
-          }
-        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
@@ -1144,23 +1296,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "ibuprofeno",
-          "destino": "inibidor_agregacao_plaquetaria",
-          "props": {
-            "gravidade": "desconhecida"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
           "destino": "hipoglicemiante_oral",
-          "props": {
-            "gravidade": "desconhecida"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "ibuprofeno",
-          "destino": "insulina",
           "props": {
             "gravidade": "desconhecida"
           }
@@ -1220,6 +1356,51 @@
           "props": {
             "gravidade": "desconhecida"
           }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "alcool",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": "desaconselhado",
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "inibidor_agregacao_plaquetaria",
+          "props": {
+            "gravidade": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "ibuprofeno",
+          "destino": "aine",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "insulina",
+          "props": {
+            "gravidade": "desconhecida"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "ibuprofeno",
+          "destino": "isrs",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do risco de sangramento gastrointestinal"
+          }
         }
       ]
     },
@@ -1227,8 +1408,30 @@
       "id": "bula_advil_interacoes_4",
       "tipo": "interacoes",
       "texto": "Tempo de sangramento pode ser aumentado pela maioria dos AINEs, com o ibuprofeno este efeito pode persistir por menos de 24 horas, desde que tenha uma meia-vida curta de aproximadamente 2 horas.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "ibuprofeno",
+          "label": "PrincipioAtivo",
+          "nome": "Ibuprofeno"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "AINEs"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "ibuprofeno",
+          "destino": "aine",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_advil_reacoes_adversas_0",
@@ -1274,11 +1477,6 @@
           "id": "vertigem",
           "label": "EfeitoAdverso",
           "nome": "Vertigem"
-        },
-        {
-          "id": "disfuncao_cardiaca",
-          "label": "EfeitoAdverso",
-          "nome": "Disfunção cardíaca"
         },
         {
           "id": "angina_pectoris",
@@ -1344,6 +1542,11 @@
           "id": "edema_periferico",
           "label": "EfeitoAdverso",
           "nome": "Edema periférico"
+        },
+        {
+          "id": "disfuncao_cardiaca",
+          "label": "EfeitoAdverso",
+          "nome": "Disfunção cardíaca"
         }
       ],
       "relacoes": [
@@ -1381,11 +1584,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
           "destino": "vertigem"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "disfuncao_cardiaca"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -1451,6 +1649,11 @@
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
           "destino": "edema_periferico"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "disfuncao_cardiaca"
         }
       ]
     },
@@ -1468,11 +1671,6 @@
           "id": "diminuicao_de_hematocritos",
           "label": "EfeitoAdverso",
           "nome": "Diminuição de hematócritos"
-        },
-        {
-          "id": "diminuicao_da_hemoglobina",
-          "label": "EfeitoAdverso",
-          "nome": "Diminuição da hemoglobina"
         },
         {
           "id": "nausea",
@@ -1515,11 +1713,6 @@
           "nome": "Dor abdominal"
         },
         {
-          "id": "constipacao",
-          "label": "EfeitoAdverso",
-          "nome": "Constipação"
-        },
-        {
           "id": "flatulencia",
           "label": "EfeitoAdverso",
           "nome": "Flatulência"
@@ -1528,21 +1721,6 @@
           "id": "erupcoes_cutaneas",
           "label": "EfeitoAdverso",
           "nome": "Erupções cutâneas"
-        },
-        {
-          "id": "urticaria",
-          "label": "EfeitoAdverso",
-          "nome": "Urticária"
-        },
-        {
-          "id": "prurido",
-          "label": "EfeitoAdverso",
-          "nome": "Prurido"
-        },
-        {
-          "id": "reacoes_de_hipersensibilidade",
-          "label": "EfeitoAdverso",
-          "nome": "Reações de hipersensibilidade"
         },
         {
           "id": "zumbido",
@@ -1620,11 +1798,6 @@
           "nome": "Edema"
         },
         {
-          "id": "meningite_asseptica",
-          "label": "EfeitoAdverso",
-          "nome": "Meningite asséptica"
-        },
-        {
           "id": "perfuracao_ou_hemorragia_gastrointestinal",
           "label": "EfeitoAdverso",
           "nome": "Perfuração ou hemorragia gastrointestinal"
@@ -1635,9 +1808,54 @@
           "nome": "Exacerbação de colite ulcerosa"
         },
         {
+          "id": "febre",
+          "label": "EfeitoAdverso",
+          "nome": "Febre"
+        },
+        {
+          "id": "meningite_asseptica",
+          "label": "EfeitoAdverso",
+          "nome": "Meningite asséptica"
+        },
+        {
+          "id": "reacoes_de_hipersensibilidade",
+          "label": "EfeitoAdverso",
+          "nome": "Reações de hipersensibilidade"
+        },
+        {
+          "id": "prurido",
+          "label": "EfeitoAdverso",
+          "nome": "Prurido"
+        },
+        {
+          "id": "diminuicao_da_hemoglobina",
+          "label": "EfeitoAdverso",
+          "nome": "Diminuição da hemoglobina"
+        },
+        {
           "id": "exacerbacao_de_doenca_de_crohn",
           "label": "EfeitoAdverso",
           "nome": "Exacerbação de doença de Crohn"
+        },
+        {
+          "id": "constipacao",
+          "label": "EfeitoAdverso",
+          "nome": "Constipação"
+        },
+        {
+          "id": "urticaria",
+          "label": "EfeitoAdverso",
+          "nome": "Urticária"
+        },
+        {
+          "id": "rigidez_do_pescoco",
+          "label": "EfeitoAdverso",
+          "nome": "Rigidez do pescoço"
+        },
+        {
+          "id": "desorientacao",
+          "label": "EfeitoAdverso",
+          "nome": "Desorientação"
         }
       ],
       "relacoes": [
@@ -1645,11 +1863,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
           "destino": "diminuicao_de_hematocritos"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "diminuicao_da_hemoglobina"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -1718,14 +1931,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
-          "destino": "constipacao",
-          "props": {
-            "frequencia": "incomum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
           "destino": "flatulencia",
           "props": {
             "frequencia": "incomum"
@@ -1735,30 +1940,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
           "destino": "erupcoes_cutaneas",
-          "props": {
-            "frequencia": "incomum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "urticaria",
-          "props": {
-            "frequencia": "incomum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "prurido",
-          "props": {
-            "frequencia": "incomum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "reacoes_de_hipersensibilidade",
           "props": {
             "frequencia": "incomum"
           }
@@ -1886,11 +2067,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
-          "destino": "meningite_asseptica"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
           "destino": "perfuracao_ou_hemorragia_gastrointestinal",
           "props": {
             "frequencia": "muito_rara"
@@ -1907,10 +2083,82 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
+          "destino": "febre",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "meningite_asseptica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "reacoes_de_hipersensibilidade",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "prurido",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "diminuicao_da_hemoglobina"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
           "destino": "exacerbacao_de_doenca_de_crohn",
           "props": {
             "frequencia": "muito_rara"
           }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "constipacao",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "urticaria",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "rigidez_do_pescoco",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "desorientacao",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -1975,11 +2223,6 @@
           "nome": "Agranulocitose"
         },
         {
-          "id": "dermatoses_esfoliativas_e_bolhosas",
-          "label": "EfeitoAdverso",
-          "nome": "Dermatoses esfoliativas e bolhosas"
-        },
-        {
           "id": "eritema_multiforme",
           "label": "EfeitoAdverso",
           "nome": "Eritema multiforme"
@@ -1993,16 +2236,6 @@
           "id": "necrolise_epidermica",
           "label": "EfeitoAdverso",
           "nome": "Necrólise epidérmica"
-        },
-        {
-          "id": "reacao_medicamentosa_com_eosinofilia_e_sintomas_sistemicos",
-          "label": "EfeitoAdverso",
-          "nome": "Reação Medicamentosa com Eosinofilia e Sintomas Sistêmicos"
-        },
-        {
-          "id": "reacoes_de_hipersensibilidade_graves",
-          "label": "EfeitoAdverso",
-          "nome": "Reações de hipersensibilidade graves"
         },
         {
           "id": "anafilaxia",
@@ -2060,9 +2293,79 @@
           "nome": "Fotodermatite"
         },
         {
-          "id": "dermatoses_bolhosas",
+          "id": "sintomas_gripais",
           "label": "EfeitoAdverso",
-          "nome": "Dermatoses bolhosas"
+          "nome": "Sintomas gripais"
+        },
+        {
+          "id": "reacoes_de_hipersensibilidade_graves",
+          "label": "EfeitoAdverso",
+          "nome": "Reações de hipersensibilidade graves"
+        },
+        {
+          "id": "sangramento_inexplicavel",
+          "label": "EfeitoAdverso",
+          "nome": "Sangramento inexplicável"
+        },
+        {
+          "id": "dermatose_bolhosa",
+          "label": "EfeitoAdverso",
+          "nome": "Dermatose bolhosa"
+        },
+        {
+          "id": "reacao_medicamentosa_com_eosinofilia_e_sintomas_sistemicos",
+          "label": "EfeitoAdverso",
+          "nome": "Reação Medicamentosa com Eosinofilia e Sintomas Sistêmicos"
+        },
+        {
+          "id": "hematomas",
+          "label": "EfeitoAdverso",
+          "nome": "Hematomas"
+        },
+        {
+          "id": "taquicardia",
+          "label": "EfeitoAdverso",
+          "nome": "Taquicardia"
+        },
+        {
+          "id": "hipotensao",
+          "label": "EfeitoAdverso",
+          "nome": "Hipotensão"
+        },
+        {
+          "id": "ulceras_superficiais_na_boca",
+          "label": "EfeitoAdverso",
+          "nome": "Úlceras superficiais na boca"
+        },
+        {
+          "id": "edema_da_lingua",
+          "label": "EfeitoAdverso",
+          "nome": "Edema da língua"
+        },
+        {
+          "id": "febre",
+          "label": "EfeitoAdverso",
+          "nome": "Febre"
+        },
+        {
+          "id": "exaustao_severa",
+          "label": "EfeitoAdverso",
+          "nome": "Exaustão severa"
+        },
+        {
+          "id": "edema_facial",
+          "label": "EfeitoAdverso",
+          "nome": "Edema facial"
+        },
+        {
+          "id": "edema_da_laringe",
+          "label": "EfeitoAdverso",
+          "nome": "Edema da laringe"
+        },
+        {
+          "id": "dor_de_garganta",
+          "label": "EfeitoAdverso",
+          "nome": "Dor de garganta"
         }
       ],
       "relacoes": [
@@ -2119,11 +2422,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
-          "destino": "dermatoses_esfoliativas_e_bolhosas"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
           "destino": "eritema_multiforme"
         },
         {
@@ -2135,16 +2433,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
           "destino": "necrolise_epidermica"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "reacao_medicamentosa_com_eosinofilia_e_sintomas_sistemicos"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "advil",
-          "destino": "reacoes_de_hipersensibilidade_graves"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -2204,7 +2492,142 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "advil",
-          "destino": "dermatoses_bolhosas"
+          "destino": "sintomas_gripais",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "reacoes_de_hipersensibilidade_graves"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "sangramento_inexplicavel",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "dermatose_bolhosa",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "reacao_medicamentosa_com_eosinofilia_e_sintomas_sistemicos"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "hematomas",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "taquicardia",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "hipotensao",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "ulceras_superficiais_na_boca",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "edema_da_lingua",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "febre",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "exaustao_severa",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "edema_facial",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "edema_da_laringe",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "advil",
+          "destino": "dor_de_garganta",
+          "frequencia": "incomum",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -2272,8 +2695,30 @@
       "id": "bula_advil_posologia_0",
       "tipo": "posologia",
       "texto": "Advil® deve ser administrado por via oral na dose recomendada de 1 cápsula. Se necessário, esta dose pode ser repetida com intervalo mínimo de 4-6 horas. Não exceder o total de 3 cápsulas (1.200mg) em um período de 24 horas. Assim como outros AINEs, administrar com água durante ou após as refeições. A menor dose necessária para atingir a eficácia deve ser usada durante o menor período de tratamento. Este medicamento não deve ser partido, aberto ou mastigado.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "ibuprofeno",
+          "label": "PrincipioAtivo",
+          "nome": "ibuprofeno"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "AINEs"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "ibuprofeno",
+          "destino": "aine",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     }
   ]
 }

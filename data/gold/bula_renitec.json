@@ -1,6 +1,6 @@
 {
   "bula": "bula_renitec",
-  "anotador": "rascunho-claude (revisar)",
+  "anotador": "adjudicado-claude (sem revisão humana)",
   "chunks": [
     {
       "id": "bula_renitec_indicacoes_0",
@@ -33,9 +33,14 @@
           "nome": "Disfunção ventricular esquerda"
         },
         {
-          "id": "eventos_coronarianos_isquemicos",
+          "id": "infarto_do_miocardio",
           "label": "Condicao",
-          "nome": "Eventos coronarianos isquêmicos"
+          "nome": "Infarto do miocárdio"
+        },
+        {
+          "id": "angina_instavel",
+          "label": "Condicao",
+          "nome": "Angina instável"
         }
       ],
       "relacoes": [
@@ -62,7 +67,22 @@
         {
           "tipo": "INDICADO_PARA",
           "origem": "renitec",
-          "destino": "eventos_coronarianos_isquemicos"
+          "destino": "infarto_do_miocardio",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "renitec",
+          "destino": "angina_instavel",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -80,11 +100,6 @@
           "id": "hipersensibilidade",
           "label": "Condicao",
           "nome": "Hipersensibilidade"
-        },
-        {
-          "id": "historico_de_edema_angioneurotico",
-          "label": "Condicao",
-          "nome": "Histórico de edema angioneurótico"
         },
         {
           "id": "angioedema_hereditario",
@@ -115,6 +130,21 @@
           "id": "sacubitril",
           "label": "PrincipioAtivo",
           "nome": "Sacubitril"
+        },
+        {
+          "id": "inibidor_da_neprilisina",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de neprilisina"
+        },
+        {
+          "id": "valsartana",
+          "label": "PrincipioAtivo",
+          "nome": "Valsartana"
+        },
+        {
+          "id": "historico_de_edema_angioneurotico",
+          "label": "Condicao",
+          "nome": "Histórico de edema angioneurótico"
         }
       ],
       "relacoes": [
@@ -122,11 +152,6 @@
           "tipo": "CONTRAINDICADO_EM",
           "origem": "renitec",
           "destino": "hipersensibilidade"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "renitec",
-          "destino": "historico_de_edema_angioneurotico"
         },
         {
           "tipo": "CONTRAINDICADO_EM",
@@ -157,9 +182,34 @@
           }
         },
         {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "sacubitril",
+          "frequencia": null,
+          "gravidade": "grave",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
           "tipo": "PERTENCE_A",
           "origem": "sacubitril",
-          "destino": "inibidor_de_neprilisina"
+          "destino": "inibidor_da_neprilisina"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "valsartana",
+          "frequencia": null,
+          "gravidade": "grave",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "renitec",
+          "destino": "historico_de_edema_angioneurotico"
         }
       ]
     },
@@ -213,8 +263,30 @@
       "id": "bula_renitec_advertencias_1",
       "tipo": "advertencias",
       "texto": "Se ocorrer hipotensão, o paciente deve ser colocado em posição supina e, se necessário, receber infusão intravenosa de solução salina. Uma resposta hipotensora transitória não representa contraindicação para novas doses, as quais podem ser administradas, geralmente sem dificuldade, depois que a pressão arterial responder à expansão de volume. Em alguns pacientes com insuficiência cardíaca, cuja pressão arterial é normal ou baixa, podem ocorrer reduções adicionais da pressão arterial sistêmica com o uso de RENITEC®; esse efeito é esperado e geralmente não constitui razão para a interrupção do tratamento. Se a hipotensão tornar-se sintomática, podem ser necessárias redução da dose e/ou descontinuação do diurético e/ou de RENITEC®. Estenose aórtica/cardiomiopatia hipertrófica: a exemplo de todos os vasodilatadores, deve-se ter cuidado ao administrar inibidores da ECA a pacientes com obstrução da via de saída do ventrículo esquerdo.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "RENITEC®"
+        },
+        {
+          "id": "hipotensao",
+          "label": "EfeitoAdverso",
+          "nome": "Hipotensão"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "hipotensao",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_renitec_advertencias_2",
@@ -227,9 +299,9 @@
           "nome": "Renitec"
         },
         {
-          "id": "insuficiencia_renal_aguda",
+          "id": "aumento_de_creatinina",
           "label": "EfeitoAdverso",
-          "nome": "Insuficiência renal aguda"
+          "nome": "Aumento de creatinina"
         },
         {
           "id": "aumento_de_ureia",
@@ -237,9 +309,14 @@
           "nome": "Aumento de ureia"
         },
         {
-          "id": "aumento_de_creatinina",
+          "id": "hipotensao",
           "label": "EfeitoAdverso",
-          "nome": "Aumento de creatinina"
+          "nome": "Hipotensão"
+        },
+        {
+          "id": "insuficiencia_renal_aguda",
+          "label": "EfeitoAdverso",
+          "nome": "Insuficiência renal aguda"
         },
         {
           "id": "enalapril",
@@ -256,7 +333,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "insuficiencia_renal_aguda",
+          "destino": "aumento_de_creatinina",
           "props": {
             "frequencia": "desconhecida"
           }
@@ -272,7 +349,17 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "aumento_de_creatinina",
+          "destino": "hipotensao",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "insuficiencia_renal_aguda",
           "props": {
             "frequencia": "desconhecida"
           }
@@ -326,24 +413,9 @@
           "nome": "Enalapril"
         },
         {
-          "id": "inibidor_de_mtor",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor de mTOR"
-        },
-        {
           "id": "inibidor_de_neprilisina",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor de neprilisina"
-        },
-        {
-          "id": "tensirolimo",
-          "label": "PrincipioAtivo",
-          "nome": "Tensirolimo"
-        },
-        {
-          "id": "sirolimo",
-          "label": "PrincipioAtivo",
-          "nome": "Sirolimo"
         },
         {
           "id": "everolimo",
@@ -351,21 +423,32 @@
           "nome": "Everolimo"
         },
         {
+          "id": "inibidor_de_mtor",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de mTOR"
+        },
+        {
+          "id": "sirolimo",
+          "label": "PrincipioAtivo",
+          "nome": "Sirolimo"
+        },
+        {
           "id": "sacubitril",
           "label": "PrincipioAtivo",
           "nome": "Sacubitril"
+        },
+        {
+          "id": "inibidor_da_neprilisina",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de neprilisina"
+        },
+        {
+          "id": "tensirolimo",
+          "label": "PrincipioAtivo",
+          "nome": "Tensirolimo"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "inibidor_de_mtor",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "maior risco de angioedema"
-          }
-        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
@@ -377,7 +460,7 @@
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "tensirolimo",
+          "origem": "everolimo",
           "destino": "inibidor_de_mtor"
         },
         {
@@ -387,13 +470,22 @@
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "everolimo",
-          "destino": "inibidor_de_mtor"
+          "origem": "sacubitril",
+          "destino": "inibidor_da_neprilisina"
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "sacubitril",
-          "destino": "inibidor_de_neprilisina"
+          "origem": "tensirolimo",
+          "destino": "inibidor_de_mtor"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "inibidor_de_mtor",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "maior risco de angioedema"
+          }
         }
       ]
     },
@@ -403,6 +495,26 @@
       "texto": "Pacientes que recebem terapia concomitante com um inibidor da ECA e vildagliptina podem apresentar risco aumentado de angioedema (Veja os itens 4. CONTRAINDICAÇÕES e 6. INTERAÇÕES MEDICAMENTOSAS). Reações anafilactoides durante dessensibilização com himenóptero: pacientes que recebiam inibidores da ECA raramente apresentaram reações anafilactoides com risco de morte durante dessensibilização com veneno de himenóptero. Essas reações foram evitadas com a suspensão temporária do inibidor da ECA antes de cada dessensibilização. Pacientes sob hemodiálise: foi relatada a ocorrência de reações anafilactoides em pacientes submetidos à diálise com membranas de alto fluxo (por exemplo, AN 69) que recebiam concomitantemente um inibidor da ECA. Nesses pacientes, deve-se considerar a utilização de um outro tipo de membrana de diálise ou de uma classe diferente de agente anti-hipertensivo. Tosse: foi relatada tosse com o uso dos inibidores da ECA. Caracteristicamente, a tosse é não produtiva, persistente e desaparece com a descontinuação do tratamento. A tosse induzida por inibidores da ECA deve ser incluída no diagnóstico diferencial de tosse.",
       "entidades": [
         {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        },
+        {
+          "id": "angioedema",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema"
+        },
+        {
+          "id": "tosse",
+          "label": "EfeitoAdverso",
+          "nome": "Tosse"
+        },
+        {
+          "id": "reacao_anafilactoide",
+          "label": "EfeitoAdverso",
+          "nome": "Reação anafilactoide"
+        },
+        {
           "id": "enalapril",
           "label": "PrincipioAtivo",
           "nome": "Enalapril"
@@ -411,31 +523,25 @@
           "id": "vildagliptina",
           "label": "PrincipioAtivo",
           "nome": "Vildagliptina"
-        },
-        {
-          "id": "renitec",
-          "label": "Medicamento",
-          "nome": "Renitec"
-        },
-        {
-          "id": "reacao_anafilactoide",
-          "label": "EfeitoAdverso",
-          "nome": "Reação anafilactoide"
-        },
-        {
-          "id": "tosse",
-          "label": "EfeitoAdverso",
-          "nome": "Tosse"
         }
       ],
       "relacoes": [
         {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "vildagliptina",
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "angioedema",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "tosse",
           "props": {
-            "gravidade": "desconhecida",
-            "efeito": "risco aumentado de angioedema"
+            "frequencia": "desconhecida"
           }
         },
         {
@@ -447,11 +553,12 @@
           }
         },
         {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "tosse",
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "vildagliptina",
           "props": {
-            "frequencia": "desconhecida"
+            "gravidade": "desconhecida",
+            "efeito": "risco aumentado de angioedema"
           }
         }
       ]
@@ -462,16 +569,6 @@
       "texto": "Cirurgia/anestesia: em pacientes submetidos a cirurgias importantes ou sob anestesia com agentes hipotensores, o enalapril bloqueia a formação de angiotensina II consequente à liberação compensatória de renina. Se ocorrer hipotensão atribuível a esse mecanismo, a pressão arterial poderá ser normalizada pela expansão de volume. Hipercalemia (veja também o item 6. INTERAÇÕES MEDICAMENTOSAS, Potássio sérico): os fatores de risco para desenvolvimento da hipercalemia incluem insuficiência renal, diabetes mellitus e uso concomitante de diuréticos poupadores de potássio (por exemplo, espironolactona, eplerenona, triantereno ou amilorida), suplementos de potássio, substitutos do sal que contenham potássio, ou outros medicamentos que possam aumentar o potássio sérico (por exemplo, produtos que contenham trimetoprima). O uso de suplementos de potássio, diuréticos poupadores de potássio ou substitutos do sal que contenham potássio, particularmente em pacientes com função renal comprometida, pode levar a aumento significativo dos níveis séricos de potássio. A hipercalemia pode causar arritmias sérias, algumas vezes fatais.",
       "entidades": [
         {
-          "id": "renitec",
-          "label": "Medicamento",
-          "nome": "Renitec"
-        },
-        {
-          "id": "hipercalemia",
-          "label": "EfeitoAdverso",
-          "nome": "Hipercalemia"
-        },
-        {
           "id": "enalapril",
           "label": "PrincipioAtivo",
           "nome": "Enalapril"
@@ -480,11 +577,6 @@
           "id": "diuretico_poupador_de_potassio",
           "label": "ClasseTerapeutica",
           "nome": "Diurético poupador de potássio"
-        },
-        {
-          "id": "suplemento_de_potassio",
-          "label": "ClasseTerapeutica",
-          "nome": "Suplemento de potássio"
         },
         {
           "id": "substituto_do_sal_com_potassio",
@@ -497,14 +589,19 @@
           "nome": "Trimetoprima"
         },
         {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        },
+        {
+          "id": "hipercalemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipercalemia"
+        },
+        {
           "id": "espironolactona",
           "label": "PrincipioAtivo",
           "nome": "Espironolactona"
-        },
-        {
-          "id": "eplerenona",
-          "label": "PrincipioAtivo",
-          "nome": "Eplerenona"
         },
         {
           "id": "triantereno",
@@ -515,30 +612,23 @@
           "id": "amilorida",
           "label": "PrincipioAtivo",
           "nome": "Amilorida"
+        },
+        {
+          "id": "suplemento_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Suplemento de potássio"
+        },
+        {
+          "id": "eplerenona",
+          "label": "PrincipioAtivo",
+          "nome": "Eplerenona"
         }
       ],
       "relacoes": [
         {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "hipercalemia",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
           "destino": "diuretico_poupador_de_potassio",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "risco de hipercalemia"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "suplemento_de_potassio",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "risco de hipercalemia"
@@ -563,13 +653,16 @@
           }
         },
         {
-          "tipo": "PERTENCE_A",
-          "origem": "espironolactona",
-          "destino": "diuretico_poupador_de_potassio"
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "hipercalemia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "eplerenona",
+          "origem": "espironolactona",
           "destino": "diuretico_poupador_de_potassio"
         },
         {
@@ -581,6 +674,20 @@
           "tipo": "PERTENCE_A",
           "origem": "amilorida",
           "destino": "diuretico_poupador_de_potassio"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "suplemento_de_potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "risco de hipercalemia"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "eplerenona",
+          "destino": "diuretico_poupador_de_potassio"
         }
       ]
     },
@@ -590,26 +697,46 @@
       "texto": "Se o uso concomitante de RENITEC com qualquer um dos agentes mencionados acima for considerado apropriado, deverá ser feito com cautela e com monitoramento frequente dos níveis séricos de potássio. Hipoglicemia: pacientes diabéticos tratados com agentes antidiabéticos orais ou insulina que estiverem iniciando tratamento com um inibidor da ECA devem ser orientados a monitorar rigorosamente a hipoglicemia, particularmente durante o primeiro mês de uso combinado (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Gravidez e amamentação: categoria de risco D. Este medicamento não deve ser utilizado por mulheres grávidas sem orientação médica. Informe imediatamente seu médico em caso de suspeita de gravidez. O uso de RENITEC® durante a gravidez não é recomendado. O tratamento com RENITEC® deve ser suspenso o mais rápido possível depois da confirmação de gravidez, a menos que seja considerado vital para a mãe.",
       "entidades": [
         {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
+        },
+        {
           "id": "enalapril",
           "label": "PrincipioAtivo",
           "nome": "Enalapril"
         },
         {
-          "id": "antidiabetico_oral",
-          "label": "ClasseTerapeutica",
-          "nome": "Antidiabético oral"
-        },
-        {
           "id": "insulina",
           "label": "PrincipioAtivo",
           "nome": "Insulina"
+        },
+        {
+          "id": "antidiabetico_oral",
+          "label": "ClasseTerapeutica",
+          "nome": "Antidiabético oral"
         }
       ],
       "relacoes": [
         {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "renitec",
+          "destino": "gestante",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "antidiabetico_oral",
+          "destino": "insulina",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "monitorar rigorosamente a hipoglicemia, particularmente durante o primeiro mês de uso combinado"
@@ -618,7 +745,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "insulina",
+          "destino": "antidiabetico_oral",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "monitorar rigorosamente a hipoglicemia, particularmente durante o primeiro mês de uso combinado"
@@ -630,93 +757,8 @@
       "id": "bula_renitec_advertencias_8",
       "tipo": "advertencias",
       "texto": "Em um estudo epidemiológico retrospectivo publicado, os recém-nascidos cujas mães receberam um inibidor da ECA durante o primeiro trimestre de gravidez pareceram ter risco aumentado de importantes malformações congênitas em comparação com recém-nascidos de mães não expostas a inibidores da ECA no primeiro trimestre. O número de casos de defeitos congênitos é pequeno e os achados desse estudo ainda não foram repetidos. Os inibidores da ECA podem causar morbidade e mortalidade fetal e neonatal quando administrados a mulheres no segundo e terceiro trimestres da gravidez. A utilização de inibidores da ECA durante esse período foi associada a danos para o feto e para o recém-nascido, incluindo hipotensão, insuficiência renal, hipercalemia e/ou hipoplasia de crânio no recém-nascido. Ocorreu oligoidrâmnio materno, presumivelmente representando redução da função renal fetal, podendo resultar em contraturas de membros, deformidades craniofaciais e desenvolvimento de pulmão hipoplásico. Se RENITEC® for utilizado nesses casos, as pacientes devem ser devidamente informadas sobre o risco potencial que o medicamento acarreta para o feto.",
-      "entidades": [
-        {
-          "id": "renitec",
-          "label": "Medicamento",
-          "nome": "Renitec"
-        },
-        {
-          "id": "malformacao_congenita",
-          "label": "EfeitoAdverso",
-          "nome": "Malformação congênita"
-        },
-        {
-          "id": "hipoplasia_de_cranio",
-          "label": "EfeitoAdverso",
-          "nome": "Hipoplasia de crânio"
-        },
-        {
-          "id": "oligoidramnio",
-          "label": "EfeitoAdverso",
-          "nome": "Oligoidrâmnio"
-        },
-        {
-          "id": "hipotensao",
-          "label": "EfeitoAdverso",
-          "nome": "Hipotensão"
-        },
-        {
-          "id": "insuficiencia_renal",
-          "label": "EfeitoAdverso",
-          "nome": "Insuficiência renal"
-        },
-        {
-          "id": "hipercalemia",
-          "label": "EfeitoAdverso",
-          "nome": "Hipercalemia"
-        }
-      ],
-      "relacoes": [
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "malformacao_congenita",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "hipoplasia_de_cranio",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "oligoidramnio",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "hipotensao",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "insuficiencia_renal",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "hipercalemia",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        }
-      ]
+      "entidades": [],
+      "relacoes": []
     },
     {
       "id": "bula_renitec_advertencias_9",
@@ -812,29 +854,9 @@
           "nome": "Anti-hipertensivo"
         },
         {
-          "id": "diuretico_tiazidico",
-          "label": "ClasseTerapeutica",
-          "nome": "Diurético tiazídico"
-        },
-        {
           "id": "diuretico_espoliador_de_potassio",
           "label": "ClasseTerapeutica",
           "nome": "Diurético espoliador de potássio"
-        },
-        {
-          "id": "diuretico_poupador_de_potassio",
-          "label": "ClasseTerapeutica",
-          "nome": "Diurético poupador de potássio"
-        },
-        {
-          "id": "suplemento_de_potassio",
-          "label": "ClasseTerapeutica",
-          "nome": "Suplemento de potássio"
-        },
-        {
-          "id": "substituto_do_sal_com_potassio",
-          "label": "ClasseTerapeutica",
-          "nome": "Substituto do sal que contém potássio"
         },
         {
           "id": "trimetoprima",
@@ -842,14 +864,29 @@
           "nome": "Trimetoprima"
         },
         {
+          "id": "eplerenona",
+          "label": "PrincipioAtivo",
+          "nome": "Eplerenona"
+        },
+        {
+          "id": "diuretico_poupador_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético poupador de potássio"
+        },
+        {
           "id": "espironolactona",
           "label": "PrincipioAtivo",
           "nome": "Espironolactona"
         },
         {
-          "id": "eplerenona",
+          "id": "amilorida",
           "label": "PrincipioAtivo",
-          "nome": "Eplerenona"
+          "nome": "Amilorida"
+        },
+        {
+          "id": "substituto_do_sal_com_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Substituto do sal que contém potássio"
         },
         {
           "id": "triantereno",
@@ -857,9 +894,14 @@
           "nome": "Triantereno"
         },
         {
-          "id": "amilorida",
-          "label": "PrincipioAtivo",
-          "nome": "Amilorida"
+          "id": "diuretico_tiazidico",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético tiazídico"
+        },
+        {
+          "id": "suplemento_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Suplemento de potássio"
         }
       ],
       "relacoes": [
@@ -875,15 +917,6 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "diuretico_tiazidico",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "efeito espoliador de potássio do diurético atenuado pelo enalapril"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
           "destino": "diuretico_espoliador_de_potassio",
           "props": {
             "gravidade": "desconhecida",
@@ -893,16 +926,56 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "diuretico_poupador_de_potassio",
+          "destino": "trimetoprima",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "fator de risco para hipercalemia"
           }
         },
         {
+          "tipo": "PERTENCE_A",
+          "origem": "eplerenona",
+          "destino": "diuretico_poupador_de_potassio"
+        },
+        {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "suplemento_de_potassio",
+          "destino": "espironolactona",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "amilorida",
+          "destino": "diuretico_poupador_de_potassio"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "eplerenona",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "amilorida",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "diuretico_poupador_de_potassio",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "fator de risco para hipercalemia"
@@ -920,7 +993,26 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "trimetoprima",
+          "destino": "triantereno",
+          "frequencia": null,
+          "gravidade": "desconhecida",
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "diuretico_tiazidico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "efeito espoliador de potássio do diurético atenuado pelo enalapril"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "suplemento_de_potassio",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "fator de risco para hipercalemia"
@@ -933,18 +1025,18 @@
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "eplerenona",
-          "destino": "diuretico_poupador_de_potassio"
-        },
-        {
-          "tipo": "PERTENCE_A",
           "origem": "triantereno",
           "destino": "diuretico_poupador_de_potassio"
         },
         {
           "tipo": "PERTENCE_A",
-          "origem": "amilorida",
-          "destino": "diuretico_poupador_de_potassio"
+          "origem": "enalapril",
+          "destino": "anti_hipertensivo",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -964,6 +1056,16 @@
           "nome": "Suplemento de potássio"
         },
         {
+          "id": "insulina",
+          "label": "PrincipioAtivo",
+          "nome": "Insulina"
+        },
+        {
+          "id": "antidiabetico_oral",
+          "label": "ClasseTerapeutica",
+          "nome": "Antidiabético oral"
+        },
+        {
           "id": "diuretico_poupador_de_potassio",
           "label": "ClasseTerapeutica",
           "nome": "Diurético poupador de potássio"
@@ -972,16 +1074,6 @@
           "id": "substituto_do_sal_com_potassio",
           "label": "ClasseTerapeutica",
           "nome": "Substituto do sal que contém potássio"
-        },
-        {
-          "id": "antidiabetico_oral",
-          "label": "ClasseTerapeutica",
-          "nome": "Antidiabético oral"
-        },
-        {
-          "id": "insulina",
-          "label": "PrincipioAtivo",
-          "nome": "Insulina"
         }
       ],
       "relacoes": [
@@ -992,6 +1084,24 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumentos significativos do potássio sérico, particularmente com função renal comprometida"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "insulina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do efeito redutor da glicemia com risco de hipoglicemia"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "antidiabetico_oral",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do efeito redutor da glicemia com risco de hipoglicemia"
           }
         },
         {
@@ -1010,24 +1120,6 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumentos significativos do potássio sérico, particularmente com função renal comprometida"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "antidiabetico_oral",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do efeito redutor da glicemia com risco de hipoglicemia"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "insulina",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do efeito redutor da glicemia com risco de hipoglicemia"
           }
         }
       ]
@@ -1048,14 +1140,14 @@
           "nome": "Lítio"
         },
         {
-          "id": "aine",
-          "label": "ClasseTerapeutica",
-          "nome": "Anti-inflamatório não esteroide"
-        },
-        {
           "id": "inibidor_da_cox2",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor seletivo da ciclooxigenase-2"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "Anti-inflamatório não esteroide"
         }
       ],
       "relacoes": [
@@ -1071,7 +1163,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "aine",
+          "destino": "inibidor_da_cox2",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "redução do efeito anti-hipertensivo; pode agravar a deterioração da função renal"
@@ -1080,7 +1172,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
-          "destino": "inibidor_da_cox2",
+          "destino": "aine",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "redução do efeito anti-hipertensivo; pode agravar a deterioração da função renal"
@@ -1096,20 +1188,44 @@
         {
           "id": "enalapril",
           "label": "PrincipioAtivo",
-          "nome": "Enalapril"
+          "nome": "enalapril"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
+        },
+        {
+          "id": "bra",
+          "label": "ClasseTerapeutica",
+          "nome": "Antagonista do receptor da angiotensina II"
         },
         {
           "id": "alisquireno",
           "label": "PrincipioAtivo",
           "nome": "Alisquireno"
-        },
-        {
-          "id": "antagonista_do_receptor_da_angiotensina_ii",
-          "label": "ClasseTerapeutica",
-          "nome": "Antagonista do receptor da angiotensina II"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "enalapril",
+          "destino": "ieca",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "bra",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo com maior risco de hipotensão, síncope, hipercalemia e alterações na função renal"
+          }
+        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
@@ -1117,15 +1233,6 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "maior risco de hipotensão, síncope, hipercalemia e alterações na função renal; não coadministrar em pacientes com diabetes"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "antagonista_do_receptor_da_angiotensina_ii",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "bloqueio duplo com maior risco de hipotensão, síncope, hipercalemia e alterações na função renal"
           }
         }
       ]
@@ -1141,34 +1248,9 @@
           "nome": "Enalapril"
         },
         {
-          "id": "aurotiomalato_de_sodio",
-          "label": "PrincipioAtivo",
-          "nome": "Aurotiomalato de sódio"
-        },
-        {
-          "id": "alcool",
-          "label": "PrincipioAtivo",
-          "nome": "Álcool"
-        },
-        {
-          "id": "inibidor_de_mtor",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor de mTOR"
-        },
-        {
-          "id": "inibidor_de_neprilisina",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor de neprilisina"
-        },
-        {
           "id": "vildagliptina",
           "label": "PrincipioAtivo",
           "nome": "Vildagliptina"
-        },
-        {
-          "id": "tensirolimo",
-          "label": "PrincipioAtivo",
-          "nome": "Tensirolimo"
         },
         {
           "id": "sirolimo",
@@ -1176,53 +1258,42 @@
           "nome": "Sirolimo"
         },
         {
+          "id": "inibidor_de_mtor",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de mTOR"
+        },
+        {
+          "id": "tensirolimo",
+          "label": "PrincipioAtivo",
+          "nome": "Tensirolimo"
+        },
+        {
+          "id": "alcool",
+          "label": "PrincipioAtivo",
+          "nome": "Álcool"
+        },
+        {
           "id": "everolimo",
           "label": "PrincipioAtivo",
           "nome": "Everolimo"
         },
         {
+          "id": "inibidor_da_neprilisina",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor de neprilisina"
+        },
+        {
           "id": "sacubitril",
           "label": "PrincipioAtivo",
           "nome": "Sacubitril"
+        },
+        {
+          "id": "aurotiomalato_de_sodio",
+          "label": "PrincipioAtivo",
+          "nome": "Aurotiomalato de sódio"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "aurotiomalato_de_sodio",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "reações nitritoides (rubor facial, náuseas, vômitos e hipotensão)"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "alcool",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumenta o efeito hipotensor"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "inibidor_de_mtor",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "maior risco de angioedema"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "enalapril",
-          "destino": "inibidor_de_neprilisina",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "maior risco de angioedema"
-          }
-        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "enalapril",
@@ -1234,13 +1305,31 @@
         },
         {
           "tipo": "PERTENCE_A",
+          "origem": "sirolimo",
+          "destino": "inibidor_de_mtor"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "inibidor_de_mtor",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "maior risco de angioedema"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
           "origem": "tensirolimo",
           "destino": "inibidor_de_mtor"
         },
         {
-          "tipo": "PERTENCE_A",
-          "origem": "sirolimo",
-          "destino": "inibidor_de_mtor"
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "alcool",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumenta o efeito hipotensor"
+          }
         },
         {
           "tipo": "PERTENCE_A",
@@ -1248,9 +1337,27 @@
           "destino": "inibidor_de_mtor"
         },
         {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "inibidor_da_neprilisina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "maior risco de angioedema"
+          }
+        },
+        {
           "tipo": "PERTENCE_A",
           "origem": "sacubitril",
-          "destino": "inibidor_de_neprilisina"
+          "destino": "inibidor_da_neprilisina"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "enalapril",
+          "destino": "aurotiomalato_de_sodio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "reações nitritoides (rubor facial, náuseas, vômitos e hipotensão)"
+          }
         }
       ]
     },
@@ -1295,29 +1402,9 @@
           "nome": "Hipotensão ortostática"
         },
         {
-          "id": "sincope",
-          "label": "EfeitoAdverso",
-          "nome": "Síncope"
-        },
-        {
-          "id": "nausea",
-          "label": "EfeitoAdverso",
-          "nome": "Náusea"
-        },
-        {
           "id": "diarreia",
           "label": "EfeitoAdverso",
           "nome": "Diarreia"
-        },
-        {
-          "id": "caibras_musculares",
-          "label": "EfeitoAdverso",
-          "nome": "Cãibras musculares"
-        },
-        {
-          "id": "erupcao_cutanea",
-          "label": "EfeitoAdverso",
-          "nome": "Erupção cutânea"
         },
         {
           "id": "tosse",
@@ -1348,6 +1435,26 @@
           "id": "angioedema_intestinal",
           "label": "EfeitoAdverso",
           "nome": "Angioedema intestinal"
+        },
+        {
+          "id": "sincope",
+          "label": "EfeitoAdverso",
+          "nome": "Síncope"
+        },
+        {
+          "id": "erupcao_cutanea",
+          "label": "EfeitoAdverso",
+          "nome": "Erupção cutânea"
+        },
+        {
+          "id": "nausea",
+          "label": "EfeitoAdverso",
+          "nome": "Náusea"
+        },
+        {
+          "id": "caibras_musculares",
+          "label": "EfeitoAdverso",
+          "nome": "Cãibras musculares"
         }
       ],
       "relacoes": [
@@ -1402,39 +1509,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "sincope",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "nausea",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
           "destino": "diarreia",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "caibras_musculares",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "erupcao_cutanea",
           "props": {
             "frequencia": "desconhecida"
           }
@@ -1486,6 +1561,38 @@
           "props": {
             "frequencia": "muito_rara"
           }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "sincope",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "erupcao_cutanea",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "nausea",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "caibras_musculares",
+          "props": {
+            "frequencia": "desconhecida"
+          }
         }
       ]
     },
@@ -1535,11 +1642,6 @@
           "nome": "Fenômeno de Raynaud"
         },
         {
-          "id": "siadh",
-          "label": "EfeitoAdverso",
-          "nome": "Síndrome da secreção inapropriada do hormônio antidiurético"
-        },
-        {
           "id": "ileo_paralitico",
           "label": "EfeitoAdverso",
           "nome": "Íleo paralítico"
@@ -1553,11 +1655,6 @@
           "id": "insuficiencia_hepatica",
           "label": "EfeitoAdverso",
           "nome": "Insuficiência hepática"
-        },
-        {
-          "id": "hepatite",
-          "label": "EfeitoAdverso",
-          "nome": "Hepatite"
         },
         {
           "id": "ictericia",
@@ -1610,11 +1707,6 @@
           "nome": "Sonolência"
         },
         {
-          "id": "insonia",
-          "label": "EfeitoAdverso",
-          "nome": "Insônia"
-        },
-        {
           "id": "nervosismo",
           "label": "EfeitoAdverso",
           "nome": "Nervosismo"
@@ -1643,16 +1735,6 @@
           "id": "infiltrados_pulmonares",
           "label": "EfeitoAdverso",
           "nome": "Infiltrados pulmonares"
-        },
-        {
-          "id": "broncoespasmo",
-          "label": "EfeitoAdverso",
-          "nome": "Broncoespasmo"
-        },
-        {
-          "id": "asma",
-          "label": "EfeitoAdverso",
-          "nome": "Asma"
         },
         {
           "id": "dispneia",
@@ -1718,6 +1800,31 @@
           "id": "alopecia",
           "label": "EfeitoAdverso",
           "nome": "Alopecia"
+        },
+        {
+          "id": "broncoespasmo",
+          "label": "EfeitoAdverso",
+          "nome": "Broncoespasmo"
+        },
+        {
+          "id": "asma",
+          "label": "EfeitoAdverso",
+          "nome": "Asma"
+        },
+        {
+          "id": "hepatite",
+          "label": "EfeitoAdverso",
+          "nome": "Hepatite"
+        },
+        {
+          "id": "siadh",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome da secreção inapropriada do hormônio antidiurético"
+        },
+        {
+          "id": "insonia",
+          "label": "EfeitoAdverso",
+          "nome": "Insônia"
         }
       ],
       "relacoes": [
@@ -1780,14 +1887,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "siadh",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
           "destino": "ileo_paralitico",
           "props": {
             "frequencia": "muito_rara"
@@ -1805,14 +1904,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
           "destino": "insuficiencia_hepatica",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "hepatite",
           "props": {
             "frequencia": "muito_rara"
           }
@@ -1900,14 +1991,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "insonia",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
           "destino": "nervosismo",
           "props": {
             "frequencia": "muito_rara"
@@ -1949,22 +2032,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
           "destino": "infiltrados_pulmonares",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "broncoespasmo",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "asma",
           "props": {
             "frequencia": "muito_rara"
           }
@@ -2072,6 +2139,46 @@
           "props": {
             "frequencia": "muito_rara"
           }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "broncoespasmo",
+          "props": {
+            "frequencia": "muito_rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "asma",
+          "props": {
+            "frequencia": "muito_rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "hepatite",
+          "props": {
+            "frequencia": "muito_rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "siadh",
+          "props": {
+            "frequencia": "muito_rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "insonia",
+          "props": {
+            "frequencia": "muito_rara"
+          }
         }
       ]
     },
@@ -2171,11 +2278,6 @@
           "nome": "Leucocitose"
         },
         {
-          "id": "erupcao_cutanea",
-          "label": "EfeitoAdverso",
-          "nome": "Erupção cutânea"
-        },
-        {
           "id": "fotossensibilidade",
           "label": "EfeitoAdverso",
           "nome": "Fotossensibilidade"
@@ -2201,26 +2303,6 @@
           "nome": "Agranulocitose"
         },
         {
-          "id": "aumento_de_ureia",
-          "label": "EfeitoAdverso",
-          "nome": "Aumento de ureia"
-        },
-        {
-          "id": "aumento_de_creatinina",
-          "label": "EfeitoAdverso",
-          "nome": "Aumento de creatinina"
-        },
-        {
-          "id": "elevacao_das_enzimas_hepaticas",
-          "label": "EfeitoAdverso",
-          "nome": "Elevação das enzimas hepáticas"
-        },
-        {
-          "id": "elevacao_da_bilirrubina_serica",
-          "label": "EfeitoAdverso",
-          "nome": "Elevação da bilirrubina sérica"
-        },
-        {
           "id": "hipercalemia",
           "label": "EfeitoAdverso",
           "nome": "Hipercalemia"
@@ -2239,6 +2321,31 @@
           "id": "reducao_de_hematocrito",
           "label": "EfeitoAdverso",
           "nome": "Redução de hematócrito"
+        },
+        {
+          "id": "elevacao_das_enzimas_hepaticas",
+          "label": "EfeitoAdverso",
+          "nome": "Elevação das enzimas hepáticas"
+        },
+        {
+          "id": "elevacao_da_bilirrubina_serica",
+          "label": "EfeitoAdverso",
+          "nome": "Elevação da bilirrubina sérica"
+        },
+        {
+          "id": "aumento_de_ureia",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento de ureia"
+        },
+        {
+          "id": "erupcao_cutanea",
+          "label": "EfeitoAdverso",
+          "nome": "Erupção cutânea"
+        },
+        {
+          "id": "aumento_de_creatinina",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento de creatinina"
         }
       ],
       "relacoes": [
@@ -2381,14 +2488,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "erupcao_cutanea",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
           "destino": "fotossensibilidade",
           "props": {
             "frequencia": "desconhecida"
@@ -2429,38 +2528,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
-          "destino": "aumento_de_ureia",
-          "props": {
-            "frequencia": "rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "aumento_de_creatinina",
-          "props": {
-            "frequencia": "rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "elevacao_das_enzimas_hepaticas",
-          "props": {
-            "frequencia": "rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
-          "destino": "elevacao_da_bilirrubina_serica",
-          "props": {
-            "frequencia": "rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "renitec",
           "destino": "hipercalemia",
           "props": {
             "frequencia": "rara"
@@ -2486,6 +2553,46 @@
           "tipo": "PODE_CAUSAR",
           "origem": "renitec",
           "destino": "reducao_de_hematocrito",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "elevacao_das_enzimas_hepaticas",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "elevacao_da_bilirrubina_serica",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "aumento_de_ureia",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "erupcao_cutanea",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "renitec",
+          "destino": "aumento_de_creatinina",
           "props": {
             "frequencia": "rara"
           }
@@ -2556,8 +2663,30 @@
       "id": "bula_renitec_posologia_2",
       "tipo": "posologia",
       "texto": "ADVERTÊNCIAS E PRECAUÇÕES, Pacientes sob hemodiálise. †† O enalaprilato é dialisável. Nos dias em que o paciente não for submetido à diálise, a posologia deverá ser ajustada à resposta da pressão arterial. Insuficiência cardíaca/disfunção ventricular esquerda assintomática: a dose inicial para pacientes com insuficiência cardíaca sintomática ou disfunção ventricular esquerda assintomática é de 2,5 mg e deve ser administrada sob rígida supervisão médica para se determinar o efeito inicial na pressão arterial. RENITEC® pode ser utilizado para o controle da insuficiência cardíaca sintomática, geralmente com diuréticos e, quando apropriado, com digitálicos. Na ausência de hipotensão sintomática, após o início da terapia de insuficiência cardíaca com RENITEC® ou após o controle efetivo da hipotensão, a dose deve ser aumentada gradualmente até a dose de manutenção usual de 20 mg, administrada em dose única diária ou dividida em duas doses, conforme tolerado pelo paciente. Essa titulação da dose pode ser realizada em um período de 2 a 4 semanas ou menos, quando a presença de sinais ou sintomas residuais de insuficiência cardíaca indicar.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "renitec",
+          "label": "Medicamento",
+          "nome": "Renitec"
+        },
+        {
+          "id": "insuficiencia_cardiaca",
+          "label": "Condicao",
+          "nome": "Insuficiência cardíaca"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "renitec",
+          "destino": "insuficiencia_cardiaca",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_renitec_posologia_3",

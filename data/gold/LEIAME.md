@@ -69,3 +69,18 @@ Exemplo de interação, no chunk de interações do Cozaar:
   não deixar claro. Não infira a gravidade.
 - **`efeito`:** texto curto, com as palavras da bula.
 - Chunk sem nenhum fato do schema fica com `"relacoes": []`.
+
+## Adjudicação (E3.5)
+
+Os desacordos entre o rascunho do gold e a extração foram resolvidos às cegas, pelo texto do chunk,
+sem saber a origem de cada item. Critérios aplicados:
+
+- `CONTRAINDICADO_EM` só quando a bula proíbe ("contraindicado", "não deve", "não use"). "Usar com
+  cautela", "não é recomendado" e "avaliar risco-benefício" ficam de fora.
+- Efeitos no feto ou no recém-nascido não entram como `PODE_CAUSAR`.
+- Título de dose na posologia não é `INDICADO_PARA`.
+- Uso concomitante que exige cuidado conta como `INTERAGE_COM`. "Como outros AINEs" e "X, como Y"
+  contam como `PERTENCE_A`.
+- Variantes do mesmo fato ficam com um id só, de preferência o do grafo semente (`ieca`, `bra`, `aine`).
+
+O gold não passou por revisão de especialista da área.

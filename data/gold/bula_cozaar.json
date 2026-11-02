@@ -1,6 +1,6 @@
 {
   "bula": "bula_cozaar",
-  "anotador": "rascunho-claude (revisar)",
+  "anotador": "adjudicado-claude (sem revisão humana)",
   "chunks": [
     {
       "id": "bula_cozaar_indicacoes_0",
@@ -23,6 +23,11 @@
           "nome": "Insuficiência cardíaca"
         },
         {
+          "id": "proteinuria",
+          "label": "Condicao",
+          "nome": "Proteinúria"
+        },
+        {
           "id": "morbidade_mortalidade_cardiovascular",
           "label": "Condicao",
           "nome": "Morbidade e mortalidade cardiovasculares em hipertensos com hipertrofia ventricular esquerda"
@@ -31,11 +36,6 @@
           "id": "doenca_renal_diabetes_tipo_2",
           "label": "Condicao",
           "nome": "Doença renal em diabetes tipo 2"
-        },
-        {
-          "id": "proteinuria",
-          "label": "Condicao",
-          "nome": "Proteinúria"
         }
       ],
       "relacoes": [
@@ -52,17 +52,17 @@
         {
           "tipo": "INDICADO_PARA",
           "origem": "cozaar",
+          "destino": "proteinuria"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
           "destino": "morbidade_mortalidade_cardiovascular"
         },
         {
           "tipo": "INDICADO_PARA",
           "origem": "cozaar",
           "destino": "doenca_renal_diabetes_tipo_2"
-        },
-        {
-          "tipo": "INDICADO_PARA",
-          "origem": "cozaar",
-          "destino": "proteinuria"
         }
       ]
     },
@@ -133,8 +133,60 @@
       "id": "bula_cozaar_advertencias_0",
       "tipo": "advertencias",
       "texto": "Toxicidade fetal: o uso de fármacos que atuam no sistema renina-angiotensina, durante o segundo e o terceiro trimestre da gravidez, diminui a função renal fetal e aumenta a morbidade, e a morte fetal e a neonatal. O oligoidrâmnio resultante pode estar associado com hipoplasia pulmonar e deformações ósseas fetais. As potenciais reações adversas neonatais incluem deformação craniana, anúria, hipotensão, insuficiência renal e morte. Quando a gravidez for detectada, COZAAR® deverá ser descontinuado o mais rápido possível (veja Uso na gravidez e amamentação). Hipersensibilidade: angioedema. Pacientes com histórico de angioedema (inchaço da face, dos lábios, da garganta e/ou língua) devem ser cuidadosamente monitorados (veja o item 9. REAÇÕES ADVERSAS). Hipotensão e desequilíbrio hidroeletrolítico: hipotensão sintomática, especialmente após a primeira dose e após o aumento de dose, pode ocorrer em pacientes que apresentam depleção de volume e/ou depleção de sódio devido a terapia intensa com diuréticos, dieta com restrição de sal, diarreia ou vômito. Essas situações devem ser corrigidas antes da administração de COZAAR® ou deve-se utilizar dose inicial mais baixa (veja o item 8.",
-      "entidades": [],
-      "relacoes": []
+      "entidades": [
+        {
+          "id": "cozaar",
+          "label": "Medicamento",
+          "nome": "COZAAR"
+        },
+        {
+          "id": "hipotensao",
+          "label": "EfeitoAdverso",
+          "nome": "Hipotensão"
+        },
+        {
+          "id": "angioedema",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
+        }
+      ],
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipotensao",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angioedema",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "gestante",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_1",
@@ -147,17 +199,36 @@
           "nome": "Losartana"
         },
         {
+          "id": "potassio",
+          "label": "PrincipioAtivo",
+          "nome": "Potássio"
+        },
+        {
           "id": "diuretico_poupador_de_potassio",
           "label": "ClasseTerapeutica",
           "nome": "Diurético poupador de potássio"
         },
         {
-          "id": "potassio",
-          "label": "PrincipioAtivo",
-          "nome": "Potássio"
+          "id": "cozaar",
+          "label": "Medicamento",
+          "nome": "Cozaar"
+        },
+        {
+          "id": "hipercalemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipercalemia"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "uso concomitante de suplementos de potássio não recomendado; hipercalemia"
+          }
+        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
@@ -168,13 +239,14 @@
           }
         },
         {
-          "tipo": "INTERAGE_COM",
-          "origem": "losartana",
-          "destino": "potassio",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "uso concomitante de suplementos de potássio não recomendado; hipercalemia"
-          }
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipercalemia",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -238,14 +310,14 @@
           "nome": "Losartana"
         },
         {
-          "id": "ieca",
-          "label": "ClasseTerapeutica",
-          "nome": "Inibidor da ECA"
-        },
-        {
           "id": "bra",
           "label": "ClasseTerapeutica",
           "nome": "Antagonista de receptor da angiotensina II"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
         },
         {
           "id": "alisquireno",
@@ -257,7 +329,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
-          "destino": "ieca",
+          "destino": "bra",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: aumenta o risco de hipotensão, hipercalemia e diminui a função renal; não recomendado"
@@ -266,7 +338,7 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
-          "destino": "bra",
+          "destino": "ieca",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: aumenta o risco de hipotensão, hipercalemia e diminui a função renal; não recomendado"
@@ -294,6 +366,11 @@
           "nome": "Losartana"
         },
         {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
+        },
+        {
           "id": "ieca",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor da ECA"
@@ -304,12 +381,36 @@
           "nome": "Antagonista de receptor da angiotensina II"
         },
         {
-          "id": "alisquireno",
-          "label": "PrincipioAtivo",
-          "nome": "Alisquireno"
+          "id": "cozaar",
+          "label": "Medicamento",
+          "nome": "Cozaar"
+        },
+        {
+          "id": "intolerancia_a_galactose",
+          "label": "Condicao",
+          "nome": "Galactose"
+        },
+        {
+          "id": "deficiencia_de_lactase_de_lapp",
+          "label": "Condicao",
+          "nome": "Lactose"
+        },
+        {
+          "id": "sindrome_de_ma_absorcao_de_glicose_galactose",
+          "label": "Condicao",
+          "nome": "Síndrome de má-absorção de glicose-galactose"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona não recomendado"
+          }
+        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
@@ -329,13 +430,34 @@
           }
         },
         {
-          "tipo": "INTERAGE_COM",
-          "origem": "losartana",
-          "destino": "alisquireno",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona não recomendado"
-          }
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "intolerancia_a_galactose",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "deficiencia_de_lactase_de_lapp",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "sindrome_de_ma_absorcao_de_glicose_galactose",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         }
       ]
     },
@@ -405,26 +527,26 @@
           "nome": "Cozaar"
         },
         {
-          "id": "tontura",
-          "label": "EfeitoAdverso",
-          "nome": "Tontura"
-        },
-        {
           "id": "sonolencia",
           "label": "EfeitoAdverso",
           "nome": "Sonolência"
+        },
+        {
+          "id": "tontura",
+          "label": "EfeitoAdverso",
+          "nome": "Tontura"
         }
       ],
       "relacoes": [
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "tontura"
+          "destino": "sonolencia"
         },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "sonolencia"
+          "destino": "tontura"
         }
       ]
     },
@@ -437,6 +559,21 @@
           "id": "losartana",
           "label": "PrincipioAtivo",
           "nome": "Losartana"
+        },
+        {
+          "id": "trimetoprima",
+          "label": "PrincipioAtivo",
+          "nome": "Trimetoprima"
+        },
+        {
+          "id": "bra",
+          "label": "ClasseTerapeutica",
+          "nome": "Antagonistas de receptores de angiotensina II"
+        },
+        {
+          "id": "litio",
+          "label": "PrincipioAtivo",
+          "nome": "Lítio"
         },
         {
           "id": "rifampicina",
@@ -457,19 +594,37 @@
           "id": "potassio",
           "label": "PrincipioAtivo",
           "nome": "Potássio"
-        },
-        {
-          "id": "trimetoprima",
-          "label": "PrincipioAtivo",
-          "nome": "Trimetoprima"
-        },
-        {
-          "id": "litio",
-          "label": "PrincipioAtivo",
-          "nome": "Lítio"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "trimetoprima",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do potássio sérico"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "losartana",
+          "destino": "bra",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "litio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "excreção de lítio pode ser reduzida"
+          }
+        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
@@ -504,24 +659,6 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumento do potássio sérico"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "losartana",
-          "destino": "trimetoprima",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do potássio sérico"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "losartana",
-          "destino": "litio",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "excreção de lítio pode ser reduzida"
           }
         }
       ]
@@ -565,6 +702,11 @@
           "nome": "Losartana"
         },
         {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
+        },
+        {
           "id": "ieca",
           "label": "ClasseTerapeutica",
           "nome": "Inibidor da ECA"
@@ -573,14 +715,18 @@
           "id": "bra",
           "label": "ClasseTerapeutica",
           "nome": "Antagonista de receptor da angiotensina II"
-        },
-        {
-          "id": "alisquireno",
-          "label": "PrincipioAtivo",
-          "nome": "Alisquireno"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
+          }
+        },
         {
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
@@ -594,15 +740,6 @@
           "tipo": "INTERAGE_COM",
           "origem": "losartana",
           "destino": "bra",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "losartana",
-          "destino": "alisquireno",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
@@ -658,11 +795,6 @@
           "id": "reacoes_de_hipersensibilidade",
           "label": "EfeitoAdverso",
           "nome": "Reações de hipersensibilidade"
-        },
-        {
-          "id": "reacoes_anafilaticas",
-          "label": "EfeitoAdverso",
-          "nome": "Reações anafiláticas"
         },
         {
           "id": "angioedema",
@@ -730,11 +862,6 @@
           "nome": "Palpitações"
         },
         {
-          "id": "angina_pectoris",
-          "label": "EfeitoAdverso",
-          "nome": "Angina pectoris"
-        },
-        {
           "id": "sincope",
           "label": "EfeitoAdverso",
           "nome": "Síncope"
@@ -788,6 +915,16 @@
           "id": "vomito",
           "label": "EfeitoAdverso",
           "nome": "Vômito"
+        },
+        {
+          "id": "angina_pectoris",
+          "label": "EfeitoAdverso",
+          "nome": "Angina pectoris"
+        },
+        {
+          "id": "reacoes_anafilaticas",
+          "label": "EfeitoAdverso",
+          "nome": "Reações anafiláticas"
         }
       ],
       "relacoes": [
@@ -811,14 +948,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
           "destino": "reacoes_de_hipersensibilidade",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "reacoes_anafilaticas",
           "props": {
             "frequencia": "desconhecida"
           }
@@ -930,14 +1059,6 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "angina_pectoris",
-          "props": {
-            "frequencia": "incomum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
           "destino": "sincope",
           "props": {
             "frequencia": "rara"
@@ -1022,6 +1143,22 @@
           "props": {
             "frequencia": "incomum"
           }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angina_pectoris",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "reacoes_anafilaticas",
+          "props": {
+            "frequencia": "desconhecida"
+          }
         }
       ]
     },
@@ -1086,19 +1223,9 @@
           "nome": "Artralgia"
         },
         {
-          "id": "rabdomiolise",
-          "label": "EfeitoAdverso",
-          "nome": "Rabdomiólise"
-        },
-        {
           "id": "insuficiencia_renal",
           "label": "EfeitoAdverso",
           "nome": "Insuficiência renal"
-        },
-        {
-          "id": "falencia_renal",
-          "label": "EfeitoAdverso",
-          "nome": "Falência renal"
         },
         {
           "id": "disfuncao_eretil_impotencia",
@@ -1111,14 +1238,29 @@
           "nome": "Astenia"
         },
         {
-          "id": "fadiga",
-          "label": "EfeitoAdverso",
-          "nome": "Fadiga"
-        },
-        {
           "id": "edema",
           "label": "EfeitoAdverso",
           "nome": "Edema"
+        },
+        {
+          "id": "hiponatremia",
+          "label": "EfeitoAdverso",
+          "nome": "Hiponatremia"
+        },
+        {
+          "id": "hipoglicemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipoglicemia"
+        },
+        {
+          "id": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento da ureia, da creatinina sérica e do potássio sérico no sangue"
+        },
+        {
+          "id": "aumento_da_alanina_aminotransferase_alt",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento da alanina aminotransferase (ALT)"
         },
         {
           "id": "mal_estar",
@@ -1131,24 +1273,19 @@
           "nome": "Hipercalemia"
         },
         {
-          "id": "aumento_da_alanina_aminotransferase_alt",
+          "id": "rabdomiolise",
           "label": "EfeitoAdverso",
-          "nome": "Aumento da alanina aminotransferase (ALT)"
+          "nome": "Rabdomiólise"
         },
         {
-          "id": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
+          "id": "fadiga",
           "label": "EfeitoAdverso",
-          "nome": "Aumento da ureia, da creatinina sérica e do potássio sérico no sangue"
+          "nome": "Fadiga"
         },
         {
-          "id": "hiponatremia",
+          "id": "falencia_renal",
           "label": "EfeitoAdverso",
-          "nome": "Hiponatremia"
-        },
-        {
-          "id": "hipoglicemia",
-          "label": "EfeitoAdverso",
-          "nome": "Hipoglicemia"
+          "nome": "Falência renal"
         }
       ],
       "relacoes": [
@@ -1235,23 +1372,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "rabdomiolise",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
           "destino": "insuficiencia_renal",
-          "props": {
-            "frequencia": "comum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "falencia_renal",
           "props": {
             "frequencia": "comum"
           }
@@ -1275,7 +1396,23 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "fadiga",
+          "destino": "edema",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hiponatremia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipoglicemia",
           "props": {
             "frequencia": "comum"
           }
@@ -1283,9 +1420,17 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "edema",
+          "destino": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
           "props": {
-            "frequencia": "incomum"
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "aumento_da_alanina_aminotransferase_alt",
+          "props": {
+            "frequencia": "rara"
           }
         },
         {
@@ -1307,23 +1452,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "aumento_da_alanina_aminotransferase_alt",
-          "props": {
-            "frequencia": "rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
-          "props": {
-            "frequencia": "comum"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "hiponatremia",
+          "destino": "rabdomiolise",
           "props": {
             "frequencia": "desconhecida"
           }
@@ -1331,7 +1460,15 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "hipoglicemia",
+          "destino": "fadiga",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "falencia_renal",
           "props": {
             "frequencia": "comum"
           }
@@ -1349,6 +1486,16 @@
           "nome": "Cozaar"
         },
         {
+          "id": "angioedema",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema"
+        },
+        {
+          "id": "angioedema_intestinal",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema intestinal"
+        },
+        {
           "id": "dor_nas_costas",
           "label": "EfeitoAdverso",
           "nome": "Dor nas costas"
@@ -1359,22 +1506,40 @@
           "nome": "Infecção do trato urinário"
         },
         {
-          "id": "sintomas_parecidos_com_os_da_gripe",
+          "id": "purpura_de_henoch_schonlein",
           "label": "EfeitoAdverso",
-          "nome": "Sintomas parecidos com os da gripe"
-        },
-        {
-          "id": "angioedema_intestinal",
-          "label": "EfeitoAdverso",
-          "nome": "Angioedema intestinal"
+          "nome": "Púrpura de Henoch-Schönlein"
         },
         {
           "id": "hipercalemia",
           "label": "EfeitoAdverso",
           "nome": "Hipercalemia"
+        },
+        {
+          "id": "sintomas_parecidos_com_os_da_gripe",
+          "label": "EfeitoAdverso",
+          "nome": "Sintomas parecidos com os da gripe"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angioedema",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angioedema_intestinal",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
@@ -1394,18 +1559,12 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
-          "destino": "sintomas_parecidos_com_os_da_gripe",
-          "props": {
-            "frequencia": "desconhecida"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "angioedema_intestinal",
-          "props": {
-            "frequencia": "desconhecida"
-          }
+          "destino": "purpura_de_henoch_schonlein",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -1413,6 +1572,14 @@
           "destino": "hipercalemia",
           "props": {
             "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "sintomas_parecidos_com_os_da_gripe",
+          "props": {
+            "frequencia": "desconhecida"
           }
         }
       ]
@@ -1428,6 +1595,11 @@
           "nome": "Cozaar"
         },
         {
+          "id": "diminuicao_da_hemoglobina_e_do_hematocrito",
+          "label": "EfeitoAdverso",
+          "nome": "Diminuição da hemoglobina e do hematócrito"
+        },
+        {
           "id": "falencia_renal",
           "label": "EfeitoAdverso",
           "nome": "Falência renal"
@@ -1436,14 +1608,14 @@
           "id": "aumento_do_nitrogenio_ureico_sanguineo_bun_ou_da_creatinina_serica",
           "label": "EfeitoAdverso",
           "nome": "Aumento do nitrogênio ureico sanguíneo (BUN) ou da creatinina sérica"
-        },
-        {
-          "id": "diminuicao_da_hemoglobina_e_do_hematocrito",
-          "label": "EfeitoAdverso",
-          "nome": "Diminuição da hemoglobina e do hematócrito"
         }
       ],
       "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "diminuicao_da_hemoglobina_e_do_hematocrito"
+        },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
@@ -1453,11 +1625,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "cozaar",
           "destino": "aumento_do_nitrogenio_ureico_sanguineo_bun_ou_da_creatinina_serica"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "cozaar",
-          "destino": "diminuicao_da_hemoglobina_e_do_hematocrito"
         }
       ]
     },

@@ -1,6 +1,6 @@
 {
   "bula": "bula_aspirina",
-  "anotador": "rascunho-claude (revisar)",
+  "anotador": "adjudicado-claude (sem revisão humana)",
   "chunks": [
     {
       "id": "bula_aspirina_indicacoes_0",
@@ -26,11 +26,6 @@
           "id": "dor_de_garganta",
           "label": "Condicao",
           "nome": "dor de garganta relacionada a resfriados"
-        },
-        {
-          "id": "dismenorreia",
-          "label": "Condicao",
-          "nome": "dismenorreia"
         },
         {
           "id": "mialgia",
@@ -63,14 +58,14 @@
           "nome": "gripe"
         },
         {
-          "id": "dor",
-          "label": "Condicao",
-          "nome": "dor"
-        },
-        {
           "id": "febre",
           "label": "Condicao",
           "nome": "febre"
+        },
+        {
+          "id": "dismenorreia",
+          "label": "Condicao",
+          "nome": "dismenorreia"
         }
       ],
       "relacoes": [
@@ -88,11 +83,6 @@
           "tipo": "INDICADO_PARA",
           "origem": "aspirina",
           "destino": "dor_de_garganta"
-        },
-        {
-          "tipo": "INDICADO_PARA",
-          "origem": "aspirina",
-          "destino": "dismenorreia"
         },
         {
           "tipo": "INDICADO_PARA",
@@ -127,12 +117,12 @@
         {
           "tipo": "INDICADO_PARA",
           "origem": "aspirina",
-          "destino": "dor"
+          "destino": "febre"
         },
         {
           "tipo": "INDICADO_PARA",
           "origem": "aspirina",
-          "destino": "febre"
+          "destino": "dismenorreia"
         }
       ]
     },
@@ -145,21 +135,6 @@
           "id": "aspirina",
           "label": "Medicamento",
           "nome": "Aspirina"
-        },
-        {
-          "id": "hipersensibilidade_a_salicilatos",
-          "label": "Condicao",
-          "nome": "hipersensibilidade ao ácido acetilsalicílico, a outros salicilatos ou a componente do produto"
-        },
-        {
-          "id": "asma_induzida_por_salicilatos",
-          "label": "Condicao",
-          "nome": "história de asma induzida por salicilatos"
-        },
-        {
-          "id": "ulcera_gastrointestinal_aguda",
-          "label": "Condicao",
-          "nome": "úlceras gastrintestinais agudas"
         },
         {
           "id": "diatese_hemorragica",
@@ -190,24 +165,24 @@
           "id": "gestante",
           "label": "Populacao",
           "nome": "gestante"
+        },
+        {
+          "id": "asma_induzida_por_salicilatos",
+          "label": "Condicao",
+          "nome": "história de asma induzida por salicilatos"
+        },
+        {
+          "id": "hipersensibilidade",
+          "label": "Condicao",
+          "nome": "Hipersensibilidade ao ácido acetilsalicílico, a outros salicilatos ou a qualquer outro componente do produto"
+        },
+        {
+          "id": "ulcera_gastrointestinal_aguda",
+          "label": "Condicao",
+          "nome": "úlceras gastrintestinais agudas"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "aspirina",
-          "destino": "hipersensibilidade_a_salicilatos"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "aspirina",
-          "destino": "asma_induzida_por_salicilatos"
-        },
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "aspirina",
-          "destino": "ulcera_gastrointestinal_aguda"
-        },
         {
           "tipo": "CONTRAINDICADO_EM",
           "origem": "aspirina",
@@ -237,6 +212,26 @@
           "tipo": "CONTRAINDICADO_EM",
           "origem": "aspirina",
           "destino": "gestante"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "aspirina",
+          "destino": "asma_induzida_por_salicilatos"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "aspirina",
+          "destino": "hipersensibilidade",
+          "frequencia": null,
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "aspirina",
+          "destino": "ulcera_gastrointestinal_aguda"
         }
       ]
     },
@@ -258,19 +253,9 @@
           "nome": "Aspirina"
         },
         {
-          "id": "sindrome_de_kounis",
-          "label": "EfeitoAdverso",
-          "nome": "Síndrome de Kounis"
-        },
-        {
           "id": "trombocitopenia",
           "label": "EfeitoAdverso",
           "nome": "Trombocitopenia"
-        },
-        {
-          "id": "sangramento",
-          "label": "EfeitoAdverso",
-          "nome": "aumento do risco de sangramento"
         },
         {
           "id": "crise_de_gota",
@@ -278,22 +263,32 @@
           "nome": "crises de gota"
         },
         {
+          "id": "anemia_hemolitica",
+          "label": "EfeitoAdverso",
+          "nome": "anemia hemolítica"
+        },
+        {
           "id": "hemolise",
           "label": "EfeitoAdverso",
           "nome": "hemólise"
         },
         {
-          "id": "anemia_hemolitica",
+          "id": "isquemia_miocardica_aguda",
           "label": "EfeitoAdverso",
-          "nome": "anemia hemolítica"
+          "nome": "Isquemia miocárdica aguda"
+        },
+        {
+          "id": "sangramento",
+          "label": "EfeitoAdverso",
+          "nome": "aumento do risco de sangramento"
+        },
+        {
+          "id": "sindrome_de_kounis",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome de Kounis"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "sindrome_de_kounis"
-        },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
@@ -305,12 +300,12 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "sangramento"
+          "destino": "crise_de_gota"
         },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "crise_de_gota"
+          "destino": "anemia_hemolitica"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -320,7 +315,22 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "anemia_hemolitica"
+          "destino": "isquemia_miocardica_aguda",
+          "frequencia": "desconhecida",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 1.0
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "sangramento"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "sindrome_de_kounis"
         }
       ]
     },
@@ -335,11 +345,6 @@
           "nome": "Aspirina"
         },
         {
-          "id": "asma_induzida_por_salicilatos",
-          "label": "Condicao",
-          "nome": "história de asma induzida por salicilatos"
-        },
-        {
           "id": "problema_estomacal",
           "label": "Condicao",
           "nome": "problema estomacal"
@@ -348,14 +353,14 @@
           "id": "sindrome_de_reye",
           "label": "EfeitoAdverso",
           "nome": "Síndrome de Reye"
+        },
+        {
+          "id": "asma_induzida_por_salicilatos",
+          "label": "Condicao",
+          "nome": "história de asma induzida por salicilatos"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "CONTRAINDICADO_EM",
-          "origem": "aspirina",
-          "destino": "asma_induzida_por_salicilatos"
-        },
         {
           "tipo": "CONTRAINDICADO_EM",
           "origem": "aspirina",
@@ -368,6 +373,11 @@
           "props": {
             "frequencia": "rara"
           }
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "aspirina",
+          "destino": "asma_induzida_por_salicilatos"
         }
       ]
     },
@@ -471,19 +481,9 @@
           "nome": "anticoagulantes"
         },
         {
-          "id": "trombolitico",
-          "label": "ClasseTerapeutica",
-          "nome": "trombolíticos"
-        },
-        {
           "id": "inibidor_da_agregacao_plaquetaria",
           "label": "ClasseTerapeutica",
           "nome": "inibidores da agregação plaquetária"
-        },
-        {
-          "id": "aine",
-          "label": "ClasseTerapeutica",
-          "nome": "anti-inflamatórios não-esteroides"
         },
         {
           "id": "isrs",
@@ -494,6 +494,16 @@
           "id": "digoxina",
           "label": "PrincipioAtivo",
           "nome": "digoxina"
+        },
+        {
+          "id": "trombolitico",
+          "label": "ClasseTerapeutica",
+          "nome": "trombolíticos"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "anti-inflamatórios não-esteroides"
         }
       ],
       "relacoes": [
@@ -518,28 +528,10 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "acido_acetilsalicilico",
-          "destino": "trombolitico",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do risco de sangramento"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "acido_acetilsalicilico",
           "destino": "inibidor_da_agregacao_plaquetaria",
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumento do risco de sangramento"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "acido_acetilsalicilico",
-          "destino": "aine",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do risco de úlceras e sangramento gastrintestinal"
           }
         },
         {
@@ -558,6 +550,24 @@
           "props": {
             "gravidade": "desconhecida",
             "efeito": "aumento da concentração plasmática de digoxina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "acido_acetilsalicilico",
+          "destino": "trombolitico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do risco de sangramento"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "acido_acetilsalicilico",
+          "destino": "aine",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do risco de úlceras e sangramento gastrintestinal"
           }
         }
       ]
@@ -588,11 +598,6 @@
           "nome": "diuréticos"
         },
         {
-          "id": "glicocorticoide",
-          "label": "ClasseTerapeutica",
-          "nome": "glicocorticoides sistêmicos"
-        },
-        {
           "id": "inibidor_da_eca",
           "label": "ClasseTerapeutica",
           "nome": "inibidores da enzima conversora de angiotensina"
@@ -601,6 +606,11 @@
           "id": "acido_valproico",
           "label": "PrincipioAtivo",
           "nome": "ácido valproico"
+        },
+        {
+          "id": "glicocorticoide",
+          "label": "ClasseTerapeutica",
+          "nome": "glicocorticoides sistêmicos"
         }
       ],
       "relacoes": [
@@ -634,15 +644,6 @@
         {
           "tipo": "INTERAGE_COM",
           "origem": "acido_acetilsalicilico",
-          "destino": "glicocorticoide",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "diminuição dos níveis de salicilato plasmático e risco de sobredose de salicilato após interrupção"
-          }
-        },
-        {
-          "tipo": "INTERAGE_COM",
-          "origem": "acido_acetilsalicilico",
           "destino": "inibidor_da_eca",
           "props": {
             "gravidade": "desconhecida",
@@ -657,6 +658,15 @@
             "gravidade": "desconhecida",
             "efeito": "aumento da toxicidade do ácido valproico"
           }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "acido_acetilsalicilico",
+          "destino": "glicocorticoide",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição dos níveis de salicilato plasmático e risco de sobredose de salicilato após interrupção"
+          }
         }
       ]
     },
@@ -665,6 +675,16 @@
       "tipo": "interacoes",
       "texto": "- Álcool Aumento do dano à mucosa gastrintestinal e prolongamento do tempo de sangramento devido a RESTRICTED efeitos aditivos do ácido acetilsalicílico e do álcool. - Uricosúricos como benzobromarona e probenecida Diminuição do efeito uricosúrico (competição pela eliminação de ácido úrico no túbulo renal).",
       "entidades": [
+        {
+          "id": "benzobromarona",
+          "label": "PrincipioAtivo",
+          "nome": "benzobromarona"
+        },
+        {
+          "id": "uricosurico",
+          "label": "ClasseTerapeutica",
+          "nome": "uricosúricos"
+        },
         {
           "id": "acido_acetilsalicilico",
           "label": "PrincipioAtivo",
@@ -676,16 +696,6 @@
           "nome": "álcool"
         },
         {
-          "id": "uricosurico",
-          "label": "ClasseTerapeutica",
-          "nome": "uricosúricos"
-        },
-        {
-          "id": "benzobromarona",
-          "label": "PrincipioAtivo",
-          "nome": "benzobromarona"
-        },
-        {
           "id": "probenecida",
           "label": "PrincipioAtivo",
           "nome": "probenecida"
@@ -693,13 +703,9 @@
       ],
       "relacoes": [
         {
-          "tipo": "INTERAGE_COM",
-          "origem": "acido_acetilsalicilico",
-          "destino": "alcool",
-          "props": {
-            "gravidade": "desconhecida",
-            "efeito": "aumento do dano à mucosa gastrintestinal e prolongamento do tempo de sangramento"
-          }
+          "tipo": "PERTENCE_A",
+          "origem": "benzobromarona",
+          "destino": "uricosurico"
         },
         {
           "tipo": "INTERAGE_COM",
@@ -711,9 +717,13 @@
           }
         },
         {
-          "tipo": "PERTENCE_A",
-          "origem": "benzobromarona",
-          "destino": "uricosurico"
+          "tipo": "INTERAGE_COM",
+          "origem": "acido_acetilsalicilico",
+          "destino": "alcool",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do dano à mucosa gastrintestinal e prolongamento do tempo de sangramento"
+          }
         },
         {
           "tipo": "PERTENCE_A",
@@ -738,19 +748,9 @@
           "nome": "dispepsia"
         },
         {
-          "id": "dor_gastrointestinal",
-          "label": "EfeitoAdverso",
-          "nome": "dor gastrintestinal"
-        },
-        {
           "id": "dor_abdominal",
           "label": "EfeitoAdverso",
           "nome": "dor abdominal"
-        },
-        {
-          "id": "inflamacao_gastrointestinal",
-          "label": "EfeitoAdverso",
-          "nome": "inflamação gastrintestinal"
         },
         {
           "id": "ulcera_gastrointestinal",
@@ -758,24 +758,9 @@
           "nome": "úlcera gastrintestinal"
         },
         {
-          "id": "ulcera_gastrointestinal_com_hemorragia_e_perfuracao",
-          "label": "EfeitoAdverso",
-          "nome": "úlcera gastrintestinal com hemorragia e perfuração"
-        },
-        {
           "id": "doenca_do_diafragma_intestinal",
           "label": "EfeitoAdverso",
           "nome": "doença do diafragma intestinal"
-        },
-        {
-          "id": "sangramento",
-          "label": "EfeitoAdverso",
-          "nome": "aumento do risco de sangramento"
-        },
-        {
-          "id": "hemorragia_intra_e_pos_operatoria",
-          "label": "EfeitoAdverso",
-          "nome": "hemorragia intra e pós-operatória"
         },
         {
           "id": "hematoma",
@@ -798,14 +783,39 @@
           "nome": "sangramento gengival"
         },
         {
-          "id": "hemorragia_gastrointestinal_grave",
-          "label": "EfeitoAdverso",
-          "nome": "hemorragia do trato gastrintestinal"
-        },
-        {
           "id": "hemorragia_cerebral",
           "label": "EfeitoAdverso",
           "nome": "hemorragia cerebral"
+        },
+        {
+          "id": "ulcera_gastrointestinal_com_hemorragia_e_perfuracao",
+          "label": "EfeitoAdverso",
+          "nome": "úlcera gastrintestinal com hemorragia e perfuração"
+        },
+        {
+          "id": "hemorragia_gastrintestinal",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia do trato gastrintestinal"
+        },
+        {
+          "id": "hemorragia_intra_e_pos_operatoria",
+          "label": "EfeitoAdverso",
+          "nome": "hemorragia intra e pós-operatória"
+        },
+        {
+          "id": "sangramento",
+          "label": "EfeitoAdverso",
+          "nome": "aumento do risco de sangramento"
+        },
+        {
+          "id": "dor_gastrointestinal",
+          "label": "EfeitoAdverso",
+          "nome": "dor gastrintestinal"
+        },
+        {
+          "id": "inflamacao_gastrointestinal",
+          "label": "EfeitoAdverso",
+          "nome": "inflamação gastrintestinal"
         }
       ],
       "relacoes": [
@@ -817,20 +827,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "dor_gastrointestinal"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
           "destino": "dor_abdominal"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "inflamacao_gastrointestinal",
-          "props": {
-            "frequencia": "rara"
-          }
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -843,28 +840,10 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "ulcera_gastrointestinal_com_hemorragia_e_perfuracao",
-          "props": {
-            "frequencia": "muito_rara"
-          }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
           "destino": "doenca_do_diafragma_intestinal",
           "props": {
             "frequencia": "desconhecida"
           }
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "sangramento"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "hemorragia_intra_e_pos_operatoria"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -889,7 +868,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "hemorragia_gastrointestinal_grave",
+          "destino": "hemorragia_cerebral",
           "props": {
             "frequencia": "rara"
           }
@@ -897,7 +876,40 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "hemorragia_cerebral",
+          "destino": "ulcera_gastrointestinal_com_hemorragia_e_perfuracao",
+          "props": {
+            "frequencia": "muito_rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "hemorragia_gastrintestinal",
+          "frequencia": "rara",
+          "gravidade": null,
+          "efeito": null,
+          "dose": null,
+          "confianca": 0.7
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "hemorragia_intra_e_pos_operatoria"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "sangramento"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "dor_gastrointestinal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "inflamacao_gastrointestinal",
           "props": {
             "frequencia": "rara"
           }
@@ -923,11 +935,6 @@
           "id": "anemia_por_deficiencia_de_ferro",
           "label": "EfeitoAdverso",
           "nome": "anemia por deficiência de ferro"
-        },
-        {
-          "id": "doenca_respiratoria_exacerbada_por_aspirina",
-          "label": "EfeitoAdverso",
-          "nome": "doença respiratória exacerbada por aspirina"
         },
         {
           "id": "rash_cutaneo",
@@ -985,9 +992,9 @@
           "nome": "disfunção hepática transitória"
         },
         {
-          "id": "aumento_das_transaminases",
+          "id": "tontura",
           "label": "EfeitoAdverso",
-          "nome": "aumento das transaminases hepáticas"
+          "nome": "tonturas"
         },
         {
           "id": "tinito",
@@ -995,9 +1002,14 @@
           "nome": "tinitos"
         },
         {
-          "id": "tontura",
+          "id": "doenca_respiratoria_exacerbada_por_aspirina",
           "label": "EfeitoAdverso",
-          "nome": "tonturas"
+          "nome": "doença respiratória exacerbada por aspirina"
+        },
+        {
+          "id": "aumento_das_transaminases",
+          "label": "EfeitoAdverso",
+          "nome": "aumento das transaminases hepáticas"
         }
       ],
       "relacoes": [
@@ -1010,11 +1022,6 @@
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
           "destino": "anemia_por_deficiencia_de_ferro"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "doenca_respiratoria_exacerbada_por_aspirina"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -1086,10 +1093,7 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "aumento_das_transaminases",
-          "props": {
-            "frequencia": "muito_rara"
-          }
+          "destino": "tontura"
         },
         {
           "tipo": "PODE_CAUSAR",
@@ -1099,7 +1103,15 @@
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
-          "destino": "tontura"
+          "destino": "doenca_respiratoria_exacerbada_por_aspirina"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "aumento_das_transaminases",
+          "props": {
+            "frequencia": "muito_rara"
+          }
         }
       ]
     },
@@ -1114,16 +1126,6 @@
           "nome": "Aspirina"
         },
         {
-          "id": "hemolise",
-          "label": "EfeitoAdverso",
-          "nome": "hemólise"
-        },
-        {
-          "id": "anemia_hemolitica",
-          "label": "EfeitoAdverso",
-          "nome": "anemia hemolítica"
-        },
-        {
           "id": "comprometimento_renal",
           "label": "EfeitoAdverso",
           "nome": "comprometimento renal"
@@ -1132,19 +1134,19 @@
           "id": "doenca_renal_aguda",
           "label": "EfeitoAdverso",
           "nome": "doença dos rins aguda"
+        },
+        {
+          "id": "anemia_hemolitica",
+          "label": "EfeitoAdverso",
+          "nome": "anemia hemolítica"
+        },
+        {
+          "id": "hemolise",
+          "label": "EfeitoAdverso",
+          "nome": "hemólise"
         }
       ],
       "relacoes": [
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "hemolise"
-        },
-        {
-          "tipo": "PODE_CAUSAR",
-          "origem": "aspirina",
-          "destino": "anemia_hemolitica"
-        },
         {
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
@@ -1154,6 +1156,16 @@
           "tipo": "PODE_CAUSAR",
           "origem": "aspirina",
           "destino": "doenca_renal_aguda"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "anemia_hemolitica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "aspirina",
+          "destino": "hemolise"
         }
       ]
     },
