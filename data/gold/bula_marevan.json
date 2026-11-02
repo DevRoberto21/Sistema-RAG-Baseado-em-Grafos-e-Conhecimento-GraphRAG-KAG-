@@ -1,6 +1,6 @@
 {
   "bula": "bula_marevan",
-  "anotador": null,
+  "anotador": "rascunho-claude (revisar)",
   "chunks": [
     {
       "id": "bula_marevan_indicacoes_0",
@@ -8,12 +8,63 @@
       "texto": "Marevan® é indicado para a prevenção primária e secundária do tromboembolismo venoso, na prevenção do embolismo sistêmico em pacientes com prótese de válvulas cardíacas ou fibrilação atrial e na prevenção do acidente vascular cerebral, do infarto agudo do miocárdio e da recorrência do infarto. Os anticoagulantes orais também estão indicados na prevenção do embolismo sistêmico em pacientes com doença valvular cardíaca.",
       "entidades": [
         {
+          "id": "tromboembolismo_venoso",
+          "label": "Condicao",
+          "nome": "Tromboembolismo venoso"
+        },
+        {
+          "id": "embolismo_sistemico",
+          "label": "Condicao",
+          "nome": "Embolismo sistêmico"
+        },
+        {
+          "id": "acidente_vascular_cerebral",
+          "label": "Condicao",
+          "nome": "Acidente vascular cerebral"
+        },
+        {
+          "id": "infarto_agudo_do_miocardio",
+          "label": "Condicao",
+          "nome": "Infarto agudo do miocárdio"
+        },
+        {
+          "id": "recorrencia_do_infarto",
+          "label": "Condicao",
+          "nome": "Recorrência do infarto"
+        },
+        {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "marevan",
+          "destino": "tromboembolismo_venoso"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "marevan",
+          "destino": "embolismo_sistemico"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "marevan",
+          "destino": "acidente_vascular_cerebral"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "marevan",
+          "destino": "infarto_agudo_do_miocardio"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "marevan",
+          "destino": "recorrencia_do_infarto"
+        }
+      ]
     },
     {
       "id": "bula_marevan_contraindicacoes_0",
@@ -21,12 +72,233 @@
       "texto": "• Durante as primeiras 24 horas antes ou após cirurgia ou parto. • Gravidez, especialmente durante o primeiro trimestre, devido à possibilidade de má-formação fetal. A administração a gestantes em estágios mais avançados está associada à hemorragia fetal e aumento na taxa de aborto. • Aborto incompleto. • Doenças hepáticas ou renais graves. • Hemorragias. • Hipertensão arterial grave não controlada. • Endocardite bacteriana. • Aneurisma cerebral ou aórtico. • Hemofilia. • Doença ulcerativa ativa do trato gastrointestinal. • Feridas ulcerativas abertas. • Hipersensibilidade a qualquer um dos componentes da fórmula. Este medicamento não deve ser usado por pessoas com síndrome de má-absorção de glicose-galactose. Gravidez Se administrado no primeiro trimestre da gravidez, Marevan® pode causar pontilhado ósseo no feto e anormalidades faciais e do sistema nervoso central, que também podem se desenvolver após administração no segundo e terceiro trimestres. A administração a gestante, em estágios mais avançados da gravidez, está associada à hemorragia fetal e aumento da taxa de aborto. Categoria X de risco na gravidez:",
       "entidades": [
         {
+          "id": "cirurgia",
+          "label": "Condicao",
+          "nome": "Cirurgia"
+        },
+        {
+          "id": "parto",
+          "label": "Condicao",
+          "nome": "Parto"
+        },
+        {
+          "id": "aborto_incompleto",
+          "label": "Condicao",
+          "nome": "Aborto incompleto"
+        },
+        {
+          "id": "doenca_hepatica_grave",
+          "label": "Condicao",
+          "nome": "Doença hepática grave"
+        },
+        {
+          "id": "doenca_renal_grave",
+          "label": "Condicao",
+          "nome": "Doença renal grave"
+        },
+        {
+          "id": "hemorragia",
+          "label": "Condicao",
+          "nome": "Hemorragia"
+        },
+        {
+          "id": "hipertensao_arterial_grave_nao_controlada",
+          "label": "Condicao",
+          "nome": "Hipertensão arterial grave não controlada"
+        },
+        {
+          "id": "endocardite_bacteriana",
+          "label": "Condicao",
+          "nome": "Endocardite bacteriana"
+        },
+        {
+          "id": "aneurisma_cerebral",
+          "label": "Condicao",
+          "nome": "Aneurisma cerebral"
+        },
+        {
+          "id": "aneurisma_aortico",
+          "label": "Condicao",
+          "nome": "Aneurisma aórtico"
+        },
+        {
+          "id": "hemofilia",
+          "label": "Condicao",
+          "nome": "Hemofilia"
+        },
+        {
+          "id": "doenca_ulcerativa_ativa_do_trato_gastrointestinal",
+          "label": "Condicao",
+          "nome": "Doença ulcerativa ativa do trato gastrointestinal"
+        },
+        {
+          "id": "feridas_ulcerativas_abertas",
+          "label": "Condicao",
+          "nome": "Feridas ulcerativas abertas"
+        },
+        {
+          "id": "hipersensibilidade_aos_componentes_da_formula",
+          "label": "Condicao",
+          "nome": "Hipersensibilidade aos componentes da fórmula"
+        },
+        {
+          "id": "sindrome_de_ma_absorcao_de_glicose_galactose",
+          "label": "Condicao",
+          "nome": "Síndrome de má-absorção de glicose-galactose"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
+        },
+        {
+          "id": "ma_formacao_fetal",
+          "label": "EfeitoAdverso",
+          "nome": "Má-formação fetal"
+        },
+        {
+          "id": "pontilhado_osseo_no_feto",
+          "label": "EfeitoAdverso",
+          "nome": "Pontilhado ósseo no feto"
+        },
+        {
+          "id": "anormalidades_faciais",
+          "label": "EfeitoAdverso",
+          "nome": "Anormalidades faciais"
+        },
+        {
+          "id": "anormalidades_do_sistema_nervoso_central",
+          "label": "EfeitoAdverso",
+          "nome": "Anormalidades do sistema nervoso central"
+        },
+        {
+          "id": "hemorragia_fetal",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia fetal"
+        },
+        {
+          "id": "aumento_da_taxa_de_aborto",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento da taxa de aborto"
+        },
+        {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "cirurgia"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "parto"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "aborto_incompleto"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "doenca_hepatica_grave"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "doenca_renal_grave"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "hemorragia"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "hipertensao_arterial_grave_nao_controlada"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "endocardite_bacteriana"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "aneurisma_cerebral"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "aneurisma_aortico"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "hemofilia"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "doenca_ulcerativa_ativa_do_trato_gastrointestinal"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "feridas_ulcerativas_abertas"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "hipersensibilidade_aos_componentes_da_formula"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "sindrome_de_ma_absorcao_de_glicose_galactose"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "gestante"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "ma_formacao_fetal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "pontilhado_osseo_no_feto"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "anormalidades_faciais"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "anormalidades_do_sistema_nervoso_central"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_fetal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "aumento_da_taxa_de_aborto"
+        }
+      ]
     },
     {
       "id": "bula_marevan_contraindicacoes_1",
@@ -34,12 +306,33 @@
       "texto": "Em estudos em animais e mulheres grávidas, o fármaco provocou anomalias fetais, havendo clara evidência de risco para o feto que é maior do que qualquer benefício possível para a paciente. Este medicamento não deve ser utilizado por mulheres grávidas ou que possam ficar grávidas durante o tratamento. A varfarina é reconhecidamente teratogênica.",
       "entidades": [
         {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
+        },
+        {
+          "id": "anomalias_fetais",
+          "label": "EfeitoAdverso",
+          "nome": "Anomalias fetais"
+        },
+        {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "gestante"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "anomalias_fetais"
+        }
+      ]
     },
     {
       "id": "bula_marevan_advertencias_0",
@@ -47,24 +340,29 @@
       "texto": "• Marevan® não deve ser administrado a pacientes que apresentem sangramento ativo. Em geral, não deve ser prescrito a pacientes com risco de hemorragia, embora possa ser usado com extrema precaução. • Os idosos e pacientes com deficiência de vitamina K requerem cuidado especial, assim como aqueles com hipertireoidismo. • Se houver interação medicamentosa com outro fármaco e risco de hemorragia grave, um deles deve ser suspenso. • Em caso de suspeita de alteração do efeito do fármaco, a atividade anticoagulante deve ser cuidadosamente monitorada, a fim de se aumentar ou diminuir a sua dose, se necessário. O período crítico é aquele em que pacientes estabilizados com um anticoagulante iniciam o tratamento com um fármaco interagente ou quando se retira o fármaco interagente em pacientes antes estabilizados com a interação medicamentosa. • Em caso de perda ou ganho de peso, o ajuste de dosagem deve ser considerado. Concentração 2,5mg - Atenção: Contém o corante amarelo quinoleína. Atenção: Contém 86,72mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Concentração 5mg - Atenção: Contém o corante vermelho de ponceau. Atenção:",
       "entidades": [
         {
-          "id": "marevan",
-          "label": "Medicamento",
-          "nome": "Marevan"
-        }
-      ],
-      "relacoes": []
-    },
-    {
-      "id": "bula_marevan_advertencias_1",
-      "tipo": "advertencias",
-      "texto": "Contém 85,50mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Concentração 7,5mg - Atenção: Contém o corante azul FDC nº1. Atenção: Contém 82,33mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Idosos A administração de varfarina em idosos deve ser realizada com muita cautela e monitoramento frequente. Lactação Com base na publicação de dados de quinze mulheres lactantes, a varfarina não foi detectada no leite humano. Dentre os quinze lactentes, seis apresentaram tempo de protombina dentro da faixa esperada. No entanto, o tempo de protombina não foi alcançado nos outros nove. Os lactentes devem ser monitorados quanto ao aparecimento de hematomas e sangramentos. Os efeitos em bebês prematuros não foram avaliados. Devem ser tomadas precauções quando Marevan® for administrado a mulheres lactantes. O uso deste medicamento no período da lactação depende da avaliação e acompanhamento do seu médico ou cirurgião-dentista.",
-      "entidades": [
+          "id": "sangramento_ativo",
+          "label": "Condicao",
+          "nome": "Sangramento ativo"
+        },
         {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "marevan",
+          "destino": "sangramento_ativo"
+        }
+      ]
+    },
+    {
+      "id": "bula_marevan_advertencias_1",
+      "tipo": "advertencias",
+      "texto": "Contém 85,50mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Concentração 7,5mg - Atenção: Contém o corante azul FDC nº1. Atenção: Contém 82,33mg de lactose (tipo de açúcar) abaixo de 0,25g/unidade farmacotécnica ou unidade de medida. Idosos A administração de varfarina em idosos deve ser realizada com muita cautela e monitoramento frequente. Lactação Com base na publicação de dados de quinze mulheres lactantes, a varfarina não foi detectada no leite humano. Dentre os quinze lactentes, seis apresentaram tempo de protombina dentro da faixa esperada. No entanto, o tempo de protombina não foi alcançado nos outros nove. Os lactentes devem ser monitorados quanto ao aparecimento de hematomas e sangramentos. Os efeitos em bebês prematuros não foram avaliados. Devem ser tomadas precauções quando Marevan® for administrado a mulheres lactantes. O uso deste medicamento no período da lactação depende da avaliação e acompanhamento do seu médico ou cirurgião-dentista.",
+      "entidades": [],
       "relacoes": []
     },
     {
@@ -73,12 +371,850 @@
       "texto": "Interação medicamento-medicamento Deve-se ter cuidado no uso em conjunto de qualquer fármaco em pacientes recebendo tratamento com anticoagulante oral. • A atividade da varfarina pode ser potencializada por esteroides anabólicos (como: etilestranol, metandrostenolona, noretrandolona), amiodarona, amitriptilina/nortriptilina, azapropazona, aztreonam, benzafibrato, cefamandol, cloranfenicol, hidrato de coral, cimetidina, ciprofloxacino, clofibrato, cotrimoxazol, danazol, destropropoxifeno, destrotiroxina, dipiridamol, eritromicina, neomicina, feprazona, fluconazol, glucagon, metronidazol, miconazol, oxifenilbutazona, fenformina, fenilbutazona, feniramidol, quinidina, salicilatos, tolbutamida, sulfonamidas (ex: sulfafenazol, sulfinpirazona), tamoxifeno, triclofos, diflunisal, flurbiprofeno, indometacina, ácido mefenâmico, piroxicam, sulindaco e, possivelmente, outros analgésicos anti-inflamatórios, cetoconazol, ácido nalidíxico, norfloxacino, tetraciclinas e outros antibióticos de largo espectro, alopurinol, dissulfiram, metilfenidato, paracetamol, fármacos para tratamento de disfunções da tireoide e qualquer fármaco potencialmente tóxico ao fígado.",
       "entidades": [
         {
-          "id": "marevan",
-          "label": "Medicamento",
-          "nome": "Marevan"
+          "id": "varfarina",
+          "label": "PrincipioAtivo",
+          "nome": "Varfarina"
+        },
+        {
+          "id": "esteroide_anabolico",
+          "label": "ClasseTerapeutica",
+          "nome": "Esteroide anabólico"
+        },
+        {
+          "id": "etilestranol",
+          "label": "PrincipioAtivo",
+          "nome": "Etilestranol"
+        },
+        {
+          "id": "metandrostenolona",
+          "label": "PrincipioAtivo",
+          "nome": "Metandrostenolona"
+        },
+        {
+          "id": "noretrandolona",
+          "label": "PrincipioAtivo",
+          "nome": "Noretrandolona"
+        },
+        {
+          "id": "sulfonamida",
+          "label": "ClasseTerapeutica",
+          "nome": "Sulfonamida"
+        },
+        {
+          "id": "sulfafenazol",
+          "label": "PrincipioAtivo",
+          "nome": "Sulfafenazol"
+        },
+        {
+          "id": "sulfinpirazona",
+          "label": "PrincipioAtivo",
+          "nome": "Sulfinpirazona"
+        },
+        {
+          "id": "amiodarona",
+          "label": "PrincipioAtivo",
+          "nome": "Amiodarona"
+        },
+        {
+          "id": "amitriptilina",
+          "label": "PrincipioAtivo",
+          "nome": "Amitriptilina"
+        },
+        {
+          "id": "nortriptilina",
+          "label": "PrincipioAtivo",
+          "nome": "Nortriptilina"
+        },
+        {
+          "id": "azapropazona",
+          "label": "PrincipioAtivo",
+          "nome": "Azapropazona"
+        },
+        {
+          "id": "aztreonam",
+          "label": "PrincipioAtivo",
+          "nome": "Aztreonam"
+        },
+        {
+          "id": "benzafibrato",
+          "label": "PrincipioAtivo",
+          "nome": "Benzafibrato"
+        },
+        {
+          "id": "cefamandol",
+          "label": "PrincipioAtivo",
+          "nome": "Cefamandol"
+        },
+        {
+          "id": "cloranfenicol",
+          "label": "PrincipioAtivo",
+          "nome": "Cloranfenicol"
+        },
+        {
+          "id": "hidrato_de_coral",
+          "label": "PrincipioAtivo",
+          "nome": "Hidrato de coral"
+        },
+        {
+          "id": "cimetidina",
+          "label": "PrincipioAtivo",
+          "nome": "Cimetidina"
+        },
+        {
+          "id": "ciprofloxacino",
+          "label": "PrincipioAtivo",
+          "nome": "Ciprofloxacino"
+        },
+        {
+          "id": "clofibrato",
+          "label": "PrincipioAtivo",
+          "nome": "Clofibrato"
+        },
+        {
+          "id": "cotrimoxazol",
+          "label": "PrincipioAtivo",
+          "nome": "Cotrimoxazol"
+        },
+        {
+          "id": "danazol",
+          "label": "PrincipioAtivo",
+          "nome": "Danazol"
+        },
+        {
+          "id": "destropropoxifeno",
+          "label": "PrincipioAtivo",
+          "nome": "Destropropoxifeno"
+        },
+        {
+          "id": "destrotiroxina",
+          "label": "PrincipioAtivo",
+          "nome": "Destrotiroxina"
+        },
+        {
+          "id": "dipiridamol",
+          "label": "PrincipioAtivo",
+          "nome": "Dipiridamol"
+        },
+        {
+          "id": "eritromicina",
+          "label": "PrincipioAtivo",
+          "nome": "Eritromicina"
+        },
+        {
+          "id": "neomicina",
+          "label": "PrincipioAtivo",
+          "nome": "Neomicina"
+        },
+        {
+          "id": "feprazona",
+          "label": "PrincipioAtivo",
+          "nome": "Feprazona"
+        },
+        {
+          "id": "fluconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Fluconazol"
+        },
+        {
+          "id": "glucagon",
+          "label": "PrincipioAtivo",
+          "nome": "Glucagon"
+        },
+        {
+          "id": "metronidazol",
+          "label": "PrincipioAtivo",
+          "nome": "Metronidazol"
+        },
+        {
+          "id": "miconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Miconazol"
+        },
+        {
+          "id": "oxifenilbutazona",
+          "label": "PrincipioAtivo",
+          "nome": "Oxifenilbutazona"
+        },
+        {
+          "id": "fenformina",
+          "label": "PrincipioAtivo",
+          "nome": "Fenformina"
+        },
+        {
+          "id": "fenilbutazona",
+          "label": "PrincipioAtivo",
+          "nome": "Fenilbutazona"
+        },
+        {
+          "id": "feniramidol",
+          "label": "PrincipioAtivo",
+          "nome": "Feniramidol"
+        },
+        {
+          "id": "quinidina",
+          "label": "PrincipioAtivo",
+          "nome": "Quinidina"
+        },
+        {
+          "id": "tolbutamida",
+          "label": "PrincipioAtivo",
+          "nome": "Tolbutamida"
+        },
+        {
+          "id": "tamoxifeno",
+          "label": "PrincipioAtivo",
+          "nome": "Tamoxifeno"
+        },
+        {
+          "id": "triclofos",
+          "label": "PrincipioAtivo",
+          "nome": "Triclofos"
+        },
+        {
+          "id": "diflunisal",
+          "label": "PrincipioAtivo",
+          "nome": "Diflunisal"
+        },
+        {
+          "id": "flurbiprofeno",
+          "label": "PrincipioAtivo",
+          "nome": "Flurbiprofeno"
+        },
+        {
+          "id": "indometacina",
+          "label": "PrincipioAtivo",
+          "nome": "Indometacina"
+        },
+        {
+          "id": "acido_mefenamico",
+          "label": "PrincipioAtivo",
+          "nome": "Ácido mefenâmico"
+        },
+        {
+          "id": "piroxicam",
+          "label": "PrincipioAtivo",
+          "nome": "Piroxicam"
+        },
+        {
+          "id": "sulindaco",
+          "label": "PrincipioAtivo",
+          "nome": "Sulindaco"
+        },
+        {
+          "id": "cetoconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Cetoconazol"
+        },
+        {
+          "id": "acido_nalidixico",
+          "label": "PrincipioAtivo",
+          "nome": "Ácido nalidíxico"
+        },
+        {
+          "id": "norfloxacino",
+          "label": "PrincipioAtivo",
+          "nome": "Norfloxacino"
+        },
+        {
+          "id": "alopurinol",
+          "label": "PrincipioAtivo",
+          "nome": "Alopurinol"
+        },
+        {
+          "id": "dissulfiram",
+          "label": "PrincipioAtivo",
+          "nome": "Dissulfiram"
+        },
+        {
+          "id": "metilfenidato",
+          "label": "PrincipioAtivo",
+          "nome": "Metilfenidato"
+        },
+        {
+          "id": "paracetamol",
+          "label": "PrincipioAtivo",
+          "nome": "Paracetamol"
+        },
+        {
+          "id": "salicilato",
+          "label": "ClasseTerapeutica",
+          "nome": "Salicilato"
+        },
+        {
+          "id": "analgesico_anti_inflamatorio",
+          "label": "ClasseTerapeutica",
+          "nome": "Analgésico anti-inflamatório"
+        },
+        {
+          "id": "tetraciclina",
+          "label": "ClasseTerapeutica",
+          "nome": "Tetraciclina"
+        },
+        {
+          "id": "antibiotico_de_largo_espectro",
+          "label": "ClasseTerapeutica",
+          "nome": "Antibiótico de largo espectro"
+        },
+        {
+          "id": "farmaco_para_tratamento_de_disfuncoes_da_tireoide",
+          "label": "ClasseTerapeutica",
+          "nome": "Fármaco para tratamento de disfunções da tireoide"
+        },
+        {
+          "id": "farmaco_potencialmente_toxico_ao_figado",
+          "label": "ClasseTerapeutica",
+          "nome": "Fármaco potencialmente tóxico ao fígado"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "esteroide_anabolico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "etilestranol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "etilestranol",
+          "destino": "esteroide_anabolico"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "metandrostenolona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "metandrostenolona",
+          "destino": "esteroide_anabolico"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "noretrandolona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "noretrandolona",
+          "destino": "esteroide_anabolico"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "sulfonamida",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "sulfafenazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "sulfafenazol",
+          "destino": "sulfonamida"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "sulfinpirazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "PERTENCE_A",
+          "origem": "sulfinpirazona",
+          "destino": "sulfonamida"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "amiodarona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "amitriptilina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "nortriptilina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "azapropazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "aztreonam",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "benzafibrato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "cefamandol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "cloranfenicol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "hidrato_de_coral",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "cimetidina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "ciprofloxacino",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "clofibrato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "cotrimoxazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "danazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "destropropoxifeno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "destrotiroxina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "dipiridamol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "eritromicina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "neomicina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "feprazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "fluconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "glucagon",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "metronidazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "miconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "oxifenilbutazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "fenformina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "fenilbutazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "feniramidol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "quinidina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "tolbutamida",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "tamoxifeno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "triclofos",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "diflunisal",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "flurbiprofeno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "indometacina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "acido_mefenamico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "piroxicam",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "sulindaco",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "cetoconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "acido_nalidixico",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "norfloxacino",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "alopurinol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "dissulfiram",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "metilfenidato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "paracetamol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "salicilato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "analgesico_anti_inflamatorio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "tetraciclina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "antibiotico_de_largo_espectro",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "farmaco_para_tratamento_de_disfuncoes_da_tireoide",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "farmaco_potencialmente_toxico_ao_figado",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização da atividade da varfarina"
+          }
+        }
+      ]
     },
     {
       "id": "bula_marevan_interacoes_1",
@@ -86,12 +1222,251 @@
       "texto": "• Mulheres em uso de varfarina devem consultar o médico antes do uso concomitante de creme vaginal ou supositório de miconazol, pois pode haver potencialização do efeito anticoagulante. • Tanto a potencialização quanto a inibição do efeito anticoagulante têm sido relatadas com fenitoína, ACTH e corticosteroides. • A colestiramina e o sulcralfato acarretam diminuição da atividade da varfarina. A colestiramina pode também diminuir a absorção de vitamina K sem, no entanto, aumentar a atividade anticoagulante da varfarina. O efeito anticoagulante pode ser diminuído pela administração de vitamina K, inclusive como constituinte de alguns alimentos, como saladas verdes. • A atividade anticoagulante da varfarina pode ser inibida por alguns fármacos, tais como: aminoglutetimida, barbiturato, carbamazepina, etclorvinol, glutatimida, griseofulvina, dicloralfenazona, primidona, rifampicina e contraceptivos orais. Em caso de suspeita de dengue, ou quando associado a outros medicamentos que aumentem o efeito hemorrágico, a prescrição deste medicamento ou a manutenção do tratamento com ele deve ser reavaliada, devido a seu potencial hemorrágico.",
       "entidades": [
         {
-          "id": "marevan",
-          "label": "Medicamento",
-          "nome": "Marevan"
+          "id": "varfarina",
+          "label": "PrincipioAtivo",
+          "nome": "Varfarina"
+        },
+        {
+          "id": "miconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Miconazol"
+        },
+        {
+          "id": "fenitoina",
+          "label": "PrincipioAtivo",
+          "nome": "Fenitoína"
+        },
+        {
+          "id": "acth",
+          "label": "PrincipioAtivo",
+          "nome": "ACTH"
+        },
+        {
+          "id": "corticosteroide",
+          "label": "ClasseTerapeutica",
+          "nome": "Corticosteroide"
+        },
+        {
+          "id": "colestiramina",
+          "label": "PrincipioAtivo",
+          "nome": "Colestiramina"
+        },
+        {
+          "id": "sucralfato",
+          "label": "PrincipioAtivo",
+          "nome": "Sucralfato"
+        },
+        {
+          "id": "vitamina_k",
+          "label": "PrincipioAtivo",
+          "nome": "Vitamina K"
+        },
+        {
+          "id": "aminoglutetimida",
+          "label": "PrincipioAtivo",
+          "nome": "Aminoglutetimida"
+        },
+        {
+          "id": "carbamazepina",
+          "label": "PrincipioAtivo",
+          "nome": "Carbamazepina"
+        },
+        {
+          "id": "etclorvinol",
+          "label": "PrincipioAtivo",
+          "nome": "Etclorvinol"
+        },
+        {
+          "id": "glutetimida",
+          "label": "PrincipioAtivo",
+          "nome": "Glutetimida"
+        },
+        {
+          "id": "griseofulvina",
+          "label": "PrincipioAtivo",
+          "nome": "Griseofulvina"
+        },
+        {
+          "id": "dicloralfenazona",
+          "label": "PrincipioAtivo",
+          "nome": "Dicloralfenazona"
+        },
+        {
+          "id": "primidona",
+          "label": "PrincipioAtivo",
+          "nome": "Primidona"
+        },
+        {
+          "id": "rifampicina",
+          "label": "PrincipioAtivo",
+          "nome": "Rifampicina"
+        },
+        {
+          "id": "barbiturato",
+          "label": "ClasseTerapeutica",
+          "nome": "Barbiturato"
+        },
+        {
+          "id": "contraceptivo_oral",
+          "label": "ClasseTerapeutica",
+          "nome": "Contraceptivo oral"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "miconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização do efeito anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "fenitoina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização ou inibição do efeito anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "acth",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização ou inibição do efeito anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "corticosteroide",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "potencialização ou inibição do efeito anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "colestiramina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "sucralfato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição da atividade da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "vitamina_k",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "diminuição do efeito anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "aminoglutetimida",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "carbamazepina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "etclorvinol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "glutetimida",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "griseofulvina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "dicloralfenazona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "primidona",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "rifampicina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "barbiturato",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "contraceptivo_oral",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "inibição da atividade anticoagulante da varfarina"
+          }
+        }
+      ]
     },
     {
       "id": "bula_marevan_interacoes_2",
@@ -99,12 +1474,41 @@
       "texto": "Interação medicamento-substância A atividade anticoagulante pode também ser aumentada com grandes quantidades ou ingestão crônica de álcool, particularmente em pacientes com insuficiência hepática. Interação medicamento-alimento Alimentos contendo vitamina K alteram a eficácia anticoagulante. Interação medicamento-exame laboratorial Com exceção dos exames relacionados aos fatores da coagulação dependentes da vitamina K, que são deprimidos pela varfarina, não há referência de interferência significativa com outros exames laboratoriais.",
       "entidades": [
         {
-          "id": "marevan",
-          "label": "Medicamento",
-          "nome": "Marevan"
+          "id": "varfarina",
+          "label": "PrincipioAtivo",
+          "nome": "Varfarina"
+        },
+        {
+          "id": "alcool",
+          "label": "PrincipioAtivo",
+          "nome": "Álcool"
+        },
+        {
+          "id": "vitamina_k",
+          "label": "PrincipioAtivo",
+          "nome": "Vitamina K"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "alcool",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento da atividade anticoagulante"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "varfarina",
+          "destino": "vitamina_k",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "alteração da eficácia anticoagulante"
+          }
+        }
+      ]
     },
     {
       "id": "bula_marevan_reacoes_adversas_0",
@@ -112,12 +1516,63 @@
       "texto": "Hemorragia de menor ou maior intensidade pode ocorrer durante a terapia com Marevan®, em qualquer tecido ou órgão, manifestando-se como sangramento externo ou interno, associado a sintomas e complicações dependentes do órgão ou sistema afetado. Pode ocorrer também necrose da pele e de outros tecidos, êmbolos aterotrombóticos sistêmicos e microêmbolos de colesterol. Algumas complicações hemorrágicas podem apresentar sinais e sintomas que não são imediatamente identificados como resultantes da hemorragia. Estas reações adversas estão marcadas na tabela abaixo com um asterisco (*).",
       "entidades": [
         {
+          "id": "hemorragia",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia"
+        },
+        {
+          "id": "necrose_da_pele",
+          "label": "EfeitoAdverso",
+          "nome": "Necrose da pele"
+        },
+        {
+          "id": "necrose_de_outros_tecidos",
+          "label": "EfeitoAdverso",
+          "nome": "Necrose de outros tecidos"
+        },
+        {
+          "id": "embolos_aterotromboticos_sistemicos",
+          "label": "EfeitoAdverso",
+          "nome": "Êmbolos aterotrombóticos sistêmicos"
+        },
+        {
+          "id": "microembolos_de_colesterol",
+          "label": "EfeitoAdverso",
+          "nome": "Microêmbolos de colesterol"
+        },
+        {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "necrose_da_pele"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "necrose_de_outros_tecidos"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "embolos_aterotromboticos_sistemicos"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "microembolos_de_colesterol"
+        }
+      ]
     },
     {
       "id": "bula_marevan_reacoes_adversas_1",
@@ -125,12 +1580,493 @@
       "texto": "Classe de sistemas de Órgãos Termo do MedDRA Desordens do sistema linfático e sanguíneo Anemia* Desordens cardíacas Dor no peito*, hemorragia pericárdica Desordens endócrinas Hemorragia da suprarrenal Desordens oculares Hemorragia ocular Desordens gastrintestinais Distensão abdominal, dor abdominal*, diarreia, disgeusia, disfagia*, flatulência, sangramento gengival, hematêmese, hematoquezia, melena, hemorragia retal, hemorragia retroperitonial, vômito Desordens gerais e condições no local de Astenia*, calafrios, fadiga*, mal-estar*, dor*, administração palidez*, inchaço* Desordens hepatobiliares Hemorragia hepática, hepatite Desordens do sistema imune Reação anafilática, hipersensibilidade Sistema musculoesquelético, tecido conjuntivo e Artralgia*, hemartrose, mialgia* desordens ósseas Desordens do sistema nervoso Tonturas*, cefaleias*, hemorragia intracraniana, parestesia*, paralisia*, hematoma espinhal Desordens psiquiátricas Letargia Desordens urinárias Hematúria Desordens do sistema reprodutor e mama Menorragia, hemorragia vaginal Desordens respiratórias, torácicas e mediastinais Epistaxe, dispneia*, hemoptise, hemotórax, hemorragia pulmonar alveolar, calcificação pulmonar",
       "entidades": [
         {
+          "id": "anemia",
+          "label": "EfeitoAdverso",
+          "nome": "Anemia"
+        },
+        {
+          "id": "dor_no_peito",
+          "label": "EfeitoAdverso",
+          "nome": "Dor no peito"
+        },
+        {
+          "id": "hemorragia_pericardica",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia pericárdica"
+        },
+        {
+          "id": "hemorragia_da_suprarrenal",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia da suprarrenal"
+        },
+        {
+          "id": "hemorragia_ocular",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia ocular"
+        },
+        {
+          "id": "distensao_abdominal",
+          "label": "EfeitoAdverso",
+          "nome": "Distensão abdominal"
+        },
+        {
+          "id": "dor_abdominal",
+          "label": "EfeitoAdverso",
+          "nome": "Dor abdominal"
+        },
+        {
+          "id": "diarreia",
+          "label": "EfeitoAdverso",
+          "nome": "Diarreia"
+        },
+        {
+          "id": "disgeusia",
+          "label": "EfeitoAdverso",
+          "nome": "Disgeusia"
+        },
+        {
+          "id": "disfagia",
+          "label": "EfeitoAdverso",
+          "nome": "Disfagia"
+        },
+        {
+          "id": "flatulencia",
+          "label": "EfeitoAdverso",
+          "nome": "Flatulência"
+        },
+        {
+          "id": "sangramento_gengival",
+          "label": "EfeitoAdverso",
+          "nome": "Sangramento gengival"
+        },
+        {
+          "id": "hematemese",
+          "label": "EfeitoAdverso",
+          "nome": "Hematêmese"
+        },
+        {
+          "id": "hematoquezia",
+          "label": "EfeitoAdverso",
+          "nome": "Hematoquezia"
+        },
+        {
+          "id": "melena",
+          "label": "EfeitoAdverso",
+          "nome": "Melena"
+        },
+        {
+          "id": "hemorragia_retal",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia retal"
+        },
+        {
+          "id": "hemorragia_retroperitonial",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia retroperitonial"
+        },
+        {
+          "id": "vomito",
+          "label": "EfeitoAdverso",
+          "nome": "Vômito"
+        },
+        {
+          "id": "astenia",
+          "label": "EfeitoAdverso",
+          "nome": "Astenia"
+        },
+        {
+          "id": "calafrios",
+          "label": "EfeitoAdverso",
+          "nome": "Calafrios"
+        },
+        {
+          "id": "fadiga",
+          "label": "EfeitoAdverso",
+          "nome": "Fadiga"
+        },
+        {
+          "id": "mal_estar",
+          "label": "EfeitoAdverso",
+          "nome": "Mal-estar"
+        },
+        {
+          "id": "dor",
+          "label": "EfeitoAdverso",
+          "nome": "Dor"
+        },
+        {
+          "id": "palidez",
+          "label": "EfeitoAdverso",
+          "nome": "Palidez"
+        },
+        {
+          "id": "inchaco",
+          "label": "EfeitoAdverso",
+          "nome": "Inchaço"
+        },
+        {
+          "id": "hemorragia_hepatica",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia hepática"
+        },
+        {
+          "id": "hepatite",
+          "label": "EfeitoAdverso",
+          "nome": "Hepatite"
+        },
+        {
+          "id": "reacao_anafilatica",
+          "label": "EfeitoAdverso",
+          "nome": "Reação anafilática"
+        },
+        {
+          "id": "hipersensibilidade",
+          "label": "EfeitoAdverso",
+          "nome": "Hipersensibilidade"
+        },
+        {
+          "id": "artralgia",
+          "label": "EfeitoAdverso",
+          "nome": "Artralgia"
+        },
+        {
+          "id": "hemartrose",
+          "label": "EfeitoAdverso",
+          "nome": "Hemartrose"
+        },
+        {
+          "id": "mialgia",
+          "label": "EfeitoAdverso",
+          "nome": "Mialgia"
+        },
+        {
+          "id": "tonturas",
+          "label": "EfeitoAdverso",
+          "nome": "Tonturas"
+        },
+        {
+          "id": "cefaleias",
+          "label": "EfeitoAdverso",
+          "nome": "Cefaleias"
+        },
+        {
+          "id": "hemorragia_intracraniana",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia intracraniana"
+        },
+        {
+          "id": "parestesia",
+          "label": "EfeitoAdverso",
+          "nome": "Parestesia"
+        },
+        {
+          "id": "paralisia",
+          "label": "EfeitoAdverso",
+          "nome": "Paralisia"
+        },
+        {
+          "id": "hematoma_espinhal",
+          "label": "EfeitoAdverso",
+          "nome": "Hematoma espinhal"
+        },
+        {
+          "id": "letargia",
+          "label": "EfeitoAdverso",
+          "nome": "Letargia"
+        },
+        {
+          "id": "hematuria",
+          "label": "EfeitoAdverso",
+          "nome": "Hematúria"
+        },
+        {
+          "id": "menorragia",
+          "label": "EfeitoAdverso",
+          "nome": "Menorragia"
+        },
+        {
+          "id": "hemorragia_vaginal",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia vaginal"
+        },
+        {
+          "id": "epistaxe",
+          "label": "EfeitoAdverso",
+          "nome": "Epistaxe"
+        },
+        {
+          "id": "dispneia",
+          "label": "EfeitoAdverso",
+          "nome": "Dispneia"
+        },
+        {
+          "id": "hemoptise",
+          "label": "EfeitoAdverso",
+          "nome": "Hemoptise"
+        },
+        {
+          "id": "hemotorax",
+          "label": "EfeitoAdverso",
+          "nome": "Hemotórax"
+        },
+        {
+          "id": "hemorragia_pulmonar_alveolar",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia pulmonar alveolar"
+        },
+        {
+          "id": "calcificacao_pulmonar",
+          "label": "EfeitoAdverso",
+          "nome": "Calcificação pulmonar"
+        },
+        {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "anemia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dor_no_peito"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_pericardica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_da_suprarrenal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_ocular"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "distensao_abdominal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dor_abdominal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "diarreia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "disgeusia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "disfagia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "flatulencia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "sangramento_gengival"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hematemese"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hematoquezia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "melena"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_retal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_retroperitonial"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "vomito"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "astenia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "calafrios"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "fadiga"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "mal_estar"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dor"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "palidez"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "inchaco"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_hepatica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hepatite"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "reacao_anafilatica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hipersensibilidade"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "artralgia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemartrose"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "mialgia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "tonturas"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "cefaleias"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_intracraniana"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "parestesia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "paralisia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hematoma_espinhal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "letargia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hematuria"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "menorragia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_vaginal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "epistaxe"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dispneia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemoptise"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemotorax"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia_pulmonar_alveolar"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "calcificacao_pulmonar"
+        }
+      ]
     },
     {
       "id": "bula_marevan_reacoes_adversas_2",
@@ -138,24 +2074,189 @@
       "texto": "Desordens do tecido subcutâneo e pele Alopecia, dermatite, dermatite bolhosa, petéquias, prurido, erupção cutânea, necrose da pele, urticária Desordens vasculares Síndrome dos dedos roxos*, embolismo arterial, embolia gordurosa, hemorragia, hipotensão*, necrose, choque*, síncope*, vasculite (*) sintomas ou condições médicas resultantes de complicações hemorrágicas. Em casos de eventos adversos, notifique pelo Sistema VigiMed, disponível no Portal da Anvisa.",
       "entidades": [
         {
-          "id": "marevan",
-          "label": "Medicamento",
-          "nome": "Marevan"
-        }
-      ],
-      "relacoes": []
-    },
-    {
-      "id": "bula_marevan_posologia_0",
-      "tipo": "posologia",
-      "texto": "A posologia de Marevan® deve ser individualizada para cada paciente, de acordo com a resposta de TP/RNI (valores obtidos através de exames de sangue) do paciente ao medicamento. • Dosagem inicial: recomenda-se que a terapia com Marevan® seja iniciada com uma dose de 2,5 mg a 5 mg ao dia, com ajustes posológicos baseados nos resultados de TP/RNI. • Manutenção: na maioria dos pacientes, a resposta é satisfatoriamente mantida com uma dose de 2,5 a 10 mg ao dia. • Dose perdida: o efeito anticoagulante de Marevan® persiste por mais de 24 horas. Caso o paciente esqueça de tomar a dose prescrita de Marevan® no horário marcado, esta deve ser tomada, assim que possível, no mesmo dia. No dia seguinte, a dose esquecida não deve ser adicionalmente ingerida e o tratamento deve ser seguido normalmente. A dose nunca deve ser duplicada. A duração da terapia para cada paciente deve ser individualizada. De modo geral, a terapia com anticoagulante deve ser continuada até que o risco de trombose e embolia seja eliminado. Este medicamento não deve ser partido, aberto ou mastigado.",
-      "entidades": [
+          "id": "alopecia",
+          "label": "EfeitoAdverso",
+          "nome": "Alopecia"
+        },
+        {
+          "id": "dermatite",
+          "label": "EfeitoAdverso",
+          "nome": "Dermatite"
+        },
+        {
+          "id": "dermatite_bolhosa",
+          "label": "EfeitoAdverso",
+          "nome": "Dermatite bolhosa"
+        },
+        {
+          "id": "petequias",
+          "label": "EfeitoAdverso",
+          "nome": "Petéquias"
+        },
+        {
+          "id": "prurido",
+          "label": "EfeitoAdverso",
+          "nome": "Prurido"
+        },
+        {
+          "id": "erupcao_cutanea",
+          "label": "EfeitoAdverso",
+          "nome": "Erupção cutânea"
+        },
+        {
+          "id": "necrose_da_pele",
+          "label": "EfeitoAdverso",
+          "nome": "Necrose da pele"
+        },
+        {
+          "id": "urticaria",
+          "label": "EfeitoAdverso",
+          "nome": "Urticária"
+        },
+        {
+          "id": "sindrome_dos_dedos_roxos",
+          "label": "EfeitoAdverso",
+          "nome": "Síndrome dos dedos roxos"
+        },
+        {
+          "id": "embolismo_arterial",
+          "label": "EfeitoAdverso",
+          "nome": "Embolismo arterial"
+        },
+        {
+          "id": "embolia_gordurosa",
+          "label": "EfeitoAdverso",
+          "nome": "Embolia gordurosa"
+        },
+        {
+          "id": "hemorragia",
+          "label": "EfeitoAdverso",
+          "nome": "Hemorragia"
+        },
+        {
+          "id": "hipotensao",
+          "label": "EfeitoAdverso",
+          "nome": "Hipotensão"
+        },
+        {
+          "id": "necrose",
+          "label": "EfeitoAdverso",
+          "nome": "Necrose"
+        },
+        {
+          "id": "choque",
+          "label": "EfeitoAdverso",
+          "nome": "Choque"
+        },
+        {
+          "id": "sincope",
+          "label": "EfeitoAdverso",
+          "nome": "Síncope"
+        },
+        {
+          "id": "vasculite",
+          "label": "EfeitoAdverso",
+          "nome": "Vasculite"
+        },
         {
           "id": "marevan",
           "label": "Medicamento",
           "nome": "Marevan"
         }
       ],
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "alopecia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dermatite"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "dermatite_bolhosa"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "petequias"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "prurido"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "erupcao_cutanea"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "necrose_da_pele"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "urticaria"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "sindrome_dos_dedos_roxos"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "embolismo_arterial"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "embolia_gordurosa"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hemorragia"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "hipotensao"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "necrose"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "choque"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "sincope"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "marevan",
+          "destino": "vasculite"
+        }
+      ]
+    },
+    {
+      "id": "bula_marevan_posologia_0",
+      "tipo": "posologia",
+      "texto": "A posologia de Marevan® deve ser individualizada para cada paciente, de acordo com a resposta de TP/RNI (valores obtidos através de exames de sangue) do paciente ao medicamento. • Dosagem inicial: recomenda-se que a terapia com Marevan® seja iniciada com uma dose de 2,5 mg a 5 mg ao dia, com ajustes posológicos baseados nos resultados de TP/RNI. • Manutenção: na maioria dos pacientes, a resposta é satisfatoriamente mantida com uma dose de 2,5 a 10 mg ao dia. • Dose perdida: o efeito anticoagulante de Marevan® persiste por mais de 24 horas. Caso o paciente esqueça de tomar a dose prescrita de Marevan® no horário marcado, esta deve ser tomada, assim que possível, no mesmo dia. No dia seguinte, a dose esquecida não deve ser adicionalmente ingerida e o tratamento deve ser seguido normalmente. A dose nunca deve ser duplicada. A duração da terapia para cada paciente deve ser individualizada. De modo geral, a terapia com anticoagulante deve ser continuada até que o risco de trombose e embolia seja eliminado. Este medicamento não deve ser partido, aberto ou mastigado.",
+      "entidades": [],
       "relacoes": []
     }
   ]

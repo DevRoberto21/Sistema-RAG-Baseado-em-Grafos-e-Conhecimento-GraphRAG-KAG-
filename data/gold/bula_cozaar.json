@@ -1,6 +1,6 @@
 {
   "bula": "bula_cozaar",
-  "anotador": null,
+  "anotador": "rascunho-claude (revisar)",
   "chunks": [
     {
       "id": "bula_cozaar_indicacoes_0",
@@ -11,9 +11,60 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "hipertensao",
+          "label": "Condicao",
+          "nome": "Hipertensão"
+        },
+        {
+          "id": "insuficiencia_cardiaca",
+          "label": "Condicao",
+          "nome": "Insuficiência cardíaca"
+        },
+        {
+          "id": "morbidade_mortalidade_cardiovascular",
+          "label": "Condicao",
+          "nome": "Morbidade e mortalidade cardiovasculares em hipertensos com hipertrofia ventricular esquerda"
+        },
+        {
+          "id": "doenca_renal_diabetes_tipo_2",
+          "label": "Condicao",
+          "nome": "Doença renal em diabetes tipo 2"
+        },
+        {
+          "id": "proteinuria",
+          "label": "Condicao",
+          "nome": "Proteinúria"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
+          "destino": "hipertensao"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
+          "destino": "insuficiencia_cardiaca"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
+          "destino": "morbidade_mortalidade_cardiovascular"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
+          "destino": "doenca_renal_diabetes_tipo_2"
+        },
+        {
+          "tipo": "INDICADO_PARA",
+          "origem": "cozaar",
+          "destino": "proteinuria"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_contraindicacoes_0",
@@ -24,21 +75,65 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "hipersensibilidade",
+          "label": "Condicao",
+          "nome": "Hipersensibilidade"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
+        },
+        {
+          "id": "insuficiencia_hepatica_grave",
+          "label": "Condicao",
+          "nome": "Insuficiência hepática grave"
+        },
+        {
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "hipersensibilidade"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "gestante"
+        },
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "insuficiencia_hepatica_grave"
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "uso concomitante contraindicado em pacientes com diabetes mellitus e insuficiência renal"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_0",
       "tipo": "advertencias",
       "texto": "Toxicidade fetal: o uso de fármacos que atuam no sistema renina-angiotensina, durante o segundo e o terceiro trimestre da gravidez, diminui a função renal fetal e aumenta a morbidade, e a morte fetal e a neonatal. O oligoidrâmnio resultante pode estar associado com hipoplasia pulmonar e deformações ósseas fetais. As potenciais reações adversas neonatais incluem deformação craniana, anúria, hipotensão, insuficiência renal e morte. Quando a gravidez for detectada, COZAAR® deverá ser descontinuado o mais rápido possível (veja Uso na gravidez e amamentação). Hipersensibilidade: angioedema. Pacientes com histórico de angioedema (inchaço da face, dos lábios, da garganta e/ou língua) devem ser cuidadosamente monitorados (veja o item 9. REAÇÕES ADVERSAS). Hipotensão e desequilíbrio hidroeletrolítico: hipotensão sintomática, especialmente após a primeira dose e após o aumento de dose, pode ocorrer em pacientes que apresentam depleção de volume e/ou depleção de sódio devido a terapia intensa com diuréticos, dieta com restrição de sal, diarreia ou vômito. Essas situações devem ser corrigidas antes da administração de COZAAR® ou deve-se utilizar dose inicial mais baixa (veja o item 8.",
-      "entidades": [
-        {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
-        }
-      ],
+      "entidades": [],
       "relacoes": []
     },
     {
@@ -47,24 +142,47 @@
       "texto": "POSOLOGIA E MODO DE USAR). Desequilíbrio hidroeletrolítico: desequilíbrios hidroeletrolíticos são comuns em pacientes com comprometimento renal, com ou sem diabetes, e devem ser corrigidos. Em um estudo clínico que envolveu pacientes com diabetes tipo 2 e com nefropatia, a incidência de hipercalemia foi mais alta no grupo tratado com COZAAR® quando comparado ao grupo placebo (veja o item 9. REAÇÕES ADVERSAS). Por isso, as concentrações plasmáticas de potássio, assim como os valores da depuração plasmática da creatinina, devem ser cuidadosamente monitoradas, especialmente em pacientes com insuficiência cardíaca e depuração plasmática da creatinina entre 30-50 mL/min. O uso concomitante de COZAAR® e de agentes poupadores de potássio, suplementos de potássio e substitutos do sal que contenham potássio não é recomendado (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). O uso concomitante de outros medicamentos que possam aumentar o potássio sérico pode levar à hipercalemia (veja INTERAÇÕES MEDICAMENTOSAS).",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "diuretico_poupador_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético poupador de potássio"
+        },
+        {
+          "id": "potassio",
+          "label": "PrincipioAtivo",
+          "nome": "Potássio"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "diuretico_poupador_de_potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "uso concomitante não recomendado; hipercalemia"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "uso concomitante de suplementos de potássio não recomendado; hipercalemia"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_2",
       "tipo": "advertencias",
       "texto": "Insuficiência hepática: com base nos dados de farmacocinética que demonstraram aumentos significativos das concentrações plasmáticas de losartana em pacientes com cirrose, deve-se considerar doses mais baixas para pacientes com histórico de insuficiência hepática. Não há experiência terapêutica sobre a losartana em pacientes com insuficiência hepática grave. Portanto, não é recomendada a administração de losartana em pacientes com insuficiência hepática grave (veja os itens 3. CARACTERÍSTICAS FARMACOLÓGICAS - Farmacologia clínica, 4. CONTRAINDICAÇÕES e 8. POSOLOGIA E MODO DE USAR). Insuficiência renal: como consequência da inibição do sistema renina-angiotensina, foram relatadas alterações na função renal (particularmente em pacientes cuja função renal é dependente do sistema renina-angiotensina-aldosterona como os pacientes com insuficiência cardíaca grave ou disfunção renal preexistente). Assim como para outros fármacos que afetam o sistema renina-angiotensina-aldosterona, o aumento nas taxas de ureia sanguínea e de creatinina sérica também foi relatado em pacientes com estenose da artéria renal bilateral ou estenose da artéria de rim único.",
-      "entidades": [
-        {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
-        }
-      ],
+      "entidades": [],
       "relacoes": []
     },
     {
@@ -73,12 +191,41 @@
       "texto": "Essas alterações da função renal podem ser reversíveis com a descontinuação do tratamento. A losartana deve ser usada com cuidado em pacientes com estenose da artéria renal bilateral ou estenose da artéria de rim único. O uso concomitante de losartana e inibidores da ECA demonstrou comprometer a função renal. Portanto, não é recomendado o uso concomitante (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Insuficiência cardíaca: em pacientes com insuficiência cardíaca, com ou sem insuficiência renal, há – assim como com outros fármacos que atuam no sistema renina-angiotensina – um risco de hipotensão arterial grave e insuficiência renal (geralmente aguda). Não há experiência terapêutica suficiente sobre a losartana em pacientes com insuficiência cardíaca concomitante com insuficiência renal grave, em pacientes com insuficiência cardíaca grave (Classe IV da NYHA), assim como em pacientes com insuficiência cardíaca e arritmia cardíaca sintomática que ameaça a vida. Desta forma, a losartana deve ser utilizada com cautela nesses pacientes. A combinação de losartana com um betabloqueador deve ser utilizada com cautela (veja o item 3. CARACTERÍSTICAS FARMACOLÓGICAS – Farmacodinâmica).",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
+        },
+        {
+          "id": "betabloqueador",
+          "label": "ClasseTerapeutica",
+          "nome": "Betabloqueador"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "comprometer a função renal; uso concomitante não recomendado"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "betabloqueador",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "combinação deve ser utilizada com cautela"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_4",
@@ -86,12 +233,55 @@
       "texto": "Transplante renal: não há dados sobre pacientes que tiveram um transplante de rim recente. Hiperaldosteronismo primário: pacientes com hiperaldosteronismo primário geralmente não respondem a medicamentos anti-hipertensivos cuja ação se dá através da inibição do sistema renina-angiotensina. Assim sendo, o uso de losartana nesses pacientes não é recomendado. Doença cardíaca coronariana e doença vascular cerebral: assim como com outros agentes anti-hipertensivos, a diminuição excessiva da pressão arterial em pacientes com isquemia cardiovascular ou doença vascular cerebral pode resultar em infarto do miocárdio ou derrame. Estenose de valva aórtica e mitral e cardiomiopatia hipertrófica obstrutiva: assim como com outros vasodilatadores, recomenda-se atenção especial em pacientes que sofrem de estenose aórtica ou mitral ou de cardiomiopatia hipertrófica obstrutiva. Bloqueio duplo do sistema renina-angiotensina-aldosterona: há evidências de que o uso concomitante de inibidor da ECA, antagonista de receptor da angiotensina II ou alisquireno aumenta o risco de hipotensão, hipercalemia e diminui a função renal (incluindo insuficiência renal aguda).",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
+        },
+        {
+          "id": "bra",
+          "label": "ClasseTerapeutica",
+          "nome": "Antagonista de receptor da angiotensina II"
+        },
+        {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: aumenta o risco de hipotensão, hipercalemia e diminui a função renal; não recomendado"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "bra",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: aumenta o risco de hipotensão, hipercalemia e diminui a função renal; não recomendado"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: aumenta o risco de hipotensão, hipercalemia e diminui a função renal; não recomendado"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_5",
@@ -99,12 +289,55 @@
       "texto": "Portanto, o bloqueio duplo do sistema renina-angiotensina-aldosterona pelo uso combinado de inibidor da ECA, antagonista de receptor da angiotensina II ou alisquireno não é recomendado (veja o item 6. INTERAÇÕES MEDICAMENTOSAS). Se a terapia utilizando o bloqueio duplo for considerada absolutamente necessária, esta deve ocorrer apenas com a supervisão de um especialista e com monitoramento constantemente da função renal, dos eletrólitos e da pressão sanguínea. Inibidores da ECA e antagonistas de receptor da angiotensina II não devem ser utilizados concomitantemente em pacientes com nefropatia diabética. Excipientes: Atenção: Contém lactose (tipo de açúcar) abaixo de 0,25 g/comprimido revestido. Este medicamento não deve ser usado por pessoas com síndrome de má-absorção de glicose-galactose. Pacientes com problemas hereditários raros de intolerância à galactose ou deficiência de lactose de Lapp não devem tomar este medicamento. Atenção: Contém o corante dióxido de titânio. Uso na gravidez e amamentação: categoria de risco na gravidez: D. Os fármacos que atuam diretamente no sistema renina-angiotensina podem causar danos e morte ao feto em desenvolvimento.",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
+        },
+        {
+          "id": "bra",
+          "label": "ClasseTerapeutica",
+          "nome": "Antagonista de receptor da angiotensina II"
+        },
+        {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona não recomendado"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "bra",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona não recomendado"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona não recomendado"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_6",
@@ -115,9 +348,20 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "gestante"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_7",
@@ -128,21 +372,26 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "gestante",
+          "label": "Populacao",
+          "nome": "Gestante"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "CONTRAINDICADO_EM",
+          "origem": "cozaar",
+          "destino": "gestante"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_advertencias_8",
       "tipo": "advertencias",
       "texto": "Durante a amamentação recomenda-se utilizar um tratamento alternativo que possua perfil de segurança melhor estabelecido, especialmente se o lactente for recém-nascido ou prematuro. Uso criterioso no aleitamento ou na doação de leite humano: o uso deste medicamento no período da lactação depende da avaliação e acompanhamento do seu médico ou cirurgião-dentista. Uso pediátrico: recém-nascidos com histórico de exposição in utero a COZAAR®: caso ocorra oligúria ou hipotensão, dar prioridade para a manutenção da pressão arterial e a perfusão renal. Exsanguineotransfusões ou diálise podem ser necessárias como um meio de reverter a hipotensão e/ou substituir a função renal comprometida. A segurança e a eficácia em crianças ainda não foram estabelecidas. Uso em idosos: nos estudos clínicos, não houve diferença relacionada à idade nos perfis de eficácia e segurança da losartana.",
-      "entidades": [
-        {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
-        }
-      ],
+      "entidades": [],
       "relacoes": []
     },
     {
@@ -154,9 +403,30 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "tontura",
+          "label": "EfeitoAdverso",
+          "nome": "Tontura"
+        },
+        {
+          "id": "sonolencia",
+          "label": "EfeitoAdverso",
+          "nome": "Sonolência"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "tontura"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "sonolencia"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_interacoes_0",
@@ -164,12 +434,97 @@
       "texto": "Nos estudos clínicos de farmacocinética realizados com hidroclorotiazida, digoxina, varfarina, cimetidina, fenobarbital, cetoconazol e eritromicina, não foram identificadas interações medicamentosas de importância clínica. Houve relatos de redução dos níveis do metabólito ativo pela rifampicina e pelo fluconazol. Não foram avaliadas as consequências clínicas dessas interações. A exemplo do que ocorre com outros fármacos que bloqueiam a angiotensina II ou os seus efeitos, o uso concomitante de diuréticos poupadores de potássio (como espironolactona, triantereno e amilorida), suplementos de potássio, substitutos do sal que contenham potássio, ou outros medicamentos que possam aumentar o potássio sérico (por exemplo, produtos que contenham trimetoprima) pode resultar em aumento do potássio sérico. A exemplo de outros fármacos que afetam a excreção de sódio, a excreção de lítio pode ser reduzida. Por isso, deve-se monitorar com cautela os níveis séricos do lítio, caso sais de lítio sejam administrados concomitantemente a antagonistas de receptores de angiotensina II.",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "rifampicina",
+          "label": "PrincipioAtivo",
+          "nome": "Rifampicina"
+        },
+        {
+          "id": "fluconazol",
+          "label": "PrincipioAtivo",
+          "nome": "Fluconazol"
+        },
+        {
+          "id": "diuretico_poupador_de_potassio",
+          "label": "ClasseTerapeutica",
+          "nome": "Diurético poupador de potássio"
+        },
+        {
+          "id": "potassio",
+          "label": "PrincipioAtivo",
+          "nome": "Potássio"
+        },
+        {
+          "id": "trimetoprima",
+          "label": "PrincipioAtivo",
+          "nome": "Trimetoprima"
+        },
+        {
+          "id": "litio",
+          "label": "PrincipioAtivo",
+          "nome": "Lítio"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "rifampicina",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "redução dos níveis do metabólito ativo"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "fluconazol",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "redução dos níveis do metabólito ativo"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "diuretico_poupador_de_potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do potássio sérico"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "potassio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do potássio sérico"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "trimetoprima",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "aumento do potássio sérico"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "litio",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "excreção de lítio pode ser reduzida"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_interacoes_1",
@@ -177,12 +532,27 @@
       "texto": "Os fármacos anti-inflamatórios não esteroides (AINEs), incluindo os inibidores seletivos da cicloxigenase-2 (inibidores da COX-2), podem reduzir o efeito de diuréticos e outros medicamentos anti-hipertensivos. Por isso, o efeito anti-hipertensivo de antagonistas de receptores da angiotensina II ou inibidores da ECA pode ser atenuado pelos AINEs, incluindo os inibidores seletivos da COX-2. Para alguns pacientes com função renal comprometida (por exemplo, pacientes idosos ou hipovolêmicos, incluindo aqueles em terapia diurética) que estão em tratamento com fármacos anti-inflamatórios não esteroides, incluindo inibidores seletivos da COX-2, a administração concomitante de antagonistas de receptores da angiotensina II ou inibidores da ECA pode resultar em maior deterioração da função renal, incluindo possível insuficiência renal aguda. Esses efeitos são usualmente reversíveis, portanto, a combinação deve ser administrada com cautela a pacientes com comprometimento da função renal.",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "aine",
+          "label": "ClasseTerapeutica",
+          "nome": "AINE"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "aine",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "redução do efeito anti-hipertensivo; possível deterioração da função renal"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_interacoes_2",
@@ -190,12 +560,55 @@
       "texto": "Dado do estudo clínico demonstrou que o bloqueio duplo do sistema renina-angiotensina-aldosterona através do uso combinado de inibidores da ECA, antagonistas de receptor da angiotensina II ou alisquireno está associado com uma frequência maior de reações adversas tais como hipotensão, hipercalemia e diminuição da função renal (incluindo insuficiência renal aguda) comparado com o uso de apenas um agente que atua no sistema renina-angiotensina-aldosterona (veja os itens 4. CONTRAINDICAÇÕES e 5. ADVERTÊNCIAS E PRECAUÇÕES). O suco de toranja contém componentes que inibem as enzimas CYP 450 e podem diminuir a concentração do metabolito ativo de COZAAR®, o que pode reduzir o efeito terapêutico. O consumo de suco de toranja deve ser evitado durante o tratamento com COZAAR®.",
       "entidades": [
         {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
+          "id": "losartana",
+          "label": "PrincipioAtivo",
+          "nome": "Losartana"
+        },
+        {
+          "id": "ieca",
+          "label": "ClasseTerapeutica",
+          "nome": "Inibidor da ECA"
+        },
+        {
+          "id": "bra",
+          "label": "ClasseTerapeutica",
+          "nome": "Antagonista de receptor da angiotensina II"
+        },
+        {
+          "id": "alisquireno",
+          "label": "PrincipioAtivo",
+          "nome": "Alisquireno"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "ieca",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "bra",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
+          }
+        },
+        {
+          "tipo": "INTERAGE_COM",
+          "origem": "losartana",
+          "destino": "alisquireno",
+          "props": {
+            "gravidade": "desconhecida",
+            "efeito": "bloqueio duplo do sistema renina-angiotensina-aldosterona: maior frequência de hipotensão, hipercalemia e diminuição da função renal"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_0",
@@ -206,9 +619,20 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "tontura",
+          "label": "EfeitoAdverso",
+          "nome": "Tontura"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "tontura"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_1",
@@ -219,9 +643,387 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "anemia",
+          "label": "EfeitoAdverso",
+          "nome": "Anemia"
+        },
+        {
+          "id": "trombocitopenia",
+          "label": "EfeitoAdverso",
+          "nome": "Trombocitopenia"
+        },
+        {
+          "id": "reacoes_de_hipersensibilidade",
+          "label": "EfeitoAdverso",
+          "nome": "Reações de hipersensibilidade"
+        },
+        {
+          "id": "reacoes_anafilaticas",
+          "label": "EfeitoAdverso",
+          "nome": "Reações anafiláticas"
+        },
+        {
+          "id": "angioedema",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema"
+        },
+        {
+          "id": "vasculite",
+          "label": "EfeitoAdverso",
+          "nome": "Vasculite"
+        },
+        {
+          "id": "depressao",
+          "label": "EfeitoAdverso",
+          "nome": "Depressão"
+        },
+        {
+          "id": "tontura",
+          "label": "EfeitoAdverso",
+          "nome": "Tontura"
+        },
+        {
+          "id": "sonolencia",
+          "label": "EfeitoAdverso",
+          "nome": "Sonolência"
+        },
+        {
+          "id": "cefaleia",
+          "label": "EfeitoAdverso",
+          "nome": "Cefaleia"
+        },
+        {
+          "id": "disturbios_do_sono",
+          "label": "EfeitoAdverso",
+          "nome": "Distúrbios do sono"
+        },
+        {
+          "id": "parestesia",
+          "label": "EfeitoAdverso",
+          "nome": "Parestesia"
+        },
+        {
+          "id": "enxaqueca",
+          "label": "EfeitoAdverso",
+          "nome": "Enxaqueca"
+        },
+        {
+          "id": "disgeusia",
+          "label": "EfeitoAdverso",
+          "nome": "Disgeusia"
+        },
+        {
+          "id": "vertigem",
+          "label": "EfeitoAdverso",
+          "nome": "Vertigem"
+        },
+        {
+          "id": "zumbido",
+          "label": "EfeitoAdverso",
+          "nome": "Zumbido"
+        },
+        {
+          "id": "palpitacoes",
+          "label": "EfeitoAdverso",
+          "nome": "Palpitações"
+        },
+        {
+          "id": "angina_pectoris",
+          "label": "EfeitoAdverso",
+          "nome": "Angina pectoris"
+        },
+        {
+          "id": "sincope",
+          "label": "EfeitoAdverso",
+          "nome": "Síncope"
+        },
+        {
+          "id": "fibrilacao_atrial",
+          "label": "EfeitoAdverso",
+          "nome": "Fibrilação atrial"
+        },
+        {
+          "id": "acidente_vascular_cerebral",
+          "label": "EfeitoAdverso",
+          "nome": "Acidente vascular cerebral"
+        },
+        {
+          "id": "hipotensao",
+          "label": "EfeitoAdverso",
+          "nome": "Hipotensão"
+        },
+        {
+          "id": "dispneia",
+          "label": "EfeitoAdverso",
+          "nome": "Dispneia"
+        },
+        {
+          "id": "tosse",
+          "label": "EfeitoAdverso",
+          "nome": "Tosse"
+        },
+        {
+          "id": "dor_abdominal",
+          "label": "EfeitoAdverso",
+          "nome": "Dor abdominal"
+        },
+        {
+          "id": "constipacao",
+          "label": "EfeitoAdverso",
+          "nome": "Constipação"
+        },
+        {
+          "id": "diarreia",
+          "label": "EfeitoAdverso",
+          "nome": "Diarreia"
+        },
+        {
+          "id": "nausea",
+          "label": "EfeitoAdverso",
+          "nome": "Náusea"
+        },
+        {
+          "id": "vomito",
+          "label": "EfeitoAdverso",
+          "nome": "Vômito"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "anemia",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "trombocitopenia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "reacoes_de_hipersensibilidade",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "reacoes_anafilaticas",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angioedema",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "vasculite",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "depressao",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "tontura",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "sonolencia",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "cefaleia",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "disturbios_do_sono",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "parestesia",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "enxaqueca",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "disgeusia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "vertigem",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "zumbido",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "palpitacoes",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angina_pectoris",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "sincope",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "fibrilacao_atrial",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "acidente_vascular_cerebral",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipotensao",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "dispneia",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "tosse",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "dor_abdominal",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "constipacao",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "diarreia",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "nausea",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "vomito",
+          "props": {
+            "frequencia": "incomum"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_2",
@@ -232,9 +1034,309 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "pancreatite",
+          "label": "EfeitoAdverso",
+          "nome": "Pancreatite"
+        },
+        {
+          "id": "hepatite",
+          "label": "EfeitoAdverso",
+          "nome": "Hepatite"
+        },
+        {
+          "id": "anormalidades_no_funcionamento_do_figado",
+          "label": "EfeitoAdverso",
+          "nome": "Anormalidades no funcionamento do fígado"
+        },
+        {
+          "id": "urticaria",
+          "label": "EfeitoAdverso",
+          "nome": "Urticária"
+        },
+        {
+          "id": "prurido",
+          "label": "EfeitoAdverso",
+          "nome": "Prurido"
+        },
+        {
+          "id": "erupcao_cutanea",
+          "label": "EfeitoAdverso",
+          "nome": "Erupção cutânea"
+        },
+        {
+          "id": "fotossensibilidade",
+          "label": "EfeitoAdverso",
+          "nome": "Fotossensibilidade"
+        },
+        {
+          "id": "eritrodermia",
+          "label": "EfeitoAdverso",
+          "nome": "Eritrodermia"
+        },
+        {
+          "id": "mialgia",
+          "label": "EfeitoAdverso",
+          "nome": "Mialgia"
+        },
+        {
+          "id": "artralgia",
+          "label": "EfeitoAdverso",
+          "nome": "Artralgia"
+        },
+        {
+          "id": "rabdomiolise",
+          "label": "EfeitoAdverso",
+          "nome": "Rabdomiólise"
+        },
+        {
+          "id": "insuficiencia_renal",
+          "label": "EfeitoAdverso",
+          "nome": "Insuficiência renal"
+        },
+        {
+          "id": "falencia_renal",
+          "label": "EfeitoAdverso",
+          "nome": "Falência renal"
+        },
+        {
+          "id": "disfuncao_eretil_impotencia",
+          "label": "EfeitoAdverso",
+          "nome": "Disfunção erétil/impotência"
+        },
+        {
+          "id": "astenia",
+          "label": "EfeitoAdverso",
+          "nome": "Astenia"
+        },
+        {
+          "id": "fadiga",
+          "label": "EfeitoAdverso",
+          "nome": "Fadiga"
+        },
+        {
+          "id": "edema",
+          "label": "EfeitoAdverso",
+          "nome": "Edema"
+        },
+        {
+          "id": "mal_estar",
+          "label": "EfeitoAdverso",
+          "nome": "Mal-estar"
+        },
+        {
+          "id": "hipercalemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipercalemia"
+        },
+        {
+          "id": "aumento_da_alanina_aminotransferase_alt",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento da alanina aminotransferase (ALT)"
+        },
+        {
+          "id": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento da ureia, da creatinina sérica e do potássio sérico no sangue"
+        },
+        {
+          "id": "hiponatremia",
+          "label": "EfeitoAdverso",
+          "nome": "Hiponatremia"
+        },
+        {
+          "id": "hipoglicemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipoglicemia"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "pancreatite",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hepatite",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "anormalidades_no_funcionamento_do_figado",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "urticaria",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "prurido",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "erupcao_cutanea",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "fotossensibilidade",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "eritrodermia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "mialgia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "artralgia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "rabdomiolise",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "insuficiencia_renal",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "falencia_renal",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "disfuncao_eretil_impotencia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "astenia",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "fadiga",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "edema",
+          "props": {
+            "frequencia": "incomum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "mal_estar",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipercalemia",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "aumento_da_alanina_aminotransferase_alt",
+          "props": {
+            "frequencia": "rara"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "aumento_da_ureia_da_creatinina_serica_e_do_potassio_serico_no_sangue",
+          "props": {
+            "frequencia": "comum"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hiponatremia",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipoglicemia",
+          "props": {
+            "frequencia": "comum"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_3",
@@ -245,9 +1347,75 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "dor_nas_costas",
+          "label": "EfeitoAdverso",
+          "nome": "Dor nas costas"
+        },
+        {
+          "id": "infeccao_do_trato_urinario",
+          "label": "EfeitoAdverso",
+          "nome": "Infecção do trato urinário"
+        },
+        {
+          "id": "sintomas_parecidos_com_os_da_gripe",
+          "label": "EfeitoAdverso",
+          "nome": "Sintomas parecidos com os da gripe"
+        },
+        {
+          "id": "angioedema_intestinal",
+          "label": "EfeitoAdverso",
+          "nome": "Angioedema intestinal"
+        },
+        {
+          "id": "hipercalemia",
+          "label": "EfeitoAdverso",
+          "nome": "Hipercalemia"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "dor_nas_costas",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "infeccao_do_trato_urinario",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "sintomas_parecidos_com_os_da_gripe",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "angioedema_intestinal",
+          "props": {
+            "frequencia": "desconhecida"
+          }
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "hipercalemia",
+          "props": {
+            "frequencia": "comum"
+          }
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_4",
@@ -258,9 +1426,40 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "falencia_renal",
+          "label": "EfeitoAdverso",
+          "nome": "Falência renal"
+        },
+        {
+          "id": "aumento_do_nitrogenio_ureico_sanguineo_bun_ou_da_creatinina_serica",
+          "label": "EfeitoAdverso",
+          "nome": "Aumento do nitrogênio ureico sanguíneo (BUN) ou da creatinina sérica"
+        },
+        {
+          "id": "diminuicao_da_hemoglobina_e_do_hematocrito",
+          "label": "EfeitoAdverso",
+          "nome": "Diminuição da hemoglobina e do hematócrito"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "falencia_renal"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "aumento_do_nitrogenio_ureico_sanguineo_bun_ou_da_creatinina_serica"
+        },
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "diminuicao_da_hemoglobina_e_do_hematocrito"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_reacoes_adversas_5",
@@ -271,34 +1470,33 @@
           "id": "cozaar",
           "label": "Medicamento",
           "nome": "Cozaar"
+        },
+        {
+          "id": "elevacao_das_enzimas_hepaticas_e_ou_da_bilirrubina_serica",
+          "label": "EfeitoAdverso",
+          "nome": "Elevação das enzimas hepáticas e/ou da bilirrubina sérica"
         }
       ],
-      "relacoes": []
+      "relacoes": [
+        {
+          "tipo": "PODE_CAUSAR",
+          "origem": "cozaar",
+          "destino": "elevacao_das_enzimas_hepaticas_e_ou_da_bilirrubina_serica"
+        }
+      ]
     },
     {
       "id": "bula_cozaar_posologia_0",
       "tipo": "posologia",
       "texto": "COZAAR® pode ser administrado com ou sem alimentos. COZAAR® pode ser administrado com outros agentes anti-hipertensivos. Hipertensão Para a maioria dos pacientes, a dose usual inicial e de manutenção é de 50 mg uma vez ao dia. O efeito anti-hipertensivo máximo é alcançado 3 a 6 semanas após o início do tratamento. Alguns pacientes podem obter benefício adicional se a dose for aumentada para 100 mg uma vez ao dia. Para pacientes com depleção de volume intravascular (por exemplo, pacientes tratados com altas doses de diuréticos), deve ser considerada uma dose inicial de 25 mg uma vez ao dia (veja o item 5. ADVERTÊNCIAS E PRECAUÇÕES). Não há necessidade de ajuste posológico inicial para pacientes idosos ou para pacientes com insuficiência renal, inclusive para pacientes em diálise. Deve ser considerada a utilização de uma dose mais baixa para pacientes com histórico de insuficiência hepática (veja os itens 4. CONTRAINDICAÇÕES e 5. ADVERTÊNCIAS E PRECAUÇÕES). Redução do risco de morbidade e mortalidade cardiovasculares em pacientes hipertensos com hipertrofia ventricular esquerda A dose usual inicial de COZAAR® é de 50 mg uma vez ao dia.",
-      "entidades": [
-        {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
-        }
-      ],
+      "entidades": [],
       "relacoes": []
     },
     {
       "id": "bula_cozaar_posologia_1",
       "tipo": "posologia",
       "texto": "Uma dose baixa de hidroclorotiazida deve ser adicionada e/ou a dose de COZAAR® deve ser elevada para 100 mg uma vez ao dia com base na resposta da pressão arterial. Insuficiência cardíaca A dose inicial de losartana para pacientes com insuficiência cardíaca é de 12,5 mg uma vez ao dia. Geralmente, a dose deve ser titulada a intervalos semanais (isto é, 12,5 mg/dia, 25 mg/dia, 50 mg/dia) até a dose usual de manutenção de 50 mg uma vez ao dia de acordo com a tolerabilidade do paciente. Proteção renal em pacientes com diabetes tipo 2 e proteinúria A dose usual inicial é de 50 mg uma vez ao dia. Essa dose pode ser aumentada para 100 mg uma vez ao dia com base na resposta da pressão arterial. COZAAR® pode ser administrado com outros agentes anti-hipertensivos (por exemplo, diuréticos, bloqueadores dos canais de cálcio, alfa ou betabloqueadores e agentes de ação central) e também com insulina e outros agentes hipoglicemiantes comumente utilizados (como sulfonilureias, glitazonas e inibidores da glucosidase). Este medicamento não deve ser partido, aberto ou mastigado.",
-      "entidades": [
-        {
-          "id": "cozaar",
-          "label": "Medicamento",
-          "nome": "Cozaar"
-        }
-      ],
+      "entidades": [],
       "relacoes": []
     }
   ]
