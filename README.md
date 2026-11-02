@@ -1,6 +1,7 @@
 # GraphRAG/KAG sobre bulas de medicamentos
 
-Sistema de perguntas e respostas sobre bulas, com grafo de conhecimento no Neo4j e LLM (Gemini).
+Sistema de perguntas e respostas sobre bulas, com grafo de conhecimento no Neo4j e LLM (Ollama local
+ou Gemini).
 Responde em dois modos, mostrados lado a lado: GraphRAG (grafo multi-hop) e RAG tradicional
 (só busca vetorial). Design: [`docs/superpowers/specs/2026-10-23-visao-graphrag-vs-rag-design.md`](docs/superpowers/specs/2026-10-23-visao-graphrag-vs-rag-design.md).
 Planejamento da equipe: [`planejamento/PLANO_EQUIPE.md`](planejamento/PLANO_EQUIPE.md).
@@ -17,7 +18,9 @@ docker compose up -d          # Neo4j 5 + APOC + GDS em http://localhost:7474
 uv run python scripts/check_setup.py
 ```
 
-Chave do Gemini (grátis): https://aistudio.google.com/apikey
+O provedor do LLM vem do `.env`. Local (o usado nos resultados): instale o [Ollama](https://ollama.com),
+rode `ollama pull qwen2.5:7b` e use `LLM_PROVIDER=ollama` e `LLM_MODEL=qwen2.5:7b`. Gemini:
+`LLM_PROVIDER=google_genai` e uma chave grátis em https://aistudio.google.com/apikey.
 
 ## Corpus
 
@@ -79,10 +82,37 @@ Mesma pergunta no RAG tradicional (E5.8), só busca vetorial, sem grafo:
 O grafo semente (`cypher/seed.cypher`) tem 5 bulas (Cozaar, Renitec, Marevan, Advil, Aspirina)
 e serve para começar retrieval e UI antes da ingestão completa.
 
+## Interface (E6)
+
+```bash
+uv run --extra ui --extra embeddings streamlit run app/streamlit_app.py
+```
+
+Abre em http://localhost:8501. A mesma pergunta sai em duas colunas, GraphRAG (com subgrafo,
+Cypher e trechos citados) e RAG tradicional (top-k trechos). Precisa do Neo4j carregado (E4).
+
+## Avaliação
+
+Extração contra o gold de 5 bulas (E3.5), relatório em `logs/avaliacao_e3.md`:
+
+```bash
+uv run python -m graphrag_bulas.gold avaliar
+```
+
+GraphRAG vs RAG vs LLM puro em 40 perguntas (E7), detalhes em
+[`data/gold/LEIAME.md`](data/gold/LEIAME.md):
+
+```bash
+uv run python -m graphrag_bulas.avaliacao validar
+uv run --extra embeddings python -m graphrag_bulas.avaliacao rodar      # retomável
+uv run python -m graphrag_bulas.avaliacao relatorio                      # -> logs/avaliacao_e7.md
+```
+
 ## Estrutura
 
 ```
 src/graphrag_bulas/   código do sistema (config.py: conexões Neo4j e LLM)
+app/                  interface Streamlit
 data/raw/             PDFs das bulas (fora do git)
 data/processed/       texto/chunks JSONL (fora do git)
 scripts/              utilitários de linha de comando
@@ -99,4 +129,5 @@ docs/                 modelagem, artigo
 
 ## Créditos
 
-Frameworks open source usados: Neo4j, LangChain, sentence-transformers.
+Frameworks open source usados: Neo4j (com APOC e GDS), LangChain, sentence-transformers (bge-m3),
+Ollama (Qwen2.5), Streamlit e pyvis (vis-network).
