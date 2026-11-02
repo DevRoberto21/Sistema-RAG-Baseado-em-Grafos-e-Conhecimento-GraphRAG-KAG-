@@ -49,6 +49,20 @@ uv run python -m graphrag_bulas.embeddings   # grava embeddings que faltam (prec
 uv run pytest tests/test_seed.py   # confere as perguntas-alvo no grafo semente
 ```
 
+### Grafo completo (E4)
+
+Depois da extração (E3.4), resolva as entidades e carregue no Neo4j:
+
+```bash
+uv run --extra embeddings python -m graphrag_bulas.resolucao   # extracoes.jsonl -> grafo.jsonl
+uv run --extra embeddings python -m graphrag_bulas.ingestao --recriar
+```
+
+A ingestão aplica schema e seed, então não precisa rodar o `cypher-shell` antes. O relatório
+de antes e depois (E4.5) fica em `logs/relatorio_e4.md`. Para documentar o limiar de fusão,
+marque `s`/`n` na coluna `mesmo` de `logs/pares_candidatos.csv`, salve como
+`data/curadoria/pares_rotulados.csv` e rode as duas etapas de novo.
+
 Retrieval do GraphRAG (E5.1 + E5.2 + E5.3), pergunta → seeds → subgrafo + trechos + Cypher
 gerado pelo Gemini (sem `llm=`, roda só a expansão):
 

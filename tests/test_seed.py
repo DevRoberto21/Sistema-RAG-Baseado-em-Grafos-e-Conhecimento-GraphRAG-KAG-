@@ -27,7 +27,8 @@ def test_anti_hipertensivos_contraindicados_na_gravidez(db):
         db,
         """
         MATCH (:ClasseTerapeutica {id: 'anti_hipertensivo'})<-[:PERTENCE_A]-(:PrincipioAtivo)
-              <-[:CONTEM]-(m:Medicamento)-[:CONTRAINDICADO_EM]->(:Populacao {id: 'gestante'})
+              <-[:CONTEM]-(m:Medicamento)-[r:CONTRAINDICADO_EM]->(:Populacao {id: 'gestante'})
+        WHERE r.metodo = 'manual'
         RETURN m.id AS id
         """,
     )
@@ -50,7 +51,8 @@ def test_efeitos_comuns_losartana_enalapril(db):
 def test_indicados_para_hipertensao(db):
     rows = consulta(
         db,
-        "MATCH (m:Medicamento)-[:INDICADO_PARA]->(:Condicao {id: 'hipertensao'}) RETURN m.id AS id",
+        "MATCH (m:Medicamento)-[r:INDICADO_PARA]->(:Condicao {id: 'hipertensao'}) "
+        "WHERE r.metodo = 'manual' RETURN m.id AS id",
     )
     assert {r["id"] for r in rows} == {"cozaar", "renitec"}
 
