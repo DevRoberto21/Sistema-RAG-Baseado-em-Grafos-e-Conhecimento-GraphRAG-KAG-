@@ -9,9 +9,12 @@ logs/pares_candidatos.csv e a primeira parte de logs/relatorio_e4.md.
 Spec: docs/superpowers/specs/2026-11-01-e4-resolucao-ingestao-design.md
 """
 
+import json
 import re
+from pathlib import Path
 
 from graphrag_bulas.chunks import PROCESSADOS, slug
+from graphrag_bulas.extracao import COMPOSICAO
 
 RAIZ = PROCESSADOS.parents[1]
 DICIONARIO = RAIZ / "data" / "curadoria" / "sinonimos.json"
@@ -66,3 +69,19 @@ def normalizar(id_: str, label: str) -> str:
 def bloqueado(a: str, b: str) -> bool:
     """Nomes com prefixo de sentido oposto (hipertensao/hipotensao) nunca se fundem."""
     return any((x in a and y in b) or (y in a and x in b) for x, y in OPOSTOS)
+
+
+def carregar_dicionario(path: Path = DICIONARIO) -> dict[str, dict[str, str]]:
+    """{label: {variante normalizada: id canônico}}. Inclui nome comercial -> princípio ativo."""
+    bruto = json.loads(path.read_text())
+    bruto.setdefault("PrincipioAtivo", {})
+    for med, pas in COMPOSICAO.items():
+        if len(pas) == 1:
+            bruto["PrincipioAtivo"].setdefault(pas[0], []).append(med)
+    dic = {}
+    for label, grupos in bruto.items():
+        dic[label] = {}
+        for canon, variantes in grupos.items():
+            for v in [canon, *variantes]:
+                dic[label][normalizar(v, label)] = canon
+    return dic

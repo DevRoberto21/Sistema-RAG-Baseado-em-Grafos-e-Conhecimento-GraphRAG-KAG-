@@ -1,0 +1,70 @@
+{
+  "ClasseTerapeutica": {
+    "aine": ["AINE", "AINEs", "anti-inflamatórios não esteroides", "anti-inflamatório não esteroidal", "antiinflamatório não esteroide", "antiinflamatório não esteroidal", "anti-inflamatório não hormonal", "analgésicos anti-inflamatórios"],
+    "ieca": ["IECA", "inibidor da ECA", "inibidores da enzima conversora de angiotensina", "inibidor da enzima conversora da angiotensina"],
+    "bra": ["BRA", "ARA II", "antagonistas de receptores da angiotensina II", "antagonista do receptor da angiotensina II", "antagonista de receptor da angiotensina II", "antagonista do receptor de angiotensina II", "antagonista de receptor de angiotensina II", "antagonista de receptor da angiotensina", "antagonista da angiotensina II", "bloqueador do receptor de angiotensina", "bloqueador do receptor de angiotensina II"],
+    "anti_hipertensivo": ["agentes anti-hipertensivos", "antihipertensivo"],
+    "anticoagulante": ["anticoagulantes orais", "agente anticoagulante"],
+    "salicilato": ["salicilatos"],
+    "betabloqueador": ["beta-bloqueador", "beta blocker"],
+    "bloqueador_do_canal_de_calcio": ["bloqueador de canal de cálcio", "bloqueadores dos canais de cálcio", "calcium channel blocker"],
+    "corticosteroide": ["corticoide", "corticoide sistêmico", "corticosteroide sistêmico"],
+    "glicocorticoide": ["glicocorticoide sistêmico", "glicocordicoide sistêmico"],
+    "digitalico": ["digital", "glicosídeo digitálico"],
+    "inibidor_da_agregacao_plaquetaria": ["inibidor de agregação plaquetária", "antiplaquetário", "agente antiplaquetário"],
+    "trombolitico": ["agente trombolítico", "fibrinolítico"],
+    "estatina": ["statin"],
+    "sulfonilureia": ["sulfonilur eia"],
+    "inibidor_da_neprilisina": ["inibidor de neprilisina"],
+    "inibidor_da_mtor": ["inibidor de mTOR"],
+    "inibidor_seletivo_da_recaptacao_da_serotonina": ["inibidor seletivo da recaptação de serotonina", "ISRS"],
+    "diuretico_poupador_de_potassio": ["diurético poupador de potásio"]
+  },
+  "PrincipioAtivo": {
+    "losartana": ["losartana potássica"],
+    "enalapril": ["maleato de enalapril"],
+    "varfarina": ["varfarina sódica"],
+    "ibuprofeno": [],
+    "acido_acetilsalicilico": ["AAS"],
+    "litio": ["lito"],
+    "sulfametoxazol": ["SMZ"],
+    "trimetoprima": ["TMP"]
+  },
+  "Condicao": {
+    "hipertensao": ["pressão alta", "hipertensão essencial"],
+    "insuficiencia_cardiaca": [],
+    "tromboembolismo": ["tromboembolismo venoso", "embolismo sistêmico"],
+    "febre": [],
+    "cefaleia": ["dor de cabeça"],
+    "dor_muscular": ["mialgia"],
+    "dismenorreia": ["cólica menstrual"],
+    "insuficiencia_hepatica": ["doença hepática grave"],
+    "ulcera_peptica": ["úlcera gastrintestinal", "doença ulcerativa do trato gastrointestinal"],
+    "hemorragia": ["sangramento"],
+    "hemofilia": [],
+    "dengue": [],
+    "angioedema_hereditario": ["angioedema idiopático"]
+  },
+  "EfeitoAdverso": {
+    "tontura": [], "vertigem": [], "cefaleia": ["dor de cabeça"], "fadiga": [],
+    "astenia": ["fraqueza"], "tosse": [], "hipercalemia": ["potássio alto"],
+    "hipotensao": ["pressão baixa", "hipotensão ortostática"],
+    "angioedema": ["edema angioneurótico"], "alopecia": ["queda de cabelo"],
+    "hemorragia": ["sangramento"], "nausea": ["enjoo"], "dispepsia": ["má digestão"],
+    "diarreia": [], "zumbido": ["tinido", "tinitos"], "urticaria": [],
+    "ulcera_gastrointestinal": ["úlcera gastrintestinal"],
+    "hemorragia_gastrointestinal": ["sangramento gastrintestinal"]
+  },
+  "Populacao": {
+    "gestante": ["gravidez", "grávida", "gestação"],
+    "lactante": ["amamentação", "lactação"],
+    "pediatrico": ["crianças", "menores de 12 anos"],
+    "idoso": ["idosos"]
+  },
+  "Fabricante": {
+    "organon": ["Organon Farmacêutica Ltda."],
+    "farmoquimica": ["Farmoquímica S/A"],
+    "pf_consumer": ["PF Consumer Healthcare Brazil Importadora e Distribuidora de Medicamentos Ltda."],
+    "bayer": ["Bayer S.A."]
+  }
+}
