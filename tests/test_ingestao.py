@@ -107,3 +107,95 @@ def test_ler_grafo_separa_nos_e_relacoes(tmp_path):
     arq.write_text('{"tipo": "no", "id": "a"}\n{"tipo": "rel", "rel": "X"}\n')
     nos, rels = ig.ler_grafo(arq)
     assert [n["id"] for n in nos] == ["a"] and [r["rel"] for r in rels] == ["X"]
+
+
+NOS_TESTE = [
+    {
+        "tipo": "no",
+        "label": "PrincipioAtivo",
+        "id": "zz_teste_pa",
+        "nome": "ZZ PA",
+        "sinonimos": ["zz pa sal"],
+    },
+    {
+        "tipo": "no",
+        "label": "ClasseTerapeutica",
+        "id": "zz_teste_classe",
+        "nome": "ZZ Classe",
+        "sinonimos": [],
+    },
+]
+RELS_TESTE = [
+    {
+        "tipo": "rel",
+        "rel": "INTERAGE_COM",
+        "label_origem": "PrincipioAtivo",
+        "origem": "zz_teste_pa",
+        "label_destino": "ClasseTerapeutica",
+        "destino": "zz_teste_classe",
+        "gravidade": "grave",
+        "efeito": "x",
+        "frequencia": None,
+        "dose": None,
+        "confianca": 0.7,
+        "fonte_chunk_id": "zz_teste_chunk",
+        "chunks": ["zz_teste_chunk"],
+    },
+    # Igual a uma relação do seed (metodo='manual'): a carga não pode trocar o método.
+    {
+        "tipo": "rel",
+        "rel": "PERTENCE_A",
+        "label_origem": "PrincipioAtivo",
+        "origem": "ibuprofeno",
+        "label_destino": "ClasseTerapeutica",
+        "destino": "aine",
+        "gravidade": None,
+        "efeito": None,
+        "frequencia": None,
+        "dose": None,
+        "confianca": 0.4,
+        "fonte_chunk_id": "zz_teste_chunk",
+        "chunks": [],
+    },
+]
+
+
+def _carregar(db):
+    ig.carregar_nos(db, NOS_TESTE)
+    ig.carregar_rels(db, RELS_TESTE)
+    ig.carregar_menciona(db, RELS_TESTE)
+
+
+def test_carga_idempotente_e_preserva_seed(db):
+    db.execute_query("MERGE (:Chunk {id: 'zz_teste_chunk', texto: 'zz'})")
+    try:
+        _carregar(db)
+        _carregar(db)
+        n = db.execute_query("""
+            MATCH (p:PrincipioAtivo:Entidade {id: 'zz_teste_pa'})
+            OPTIONAL MATCH (p)-[i:INTERAGE_COM]->(:ClasseTerapeutica {id: 'zz_teste_classe'})
+            OPTIONAL MATCH (:Chunk {id: 'zz_teste_chunk'})-[m:MENCIONA]->(p)
+            RETURN count(DISTINCT p) AS nos, count(DISTINCT i) AS rels, count(DISTINCT m) AS menc,
+                   p.sinonimos AS sin, collect(i.metodo)[0] AS metodo
+            """).records[0]
+        assert (n["nos"], n["rels"], n["menc"]) == (1, 1, 1)
+        assert n["sin"] == ["zz pa sal"] and n["metodo"] == "llm"
+        seed = db.execute_query(
+            "MATCH (:PrincipioAtivo {id: 'ibuprofeno'})-[x:PERTENCE_A]->(:ClasseTerapeutica "
+            "{id: 'aine'}) RETURN count(x) AS n, collect(x.metodo) AS metodos"
+        ).records[0]
+        assert seed["n"] == 1 and seed["metodos"] == ["manual"]
+    finally:
+        db.execute_query("MATCH (n) WHERE n.id STARTS WITH 'zz_teste' DETACH DELETE n")
+
+
+def test_relatorio_carga_compara_arquivo_e_banco():
+    texto = ig.relatorio_carga(
+        ["bula_cozaar_indicacoes_0"],
+        {"PrincipioAtivo": 2},
+        {"INTERAGE_COM": 1},
+        [{"label": "PrincipioAtivo"}],
+        [{"rel": "INTERAGE_COM"}],
+    )
+    assert "- bula_cozaar_indicacoes_0" in texto
+    assert "| PrincipioAtivo | 1 | 2 |" in texto and "| INTERAGE_COM | 1 | 1 |" in texto
