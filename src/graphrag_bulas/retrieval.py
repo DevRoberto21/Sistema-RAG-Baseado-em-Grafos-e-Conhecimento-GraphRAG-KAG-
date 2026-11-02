@@ -134,7 +134,7 @@ def expandir(driver, seeds, saltos=2, max_nos=60):
                   MATCH (s:Entidade) WHERE s.id IN $ids
                   MATCH p = (s)-[:{rels}*1..{int(saltos)}]-(n:Entidade)
                   RETURN n, length(p) AS d,
-                         all(r IN relationships(p) WHERE type(r) = 'CONTEM') AS nucleo,
+                         length(p) = 1 AND type(relationships(p)[0]) = 'CONTEM' AS nucleo,
                          size([r IN relationships(p) WHERE NOT type(r) IN $caminho]) AS c,
                          s.id AS seed
                 }}
@@ -142,7 +142,7 @@ def expandir(driver, seeds, saltos=2, max_nos=60):
                      count(DISTINCT seed) AS pontes
                 // Corte: no corpus, PODE_CAUSAR etc. dão centenas de vizinhos a 1 salto e
                 // (dist, id) expulsava o caminho da resposta (marevan→varfarina→aine). Ordem:
-                // seeds; marca/princípio ativo da seed (CONTEM = mesma substância); depois
+                // seeds; vizinho por CONTEM a 1 salto da seed (mesma substância); depois
                 // saltos fora de RELACOES_CAMINHO menos seeds ligadas (seed a mais vale 1 salto).
                 ORDER BY CASE WHEN dist = 0 THEN 0 WHEN nucleo = 1 THEN 1 ELSE 2 END,
                          custo - pontes, dist, n.id
