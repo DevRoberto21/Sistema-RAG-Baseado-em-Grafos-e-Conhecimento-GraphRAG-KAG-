@@ -16,6 +16,10 @@ dependencies = [
 [project.optional-dependencies]
 # Fora do core: torch é pesado e o CI não precisa dele.
 embeddings = ["sentence-transformers>=3.0"]
+ui = [
+    "pyvis>=0.3.2",
+    "streamlit>=1.66.1",
+]
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]
