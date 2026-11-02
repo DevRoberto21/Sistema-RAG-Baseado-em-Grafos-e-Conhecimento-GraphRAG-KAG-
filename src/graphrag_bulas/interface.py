@@ -45,7 +45,9 @@ html, body, .stApp, input, textarea, button {
   animation: surgir 700ms var(--ease) 80ms both; }
 .stTextInput input { border: 1px solid var(--borda) !important; border-radius: 12px !important;
   background: #FFFFFF !important; padding: 0.9rem 1.1rem !important; font-size: 1.05rem !important;
-  transition: border-color 200ms var(--ease); box-shadow: none !important; }
+  transition: border-color 200ms var(--ease); box-shadow: none !important;
+  color: var(--tinta) !important; -webkit-text-fill-color: var(--tinta) !important; caret-color: var(--tinta); }
+.stTextInput input::placeholder { color: #A8A6A1 !important; -webkit-text-fill-color: #A8A6A1 !important; }
 .stTextInput input:focus { border-color: #BDBBB6 !important; }
 .stButton button, .stFormSubmitButton button { background: var(--tinta); color: #FFFFFF;
   border: none; border-radius: 6px; padding: 0.55rem 1.3rem; transition: background 200ms, transform 120ms; }

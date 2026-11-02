@@ -1,0 +1,6 @@
+# Tema claro fixo: o CSS do app (interface.py) assume fundo claro.
+[theme]
+base = "light"
+backgroundColor = "#FBFBFA"
+textColor = "#2F3437"
+primaryColor = "#111111"
