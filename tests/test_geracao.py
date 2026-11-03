@@ -95,3 +95,10 @@ def test_chunk_id_citado_com_colchetes_vale():
     g = gerar_resposta(llm, "p", CTX)
     assert not g["recusou"] and g["chunks"] == ["c1"] and g["nos"] == ["marevan"]
     assert g["confianca"] == 1.0
+
+
+def test_linha_do_contexto_citada_inteira_vale_pelo_id_entre_colchetes():
+    linha = "Marevan -[CONTEM]-> Varfarina [c1] (ids: marevan, varfarina)"
+    llm = LLMFalso(Resposta=[resp(chunks=[linha])])
+    g = gerar_resposta(llm, "p", CTX)
+    assert not g["recusou"] and g["chunks"] == ["c1"]

@@ -3,6 +3,7 @@
 Spec: docs/superpowers/specs/2026-10-28-e5-contexto-geracao-api-design.md
 """
 
+import re
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -31,7 +32,8 @@ class Resposta(BaseModel):
 
 
 def _limpar(ids):
-    return [i.strip().strip("[]").strip() for i in ids]
+    """Ids citados sem colchetes; de uma linha inteira do contexto, os ids entre colchetes dela."""
+    return [x.strip() for i in ids for x in (re.findall(r"\[([^\[\]]+)\]", i) or [i])]
 
 
 def _recusa():
