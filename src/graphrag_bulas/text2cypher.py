@@ -34,7 +34,8 @@ Regras:
 - Leia INTERAGE_COM sem direção: (a)-[r:INTERAGE_COM]-(b).
 - INTERAGE_COM pode apontar para uma ClasseTerapeutica. Para achar os princípios ativos dessa
   classe, desça por (classe)<-[:PERTENCE_A]-(pa:PrincipioAtivo).
-- Ao retornar um fato de uma relação r, retorne também r.fonte_chunk_id.
+- Ao retornar um fato de uma relação, dê nome a ela no MATCH (-[r:INDICADO_PARA]->) e retorne
+  também r.fonte_chunk_id. Nunca use no RETURN uma variável que não aparece no MATCH.
 - Retorne propriedades (m.nome, r.dose), nunca nós inteiros.
 - Termine com LIMIT 50.
 - Se o schema não responde à pergunta, devolva cypher vazio."""

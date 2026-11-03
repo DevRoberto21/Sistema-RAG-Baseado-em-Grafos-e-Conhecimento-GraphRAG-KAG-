@@ -24,11 +24,24 @@ Regras:
 NOTA_SEM_CONSULTA = "A consulta estruturada indicou que o schema do grafo não cobre esta pergunta."
 
 
+# suporte antes das listas e listas com teto: o qwen 7b repetia ids até o limite de saída e o
+# JSON acabava sem suporte. O Ollama aplica a ordem e o maxItems do schema na decodificação.
 class Resposta(BaseModel):
     resposta: str
-    chunks: list[str] = Field(description="chunk_ids que sustentam a resposta")
-    nos: list[str] = Field(description="ids das entidades usadas")
     suporte: Literal["total", "parcial", "nenhum"]
+    chunks: list[str] = Field(description="chunk_ids que sustentam a resposta", max_length=8)
+    nos: list[str] = Field(description="ids das entidades usadas", max_length=12)
+
+
+# Resposta que diz que o contexto não traz a informação, mas sem marcar suporte nenhum (s02 do E7).
+SEM_INFO = re.compile(
+    r"\bnão (há|consta|encontr|está (mencionad|presente)|menciona|posso|traz|fornece)", re.I
+)
+
+
+def _diz_que_nao_sabe(texto):
+    primeira = re.split(r"(?<=[.!?])\s", texto.strip(), maxsplit=1)[0]
+    return "contexto" in primeira.lower() and bool(SEM_INFO.search(primeira))
 
 
 def _limpar(ids):
@@ -54,7 +67,7 @@ def gerar_resposta(llm, pergunta, contexto):
     citados_n = list(dict.fromkeys(_limpar(r.nos)))
     chunks = [c for c in citados_c if c in contexto["chunk_ids"]]
     nos = [n for n in citados_n if n in contexto["nos"]]
-    if r.suporte == "nenhum" or not chunks:
+    if r.suporte == "nenhum" or not chunks or _diz_que_nao_sabe(r.resposta):
         return _recusa()
     # Sem nós no contexto (modo rag), ids de entidade citados não contam contra a confiança.
     citadas = len(citados_c) + (len(citados_n) if contexto["nos"] else 0)
