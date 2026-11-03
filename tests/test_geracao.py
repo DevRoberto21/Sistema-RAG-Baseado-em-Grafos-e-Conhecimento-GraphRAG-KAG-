@@ -88,3 +88,10 @@ def test_contexto_sem_nos_nao_penaliza_nos_citados():
     llm = LLMFalso(Resposta=[resp(chunks=["c1"], nos=["marevan", "x"])])
     g = gerar_resposta(llm, "p", {**CTX, "nos": set()})
     assert g["confianca"] == 1.0 and g["nos"] == []
+
+
+def test_chunk_id_citado_com_colchetes_vale():
+    llm = LLMFalso(Resposta=[resp(chunks=["[c1]", " c1 "], nos=["[marevan]"])])
+    g = gerar_resposta(llm, "p", CTX)
+    assert not g["recusou"] and g["chunks"] == ["c1"] and g["nos"] == ["marevan"]
+    assert g["confianca"] == 1.0

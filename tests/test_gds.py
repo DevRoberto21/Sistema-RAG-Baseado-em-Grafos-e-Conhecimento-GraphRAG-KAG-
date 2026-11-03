@@ -47,3 +47,15 @@ def test_erro_do_gds_nao_levanta_e_apaga_projecao(db, monkeypatch):
     assert r["gds"]["erro"] and r["gds"]["caminhos"] == []
     assert all(n["pagerank"] is None for n in r["subgrafo"]["nos"])
     assert projecoes_ctx(db) == []
+
+
+def test_consultas_do_gds_tem_timeout():
+    vistas = []
+
+    class Driver:
+        def execute_query(self, query, params, routing_):
+            vistas.append(query)
+            return SimpleNamespace(records=[])
+
+    gds._ler(Driver(), "RETURN 1")
+    assert vistas[0].timeout == gds.TIMEOUT_S

@@ -8,13 +8,17 @@ from uuid import uuid4
 
 from neo4j.exceptions import Neo4jError
 
+from neo4j import Query
+
 MAX_MEDICAMENTOS = 3
 # Ligação entre remédios via princípio ativo, classe e interação (PLANO_EQUIPE, E5.4).
 RELACOES_CAMINHO = ["CONTEM", "PERTENCE_A", "INTERAGE_COM"]
+# Num subgrafo de 64 nós o Louvain já rodou 30 min sem fim; o timeout vira Neo4jError (tratado).
+TIMEOUT_S = 10
 
 
 def _ler(driver, cypher, **params):
-    return driver.execute_query(cypher, params, routing_="r").records
+    return driver.execute_query(Query(cypher, timeout=TIMEOUT_S), params, routing_="r").records
 
 
 def _projetar(driver, nome, nos, arestas):

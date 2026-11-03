@@ -30,6 +30,10 @@ class Resposta(BaseModel):
     suporte: Literal["total", "parcial", "nenhum"]
 
 
+def _limpar(ids):
+    return [i.strip().strip("[]").strip() for i in ids]
+
+
 def _recusa():
     return {"resposta": RECUSA, "chunks": [], "nos": [], "confianca": 0.0, "recusou": True}
 
@@ -43,12 +47,15 @@ def gerar_resposta(llm, pergunta, contexto):
         partes.append(NOTA_SEM_CONSULTA)
     partes += ["Contexto:\n" + contexto["texto"], f"Pergunta: {pergunta}"]
     r = llm.with_structured_output(Resposta).invoke("\n\n".join(partes))
-    chunks = [c for c in dict.fromkeys(r.chunks) if c in contexto["chunk_ids"]]
-    nos = [n for n in dict.fromkeys(r.nos) if n in contexto["nos"]]
+    # O contexto mostra os chunk_ids entre colchetes e o modelo às vezes os copia junto.
+    citados_c = list(dict.fromkeys(_limpar(r.chunks)))
+    citados_n = list(dict.fromkeys(_limpar(r.nos)))
+    chunks = [c for c in citados_c if c in contexto["chunk_ids"]]
+    nos = [n for n in citados_n if n in contexto["nos"]]
     if r.suporte == "nenhum" or not chunks:
         return _recusa()
     # Sem nós no contexto (modo rag), ids de entidade citados não contam contra a confiança.
-    citadas = len(set(r.chunks)) + (len(set(r.nos)) if contexto["nos"] else 0)
+    citadas = len(citados_c) + (len(citados_n) if contexto["nos"] else 0)
     confianca = round(PESO_SUPORTE[r.suporte] * (len(chunks) + len(nos)) / citadas, 2)
     return {
         "resposta": r.resposta,
