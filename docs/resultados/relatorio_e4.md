@@ -1,0 +1,1035 @@
+# Relatório E4 — resolução e ingestão
+
+Limiar de embedding: 0.920 (padrão; sem data/curadoria/pares_rotulados.csv).
+
+## Nós por label
+
+| Label | Antes | Depois | Regra | Dicionário | Embedding |
+|---|---|---|---|---|---|
+| ClasseTerapeutica | 131 | 73 | 99 | 45 | 7 |
+| Condicao | 385 | 353 | 1 | 6 | 27 |
+| EfeitoAdverso | 853 | 750 | 4 | 8 | 94 |
+| Medicamento | 25 | 25 | 0 | 0 | 0 |
+| Populacao | 4 | 4 | 0 | 0 | 0 |
+| PrincipioAtivo | 226 | 201 | 6 | 8 | 13 |
+
+## Relações por tipo
+
+| Tipo | Antes | Depois |
+|---|---|---|
+| CONTEM | 6 | 6 |
+| CONTRAINDICADO_EM | 302 | 248 |
+| INDICADO_PARA | 365 | 291 |
+| INTERAGE_COM | 467 | 407 |
+| PERTENCE_A | 90 | 75 |
+| PODE_CAUSAR | 1644 | 1518 |
+
+Relações descartadas por laço depois da fusão: 2.
+
+## 30 maiores fusões por embedding
+
+| Label | De | Para | Cosseno |
+|---|---|---|---|
+| PrincipioAtivo | antagonista_receptor_da_angiotensina_ii | antagonista_de_receptor_da_angiotensina_ii | 1.000 |
+| Condicao | dismenorreia_prima | demenorreia_prima | 1.000 |
+| EfeitoAdverso | hipercaliemia | hipercalemia | 1.000 |
+| EfeitoAdverso | hipocalemi | hipocalcemia | 1.000 |
+| Condicao | infarto_do_miocardio_com_elevacao_do_segmento_st | infarto_agudo_do_miocardio_com_elevacao_do_segmento_st | 1.000 |
+| EfeitoAdverso | rabdomiolise | rabdomiolyse | 1.000 |
+| EfeitoAdverso | rabdomioloise | rabdomiolyse | 1.000 |
+| EfeitoAdverso | petecuia | petecuas | 1.000 |
+| EfeitoAdverso | angina_pectoral | angina_pectoris | 1.000 |
+| EfeitoAdverso | candidise_mucocutanea | candidiase_mucocutanea | 1.000 |
+| EfeitoAdverso | crystaluria | cristaluria | 1.000 |
+| EfeitoAdverso | disturbios_generais | disturbios_gerais | 1.000 |
+| EfeitoAdverso | reacoes_alergicas | alergia | 1.000 |
+| EfeitoAdverso | necrolese_epidermica_toxica | necrolise_epidermica_toxica | 1.000 |
+| EfeitoAdverso | colite_hemorrgica | colite_hemorragica | 1.000 |
+| EfeitoAdverso | sindrome_stevens_johnson | sindrome_de_stevens_johnson | 1.000 |
+| Condicao | cirurgia_revascularizacao_miocardio | cirurgia_de_revascularizacao_do_miocardio | 1.000 |
+| Condicao | ma_absorcao_de_glicose_galactose | sindrome_de_ma_absorcao_de_glicose_galactose | 1.000 |
+| Condicao | sindrome_de_mal_absorcao_de_glicose_galactose | sindrome_de_ma_absorcao_de_glicose_galactose | 1.000 |
+| EfeitoAdverso | lingua_pilosa_negra | lengua_pilosa_negra | 1.000 |
+| EfeitoAdverso | pupura | purpura | 1.000 |
+| PrincipioAtivo | acetilsalicilico | acido_acetilsalicilico | 1.000 |
+| ClasseTerapeutica | varfarina | anticoagulante | 1.000 |
+| EfeitoAdverso | nafessa | nausea | 1.000 |
+| EfeitoAdverso | insuficiencia_cardica_congestiva | insuficiencia_cardiaca_congestiva | 1.000 |
+| PrincipioAtivo | lidocainea | lidocaina | 1.000 |
+| EfeitoAdverso | malestar | mal_estar | 1.000 |
+| EfeitoAdverso | erupcao_fixa | erupcao_fixa_medicamentosa | 1.000 |
+| Condicao | osteoesclerose_reumatoide | artrite_reumatoide | 1.000 |
+| Condicao | giardise | giardia | 1.000 |
+
+## Ids vistos uma vez e sem fusão (919)
+
+- ClasseTerapeutica: acth
+- ClasseTerapeutica: agente_de_acao_central
+- ClasseTerapeutica: alfa_betabloqueador
+- ClasseTerapeutica: alfabloqueador
+- ClasseTerapeutica: aminoglicosidico
+- ClasseTerapeutica: analogo_de_nucleosido
+- ClasseTerapeutica: anestesico
+- ClasseTerapeutica: anfotericina_b
+- ClasseTerapeutica: antagonista_da_vitamina_k
+- ClasseTerapeutica: antiacido
+- ClasseTerapeutica: antiarritmicosa_classe_ia
+- ClasseTerapeutica: anticoagulante_tipo_cumarinico
+- ClasseTerapeutica: antidepressivo_triciclico
+- ClasseTerapeutica: antipsicotico
+- ClasseTerapeutica: bloqueador_da_aldosterona
+- ClasseTerapeutica: bloqueador_do_receptor_h2
+- ClasseTerapeutica: bloqueador_do_sistema_renina_angiotensina
+- ClasseTerapeutica: bloqueador_neuromuscular
+- ClasseTerapeutica: cefalosporina
+- ClasseTerapeutica: ciprofloxacino
+- ClasseTerapeutica: cyp2c8
+- ClasseTerapeutica: cyp2c9
+- ClasseTerapeutica: cyp2d6
+- ClasseTerapeutica: diuretico_espoliador_de_potassio
+- ClasseTerapeutica: diuretico_indutor_de_hipocalemia
+- ClasseTerapeutica: droga_de_acao_serotoninergica
+- ClasseTerapeutica: fluoroquinolona
+- ClasseTerapeutica: glitazona
+- ClasseTerapeutica: indutor_de_cyp2c9
+- ClasseTerapeutica: inibidor_cyp2c9
+- ClasseTerapeutica: inibidor_da_glucosidase
+- ClasseTerapeutica: inibidor_seletivo_da_cox_2
+- ClasseTerapeutica: insulina
+- ClasseTerapeutica: laxativo_estimulante
+- ClasseTerapeutica: macrolida
+- ClasseTerapeutica: medicamento_hipertensor_simpatomimetico
+- ClasseTerapeutica: medicamento_poupador_de_potassio
+- ClasseTerapeutica: metilxantina
+- ClasseTerapeutica: nitrato_de_longa_acao
+- ClasseTerapeutica: nitroglicerina_sublingual
+- ClasseTerapeutica: radiocontraste
+- ClasseTerapeutica: terapia_sequencial
+- Condicao: abscesso_dentario_grave_com_celulite_disseminada
+- Condicao: acidente_vascular_cerebral_isqueimico_agudo
+- Condicao: acidente_vascular_cerebral_isquemico_agudo
+- Condicao: actinomicetoma
+- Condicao: alergico_a_cefalosporinas
+- Condicao: alteracoes_do_ritmo_associadas_a_sindrome_de_wolff_parkinson_white
+- Condicao: ameba_hepatica
+- Condicao: ameba_intestinal
+- Condicao: amebise
+- Condicao: aneurisma_aortico
+- Condicao: aneurisma_aortico_preexistente
+- Condicao: aneurisma_cerebral
+- Condicao: angina
+- Condicao: angina_de_prinzmetal
+- Condicao: angina_estavel_cronica
+- Condicao: angina_pectoris
+- Condicao: angina_variante
+- Condicao: angioedema_intestinal
+- Condicao: antraz
+- Condicao: antraz_por_inalacao
+- Condicao: anuria
+- Condicao: arritmias_cardiacas
+- Condicao: arterite_de_celulas_gigantes
+- Condicao: arterite_de_takayasu
+- Condicao: artralgia
+- Condicao: artrite
+- Condicao: artrite_juvenil_cronica
+- Condicao: ataque_isquemico_transitorio
+- Condicao: ataque_isquimico_transitorio
+- Condicao: aterosclerose_conhecida
+- Condicao: avc_isquemico
+- Condicao: bacillus_anthracis
+- Condicao: balao
+- Condicao: blastomicose_sul_americana
+- Condicao: bloqueio_cardiaco_de_primeiro_grau
+- Condicao: bloqueio_sinoatrial
+- Condicao: bordetella_pertussis
+- Condicao: bradicardia_sinosal
+- Condicao: broncopneumonia
+- Condicao: brucella
+- Condicao: brucelose
+- Condicao: cancer_ativo
+- Condicao: cancroide
+- Condicao: cardiomiopatia_hipertrofica
+- Condicao: cefaleia_tensional
+- Condicao: celulite
+- Condicao: cirrose
+- Condicao: cirurgia_geral
+- Condicao: cirurgia_ortopedica
+- Condicao: cistite_em_mulheres
+- Condicao: cistites_nao_complicadas
+- Condicao: clostridium
+- Condicao: colite_pseudomembranosa
+- Condicao: colite_ulcerativa
+- Condicao: corynebacterium
+- Condicao: debilitacao_significativa
+- Condicao: deficiencia_da_funcao_cardiaca
+- Condicao: deficiencia_de_acido_folico
+- Condicao: deficiencia_de_glicose_6_fosfato_desidrogenase
+- Condicao: deficiencia_de_vitamina_k
+- Condicao: depressao
+- Condicao: desidratacao
+- Condicao: diarreia
+- Condicao: diatese_hemorragica
+- Condicao: diminuicao_significativa_da_funcao_renal
+- Condicao: disfuncao_hepatica
+- Condicao: disfuncao_ventricular_esquerda_assintomatica
+- Condicao: dissecacao_aortica
+- Condicao: disturbios_cardiacos
+- Condicao: disturbios_da_circulacao_arterial_periferica
+- Condicao: disturbios_edematosos
+- Condicao: disturbios_graves_do_ritmo_cardiaco
+- Condicao: disturbios_hepaticos
+- Condicao: disturbios_renais
+- Condicao: disturbios_severos_de_conducao_a_v
+- Condicao: doadao_de_sangue
+- Condicao: doenca_arterial_periferica
+- Condicao: doenca_cardiaca_isquemica
+- Condicao: doenca_cardiovascular_estabelecida
+- Condicao: doenca_de_addison
+- Condicao: doenca_de_behcet
+- Condicao: doenca_de_crohn
+- Condicao: doenca_do_no_sinosal
+- Condicao: doenca_renal
+- Condicao: doenca_reumatica
+- Condicao: doenca_ulcerativa_ativa_do_trato_gastrointestinal
+- Condicao: dor_aguda_pos_cirurgia_ginecologica
+- Condicao: dor_aguda_pos_operatoria_moderada_a_grave_associada_a_cirurgia_ginecologica_abdominal
+- Condicao: dor_aguda_pos_operatoria_moderada_a_grave_associada_a_cirurgia_odontologica
+- Condicao: dor_artritica
+- Condicao: dor_associada_a_artrites
+- Condicao: dor_associada_a_dismenorreia
+- Condicao: dor_associada_a_resfriados_comuns
+- Condicao: dor_de_garganta
+- Condicao: dor_e_inflamacao_em_ginecologia
+- Condicao: dor_e_inflamacao_no_pos_operatorio
+- Condicao: dor_musculares
+- Condicao: dor_nas_costas
+- Condicao: dor_no_corpo
+- Condicao: edema
+- Condicao: edema_angioneurotico
+- Condicao: edema_e_ascite_da_insuficiencia_cardiaca_congestiva
+- Condicao: edema_em_crianca
+- Condicao: endocardite_bacteriana
+- Condicao: enterobacter
+- Condicao: enterococcus_faecalis
+- Condicao: enxaqueca
+- Condicao: episodio_manico
+- Condicao: escherichia_coli
+- Condicao: estados_dolorosos_inflamatorios_pos_traumaticos
+- Condicao: estafilococos
+- Condicao: estenose_aortica
+- Condicao: exacerbacoes_agudas_de_bronquite_cronica
+- Condicao: exposicao_ao_antraz
+- Condicao: falencia_respiratoria
+- Condicao: faringites_estreptococicas
+- Condicao: fatores_risco_cardiovasculares_significativos
+- Condicao: feridas_ulcerativas_abertas
+- Condicao: fertilidade_feminina
+- Condicao: fertilidade_masculina
+- Condicao: fibrilacao_ventricular
+- Condicao: fibrose_cistica
+- Condicao: galactose
+- Condicao: gardenella_vaginalis
+- Condicao: gonorreia
+- Condicao: gonorreia_aguda_nao_complicada
+- Condicao: gonorreia_extragenital
+- Condicao: gripe
+- Condicao: gripes
+- Condicao: helicobacter_pylori
+- Condicao: hematoma_intraspinhal
+- Condicao: hemodialise
+- Condicao: hemofilia
+- Condicao: hemorragia
+- Condicao: hemorragias_ativas_de_grande_porte
+- Condicao: heparina
+- Condicao: hepatite_c
+- Condicao: hepatopatia
+- Condicao: hipercalemia
+- Condicao: hipercondicao
+- Condicao: hipercondicao_aines
+- Condicao: hipersensibilidade_a_enoxaparina_sodica
+- Condicao: hipersensibilidade_a_furosemida
+- Condicao: hipersensibilidade_a_metronidazol
+- Condicao: hipersensibilidade_a_outros_derivados_imidazolicos
+- Condicao: hipersensibilidade_a_paracetamol
+- Condicao: hipersensibilidade_a_trimetoprima
+- Condicao: hipersensibilidade_a_tylenen
+- Condicao: hipersensibilidade_celecoxibe
+- Condicao: hipertensao_maligna
+- Condicao: hipertensao_nao_controlada
+- Condicao: hipomagnesemia
+- Condicao: hiponatremia_severa
+- Condicao: hipopotassemia_severa
+- Condicao: hipotireoidismo
+- Condicao: hipovolemia_com_ou_sem_hipotensao_ou_desidratacao
+- Condicao: histeresia
+- Condicao: historico_de_ulcera
+- Condicao: historico_sangramento_perfusao_gastrointestinal
+- Condicao: hit_mediada_por_imunidade
+- Condicao: ictericia_disfuncao_hepatica
+- Condicao: infarto_agudo_do_miocardio
+- Condicao: infeccao_aguda
+- Condicao: infeccao_causada_por_chlamydia_spp
+- Condicao: infeccao_estreptococica
+- Condicao: infeccao_por_pseudomonas_aeruginosa
+- Condicao: infeccao_renal
+- Condicao: infeccao_severa
+- Condicao: infeccao_urinaria_aguda_nao_complicada
+- Condicao: infeccao_viral
+- Condicao: infeccoes_bacterianas
+- Condicao: infeccoes_complicadas
+- Condicao: infeccoes_da_cavidade_abdominal
+- Condicao: infeccoes_da_pele_e_estruturas_da_pele
+- Condicao: infeccoes_dentarias
+- Condicao: infeccoes_do_olho
+- Condicao: infeccoes_do_rin
+- Condicao: infeccoes_do_trato_biliar
+- Condicao: infeccoes_do_trato_gastrintestinal
+- Condicao: infeccoes_do_trato_renal
+- Condicao: infeccoes_dos_osso_e_articulacoes
+- Condicao: infeccoes_gastrointestinais
+- Condicao: infeccoes_mistas
+- Condicao: infeccoes_nao_complicadas
+- Condicao: infeccoes_osseas
+- Condicao: infeccoes_pele_tecidos_moles
+- Condicao: infeccoes_por_staphylococcus
+- Condicao: infeccoes_trato_geniturinario
+- Condicao: insuficiencia_cardiaca_descompensada
+- Condicao: insuficiencia_cardiaca_severa
+- Condicao: insuficiencia_cardiaca_sintomatica
+- Condicao: insuficiencia_coronariana
+- Condicao: insuficiencia_grave
+- Condicao: insuficiencia_leve
+- Condicao: insuficiencia_moderada
+- Condicao: insuficiencia_renal_aguda
+- Condicao: insuficiencia_renal_com_anuria
+- Condicao: insuficiencia_renal_severa
+- Condicao: intolerancia_a_galactose
+- Condicao: klebsiella
+- Condicao: lesoes_graves_do_parenquima_hepatico
+- Condicao: listeria_monocytogenes
+- Condicao: lombalgia_cronica
+- Condicao: microalbuminuria
+- Condicao: moraxella_catarrhalis
+- Condicao: mordidas_de_animais
+- Condicao: mortalidade_cardiovascular
+- Condicao: morte_cardiovascular
+- Condicao: nao_hiperaldosteronismo_prima
+- Condicao: nefropatias_cronicas
+- Condicao: neisseria_gonorrhoeae
+- Condicao: neisseria_meningitidis
+- Condicao: odontalgia
+- Condicao: otites
+- Condicao: parto
+- Condicao: pasteurella_septica
+- Condicao: peritonite
+- Condicao: pneumonia
+- Condicao: pneumonia_por_pneumocystis_jirovecii
+- Condicao: porfiria
+- Condicao: pre_coma_e_coma_associado_a_encefalopatia_hepatica
+- Condicao: problema_estomacal
+- Condicao: proteus_mirabilis
+- Condicao: pseudomonas
+- Condicao: queimaduras
+- Condicao: reacao_alergica_acetilsalicilico
+- Condicao: resfriado_comum
+- Condicao: resfriados_comuns
+- Condicao: reumatismo_nao_articular
+- Condicao: rinite_aguda
+- Condicao: risco_iminente_de_infeccao
+- Condicao: salmonella
+- Condicao: sangramento_ativo
+- Condicao: sepsis
+- Condicao: shigella
+- Condicao: sindrome_de_brugada
+- Condicao: sindrome_de_ehlers_danlos_vascular
+- Condicao: sindrome_de_marfan
+- Condicao: sindromes_dolorosas_da_coluna_vertebral
+- Condicao: sinusites_bacterianas
+- Condicao: staphylococcus_aureus_sensivel_a_penicilina
+- Condicao: staphylococcus_resistente
+- Condicao: streptococcus_viridans
+- Condicao: tonsilite_recorrente
+- Condicao: tp_rni
+- Condicao: trabalho_de_parto
+- Condicao: transtorno_afetivo_bipolar
+- Condicao: tratamento_neutropenico
+- Condicao: trombocitopenia_induzida_por_heparina_medida_por_imunidade_hit
+- Condicao: trombose_venosa_profunda_estendido
+- Condicao: tvp_e_ep_em_pacientes_com_cancer_ativo
+- Condicao: ulcera_gastrica
+- Condicao: ulcera_gastrintestiniais_agudas
+- Condicao: ulcera_intestinal
+- Condicao: ulcera_peptica_ativa
+- Condicao: vaginites_por_gardnerella_vaginalis
+- Condicao: vibrio_cholerae
+- EfeitoAdverso: abdominais
+- EfeitoAdverso: aborto_congenito
+- EfeitoAdverso: aborto_spontaneo
+- EfeitoAdverso: acidente_vascular_encefalico
+- EfeitoAdverso: acne
+- EfeitoAdverso: administracao_palidez
+- EfeitoAdverso: ageusia
+- EfeitoAdverso: agitacao
+- EfeitoAdverso: alcalose_metabolica
+- EfeitoAdverso: alteracao_da_marcha
+- EfeitoAdverso: alteracao_da_visualizacao_das_cores
+- EfeitoAdverso: alteracao_do_peristaltismo_intestinal
+- EfeitoAdverso: alteracoes_cardiorrespiratorias
+- EfeitoAdverso: alteracoes_clinicas_dos_parametros_laboratoriais_padroes
+- EfeitoAdverso: alteracoes_de_pele_e_tecido_subcutaneo
+- EfeitoAdverso: alteracoes_do_olfato
+- EfeitoAdverso: alteracoes_iespecificicas_do_ecg
+- EfeitoAdverso: alteracoes_no_musculoesqueletico
+- EfeitoAdverso: alteracoes_no_paladar_incluindo_gosto_metabolico
+- EfeitoAdverso: alteracoes_no_tecido_conectivo
+- EfeitoAdverso: alteracoes_psicoticas_incluindo_confusao_e_alucinacoes
+- EfeitoAdverso: alteracoes_renais_e_urinarias
+- EfeitoAdverso: alteracoes_visuais_transitorias
+- EfeitoAdverso: alveolite_alergica
+- EfeitoAdverso: alveolite_eosinofilica
+- EfeitoAdverso: anafilaticas
+- EfeitoAdverso: aneis_de_fibrina
+- EfeitoAdverso: anemia_hemorragica
+- EfeitoAdverso: anemia_megaloblastica
+- EfeitoAdverso: anemia_por_deficiencia_de_ferro
+- EfeitoAdverso: anemia_pos_hemorragica
+- EfeitoAdverso: aneurisma
+- EfeitoAdverso: angina
+- EfeitoAdverso: angina_instavel
+- EfeitoAdverso: anormalidades_no_padrao_de_sonhos
+- EfeitoAdverso: anosmia
+- EfeitoAdverso: anuria
+- EfeitoAdverso: apetite_diminuido
+- EfeitoAdverso: apneia_central_do_sono
+- EfeitoAdverso: arritmia_ventricular
+- EfeitoAdverso: asma
+- EfeitoAdverso: astenia_fadiga
+- EfeitoAdverso: ataque_isquemico_transitorio
+- EfeitoAdverso: ataxia_cerebelar
+- EfeitoAdverso: aterosclerose_da_arteria_coronaria
+- EfeitoAdverso: aumento_da_alaninaaminotransferase
+- EfeitoAdverso: aumento_da_alt
+- EfeitoAdverso: aumento_da_amilase
+- EfeitoAdverso: aumento_da_ast
+- EfeitoAdverso: aumento_da_creatina_fosfoquinase
+- EfeitoAdverso: aumento_da_fosfatase_alcalina_no_sangue
+- EfeitoAdverso: aumento_da_rni
+- EfeitoAdverso: aumento_do_apetite
+- EfeitoAdverso: aumento_do_debito_urinario
+- EfeitoAdverso: aumento_do_peso
+- EfeitoAdverso: aumento_do_tonus_muscular
+- EfeitoAdverso: aumento_no_volume_urinario
+- EfeitoAdverso: aumento_nos_niveis_de_hemoglobina
+- EfeitoAdverso: aumento_nos_niveis_de_sodio_e_cloreto_na_urina
+- EfeitoAdverso: aumento_nos_niveis_sericos_de_colesterol
+- EfeitoAdverso: aumento_nos_niveis_sericos_de_triglicerides
+- EfeitoAdverso: aumento_nos_niveis_sericos_de_ureia
+- EfeitoAdverso: aumento_reducao_peso
+- EfeitoAdverso: aumento_transaminases
+- EfeitoAdverso: aumento_transaminases_sericas
+- EfeitoAdverso: benigno
+- EfeitoAdverso: bilirrubina_elevada
+- EfeitoAdverso: bilirrubina_serica
+- EfeitoAdverso: bloqueio_sinoatrial
+- EfeitoAdverso: bocio
+- EfeitoAdverso: bradiarritmia
+- EfeitoAdverso: bradicardia_sinusal
+- EfeitoAdverso: broncoespasmo_asma
+- EfeitoAdverso: bronquite
+- EfeitoAdverso: cabras
+- EfeitoAdverso: cabras_musculares
+- EfeitoAdverso: caimbras_espasmo_muscular
+- EfeitoAdverso: calafrios
+- EfeitoAdverso: calcificacao_pulmonar
+- EfeitoAdverso: chiado
+- EfeitoAdverso: choque_grave
+- EfeitoAdverso: cisto
+- EfeitoAdverso: cisto_ovariano
+- EfeitoAdverso: cisto_sinovial
+- EfeitoAdverso: colite_isquemica
+- EfeitoAdverso: colite_ulcerosa
+- EfeitoAdverso: coma
+- EfeitoAdverso: complicacoes_do_procedimento
+- EfeitoAdverso: comprometimento_renal
+- EfeitoAdverso: condicao_no_local_de_administracao
+- EfeitoAdverso: confusao_e_desorientacao
+- EfeitoAdverso: congestao_nasal
+- EfeitoAdverso: corrimento_vaginal
+- EfeitoAdverso: creatinina_sanguinea_aumentada
+- EfeitoAdverso: crise_hipertensiva
+- EfeitoAdverso: crises_de_gota
+- EfeitoAdverso: deficiencia_auditiva_perda_da_audiacao
+- EfeitoAdverso: deformacao_craniana
+- EfeitoAdverso: deformacoes_ossseas_fetais
+- EfeitoAdverso: depositos_no_humor_vitreo
+- EfeitoAdverso: dermatite_alergica
+- EfeitoAdverso: descoloracao_da_lingua_sensacao_de_lingua_aspera
+- EfeitoAdverso: desconforto_epigastrico
+- EfeitoAdverso: descontinuacao_devido_a_eventos_adversos
+- EfeitoAdverso: desidratacao
+- EfeitoAdverso: desmaio
+- EfeitoAdverso: desmaios
+- EfeitoAdverso: diabetes_insipidus_nefrogenico
+- EfeitoAdverso: diaforese
+- EfeitoAdverso: diarreia_sanguinolenta
+- EfeitoAdverso: diminucao_da_libido
+- EfeitoAdverso: diminucao_de_sodio_no_sangue
+- EfeitoAdverso: diminuicao_da_acuidade_mental
+- EfeitoAdverso: diminuicao_da_acuidade_visual
+- EfeitoAdverso: discrasias_sanguineas
+- EfeitoAdverso: disfonia
+- EfeitoAdverso: disfuncao_cardaca
+- EfeitoAdverso: disfuncao_hepatica
+- EfeitoAdverso: disfuncao_primaire_do_enxerto_apos_transplante_cardiaco
+- EfeitoAdverso: disfuncao_renal_fetal
+- EfeitoAdverso: disglicemia
+- EfeitoAdverso: dismenorreia
+- EfeitoAdverso: dissecacao
+- EfeitoAdverso: distorcao_visual_das_cores
+- EfeitoAdverso: disturbio_hemorragico
+- EfeitoAdverso: disturbios_da_pele
+- EfeitoAdverso: disturbios_da_pele_e_tecido_subcutaneo
+- EfeitoAdverso: disturbios_do_labirinto_e_do_ouvido
+- EfeitoAdverso: disturbios_do_metabolismo_e_nutricao
+- EfeitoAdverso: disturbios_do_olfato
+- EfeitoAdverso: disturbios_do_ouvido
+- EfeitoAdverso: disturbios_do_ritmo_cardiaco
+- EfeitoAdverso: disturbios_do_sistema_reprodutivo
+- EfeitoAdverso: disturbios_do_tecido_subcutaneo
+- EfeitoAdverso: disturbios_do_trato_gastrintestinal
+- EfeitoAdverso: disturbios_dos_sentidos
+- EfeitoAdverso: disturbios_eletroliticos
+- EfeitoAdverso: disturbios_esofagicos
+- EfeitoAdverso: disturbios_gerais_e_mal_estar
+- EfeitoAdverso: disturbios_metabolicos_e_nutricionais
+- EfeitoAdverso: disturbios_no_sangue_e_no_sistema_linfatico
+- EfeitoAdverso: disturbios_olculares
+- EfeitoAdverso: disturbios_renais
+- EfeitoAdverso: disturbios_renais_e_urinarios
+- EfeitoAdverso: disturbios_urinarios
+- EfeitoAdverso: disturbios_vasculares
+- EfeitoAdverso: diverticulose
+- EfeitoAdverso: doenca_articular
+- EfeitoAdverso: doenca_de_ig_a_linear
+- EfeitoAdverso: doenca_dentaria
+- EfeitoAdverso: doenca_do_refluxo_gastroesofagico
+- EfeitoAdverso: doenca_do_soro
+- EfeitoAdverso: doenca_dos_rins_aguda
+- EfeitoAdverso: doenca_respiratoria_exacerbadapor_aspirina
+- EfeitoAdverso: dor_epigastrica
+- EfeitoAdverso: dor_gastrintestinal
+- EfeitoAdverso: dor_inespecifica
+- EfeitoAdverso: dor_nas_mamas_feminino
+- EfeitoAdverso: dor_nas_mamas_masculino
+- EfeitoAdverso: dor_rigidez_musculoesqueletica
+- EfeitoAdverso: dor_toracica
+- EfeitoAdverso: dores_articulacoes
+- EfeitoAdverso: dores_dedos
+- EfeitoAdverso: dores_gastrintestinais
+- EfeitoAdverso: dress
+- EfeitoAdverso: edema_alergico
+- EfeitoAdverso: edema_angeonurtico
+- EfeitoAdverso: edema_da_laringe
+- EfeitoAdverso: edema_da_lingua
+- EfeitoAdverso: edema_retencao_de_liquidos
+- EfeitoAdverso: efectos_adversos
+- EfeitoAdverso: elevacao_do_antigeno_prostatico_especifico
+- EfeitoAdverso: elevacao_do_potassio_e_sodio_serico
+- EfeitoAdverso: elevacao_enzima_hepatica
+- EfeitoAdverso: elevacoes_da_bilirrubina_serica
+- EfeitoAdverso: elevacoes_das_enzimas_hepaticas
+- EfeitoAdverso: elevacoes_moderadas_da_transaminase_glutamico_oxalacetica_no_soro
+- EfeitoAdverso: elevacoes_moderadas_da_transaminase_glutamicopiruvica_no_soro
+- EfeitoAdverso: embolia_gordurosa
+- EfeitoAdverso: embolismo_articular
+- EfeitoAdverso: embolos_aterotromboticos_sistemicos
+- EfeitoAdverso: encefalopatia_hepatica
+- EfeitoAdverso: enteropatia_semelhante_a_doenca_celiac
+- EfeitoAdverso: envenenamento
+- EfeitoAdverso: epicondilite
+- EfeitoAdverso: epidermica_toxica
+- EfeitoAdverso: epididimites
+- EfeitoAdverso: erisipela
+- EfeitoAdverso: eritema_exsudativo_multiforme
+- EfeitoAdverso: eritema_nodoso
+- EfeitoAdverso: eritema_polimorfo
+- EfeitoAdverso: erupcao_bolhosa_generalizada
+- EfeitoAdverso: erupcao_com_eosinofilia_e_sintomas_sistemicos
+- EfeitoAdverso: erupcao_cutanea_medicalementosa_com_eosinofilia_e_sintomas_sistemicos
+- EfeitoAdverso: erupcao_maculopapular
+- EfeitoAdverso: erupcao_medicamentosa_fixa_bolhosa_generalizada
+- EfeitoAdverso: erupcoes_pustulosas
+- EfeitoAdverso: esofagite
+- EfeitoAdverso: estado_confusional
+- EfeitoAdverso: estado_confusional_delirio
+- EfeitoAdverso: estomatite_aguda
+- EfeitoAdverso: euforia
+- EfeitoAdverso: evacuacoes_frequentes
+- EfeitoAdverso: eventos_aterotromboticos
+- EfeitoAdverso: eventos_cardiovasculares_tromboticos
+- EfeitoAdverso: exacerbacao_da_colite_ulcerativa
+- EfeitoAdverso: exacerbacao_de_asma
+- EfeitoAdverso: exantema
+- EfeitoAdverso: exantema_maculopapular
+- EfeitoAdverso: exaustao_severa
+- EfeitoAdverso: falencia_hepatica
+- EfeitoAdverso: falencia_renal
+- EfeitoAdverso: falta_de_ar
+- EfeitoAdverso: falta_de_coordenacao
+- EfeitoAdverso: faringite
+- EfeitoAdverso: fator_antinucleo_positivo
+- EfeitoAdverso: fechamento_prematuro_do_canal_arterial_fetal
+- EfeitoAdverso: fenomeno_de_raynaud
+- EfeitoAdverso: fotodermatite
+- EfeitoAdverso: fratura
+- EfeitoAdverso: fratura_de_membro_inferior
+- EfeitoAdverso: fratura_do_pe
+- EfeitoAdverso: funcao_hepatica
+- EfeitoAdverso: gastrites
+- EfeitoAdverso: gastroenterite
+- EfeitoAdverso: gengivite
+- EfeitoAdverso: glomerulonefrite_por_lesao_minima
+- EfeitoAdverso: gosto_metallico
+- EfeitoAdverso: granulocitopenia
+- EfeitoAdverso: granuloma
+- EfeitoAdverso: granuloma_de_medula_ossea
+- EfeitoAdverso: granulomatose_com_poliangeite
+- EfeitoAdverso: hemarthrose
+- EfeitoAdverso: hematoma_espinhal
+- EfeitoAdverso: hematoma_intraespinhal
+- EfeitoAdverso: hematoma_neuroaxial
+- EfeitoAdverso: hematoma_traumatico
+- EfeitoAdverso: hematoquezia
+- EfeitoAdverso: hemoconcentracao
+- EfeitoAdverso: hemoptise
+- EfeitoAdverso: hemorragia_auricular
+- EfeitoAdverso: hemorragia_conjuntival
+- EfeitoAdverso: hemorragia_cso_gastrointestinal
+- EfeitoAdverso: hemorragia_do_sistema_reprodutivo
+- EfeitoAdverso: hemorragia_do_sistema_respiratorio
+- EfeitoAdverso: hemorragia_fatal
+- EfeitoAdverso: hemorragia_fatia
+- EfeitoAdverso: hemorragia_hemorroida
+- EfeitoAdverso: hemorragia_hepatica
+- EfeitoAdverso: hemorragia_intra_operatoria
+- EfeitoAdverso: hemorragia_intrasegmentar
+- EfeitoAdverso: hemorragia_muscular
+- EfeitoAdverso: hemorragia_outros_timi_maior
+- EfeitoAdverso: hemorragia_pericardica
+- EfeitoAdverso: hemorragia_pos_operatoria
+- EfeitoAdverso: hemorragia_posprocedimento
+- EfeitoAdverso: hemorragia_pulmonar
+- EfeitoAdverso: hemorragia_pulmonar_alveolar
+- EfeitoAdverso: hemorragia_retal
+- EfeitoAdverso: hemorragia_suprarrenal
+- EfeitoAdverso: hemorragia_tumoral
+- EfeitoAdverso: hemorragia_urogenital
+- EfeitoAdverso: hemotorrax
+- EfeitoAdverso: hepatite_hepatocelular
+- EfeitoAdverso: hepatite_transitoria
+- EfeitoAdverso: hepatotoxicidade
+- EfeitoAdverso: herpes_zoster
+- EfeitoAdverso: hiperatividade
+- EfeitoAdverso: hiperatividade_psicomotora
+- EfeitoAdverso: hipercalcemia
+- EfeitoAdverso: hipercinesia
+- EfeitoAdverso: hiperestesia
+- EfeitoAdverso: hiperidrose
+- EfeitoAdverso: hiperplasia_prostatica_benigna
+- EfeitoAdverso: hipertensao_e_diabetes_tipo_2_com_doenca_renal
+- EfeitoAdverso: hipertensao_intracraniana
+- EfeitoAdverso: hipertensao_intracraniana_benigna
+- EfeitoAdverso: hipertireoidismo
+- EfeitoAdverso: hipertricose
+- EfeitoAdverso: hipertrofia_ventricular
+- EfeitoAdverso: hipertrofia_ventricular_esquerda
+- EfeitoAdverso: hipoacusia
+- EfeitoAdverso: hipocloremia
+- EfeitoAdverso: hipoestesia
+- EfeitoAdverso: hipomagnesemia
+- EfeitoAdverso: hipoplasia_pulmonar
+- EfeitoAdverso: hipopotassemia
+- EfeitoAdverso: hipotensao_orotostatica
+- EfeitoAdverso: hipotensao_sintomatica
+- EfeitoAdverso: hipovolemia
+- EfeitoAdverso: humor_alterado
+- EfeitoAdverso: humor_depressivo
+- EfeitoAdverso: ideias_pensamentos_suicidas
+- EfeitoAdverso: ileo_paralitico
+- EfeitoAdverso: impotencia
+- EfeitoAdverso: inchaco
+- EfeitoAdverso: incontinencia_urinaria
+- EfeitoAdverso: indigestao
+- EfeitoAdverso: indisposicao
+- EfeitoAdverso: infarto_cerebral
+- EfeitoAdverso: infarto_organico
+- EfeitoAdverso: infeccao_bacteriana
+- EfeitoAdverso: infeccao_em_feridas
+- EfeitoAdverso: infeccao_fungica
+- EfeitoAdverso: infeccao_por_helicobacter
+- EfeitoAdverso: infertilidade_feminina
+- EfeitoAdverso: infiltrados_pulmonares
+- EfeitoAdverso: inflamacao
+- EfeitoAdverso: inflamacao_gastrintestinal
+- EfeitoAdverso: influtracoes_pulmonares
+- EfeitoAdverso: insuficiencia_cardiaca
+- EfeitoAdverso: insuficiencia_cardiaca_cronica
+- EfeitoAdverso: insuficiencia_da_valva_aortica
+- EfeitoAdverso: insuficiencia_hipertrofia_cardiaca_cronica_ventricular_esquerda
+- EfeitoAdverso: intoxicacao_de_litio
+- EfeitoAdverso: intoxicacao_leve
+- EfeitoAdverso: intoxicacao_moderada_a_severa
+- EfeitoAdverso: intoxicacao_severa
+- EfeitoAdverso: investigacoes_laboratoriais
+- EfeitoAdverso: irritacao
+- EfeitoAdverso: isquemia_extremidade
+- EfeitoAdverso: kernicterus
+- EfeitoAdverso: labirintite
+- EfeitoAdverso: lesao
+- EfeitoAdverso: lesao_colestatica
+- EfeitoAdverso: lesao_envenenamento_e_condicoes_procedimento
+- EfeitoAdverso: lesao_hepatocelular
+- EfeitoAdverso: lesao_hepocelular
+- EfeitoAdverso: lesao_intoxicacao_e_complicacoes_de_procedimento
+- EfeitoAdverso: lesao_renal_aguda
+- EfeitoAdverso: lesoes_envenenamento_e_complicacoes_processuais
+- EfeitoAdverso: linfo_histiocitose_hemofagocitica
+- EfeitoAdverso: lipoma
+- EfeitoAdverso: lld_bra_cdsv14_0_10fev2025_v3_adncom_24a_vps
+- EfeitoAdverso: lupus_eritematoso_sistemico
+- EfeitoAdverso: mal_estar_geral
+- EfeitoAdverso: malformacoes_fetais
+- EfeitoAdverso: maligno
+- EfeitoAdverso: mama
+- EfeitoAdverso: menorragia
+- EfeitoAdverso: metahemoglobinemia
+- EfeitoAdverso: miccionais
+- EfeitoAdverso: microembolos_de_colesterol
+- EfeitoAdverso: miocardite_alergica
+- EfeitoAdverso: miopia
+- EfeitoAdverso: miosite
+- EfeitoAdverso: morte
+- EfeitoAdverso: mucosite_oral
+- EfeitoAdverso: natimorto
+- EfeitoAdverso: nausea_e_vomito
+- EfeitoAdverso: necrolise
+- EfeitoAdverso: necrolise_epidermica
+- EfeitoAdverso: necrolise_epidermica_toxica_sindrome_de_stevens_johnson
+- EfeitoAdverso: necrose_cutanea
+- EfeitoAdverso: necrose_hepatica_fulminante
+- EfeitoAdverso: necrose_papilar
+- EfeitoAdverso: necrose_papilar_renal
+- EfeitoAdverso: necrotizante
+- EfeitoAdverso: nefrite_intersticial_reversivel
+- EfeitoAdverso: nefrocalcinose_nefrolitise_em_criancas_prematuras
+- EfeitoAdverso: nefrotoxicidade
+- EfeitoAdverso: neoplasma
+- EfeitoAdverso: neuropatia
+- EfeitoAdverso: neuropatia_optica_neurite
+- EfeitoAdverso: neuropatia_periferica_sensorimotor_eou_miopatia
+- EfeitoAdverso: neutropenia_grave
+- EfeitoAdverso: nivel_anormal_de_protrombina
+- EfeitoAdverso: nodulo_infiltrado
+- EfeitoAdverso: oligodrmnio
+- EfeitoAdverso: osteoporose
+- EfeitoAdverso: otite
+- EfeitoAdverso: palpitacao
+- EfeitoAdverso: pancreatite_aguda
+- EfeitoAdverso: parada_cardiaca
+- EfeitoAdverso: paralisia
+- EfeitoAdverso: paralisia_permanente
+- EfeitoAdverso: parkinsonismo
+- EfeitoAdverso: parosmia
+- EfeitoAdverso: pele
+- EfeitoAdverso: penfigo
+- EfeitoAdverso: perfuracao
+- EfeitoAdverso: perfuracao_gastrintestinal
+- EfeitoAdverso: perfuracao_intestinal
+- EfeitoAdverso: perfuracao_ou_hemorragia_gastrointestinal
+- EfeitoAdverso: pesadelos
+- EfeitoAdverso: pigmentacao_grisacea_ou_azulada_da_pele
+- EfeitoAdverso: pirose
+- EfeitoAdverso: placa_eritematosa
+- EfeitoAdverso: pneumonite
+- EfeitoAdverso: pneumonite_intersticial
+- EfeitoAdverso: polaciuria
+- EfeitoAdverso: poliarterite_nodosa
+- EfeitoAdverso: polineuropatia
+- EfeitoAdverso: polipo
+- EfeitoAdverso: pre_sincopen
+- EfeitoAdverso: prisao_de_ventre
+- EfeitoAdverso: prostatite
+- EfeitoAdverso: prurido_anal
+- EfeitoAdverso: prurido_genital
+- EfeitoAdverso: pseudotumor_cerebral
+- EfeitoAdverso: purgura_trombocitopetica_trombotica
+- EfeitoAdverso: reacao_a_medicamentos_com_eosinofilia_e_sintomas_sistemicos
+- EfeitoAdverso: reacao_anafilactoides
+- EfeitoAdverso: reacao_de_ansiedade
+- EfeitoAdverso: reacao_de_fotossensibilidade
+- EfeitoAdverso: reacao_distonica
+- EfeitoAdverso: reacao_hipersensibilidade_graves
+- EfeitoAdverso: reacao_hipersensibilidade_variando_de_anafilaxia
+- EfeitoAdverso: reacoes_adversas
+- EfeitoAdverso: reacoes_anafilactoides_severas
+- EfeitoAdverso: reacoes_cutaneas_severas
+- EfeitoAdverso: reacoes_de_hipersensibilidade_incluindo_urticaria_e_prurido
+- EfeitoAdverso: reacoes_psiquiatricas
+- EfeitoAdverso: reacoes_similares_a_doenca_do_soro
+- EfeitoAdverso: refluxo_gastroesofagico
+- EfeitoAdverso: retencao_urinaria
+- EfeitoAdverso: rigidez_do_pescoco
+- EfeitoAdverso: rinorreia
+- EfeitoAdverso: sangramento_dermico
+- EfeitoAdverso: sangramento_do_trato_urinario
+- EfeitoAdverso: sangramento_fatual
+- EfeitoAdverso: sangramento_fatual_ae
+- EfeitoAdverso: sangramento_inexplicavel
+- EfeitoAdverso: sangramento_intracraniano
+- EfeitoAdverso: sangramento_maior
+- EfeitoAdverso: sangramento_menor
+- EfeitoAdverso: sangramento_moderado
+- EfeitoAdverso: sangramento_nao_relacionado_rm
+- EfeitoAdverso: sangramento_plato_definido_maior
+- EfeitoAdverso: sangramento_plato_definido_menor
+- EfeitoAdverso: sangramento_plato_maior_fatal_ameaca_a_vida
+- EfeitoAdverso: sangramento_plato_maior_outros
+- EfeitoAdverso: sangramento_plato_menor
+- EfeitoAdverso: sangramento_severa
+- EfeitoAdverso: sangramento_timi_maior
+- EfeitoAdverso: sangramento_timi_maior_nao_fat
+- EfeitoAdverso: sedacao_excessiva
+- EfeitoAdverso: sensibilidade_na_mama
+- EfeitoAdverso: serosite
+- EfeitoAdverso: sindrome_cerebelar_subaguda
+- EfeitoAdverso: sindrome_de_angustia_respiratoria_aguda_do_adulto
+- EfeitoAdverso: sindrome_de_ativacao_de_macrophages
+- EfeitoAdverso: sindrome_de_bartter
+- EfeitoAdverso: sindrome_de_dress
+- EfeitoAdverso: sindrome_de_encefalopatia_posterior_reversivel_pres
+- EfeitoAdverso: sindrome_de_enterocolite_induzida_por_medicamentos
+- EfeitoAdverso: sindrome_de_fibrilacao_atrial
+- EfeitoAdverso: sindrome_de_hipersensibilidade_a_drogas_com_eosinofilia_e_sintomas_sistemicos
+- EfeitoAdverso: sindrome_de_linfo_histiocitose_hemofagocitica
+- EfeitoAdverso: sindrome_de_lyell
+- EfeitoAdverso: sindrome_do_desaparecimento_do_ducto_biliar
+- EfeitoAdverso: sindrome_dos_dedos_roxos
+- EfeitoAdverso: sintomas_de_menopausa
+- EfeitoAdverso: sintomas_gripais
+- EfeitoAdverso: sintomas_parecidos_com_os_da_gripe
+- EfeitoAdverso: sinusite
+- EfeitoAdverso: sonhos_anormais
+- EfeitoAdverso: sudorese
+- EfeitoAdverso: superinfeccoes_micoticas
+- EfeitoAdverso: taquicardia_ventricular
+- EfeitoAdverso: testes_laboratoriais
+- EfeitoAdverso: tolerancia_a_glicose_diminuida
+- EfeitoAdverso: torsade_de_pointes
+- EfeitoAdverso: torsades_de_pointes
+- EfeitoAdverso: tosse_nao_produtiva
+- EfeitoAdverso: toxicidade_hepatica
+- EfeitoAdverso: toxicidade_pulmonar
+- EfeitoAdverso: transaminases_elevadas
+- EfeitoAdverso: transaminases_sericas
+- EfeitoAdverso: transtorno_extrapiramidal
+- EfeitoAdverso: transtornos_da_coordenacao
+- EfeitoAdverso: tremor
+- EfeitoAdverso: tremor_extrapiramidal
+- EfeitoAdverso: tremor_fino
+- EfeitoAdverso: tremor_involuntario
+- EfeitoAdverso: tremores
+- EfeitoAdverso: trombocitopenia_imunalogica
+- EfeitoAdverso: trombocitopenia_purpura
+- EfeitoAdverso: trombocitose
+- EfeitoAdverso: tumoracao
+- EfeitoAdverso: ulcera_duodenal
+- EfeitoAdverso: ulcera_esofagiana
+- EfeitoAdverso: ulcera_gastrica
+- EfeitoAdverso: ulcera_gastroduodenal
+- EfeitoAdverso: ulcera_na_boca
+- EfeitoAdverso: ulcera_oral
+- EfeitoAdverso: ulceracao_oral
+- EfeitoAdverso: ulceras_pepticas
+- EfeitoAdverso: ulceras_superficiais_na_boca
+- EfeitoAdverso: uveite
+- EfeitoAdverso: vaginite
+- EfeitoAdverso: vasculite_cutanea
+- EfeitoAdverso: vasculite_henoch_schonlein
+- EfeitoAdverso: vasculite_por_hipersensibilidade
+- EfeitoAdverso: vasculite_retiniana
+- EfeitoAdverso: vasodilatacao
+- EfeitoAdverso: vertigens
+- EfeitoAdverso: vhs_elevada
+- EfeitoAdverso: visao_embacada
+- PrincipioAtivo: abiraterona
+- PrincipioAtivo: acenocumarol
+- PrincipioAtivo: acido_mefanemico
+- PrincipioAtivo: adrenalina
+- PrincipioAtivo: alcacuz
+- PrincipioAtivo: alcool
+- PrincipioAtivo: alopurinol
+- PrincipioAtivo: amantadina
+- PrincipioAtivo: aminoglutetimida
+- PrincipioAtivo: amprenavir
+- PrincipioAtivo: antiacido
+- PrincipioAtivo: antiacidos
+- PrincipioAtivo: anticoncepcional_oral
+- PrincipioAtivo: antidepressivos_triciclicos
+- PrincipioAtivo: antipirina
+- PrincipioAtivo: antiplaquetario
+- PrincipioAtivo: aprepitanto
+- PrincipioAtivo: atorvastatina
+- PrincipioAtivo: azatioprina
+- PrincipioAtivo: barbiturato
+- PrincipioAtivo: bebida_alcoolica
+- PrincipioAtivo: betabloqueadores
+- PrincipioAtivo: bussulfano
+- PrincipioAtivo: cefalexina
+- PrincipioAtivo: celbracds20nov2024
+- PrincipioAtivo: cetorolaco
+- PrincipioAtivo: ciclosporina_a
+- PrincipioAtivo: cisaprida
+- PrincipioAtivo: cisplatina
+- PrincipioAtivo: citalopram
+- PrincipioAtivo: cloreto_de_amonio
+- PrincipioAtivo: colchicina
+- PrincipioAtivo: colestiramina
+- PrincipioAtivo: comprimidos
+- PrincipioAtivo: daclatasvir
+- PrincipioAtivo: dapsona
+- PrincipioAtivo: desetilamiodarona
+- PrincipioAtivo: dextrometorfano
+- PrincipioAtivo: dextrose_a_5
+- PrincipioAtivo: dicloralfenazona
+- PrincipioAtivo: didanosina
+- PrincipioAtivo: dihidroergotamina
+- PrincipioAtivo: disopiramida
+- PrincipioAtivo: dissulfiram
+- PrincipioAtivo: diuretico_tiazidico
+- PrincipioAtivo: dofetilida
+- PrincipioAtivo: ergotamina
+- PrincipioAtivo: etclorvinol
+- PrincipioAtivo: etinilestradiol
+- PrincipioAtivo: everolimo
+- PrincipioAtivo: fenilbutazona
+- PrincipioAtivo: fentanyl
+- PrincipioAtivo: fingolimode
+- PrincipioAtivo: flecainida
+- PrincipioAtivo: flucloxacilina
+- PrincipioAtivo: fluoruracila
+- PrincipioAtivo: fluoxetina
+- PrincipioAtivo: glutatimida
+- PrincipioAtivo: grapefruit
+- PrincipioAtivo: griseofulvina
+- PrincipioAtivo: haloperidol
+- PrincipioAtivo: heparina_de_baixo_peso_molecular
+- PrincipioAtivo: hidrato_de_cloral
+- PrincipioAtivo: hypericum_perforatum
+- PrincipioAtivo: injecao
+- PrincipioAtivo: iohexol
+- PrincipioAtivo: lacosamida
+- PrincipioAtivo: lantanio
+- PrincipioAtivo: laticinios
+- PrincipioAtivo: laxantes_que_podem_causar_hipocalemia
+- PrincipioAtivo: ledipasvir
+- PrincipioAtivo: levonorgestrel
+- PrincipioAtivo: levotiroxina
+- PrincipioAtivo: lisinopril
+- PrincipioAtivo: lovastatina
+- PrincipioAtivo: memantina
+- PrincipioAtivo: mercaptopurina
+- PrincipioAtivo: metformina
+- PrincipioAtivo: metoclopramida
+- PrincipioAtivo: metoprolol
+- PrincipioAtivo: miconazol
+- PrincipioAtivo: midazolam
+- PrincipioAtivo: misoprostol
+- PrincipioAtivo: mitotano
+- PrincipioAtivo: norepinefrina
+- PrincipioAtivo: olanzapina
+- PrincipioAtivo: omeprazol
+- PrincipioAtivo: paclitaxel
+- PrincipioAtivo: paroxetina
+- PrincipioAtivo: pentoxifilina
+- PrincipioAtivo: pioglitazona
+- PrincipioAtivo: pirimetamina
+- PrincipioAtivo: potasio_oral
+- PrincipioAtivo: primidona
+- PrincipioAtivo: relaxante_muscular_curare
+- PrincipioAtivo: repaglinida
+- PrincipioAtivo: rivastigmina
+- PrincipioAtivo: rosiglitazona
+- PrincipioAtivo: rosuvastatina
+- PrincipioAtivo: s_i_biparafeno
+- PrincipioAtivo: salicilatos_sistemicos
+- PrincipioAtivo: sertralina
+- PrincipioAtivo: sevelamer
+- PrincipioAtivo: simeprevir
+- PrincipioAtivo: sirolimo
+- PrincipioAtivo: solucao_salina_normal_0_9
+- PrincipioAtivo: sulcralfato
+- PrincipioAtivo: sulfonilureia
+- PrincipioAtivo: tacrolimus
+- PrincipioAtivo: tensirolimo
+- PrincipioAtivo: tetracosactida
+- PrincipioAtivo: ticlopidina
+- PrincipioAtivo: tiroxina
+- PrincipioAtivo: tmp_smz
+- PrincipioAtivo: tolbutamida
+- PrincipioAtivo: topiramato
+- PrincipioAtivo: triazolam
+- PrincipioAtivo: triiodotiroxina
+- PrincipioAtivo: valsartana
+- PrincipioAtivo: zidovudina
+- PrincipioAtivo: zolpidem
+
+## Carga no Neo4j
+
+Chunks cujo texto mudou (seed resumido -> corpus): 22
+
+- bula_advil_contraindicacoes_0
+- bula_advil_interacoes_0
+- bula_advil_interacoes_1
+- bula_advil_reacoes_adversas_0
+- bula_aspirina_contraindicacoes_0
+- bula_aspirina_indicacoes_0
+- bula_aspirina_interacoes_0
+- bula_aspirina_reacoes_adversas_0
+- bula_cozaar_contraindicacoes_0
+- bula_cozaar_indicacoes_0
+- bula_cozaar_interacoes_0
+- bula_cozaar_reacoes_adversas_0
+- bula_marevan_contraindicacoes_0
+- bula_marevan_indicacoes_0
+- bula_marevan_interacoes_0
+- bula_marevan_reacoes_adversas_0
+- bula_renitec_advertencias_0
+- bula_renitec_contraindicacoes_0
+- bula_renitec_indicacoes_0
+- bula_renitec_interacoes_0
+- bula_renitec_reacoes_adversas_0
+- bula_renitec_reacoes_adversas_1
+
+| Label | grafo.jsonl | Neo4j |
+|---|---|---|
+| ClasseTerapeutica | 73 | 74 |
+| Condicao | 353 | 355 |
+| EfeitoAdverso | 750 | 750 |
+| Fabricante | 0 | 18 |
+| Medicamento | 25 | 25 |
+| Populacao | 4 | 4 |
+| PrincipioAtivo | 201 | 202 |
+
+| Relação | grafo.jsonl | Neo4j |
+|---|---|---|
+| CONTEM | 6 | 28 |
+| CONTRAINDICADO_EM | 248 | 253 |
+| DESCREVE | 0 | 25 |
+| FABRICADO_POR | 0 | 25 |
+| INDICADO_PARA | 291 | 295 |
+| INTERAGE_COM | 407 | 413 |
+| MENCIONA | 0 | 3362 |
+| PERTENCE_A | 75 | 78 |
+| PODE_CAUSAR | 1518 | 1522 |
+| TEM_CHUNK | 0 | 569 |
+| TEM_SECAO | 0 | 150 |
