@@ -118,6 +118,17 @@ def gerar_cypher(llm, pergunta, seeds, anterior=None, erro=None):
     return llm.with_structured_output(Consulta).invoke("\n\n".join(partes)).cypher.strip()
 
 
+def nomear_relacao(cypher):
+    """Usa r.x sem relação chamada r (erro comum do qwen 7b): dá o nome r à primeira sem nome.
+
+    shortcut: a primeira relação sem nome pode não ser a que o modelo quis; vale para a
+    proveniência (fonte_chunk_id), troque por few-shot melhor se o modelo crescer.
+    """
+    if re.search(r"\br\.", cypher) and not re.search(r"\[\s*r\s*[:\]{]", cypher):
+        return re.sub(r"\[\s*:", "[r:", cypher, count=1)
+    return cypher
+
+
 def validar_cypher(driver, cypher):
     """Levanta CypherInvalido se a consulta for vazia, proibida, inválida ou não for só leitura."""
     if not cypher.strip():
@@ -156,7 +167,7 @@ def consultar(driver, llm, pergunta, seeds, tentativas=2):
     cypher = erro = None
     for _ in range(tentativas):
         try:
-            cypher = gerar_cypher(llm, pergunta, seeds, cypher, erro)
+            cypher = nomear_relacao(gerar_cypher(llm, pergunta, seeds, cypher, erro))
         except Exception as e:  # rede, cota ou saída inválida do LLM
             return _falha(None, f"llm: {e}")
         try:

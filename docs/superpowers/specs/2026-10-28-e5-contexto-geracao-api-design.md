@@ -151,7 +151,7 @@ Constante no módulo, em pt-BR. Quem chama passa o LLM com `temperature=0`. Part
    que estão em `contexto["nos"]`. Sem repetidos, na ordem do LLM.
 3. **Confiança:** `PESO_SUPORTE[suporte] × válidas / citadas`, somando chunks e nós, arredondada
    a 2 casas. Sem nenhuma citação, a razão é 0.
-4. **Recusa** quando `suporte == "nenhum"` ou quando não sobra nenhum chunk válido. Na recusa:
+4. **Recusa** quando `suporte == "nenhum"` ou quando não sobra nenhum chunk nem nó válido (2026-11-03: fato do grafo sem `fonte_chunk_id`, como CONTEM, também sustenta). Na recusa:
    `resposta = RECUSA`, `chunks = []`, `nos = []`, `confianca = 0.0`, `recusou = True`.
 
 Uma falha do LLM (rede, cota, saída inválida) propaga a exceção.

@@ -67,7 +67,8 @@ def gerar_resposta(llm, pergunta, contexto):
     citados_n = list(dict.fromkeys(_limpar(r.nos)))
     chunks = [c for c in citados_c if c in contexto["chunk_ids"]]
     nos = [n for n in citados_n if n in contexto["nos"]]
-    if r.suporte == "nenhum" or not chunks or _diz_que_nao_sabe(r.resposta):
+    # Fato do grafo sem fonte_chunk_id (ex.: CONTEM) também sustenta: basta um nó válido.
+    if r.suporte == "nenhum" or not (chunks or nos) or _diz_que_nao_sabe(r.resposta):
         return _recusa()
     # Sem nós no contexto (modo rag), ids de entidade citados não contam contra a confiança.
     citadas = len(citados_c) + (len(citados_n) if contexto["nos"] else 0)

@@ -61,8 +61,10 @@ def test_citacao_inventada_descartada_e_confianca_reduzida():
     assert g["confianca"] == 0.3  # 0.6 * 2/4
 
 
-@pytest.mark.parametrize("r", [resp(suporte="nenhum"), resp(chunks=["inventado"]), resp(chunks=[])])
-def test_recusa_sem_suporte_ou_sem_chunk_valido(r):
+@pytest.mark.parametrize(
+    "r", [resp(suporte="nenhum"), resp(chunks=["inventado"], nos=[]), resp(chunks=[], nos=["x"])]
+)
+def test_recusa_sem_suporte_ou_sem_citacao_valida(r):
     g = gerar_resposta(LLMFalso(Resposta=[r]), "p", CTX)
     assert g == {"resposta": RECUSA, "chunks": [], "nos": [], "confianca": 0.0, "recusou": True}
 
@@ -123,3 +125,9 @@ def test_schema_poe_suporte_antes_das_listas_e_limita_tamanho():
     s = Resposta.model_json_schema()
     assert list(s["properties"]) == ["resposta", "suporte", "chunks", "nos"]
     assert s["properties"]["chunks"]["maxItems"] == 8 and s["properties"]["nos"]["maxItems"] == 12
+
+
+def test_so_nos_validos_sem_chunk_sustentam_a_resposta():
+    g = gerar_resposta(LLMFalso(Resposta=[resp(chunks=["Fato sem fonte"], nos=["marevan"])]),
+                       "p", CTX)
+    assert not g["recusou"] and g["chunks"] == [] and g["nos"] == ["marevan"]

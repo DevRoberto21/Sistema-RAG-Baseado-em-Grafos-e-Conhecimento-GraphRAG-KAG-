@@ -165,3 +165,19 @@ def test_gemini_real_gera_cypher_com_fonte(db):
     r = consultar(db, get_llm(temperature=0), MAREVAN_ADVIL, seeds)
     assert r["erro"] is None, r
     assert any(linha.get("fonte_chunk_id") for linha in r["linhas"]), r
+
+
+@pytest.mark.parametrize(
+    "antes,depois",
+    [
+        ("MATCH (m)-[:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id",
+         "MATCH (m)-[r:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id"),
+        ("MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose",
+         "MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose"),
+        ("MATCH (m)-[:CONTEM]->(pr) RETURN pr.nome", "MATCH (m)-[:CONTEM]->(pr) RETURN pr.nome"),
+    ],
+)
+def test_nomear_relacao(antes, depois):
+    from graphrag_bulas.text2cypher import nomear_relacao
+
+    assert nomear_relacao(antes) == depois
