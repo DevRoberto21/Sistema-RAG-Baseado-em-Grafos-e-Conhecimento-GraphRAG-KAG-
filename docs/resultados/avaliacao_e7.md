@@ -5,21 +5,35 @@
 ## Geral
 | modo | cobertura | acerto | fidelidade | recusa_falsa | recusa_correta | alucinacao | tempo médio (s) | erros |
 |---|---|---|---|---|---|---|---|---|
-| graphrag | 0.710 | 0.586 | 0.649 | 0.034 | 0.875 | 0.125 | 97.7 | 3 |
-| rag | 0.699 | 0.567 | 0.595 | 0.033 | 1.000 | 0.000 | 31.6 | 0 |
-| llm_puro | 0.368 | 0.259 | — | 0.037 | 0.100 | 0.900 | 40.8 | 3 |
+| graphrag | 0.737 | 0.600 | 0.713 | 0.033 | 1.000 | 0.000 | 122.0 | 0 |
+| rag | 0.699 | 0.567 | 0.634 | 0.067 | 1.000 | 0.000 | 47.5 | 0 |
+| llm_puro | 0.390 | 0.286 | — | 0.036 | 0.100 | 0.900 | 43.5 | 2 |
 
 ## Por tipo
 | modo | tipo | cobertura | acerto |
 |---|---|---|---|
-| graphrag | 1hop | 0.929 | 0.929 |
-| graphrag | multihop | 0.506 | 0.267 |
+| graphrag | 1hop | 0.900 | 0.867 |
+| graphrag | multihop | 0.573 | 0.333 |
 | rag | 1hop | 1.000 | 1.000 |
 | rag | multihop | 0.398 | 0.133 |
-| llm_puro | 1hop | 0.564 | 0.462 |
+| llm_puro | 1hop | 0.595 | 0.500 |
 | llm_puro | multihop | 0.185 | 0.071 |
 
-## Notas da rodada (2026-11-03)
+## Notas da rodada final (2026-11-03, tarde)
+
+- GraphRAG rodado depois dos commits 69c76a9 e cc3bb42. RAG rodado depois de 69c76a9 (cc3bb42 não
+  muda o modo rag). LLM puro: só as perguntas com erro foram refeitas; 2 seguem com JSON quebrado.
+- Mudanças: `suporte` antes das listas e teto de itens no schema da Resposta (fim do JSON
+  quebrado do GraphRAG: 3 erros -> 0); resposta que diz que o contexto não informa vira recusa
+  (s02); fato do grafo sem trecho (ex.: CONTEM) sustenta a resposta (m06); o código nomeia a
+  relação `r` quando o Cypher do modelo esquece.
+- Falhas de Text-to-Cypher: 13 -> 8 (3 sem_consulta, 4 sintaxe, 1 `Variable r not defined`).
+- Tempo médio do GraphRAG (122 s) e do RAG (47.5 s) inflado: a máquina rodou outras tarefas ao
+  mesmo tempo. Na rodada de 2026-11-02 foram 99 s e 28 s.
+- Variação entre rodadas com temperatura 0 é de 1 a 2 perguntas (ex.: q03 e m10 mudaram sem
+  mudança de código que as afetasse).
+
+## Notas da rodada intermediária (2026-11-03, manhã)
 
 - Modos `graphrag` e `rag` rodados de novo depois dos commits fb0ec50 e d278f10. O `llm_puro`
   não usa citação e manteve as respostas de 2026-11-02.
