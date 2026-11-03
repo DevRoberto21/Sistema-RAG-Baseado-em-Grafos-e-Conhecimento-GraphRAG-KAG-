@@ -26,8 +26,10 @@ def test_responder_monta_o_contrato(db):
     assert r["modo"] == "graphrag" and r["recusou"] is False and r["confianca"] == 1.0
     assert r["cypher"] == INTERACAO
     assert r["nos"] == ["varfarina"] and r["subgrafo"]["arestas"]
+    # Citação aceita (confianca 1.0). Com o corte por max_chars (E5.5), o chunk pode valer só pela
+    # fonte de um fato, sem o texto entre os trechos; se o texto entrou, vem marcado.
     citados = [t["chunk_id"] for t in r["trechos"] if t["citado"]]
-    assert citados == ["bula_marevan_interacoes_0"]
+    assert citados in ([], ["bula_marevan_interacoes_0"])
 
 
 def test_responder_sem_cypher_e_com_recusa(db):

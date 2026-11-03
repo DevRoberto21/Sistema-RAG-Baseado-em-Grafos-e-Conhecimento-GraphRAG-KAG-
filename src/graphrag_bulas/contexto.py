@@ -37,8 +37,18 @@ def _caminho(ids, nomes, arestas):
     return "- " + " ".join(partes)
 
 
-def montar_contexto(r, max_fatos=100, max_trechos=20):
-    """Monta o texto do prompt e os ids que a resposta pode citar. Não acessa o Neo4j."""
+# ~16 mil caracteres (~5 mil tokens) cabem no num_ctx 8192 com as regras e a saída (config.py).
+MAX_CHARS = 16000
+TOPO_VETOR = 2
+MIN_TRECHOS = 4  # o corte tira trechos até sobrar este tanto, depois fatos
+
+
+def montar_contexto(r, max_fatos=100, max_trechos=20, max_chars=MAX_CHARS):
+    """Monta o texto do prompt e os ids que a resposta pode citar. Não acessa o Neo4j.
+
+    Acima de max_chars corta do fim: trechos até MIN_TRECHOS, depois fatos, depois o resto.
+    Sem isso o Ollama trunca o começo do prompt, onde ficam as regras.
+    """
     nos = r["subgrafo"]["nos"]
     nomes = {n["id"]: n["nome"] for n in nos}
     dist = {n["id"]: n["dist"] for n in nos}
@@ -59,20 +69,51 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
 
     fontes = [a["props"]["fonte_chunk_id"] for a in arestas if a["props"].get("fonte_chunk_id")]
     ordem = {cid: i for i, cid in enumerate(dict.fromkeys(fontes))}
-    trechos = sorted(
-        r["trechos"],
+    # Os TOPO_VETOR trechos mais parecidos com a pergunta vêm antes: o PageRank do subgrafo não olha
+    # a pergunta, e o corte por max_chars tira o fim da lista. Depois, os citados pelos fatos.
+    com_score = [t for t in r["trechos"] if t["score"] is not None]
+    topo = sorted(com_score, key=lambda t: -t["score"])[:TOPO_VETOR]
+    resto = sorted(
+        (t for t in r["trechos"] if t not in topo),
         key=lambda t: (
             ordem.get(t["chunk_id"], len(ordem)),
             t["score"] is None,
             -(t["score"] or 0),
         ),
     )
+    trechos = topo + resto
     unicos = {}
     for t in trechos:
         unicos.setdefault(t["chunk_id"], t)
     trechos = list(unicos.values())[:max_trechos]
 
     caminhos = (r.get("gds") or {}).get("caminhos", [])
+    texto = _texto(caminhos, nomes, r, arestas, linhas, trechos)
+    while len(texto) > max_chars and (trechos or arestas):
+        if len(trechos) > MIN_TRECHOS or not arestas:
+            trechos = trechos[:-1]
+        else:
+            arestas = arestas[:-1]
+        texto = _texto(caminhos, nomes, r, arestas, linhas, trechos)
+    fontes = [a["props"]["fonte_chunk_id"] for a in arestas if a["props"].get("fonte_chunk_id")]
+    return {
+        "texto": texto,
+        "chunk_ids": {t["chunk_id"] for t in trechos}
+        | set(fontes)
+        | {
+            linha["fonte_chunk_id"]
+            for linha in linhas
+            if isinstance(linha.get("fonte_chunk_id"), str) and linha["fonte_chunk_id"]
+        },
+        "nos": {a["origem"] for a in arestas}
+        | {a["destino"] for a in arestas}
+        | {i for c in caminhos for i in c},
+        "trechos": trechos,
+        "sem_consulta": cypher.get("erro") == "sem_consulta",
+    }
+
+
+def _texto(caminhos, nomes, r, arestas, linhas, trechos):
     blocos = []
     if caminhos:
         blocos.append(
@@ -94,18 +135,4 @@ def montar_contexto(r, max_fatos=100, max_trechos=20):
             "Trechos de bula:\n"
             + "\n".join(f"[{t['chunk_id']}] ({t['fonte']}) {t['texto']}" for t in trechos)
         )
-    return {
-        "texto": "\n\n".join(blocos),
-        "chunk_ids": {t["chunk_id"] for t in trechos}
-        | set(fontes)
-        | {
-            linha["fonte_chunk_id"]
-            for linha in linhas
-            if isinstance(linha.get("fonte_chunk_id"), str) and linha["fonte_chunk_id"]
-        },
-        "nos": {a["origem"] for a in arestas}
-        | {a["destino"] for a in arestas}
-        | {i for c in caminhos for i in c},
-        "trechos": trechos,
-        "sem_consulta": cypher.get("erro") == "sem_consulta",
-    }
+    return "\n\n".join(blocos)

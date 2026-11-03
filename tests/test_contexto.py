@@ -53,14 +53,15 @@ def test_fatos_ordenados_por_dist_e_confianca_e_cortados():
     assert ctx["chunk_ids"] == {"c1", "c2"}
 
 
-def test_trechos_citados_pelos_fatos_vem_primeiro_e_sao_cortados():
+def test_trechos_por_similaridade_depois_citados_pelos_fatos_e_cortados():
     r = r_base(
         [aresta("marevan", "CONTEM", "varfarina", "c1")],
         [trecho("s1", 0.9), trecho("s2", 0.8), trecho("c1"), trecho("s3", None)],
     )
-    ctx = montar_contexto(r, max_trechos=3)
-    assert [t["chunk_id"] for t in ctx["trechos"]] == ["c1", "s1", "s2"]
-    assert ctx["texto"].index("[c1] (bula_x) texto de c1") < ctx["texto"].index("[s1]")
+    r["trechos"].append(trecho("s0", 0.95))
+    ctx = montar_contexto(r, max_trechos=4)
+    assert [t["chunk_id"] for t in ctx["trechos"]] == ["s0", "s1", "c1", "s2"]
+    assert ctx["texto"].index("[s1]") < ctx["texto"].index("[c1] (bula_x) texto de c1")
 
 
 def test_linhas_do_cypher_entram_so_sem_erro():
@@ -125,3 +126,15 @@ def test_bloco_de_caminhos_com_nomes_tipos_e_direcao():
     linha = "- Marevan -[CONTEM]-> Varfarina <-[INTERAGE_COM]- AINEs -[?]- x"
     assert ctx["texto"].startswith("Caminhos entre medicamentos:\n" + linha)
     assert "x" in ctx["nos"]
+
+
+def test_orcamento_de_caracteres_corta_trechos_ate_o_minimo_e_depois_fatos():
+    fatos = [aresta("marevan", "INTERAGE_COM", "varfarina", f"f{i}", efeito="x" * 50)
+             for i in range(30)]
+    trechos = [{**trecho(f"s{i}", 0.9 - i / 100), "texto": "y" * 500} for i in range(10)]
+    ctx = montar_contexto(r_base(fatos, trechos), max_chars=3000)
+    assert len(ctx["texto"]) <= 3000
+    assert [t["chunk_id"] for t in ctx["trechos"]][:1] == ["s0"]
+    assert len(ctx["trechos"]) <= 4
+    assert montar_contexto(r_base(fatos, trechos))["texto"] == montar_contexto(
+        r_base(fatos, trechos), max_chars=10**6)["texto"]

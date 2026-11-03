@@ -88,9 +88,13 @@ Trechos de bula:
 - **Linhas do Cypher.** Só quando `r["cypher"]` existe e `erro is None`. Uma linha por registro,
   em JSON compacto (`ensure_ascii=False`, chaves ordenadas). O `fonte_chunk_id` de cada linha,
   quando houver, entra em `chunk_ids`.
-- **Trechos.** Primeiro os trechos citados pelos fatos que entraram, na ordem dos fatos. Depois
-  os demais trechos de `r["trechos"]`, por `score` decrescente (`None` por último), sem repetir
-  `chunk_id`. Corte em `max_trechos`. Formato: `[chunk_id] (fonte) texto`, com o texto inteiro.
+- **Trechos.** Primeiro os 2 trechos de maior `score` (similaridade com a pergunta). Depois os
+  citados pelos fatos que entraram, na ordem dos fatos, e por fim os demais por `score`
+  decrescente (`None` por último), sem repetir `chunk_id`. Corte em `max_trechos`.
+- **Orçamento (2026-11-02).** Com o texto acima de `max_chars` (16 mil caracteres, para caber no
+  `num_ctx` 8192 do Ollama), sai o último trecho até sobrarem 4, depois o último fato, depois o
+  resto dos trechos. Na avaliação do E7, sem esse corte, o contexto passava de 30 mil caracteres
+  e o Ollama truncava as regras do começo do prompt. Formato: `[chunk_id] (fonte) texto`, com o texto inteiro.
 - **`chunk_ids`.** Os ids dos trechos que entraram, mais as fontes dos fatos e das linhas que
   entraram.
 - **Vazio.** Sem fatos, sem linhas e sem trechos, `texto == ""`.
