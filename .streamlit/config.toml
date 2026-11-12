@@ -4,3 +4,7 @@ base = "light"
 backgroundColor = "#FBFBFA"
 textColor = "#2F3437"
 primaryColor = "#111111"
+
+# Watcher varre todos os módulos do transformers e loga erro de torchvision ausente.
+[server]
+fileWatcherType = "none"
