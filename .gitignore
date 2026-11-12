@@ -8,3 +8,8 @@ __pycache__/
 data/processed/*
 !data/**/.gitkeep
 neo4j/
+
+# Material de entrega e slides (fica só local)
+entrega/
+scripts/gerar_slides.py
+.archify/
