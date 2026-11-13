@@ -91,6 +91,30 @@ uv run --extra ui --extra embeddings streamlit run app/streamlit_app.py
 Abre em http://localhost:8501. A mesma pergunta sai em duas colunas, GraphRAG (com subgrafo,
 Cypher e trechos citados) e RAG tradicional (top-k trechos). Precisa do Neo4j carregado (E4).
 
+### Perguntas para testar
+
+Tiradas do conjunto de avaliação do E7 ([`data/gold/perguntas.json`](data/gold/perguntas.json)).
+
+Fato direto de uma bula (1 salto):
+
+- Para que o Cozaar é indicado?
+- O Renitec pode causar tosse?
+- Por que a Aspirina é contraindicada na suspeita de dengue?
+- O que pode acontecer se eu beber álcool durante o tratamento com Flagyl?
+
+Cruzando bulas pelo grafo (multi-salto), onde o GraphRAG tende a se sair melhor que o RAG:
+
+- Posso tomar Marevan com Advil?
+- O Ancoron interage com o princípio ativo do Marevan? Qual o efeito?
+- Quais medicamentos do corpus são indicados para hipertensão?
+- O Cozaar e o Aradois têm o mesmo princípio ativo?
+- Que efeito adverso o Cozaar e o Norvasc têm em comum?
+
+Fora do corpus (o esperado é recusar, não inventar):
+
+- Qual a dose de Rivotril para ansiedade?
+- Qual o preço do Cozaar na farmácia?
+
 ## Avaliação
 
 Extração contra o gold de 5 bulas (E3.5), relatório em `logs/avaliacao_e3.md`:
