@@ -5,7 +5,7 @@ import os
 import pytest
 from test_geracao import LLMFalso, resp
 
-from graphrag_bulas.api import responder
+from graphrag_bulas.api import ETAPAS, responder
 from graphrag_bulas.text2cypher import Consulta
 
 MAREVAN_ADVIL = "Posso tomar Marevan com Advil?"
@@ -21,7 +21,9 @@ def test_responder_monta_o_contrato(db):
         Consulta=[Consulta(cypher=INTERACAO)],
         Resposta=[resp(chunks=["bula_marevan_interacoes_0"], nos=["varfarina"])],
     )
-    r = responder(MAREVAN_ADVIL, driver=db, llm=llm)
+    etapas = []
+    r = responder(MAREVAN_ADVIL, driver=db, llm=llm, etapa=etapas.append)
+    assert etapas == list(ETAPAS)
     assert set(r) == CHAVES
     assert r["modo"] == "graphrag" and r["recusou"] is False and r["confianca"] == 1.0
     assert r["cypher"] == INTERACAO

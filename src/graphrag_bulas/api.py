@@ -10,20 +10,29 @@ from graphrag_bulas.geracao import gerar_resposta
 from graphrag_bulas.rag_vetorial import recuperar_vetorial
 from graphrag_bulas.retrieval import recuperar
 
+ETAPAS = ("recuperando", "montando contexto", "gerando resposta")
 
-def responder(pergunta, modo="graphrag", driver=None, llm=None):
-    """Pergunta -> resposta citada. "graphrag": grafo + GDS + Cypher; "rag": só vetor (E5.8)."""
+
+def responder(pergunta, modo="graphrag", driver=None, llm=None, etapa=None):
+    """Pergunta -> resposta citada. "graphrag": grafo + GDS + Cypher; "rag": só vetor (E5.8).
+
+    etapa(nome), se dado, é chamada antes de cada uma das ETAPAS (barra de progresso da UI).
+    """
+    etapa = etapa or (lambda nome: None)
     if modo not in ("graphrag", "rag"):
         raise ValueError(f"modo desconhecido: {modo}")
     llm = llm or get_llm(temperature=0)
     if driver is None:
         with get_driver() as d:
-            return responder(pergunta, modo, d, llm)
+            return responder(pergunta, modo, d, llm, etapa)
+    etapa(ETAPAS[0])
     if modo == "rag":
         r = recuperar_vetorial(driver, pergunta)
     else:
         r = recuperar(driver, pergunta, llm=llm)
+    etapa(ETAPAS[1])
     ctx = montar_contexto(r)
+    etapa(ETAPAS[2])
     g = gerar_resposta(llm, pergunta, ctx)
     citados = set(g["chunks"])
     return {

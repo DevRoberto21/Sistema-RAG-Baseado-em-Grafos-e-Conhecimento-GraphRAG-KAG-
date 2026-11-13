@@ -26,6 +26,7 @@ CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap');
 :root { --tinta: #111111; --texto: #2F3437; --mudo: #787774; --borda: #EAEAEA; --fundo: #FBFBFA;
+        --cartao: #FFFFFF; --codigo: #F7F6F3; --placeholder: #A8A6A1; --foco: #BDBBB6; --hover: #333333;
         --ease: cubic-bezier(0.16, 1, 0.3, 1); }
 html, body, [data-testid="stAppViewContainer"] { background: var(--fundo); }
 html, body, .stApp, input, textarea, button {
@@ -44,18 +45,18 @@ html, body, .stApp, input, textarea, button {
 .subtitulo { color: var(--mudo); font-size: 1.05rem; line-height: 1.6; margin: 0.8rem 0 2.6rem;
   animation: surgir 700ms var(--ease) 80ms both; }
 .stTextInput input { border: 1px solid var(--borda) !important; border-radius: 12px !important;
-  background: #FFFFFF !important; padding: 0.9rem 1.1rem !important; font-size: 1.05rem !important;
+  background: var(--cartao) !important; padding: 0.9rem 1.1rem !important; font-size: 1.05rem !important;
   transition: border-color 200ms var(--ease); box-shadow: none !important;
   color: var(--tinta) !important; -webkit-text-fill-color: var(--tinta) !important; caret-color: var(--tinta); }
-.stTextInput input::placeholder { color: #A8A6A1 !important; -webkit-text-fill-color: #A8A6A1 !important; }
-.stTextInput input:focus { border-color: #BDBBB6 !important; }
-.stButton button, .stFormSubmitButton button { background: var(--tinta); color: #FFFFFF;
+.stTextInput input::placeholder { color: var(--placeholder) !important; -webkit-text-fill-color: var(--placeholder) !important; }
+.stTextInput input:focus { border-color: var(--foco) !important; }
+.stButton button, .stFormSubmitButton button { background: var(--tinta); color: var(--fundo);
   border: none; border-radius: 6px; padding: 0.55rem 1.3rem; transition: background 200ms, transform 120ms; }
-.stButton button:hover, .stFormSubmitButton button:hover { background: #333333; color: #FFFFFF; }
+.stButton button:hover, .stFormSubmitButton button:hover { background: var(--hover); color: var(--fundo); }
 .stButton button:active, .stFormSubmitButton button:active { transform: scale(0.98); }
 .coluna { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mudo);
   margin-bottom: 0.7rem; }
-.cartao { position: relative; background: #FFFFFF; border: 1px solid var(--borda); border-radius: 12px;
+.cartao { position: relative; background: var(--cartao); border: 1px solid var(--borda); border-radius: 12px;
   padding: 28px; margin-bottom: 14px; animation: surgir 600ms var(--ease) both;
   animation-delay: calc(var(--i, 0) * 80ms); transition: box-shadow 200ms var(--ease); }
 .cartao:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
@@ -68,7 +69,7 @@ html, body, .stApp, input, textarea, button {
 .meta { font-family: 'SF Mono', 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--mudo); }
 .meta a { color: var(--mudo); text-decoration: none; border-bottom: 1px solid var(--borda); }
 .cypher { font-family: 'SF Mono', 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 1.6;
-  background: #F7F6F3; border-radius: 8px; padding: 14px 16px; white-space: pre-wrap;
+  background: var(--codigo); border-radius: 8px; padding: 14px 16px; white-space: pre-wrap;
   word-break: break-word; color: var(--texto); }
 .erro { color: #9F2F2D; }
 .aviso { margin-top: 4rem; padding-top: 1.4rem; border-top: 1px solid var(--borda); color: var(--mudo);
@@ -77,9 +78,31 @@ details.anterior { border-bottom: 1px solid var(--borda); padding: 14px 0; }
 details.anterior summary { cursor: pointer; list-style: none; color: var(--texto); }
 details.anterior summary::before { content: '+'; display: inline-block; width: 1.4rem; color: var(--mudo); }
 details.anterior[open] summary::before { content: '\\2212'; }
+[data-testid="stWidgetLabel"] * { color: var(--texto) !important; }
+.progresso { height: 4px; background: var(--borda); border-radius: 9999px; overflow: hidden; margin: 0 0 0.6rem; }
+.progresso div { height: 100%; background: var(--tinta); transition: width 400ms var(--ease); }
 </style>
 <div class="aura"></div>
 """
+
+# Tema escuro: só redefine as variáveis do CSS acima; injetado depois dele.
+CSS_ESCURO = """
+<style>
+:root { --tinta: #F1F1EF; --texto: #D4D4D2; --mudo: #9B9A97; --borda: #2F2F2F; --fundo: #191919;
+        --cartao: #202020; --codigo: #2A2A2A; --placeholder: #6F6E69; --foco: #555555; --hover: #D4D4D2; }
+.aura { opacity: 0.4; }
+</style>
+"""
+
+
+def html_progresso(fracao, texto):
+    """Barra fina com a porcentagem, no tema da página (st.progress segue só o config.toml)."""
+    pct = round(100 * fracao)
+    return (
+        f'<div class="progresso"><div style="width:{pct}%"></div></div>'
+        f'<div class="meta">{pct}% · {escape(texto)}</div>'
+    )
+
 
 AVISO = (
     "Este sistema responde só com base em bulas da ANVISA e pode errar. "
@@ -143,13 +166,13 @@ def html_erro(erro, i=0):
     return cartao(f'<div class="resposta erro">Falhou: {escape(erro)}</div>', i)
 
 
-def html_subgrafo(subgrafo, altura=420):
+def html_subgrafo(subgrafo, altura=420, escuro=False):
     """Subgrafo interativo (vis-network via pyvis), cor por label, nó maior com mais PageRank."""
     net = Network(
         height=f"{altura}px",
         width="100%",
-        bgcolor="#FFFFFF",
-        font_color="#2F3437",
+        bgcolor="#202020" if escuro else "#FFFFFF",
+        font_color="#D4D4D2" if escuro else "#2F3437",
         directed=True,
         cdn_resources="remote",
     )
@@ -165,7 +188,7 @@ def html_subgrafo(subgrafo, altura=420):
             color={
                 "background": fundo,
                 "border": cor,
-                "highlight": {"background": fundo, "border": "#111111"},
+                "highlight": {"background": fundo, "border": "#F1F1EF" if escuro else "#111111"},
             },
             font={"color": cor, "face": "-apple-system, Helvetica Neue, sans-serif"},
             size=10 + 18 * (n.get("pagerank") or 0.0) / topo,
@@ -175,7 +198,7 @@ def html_subgrafo(subgrafo, altura=420):
     ids = {n["id"] for n in subgrafo["nos"]}
     for a in subgrafo["arestas"]:
         if a["origem"] in ids and a["destino"] in ids:
-            net.add_edge(a["origem"], a["destino"], title=a["tipo"], color="#D9D8D4", width=1)
+            net.add_edge(a["origem"], a["destino"], title=a["tipo"], color="#444444" if escuro else "#D9D8D4", width=1)
     net.set_options("""{"physics": {"barnesHut": {"springLength": 110}, "stabilization": {"iterations": 120}},
                         "interaction": {"hover": true}, "edges": {"smooth": {"type": "continuous"},
                         "arrows": {"to": {"scaleFactor": 0.4}}}}""")

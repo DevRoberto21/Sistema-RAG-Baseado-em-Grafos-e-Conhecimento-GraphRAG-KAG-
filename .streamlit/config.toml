@@ -1,4 +1,4 @@
-# Tema claro fixo: o CSS do app (interface.py) assume fundo claro.
+# Base clara; o tema escuro do app é o CSS_ESCURO de interface.py (toggle na página).
 [theme]
 base = "light"
 backgroundColor = "#FBFBFA"

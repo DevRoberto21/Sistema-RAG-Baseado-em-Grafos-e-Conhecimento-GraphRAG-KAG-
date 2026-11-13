@@ -69,7 +69,7 @@ def test_subgrafo_tem_nos_e_aresta():
 
 
 def test_app_mostra_dois_modos_e_isola_falha(monkeypatch):
-    def falso(pergunta, modo, driver=None, llm=None):
+    def falso(pergunta, modo, driver=None, llm=None, etapa=None):
         if modo == "rag":
             raise RuntimeError("sem índice")
         return R
@@ -84,3 +84,10 @@ def test_app_mostra_dois_modos_e_isola_falha(monkeypatch):
     assert "&lt;b&gt;hemorragia" in html
     assert "Falhou: RuntimeError: sem índice" in html
     assert "Não substitui" in html
+    assert "100% · concluído" in html
+    assert at.text_input[0].placeholder == "O Marevan causa sangramento?"
+
+
+def test_progresso_e_subgrafo_escuro():
+    assert "42% · GraphRAG: gerando" in interface.html_progresso(0.42, "GraphRAG: gerando")
+    assert "#202020" in interface.html_subgrafo(R["subgrafo"], escuro=True)
