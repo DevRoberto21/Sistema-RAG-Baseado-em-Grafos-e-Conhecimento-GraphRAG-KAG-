@@ -22,7 +22,7 @@ RE_REGISTRO = re.compile(r"\b1\.\d{4}\.\d{4}(?:\.\d{3}-?\d)?")
 RE_CNPJ = re.compile(r"\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}")
 RE_REGISTRADO = re.compile(r"registrad[oa][^:\n]{0,30}por\s*:?", re.I)
 RE_EMPRESA = re.compile(r"(.*?\b(?:Ltda|LTDA|S\.\s?A|S/A)\b\.?)")
-RE_HISTORICO =re.compile(r"hist.rico de altera", re.I)
+RE_HISTORICO = re.compile(r"hist.rico de altera", re.I)
 # Seções que só existem na bula do profissional (RDC 47/2009).
 RE_PROFISSIONAL = re.compile(r"resultados de efic.cia|caracter.sticas farmacol.gicas", re.I)
 
@@ -39,10 +39,11 @@ def empresa_e_cnpj(txt: str) -> tuple[str | None, str | None]:
     if not m:
         cnpj = RE_CNPJ.search(txt)
         return None, cnpj.group() if cnpj else None
-    resto = txt[m.end():]
+    resto = txt[m.end() :]
     # Descarta ruído de rodapé ("16", "- 8 de 9 -", "Internal", "VV-REG-...").
     linhas = [
-        linha.strip() for linha in resto.splitlines()[:12]
+        linha.strip()
+        for linha in resto.splitlines()[:12]
         if re.search(r"[A-Za-zÀ-ú]{3}", linha) and not re.match(r"\s*(Internal|VV-)", linha)
     ]
     janela = " ".join(linhas[:4])
@@ -58,7 +59,7 @@ def data_publicacao(txt: str) -> str | None:
         return m.group(1)
     h = RE_HISTORICO.search(txt)
     datas = []
-    for d in re.findall(DATA, txt[h.start() if h else 0:]):
+    for d in re.findall(DATA, txt[h.start() if h else 0 :]):
         try:
             datas.append(datetime.strptime(d, "%d/%m/%Y"))
         except ValueError:

@@ -47,6 +47,7 @@
 
 ```python
 """Retrieval E5.1 + E5.2 sobre o grafo semente. Pula sem Neo4j (fixture db em conftest.py)."""
+
 from graphrag_bulas.retrieval import termos_fulltext
 
 

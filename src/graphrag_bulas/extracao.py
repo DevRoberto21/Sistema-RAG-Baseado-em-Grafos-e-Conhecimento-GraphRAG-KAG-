@@ -47,8 +47,8 @@ Regras:
 FOCO = {
     "indicacoes": "INDICADO_PARA: doenças e sintomas que o medicamento trata ou previne.",
     "contraindicacoes": "CONTRAINDICADO_EM: condições e populações em que o uso é proibido.",
-    "advertencias": "CONTRAINDICADO_EM só quando o trecho proíbe o uso (\"não deve ser usado\", "
-    "confianca 1.0) ou desaconselha (\"não é recomendado\", confianca 0.7). Cautela, atenção, "
+    "advertencias": 'CONTRAINDICADO_EM só quando o trecho proíbe o uso ("não deve ser usado", '
+    'confianca 1.0) ou desaconselha ("não é recomendado", confianca 0.7). Cautela, atenção, '
     "falta de dados, ajuste de dose ou monitoramento não é contraindicação: sem relação.",
     "interacoes": "INTERAGE_COM entre o princípio ativo da bula e outros fármacos ou classes. "
     "PERTENCE_A quando o trecho diz a classe de um fármaco.",
@@ -59,7 +59,8 @@ FOCO = {
 # Fora do gold set (E2.5), para não vazar a resposta na medição (E3.5). Trechos parafraseados.
 EXEMPLOS = [
     (
-        "losec", "indicacoes",
+        "losec",
+        "indicacoes",
         "Losec é indicado para o tratamento de úlcera duodenal e da esofagite de refluxo.",
         Extracao(
             entidades=[
@@ -68,15 +69,21 @@ EXEMPLOS = [
                 Entidade(id="esofagite_de_refluxo", label="Condicao", nome="Esofagite de refluxo"),
             ],
             relacoes=[
-                Relacao(tipo="INDICADO_PARA", origem="losec", destino="ulcera_duodenal",
-                        confianca=1.0),
-                Relacao(tipo="INDICADO_PARA", origem="losec", destino="esofagite_de_refluxo",
-                        confianca=1.0),
+                Relacao(
+                    tipo="INDICADO_PARA", origem="losec", destino="ulcera_duodenal", confianca=1.0
+                ),
+                Relacao(
+                    tipo="INDICADO_PARA",
+                    origem="losec",
+                    destino="esofagite_de_refluxo",
+                    confianca=1.0,
+                ),
             ],
         ),
     ),
     (
-        "novalgina", "contraindicacoes",
+        "novalgina",
+        "contraindicacoes",
         "Novalgina não deve ser utilizada durante os três primeiros meses de gravidez nem por "
         "pacientes com porfiria hepática aguda intermitente. O uso de dipirona com metotrexato é "
         "contraindicado em pacientes com insuficiência renal.",
@@ -84,24 +91,38 @@ EXEMPLOS = [
             entidades=[
                 Entidade(id="novalgina", label="Medicamento", nome="Novalgina"),
                 Entidade(id="gestante", label="Populacao", nome="Gestante"),
-                Entidade(id="porfiria_hepatica_aguda_intermitente", label="Condicao",
-                         nome="Porfiria hepática aguda intermitente"),
+                Entidade(
+                    id="porfiria_hepatica_aguda_intermitente",
+                    label="Condicao",
+                    nome="Porfiria hepática aguda intermitente",
+                ),
                 Entidade(id="dipirona", label="PrincipioAtivo", nome="Dipirona"),
                 Entidade(id="metotrexato", label="PrincipioAtivo", nome="Metotrexato"),
             ],
             relacoes=[
-                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina", destino="gestante",
-                        confianca=1.0),
-                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
-                        destino="porfiria_hepatica_aguda_intermitente", confianca=1.0),
-                Relacao(tipo="INTERAGE_COM", origem="dipirona", destino="metotrexato",
-                        gravidade="grave", efeito="contraindicado em insuficiência renal",
-                        confianca=1.0),
+                Relacao(
+                    tipo="CONTRAINDICADO_EM", origem="novalgina", destino="gestante", confianca=1.0
+                ),
+                Relacao(
+                    tipo="CONTRAINDICADO_EM",
+                    origem="novalgina",
+                    destino="porfiria_hepatica_aguda_intermitente",
+                    confianca=1.0,
+                ),
+                Relacao(
+                    tipo="INTERAGE_COM",
+                    origem="dipirona",
+                    destino="metotrexato",
+                    gravidade="grave",
+                    efeito="contraindicado em insuficiência renal",
+                    confianca=1.0,
+                ),
             ],
         ),
     ),
     (
-        "novalgina", "advertencias",
+        "novalgina",
+        "advertencias",
         "Pacientes com asma têm maior risco de reações anafilactoides; use com cautela. Em idosos, "
         "monitorar a função renal. Novalgina não deve ser usada por pacientes com deficiência de "
         "glicose-6-fosfato-desidrogenase. Contém sacarose: não deve ser usado por pessoas com "
@@ -109,21 +130,34 @@ EXEMPLOS = [
         Extracao(
             entidades=[
                 Entidade(id="novalgina", label="Medicamento", nome="Novalgina"),
-                Entidade(id="deficiencia_de_glicose_6_fosfato_desidrogenase", label="Condicao",
-                         nome="Deficiência de glicose-6-fosfato-desidrogenase"),
-                Entidade(id="intolerancia_a_frutose", label="Condicao",
-                         nome="Intolerância à frutose"),
+                Entidade(
+                    id="deficiencia_de_glicose_6_fosfato_desidrogenase",
+                    label="Condicao",
+                    nome="Deficiência de glicose-6-fosfato-desidrogenase",
+                ),
+                Entidade(
+                    id="intolerancia_a_frutose", label="Condicao", nome="Intolerância à frutose"
+                ),
             ],
             relacoes=[
-                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
-                        destino="deficiencia_de_glicose_6_fosfato_desidrogenase", confianca=1.0),
-                Relacao(tipo="CONTRAINDICADO_EM", origem="novalgina",
-                        destino="intolerancia_a_frutose", confianca=1.0),
+                Relacao(
+                    tipo="CONTRAINDICADO_EM",
+                    origem="novalgina",
+                    destino="deficiencia_de_glicose_6_fosfato_desidrogenase",
+                    confianca=1.0,
+                ),
+                Relacao(
+                    tipo="CONTRAINDICADO_EM",
+                    origem="novalgina",
+                    destino="intolerancia_a_frutose",
+                    confianca=1.0,
+                ),
             ],
         ),
     ),
     (
-        "losec", "interacoes",
+        "losec",
+        "interacoes",
         "O omeprazol pode reduzir a absorção do cetoconazol. O uso com clopidogrel diminui a "
         "inibição plaquetária e não é recomendado.",
         Extracao(
@@ -133,17 +167,28 @@ EXEMPLOS = [
                 Entidade(id="clopidogrel", label="PrincipioAtivo", nome="Clopidogrel"),
             ],
             relacoes=[
-                Relacao(tipo="INTERAGE_COM", origem="omeprazol", destino="cetoconazol",
-                        gravidade="desconhecida", efeito="redução da absorção do cetoconazol",
-                        confianca=1.0),
-                Relacao(tipo="INTERAGE_COM", origem="omeprazol", destino="clopidogrel",
-                        gravidade="desconhecida", efeito="diminui a inibição plaquetária",
-                        confianca=1.0),
+                Relacao(
+                    tipo="INTERAGE_COM",
+                    origem="omeprazol",
+                    destino="cetoconazol",
+                    gravidade="desconhecida",
+                    efeito="redução da absorção do cetoconazol",
+                    confianca=1.0,
+                ),
+                Relacao(
+                    tipo="INTERAGE_COM",
+                    origem="omeprazol",
+                    destino="clopidogrel",
+                    gravidade="desconhecida",
+                    efeito="diminui a inibição plaquetária",
+                    confianca=1.0,
+                ),
             ],
         ),
     ),
     (
-        "novalgina", "reacoes_adversas",
+        "novalgina",
+        "reacoes_adversas",
         "Reação rara (> 1/10.000 e < 1/1.000): agranulocitose. Pode ocorrer hipotensão "
         "transitória isolada (reação incomum).",
         Extracao(
@@ -153,15 +198,26 @@ EXEMPLOS = [
                 Entidade(id="hipotensao", label="EfeitoAdverso", nome="Hipotensão"),
             ],
             relacoes=[
-                Relacao(tipo="PODE_CAUSAR", origem="novalgina", destino="agranulocitose",
-                        frequencia="rara", confianca=1.0),
-                Relacao(tipo="PODE_CAUSAR", origem="novalgina", destino="hipotensao",
-                        frequencia="incomum", confianca=1.0),
+                Relacao(
+                    tipo="PODE_CAUSAR",
+                    origem="novalgina",
+                    destino="agranulocitose",
+                    frequencia="rara",
+                    confianca=1.0,
+                ),
+                Relacao(
+                    tipo="PODE_CAUSAR",
+                    origem="novalgina",
+                    destino="hipotensao",
+                    frequencia="incomum",
+                    confianca=1.0,
+                ),
             ],
         ),
     ),
     (
-        "losec", "posologia",
+        "losec",
+        "posologia",
         "Tomar uma cápsula de manhã, antes do café, durante 4 semanas.",
         Extracao(entidades=[], relacoes=[]),
     ),
@@ -169,20 +225,24 @@ EXEMPLOS = [
 
 
 def _exemplo(med, tipo, texto, saida):
-    return (f"Medicamento da bula: {med}\nSeção: {tipo}\nTrecho: {texto}\n"
-            f"Saída: {saida.model_dump_json(exclude_none=True)}")
+    return (
+        f"Medicamento da bula: {med}\nSeção: {tipo}\nTrecho: {texto}\n"
+        f"Saída: {saida.model_dump_json(exclude_none=True)}"
+    )
 
 
 def montar_prompt(chunk):
     """Prompt de um chunk de chunks.jsonl (E2.4): regras, foco da seção, exemplos e o trecho."""
     med = chunk["bula"].removeprefix("bula_")
     exemplos = "\n\n".join(_exemplo(*e) for e in EXEMPLOS)
-    return "\n\n".join([
-        REGRAS,
-        "Exemplos:\n\n" + exemplos,
-        f"Medicamento da bula: {med}\nSeção: {chunk['tipo']}\nFoco: {FOCO[chunk['tipo']]}\n"
-        f"Trecho: {chunk['texto']}",
-    ])
+    return "\n\n".join(
+        [
+            REGRAS,
+            "Exemplos:\n\n" + exemplos,
+            f"Medicamento da bula: {med}\nSeção: {chunk['tipo']}\nFoco: {FOCO[chunk['tipo']]}\n"
+            f"Trecho: {chunk['texto']}",
+        ]
+    )
 
 
 def extrair(llm, chunk) -> Extracao:
@@ -193,41 +253,70 @@ def extrair(llm, chunk) -> Extracao:
 # Princípios ativos de cada bula, da composição (fora dos chunks; fonte do CONTEM no E4).
 # Conferido: cada id aparece no texto da bula.
 COMPOSICAO = {
-    "advil": ["ibuprofeno"], "aldactone": ["espironolactona"], "amoxil": ["amoxicilina"],
-    "ancoron": ["amiodarona"], "aradois": ["losartana"], "arcoxia": ["etoricoxibe"],
-    "aspirina": ["acido_acetilsalicilico"], "atenolol": ["atenolol"],
-    "bactrim": ["sulfametoxazol", "trimetoprima"], "benicar": ["olmesartana"],
-    "brilinta": ["ticagrelor"], "carbolitium": ["litio"], "cataflam": ["diclofenaco"],
-    "celebra": ["celecoxibe"], "cipro": ["ciprofloxacino"],
-    "clavulin": ["amoxicilina", "clavulanato"], "clexane": ["enoxaparina"],
-    "cozaar": ["losartana"], "flagyl": ["metronidazol"], "keflex": ["cefalexina"],
-    "lasix": ["furosemida"], "marevan": ["varfarina"], "norvasc": ["anlodipino"],
-    "renitec": ["enalapril"], "tylenol": ["paracetamol"],
+    "advil": ["ibuprofeno"],
+    "aldactone": ["espironolactona"],
+    "amoxil": ["amoxicilina"],
+    "ancoron": ["amiodarona"],
+    "aradois": ["losartana"],
+    "arcoxia": ["etoricoxibe"],
+    "aspirina": ["acido_acetilsalicilico"],
+    "atenolol": ["atenolol"],
+    "bactrim": ["sulfametoxazol", "trimetoprima"],
+    "benicar": ["olmesartana"],
+    "brilinta": ["ticagrelor"],
+    "carbolitium": ["litio"],
+    "cataflam": ["diclofenaco"],
+    "celebra": ["celecoxibe"],
+    "cipro": ["ciprofloxacino"],
+    "clavulin": ["amoxicilina", "clavulanato"],
+    "clexane": ["enoxaparina"],
+    "cozaar": ["losartana"],
+    "flagyl": ["metronidazol"],
+    "keflex": ["cefalexina"],
+    "lasix": ["furosemida"],
+    "marevan": ["varfarina"],
+    "norvasc": ["anlodipino"],
+    "renitec": ["enalapril"],
+    "tylenol": ["paracetamol"],
 }
 
 # Sinônimos que o LLM usa para as 4 populações.
 POP_SINONIMOS = {
-    "gravidez": "gestante", "gravida": "gestante", "gravidas": "gestante",
-    "gestacao": "gestante", "gestantes": "gestante",
-    "lactacao": "lactante", "amamentacao": "lactante", "aleitamento": "lactante",
+    "gravidez": "gestante",
+    "gravida": "gestante",
+    "gravidas": "gestante",
+    "gestacao": "gestante",
+    "gestantes": "gestante",
+    "lactacao": "lactante",
+    "amamentacao": "lactante",
+    "aleitamento": "lactante",
     "lactantes": "lactante",
-    "crianca": "pediatrico", "criancas": "pediatrico", "pacientes_pediatricos": "pediatrico",
+    "crianca": "pediatrico",
+    "criancas": "pediatrico",
+    "pacientes_pediatricos": "pediatrico",
     "pediatria": "pediatrico",
-    "idosos": "idoso", "geriatria": "idoso",
+    "idosos": "idoso",
+    "geriatria": "idoso",
 }
 
 # Propriedade -> único tipo de relação que a aceita.
-PROPS = {"frequencia": "PODE_CAUSAR", "gravidade": "INTERAGE_COM", "efeito": "INTERAGE_COM",
-         "dose": "CONTEM"}
+PROPS = {
+    "frequencia": "PODE_CAUSAR",
+    "gravidade": "INTERAGE_COM",
+    "efeito": "INTERAGE_COM",
+    "dose": "CONTEM",
+}
 
 
 # Proibição explícita; "cautela", "não é recomendado" e risco-benefício não contam (gold E3.5).
-PROIBE = re.compile(r"contra-?indica|não deve(m)? (ser )?(usad|utilizad|tomad|administrad)"
-                    r"|não (use|utilize|tome)", re.I)
+PROIBE = re.compile(
+    r"contra-?indica|não deve(m)? (ser )?(usad|utilizad|tomad|administrad)"
+    r"|não (use|utilize|tome)",
+    re.I,
+)
 
 
-def validar(extracao: Extracao, med: str, chunk: dict | None = None
-            ) -> tuple[Extracao, list[str]]:
+def validar(extracao: Extracao, med: str, chunk: dict | None = None) -> tuple[Extracao, list[str]]:
     """Descarta o que o schema não aceita (E3.3). Devolve a extração limpa e os motivos.
 
     Tipo, label, vocabulário e faixa de confianca já são barrados pelo Pydantic (E3.1).
@@ -239,8 +328,9 @@ def validar(extracao: Extracao, med: str, chunk: dict | None = None
     INTERAGE_COM grave (regra "com X, contraindicado"). Com o chunk: CONTRAINDICADO_EM fora
     da seção de contraindicações sai se o texto não tem proibição explícita (PROIBE).
     """
-    sem_proibicao = bool(chunk) and chunk["tipo"] != "contraindicacoes" and not PROIBE.search(
-        chunk["texto"])
+    sem_proibicao = (
+        bool(chunk) and chunk["tipo"] != "contraindicacoes" and not PROIBE.search(chunk["texto"])
+    )
     descartes, ents, nomes = [], {}, {}
     for e in extracao.entidades:
         i = slug(e.id)
@@ -256,17 +346,28 @@ def validar(extracao: Extracao, med: str, chunk: dict | None = None
     pas = COMPOSICAO.get(med, [])
     rels = {}
     for r in extracao.relacoes:
-        r = r.model_copy(update={"origem": nomes.get(slug(r.origem), slug(r.origem)),
-                                 "destino": nomes.get(slug(r.destino), slug(r.destino))})
+        r = r.model_copy(
+            update={
+                "origem": nomes.get(slug(r.origem), slug(r.origem)),
+                "destino": nomes.get(slug(r.destino), slug(r.destino)),
+            }
+        )
         o, d = ents.get(r.origem), ents.get(r.destino)
-        if len(pas) == 1 and o and o.label == "Medicamento" and d and d.label in (
-                "PrincipioAtivo", "ClasseTerapeutica") and not r.destino.startswith(pas[0]):
+        if (
+            len(pas) == 1
+            and o
+            and o.label == "Medicamento"
+            and d
+            and d.label in ("PrincipioAtivo", "ClasseTerapeutica")
+            and not r.destino.startswith(pas[0])
+        ):
             # destino = o próprio princípio ativo (olmesartana_medoxomila): é alergia, não interação
             if r.tipo == "CONTRAINDICADO_EM":
                 r = r.model_copy(update={"tipo": "INTERAGE_COM", "gravidade": "grave"})
             if r.tipo in ("INTERAGE_COM", "PERTENCE_A"):
-                o = ents.setdefault(pas[0], Entidade(id=pas[0], label="PrincipioAtivo",
-                                                     nome=pas[0]))
+                o = ents.setdefault(
+                    pas[0], Entidade(id=pas[0], label="PrincipioAtivo", nome=pas[0])
+                )
                 r = r.model_copy(update={"origem": o.id})
         origens, destinos = RELACOES[r.tipo]
         onde = f"{r.tipo} {r.origem}->{r.destino}"
@@ -292,5 +393,6 @@ def validar(extracao: Extracao, med: str, chunk: dict | None = None
             if chave not in rels or r.confianca > rels[chave].confianca:
                 rels[chave] = r
     usadas = {i for r in rels.values() for i in (r.origem, r.destino)}
-    return Extracao(entidades=[e for i, e in ents.items() if i in usadas],
-                    relacoes=list(rels.values())), descartes
+    return Extracao(
+        entidades=[e for i, e in ents.items() if i in usadas], relacoes=list(rels.values())
+    ), descartes

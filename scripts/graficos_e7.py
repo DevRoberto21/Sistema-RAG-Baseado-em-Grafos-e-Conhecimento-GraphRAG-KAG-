@@ -31,16 +31,23 @@ def resumo(perguntas, linhas):
     out = {}
     for m in MODOS:
         ls = [x for k, x in ultima.items() if k[1] == m]
-        ok = [(por_id[x["id"]]["tipo"], v) for x in ls
-              if (v := metricas(por_id[x["id"]], x)) is not None]
+        ok = [
+            (por_id[x["id"]]["tipo"], v)
+            for x in ls
+            if (v := metricas(por_id[x["id"]], x)) is not None
+        ]
 
         def media(campo, tipo=None, ok=ok):
             return mean(v[campo] for t, v in ok if campo in v and tipo in (None, t))
 
-        out[m] = {"acerto": media("acerto"), "acerto_1hop": media("acerto", "1hop"),
-                  "acerto_multihop": media("acerto", "multihop"),
-                  "alucinacao": media("alucinacao"), "recusa_falsa": media("recusa_falsa"),
-                  "segundos": [x["segundos"] for x in ls]}
+        out[m] = {
+            "acerto": media("acerto"),
+            "acerto_1hop": media("acerto", "1hop"),
+            "acerto_multihop": media("acerto", "multihop"),
+            "alucinacao": media("alucinacao"),
+            "recusa_falsa": media("recusa_falsa"),
+            "segundos": [x["segundos"] for x in ls],
+        }
     return out
 
 
@@ -84,35 +91,72 @@ def graficos(r):
     fig, ax = _eixos("Acerto por tipo de pergunta", "15 perguntas de 1 salto e 15 de vários saltos")
     w = 0.36
     _barras(ax, [p - w / 2 for p in pos], [r[m]["acerto_1hop"] for m in MODOS], AZUL, w, "1 salto")
-    _barras(ax, [p + w / 2 for p in pos], [r[m]["acerto_multihop"] for m in MODOS], LARANJA, w,
-            "Vários saltos (multi-hop)")
+    _barras(
+        ax,
+        [p + w / 2 for p in pos],
+        [r[m]["acerto_multihop"] for m in MODOS],
+        LARANJA,
+        w,
+        "Vários saltos (multi-hop)",
+    )
     ax.set_xticks(pos, nomes)
     ax.set_ylim(0, 1.1)
     ax.legend(frameon=False, fontsize=8, labelcolor=TINTA2, loc="upper right")
     _salvar(fig, "2_acerto_por_tipo.png")
 
-    fig, ax = _eixos("Tempo de resposta por modo",
-                     "Segundos por pergunta; a máquina rodava outras tarefas ao mesmo tempo")
+    fig, ax = _eixos(
+        "Tempo de resposta por modo",
+        "Segundos por pergunta; a máquina rodava outras tarefas ao mesmo tempo",
+    )
     seg = [r[m]["segundos"] for m in MODOS]
-    ax.boxplot(seg, tick_labels=nomes, widths=0.45, patch_artist=True,
-               boxprops={"facecolor": AZUL, "edgecolor": AZUL},
-               medianprops={"color": "white", "linewidth": 2},
-               whiskerprops={"color": MUDO}, capprops={"color": MUDO},
-               flierprops={"marker": "o", "markersize": 4, "markerfacecolor": MUDO,
-                           "markeredgecolor": "white"})
+    ax.boxplot(
+        seg,
+        tick_labels=nomes,
+        widths=0.45,
+        patch_artist=True,
+        boxprops={"facecolor": AZUL, "edgecolor": AZUL},
+        medianprops={"color": "white", "linewidth": 2},
+        whiskerprops={"color": MUDO},
+        capprops={"color": MUDO},
+        flierprops={
+            "marker": "o",
+            "markersize": 4,
+            "markerfacecolor": MUDO,
+            "markeredgecolor": "white",
+        },
+    )
     for i, s in enumerate(seg, 1):
-        ax.annotate(f"mediana {median(s):.0f} s", (i + 0.27, median(s)), fontsize=8,
-                    color=TINTA, va="center")
+        ax.annotate(
+            f"mediana {median(s):.0f} s",
+            (i + 0.27, median(s)),
+            fontsize=8,
+            color=TINTA,
+            va="center",
+        )
     ax.set_ylabel("segundos", color=TINTA2, fontsize=9)
     ax.set_ylim(bottom=0)
     _salvar(fig, "3_tempo_por_modo.png")
 
-    fig, ax = _eixos("Alucinação e recusa falsa",
-                     "Alucinação: 10 perguntas sem resposta; recusa falsa: 30 com resposta")
-    _barras(ax, [p - w / 2 for p in pos], [r[m]["alucinacao"] for m in MODOS], AZUL, w,
-            "Alucinação (respondeu sem base)")
-    _barras(ax, [p + w / 2 for p in pos], [r[m]["recusa_falsa"] for m in MODOS], LARANJA, w,
-            "Recusa falsa (recusou com base)")
+    fig, ax = _eixos(
+        "Alucinação e recusa falsa",
+        "Alucinação: 10 perguntas sem resposta; recusa falsa: 30 com resposta",
+    )
+    _barras(
+        ax,
+        [p - w / 2 for p in pos],
+        [r[m]["alucinacao"] for m in MODOS],
+        AZUL,
+        w,
+        "Alucinação (respondeu sem base)",
+    )
+    _barras(
+        ax,
+        [p + w / 2 for p in pos],
+        [r[m]["recusa_falsa"] for m in MODOS],
+        LARANJA,
+        w,
+        "Recusa falsa (recusou com base)",
+    )
     ax.set_xticks(pos, nomes)
     ax.set_ylim(0, 1.1)
     ax.legend(frameon=False, fontsize=8, labelcolor=TINTA2, loc="upper left")

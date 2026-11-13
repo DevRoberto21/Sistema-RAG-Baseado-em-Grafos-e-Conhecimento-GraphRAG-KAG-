@@ -170,10 +170,14 @@ def test_gemini_real_gera_cypher_com_fonte(db):
 @pytest.mark.parametrize(
     "antes,depois",
     [
-        ("MATCH (m)-[:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id",
-         "MATCH (m)-[r:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id"),
-        ("MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose",
-         "MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose"),
+        (
+            "MATCH (m)-[:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id",
+            "MATCH (m)-[r:INDICADO_PARA]->(c) RETURN c.nome, r.fonte_chunk_id",
+        ),
+        (
+            "MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose",
+            "MATCH (m)-[r:CONTEM]->(p)-[:PERTENCE_A]->(c) RETURN r.dose",
+        ),
         ("MATCH (m)-[:CONTEM]->(pr) RETURN pr.nome", "MATCH (m)-[:CONTEM]->(pr) RETURN pr.nome"),
     ],
 )

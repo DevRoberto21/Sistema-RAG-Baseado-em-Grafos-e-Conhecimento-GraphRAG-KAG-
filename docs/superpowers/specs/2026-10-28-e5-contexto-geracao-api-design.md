@@ -46,11 +46,11 @@ Entrada: o retorno de `recuperar`. Saída:
 
 ```python
 {
-    "texto": str,            # vai para o prompt; "" quando não há nada
-    "chunk_ids": set[str],   # chunks que podem ser citados
-    "nos": set[str],         # ids de entidades que podem ser citadas
-    "trechos": list[dict],   # trechos que entraram, no formato de r["trechos"]
-    "sem_consulta": bool,    # r["cypher"]["erro"] == "sem_consulta"
+    "texto": str,  # vai para o prompt; "" quando não há nada
+    "chunk_ids": set[str],  # chunks que podem ser citados
+    "nos": set[str],  # ids de entidades que podem ser citadas
+    "trechos": list[dict],  # trechos que entraram, no formato de r["trechos"]
+    "sem_consulta": bool,  # r["cypher"]["erro"] == "sem_consulta"
 }
 ```
 

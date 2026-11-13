@@ -109,8 +109,11 @@ def test_linha_do_contexto_citada_inteira_vale_pelo_id_entre_colchetes():
 @pytest.mark.parametrize(
     "texto,recusa",
     [
-        ("Não há informações específicas sobre a interação no contexto fornecido. Procure um "
-         "médico.", True),
+        (
+            "Não há informações específicas sobre a interação no contexto fornecido. Procure um "
+            "médico.",
+            True,
+        ),
         ("O Roacutan não está mencionado no contexto fornecido, portanto não sei.", True),
         ("Não, o contexto mostra que o Cozaar não interage com o Advil.", False),
         ("Não há interação descrita entre os dois. Procure um médico.", False),
@@ -128,6 +131,7 @@ def test_schema_poe_suporte_antes_das_listas_e_limita_tamanho():
 
 
 def test_so_nos_validos_sem_chunk_sustentam_a_resposta():
-    g = gerar_resposta(LLMFalso(Resposta=[resp(chunks=["Fato sem fonte"], nos=["marevan"])]),
-                       "p", CTX)
+    g = gerar_resposta(
+        LLMFalso(Resposta=[resp(chunks=["Fato sem fonte"], nos=["marevan"])]), "p", CTX
+    )
     assert not g["recusou"] and g["chunks"] == [] and g["nos"] == ["marevan"]

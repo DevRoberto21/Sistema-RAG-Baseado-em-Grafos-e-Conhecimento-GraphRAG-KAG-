@@ -198,7 +198,13 @@ def html_subgrafo(subgrafo, altura=420, escuro=False):
     ids = {n["id"] for n in subgrafo["nos"]}
     for a in subgrafo["arestas"]:
         if a["origem"] in ids and a["destino"] in ids:
-            net.add_edge(a["origem"], a["destino"], title=a["tipo"], color="#444444" if escuro else "#D9D8D4", width=1)
+            net.add_edge(
+                a["origem"],
+                a["destino"],
+                title=a["tipo"],
+                color="#444444" if escuro else "#D9D8D4",
+                width=1,
+            )
     net.set_options("""{"physics": {"barnesHut": {"springLength": 110}, "stabilization": {"iterations": 120}},
                         "interaction": {"hover": true}, "edges": {"smooth": {"type": "continuous"},
                         "arrows": {"to": {"scaleFactor": 0.4}}}}""")

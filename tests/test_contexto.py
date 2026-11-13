@@ -129,12 +129,15 @@ def test_bloco_de_caminhos_com_nomes_tipos_e_direcao():
 
 
 def test_orcamento_de_caracteres_corta_trechos_ate_o_minimo_e_depois_fatos():
-    fatos = [aresta("marevan", "INTERAGE_COM", "varfarina", f"f{i}", efeito="x" * 50)
-             for i in range(30)]
+    fatos = [
+        aresta("marevan", "INTERAGE_COM", "varfarina", f"f{i}", efeito="x" * 50) for i in range(30)
+    ]
     trechos = [{**trecho(f"s{i}", 0.9 - i / 100), "texto": "y" * 500} for i in range(10)]
     ctx = montar_contexto(r_base(fatos, trechos), max_chars=3000)
     assert len(ctx["texto"]) <= 3000
     assert [t["chunk_id"] for t in ctx["trechos"]][:1] == ["s0"]
     assert len(ctx["trechos"]) <= 4
-    assert montar_contexto(r_base(fatos, trechos))["texto"] == montar_contexto(
-        r_base(fatos, trechos), max_chars=10**6)["texto"]
+    assert (
+        montar_contexto(r_base(fatos, trechos))["texto"]
+        == montar_contexto(r_base(fatos, trechos), max_chars=10**6)["texto"]
+    )

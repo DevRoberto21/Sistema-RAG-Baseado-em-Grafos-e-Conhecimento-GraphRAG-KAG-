@@ -186,8 +186,6 @@ git commit -m "feat: adiciona recuperar_vetorial do modo rag com buscar_chunks c
 No fim de `tests/test_geracao.py`, acrescentar:
 
 ```python
-
-
 def test_contexto_sem_nos_nao_penaliza_nos_citados():
     llm = LLMFalso(Resposta=[resp(chunks=["c1"], nos=["marevan", "x"])])
     g = gerar_resposta(llm, "p", {**CTX, "nos": set()})
@@ -379,8 +377,6 @@ def test_erro_do_gds_nao_levanta_e_apaga_projecao(db, monkeypatch):
 No fim de `tests/test_retrieval.py`, acrescentar:
 
 ```python
-
-
 def test_recuperar_ranqueia_com_gds(db):
     r = recuperar(db, MAREVAN_ADVIL)
     assert r["gds"]["erro"] is None and r["gds"]["caminhos"]
@@ -571,8 +567,6 @@ git commit -m "feat: adiciona ranquear com PageRank, Louvain e caminhos via GDS 
 No fim de `tests/test_contexto.py`, acrescentar:
 
 ```python
-
-
 def test_pagerank_maior_vem_primeiro_mesmo_com_dist_maior():
     r = r_base(
         [

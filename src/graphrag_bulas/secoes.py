@@ -93,11 +93,16 @@ def main() -> None:
         if faltando:
             print(f"{pdf.name}: sem {', '.join(faltando)}")
         meta = manifesto.get(pdf.name, {})
-        linhas.append(json.dumps({
-            "arquivo": pdf.name,
-            "medicamento": meta.get("medicamento", pdf.stem.removeprefix("bula_").upper()),
-            "secoes": secoes,
-        }, ensure_ascii=False))
+        linhas.append(
+            json.dumps(
+                {
+                    "arquivo": pdf.name,
+                    "medicamento": meta.get("medicamento", pdf.stem.removeprefix("bula_").upper()),
+                    "secoes": secoes,
+                },
+                ensure_ascii=False,
+            )
+        )
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
     SAIDA.write_text("\n".join(linhas) + "\n")
     print(f"{len(linhas)} bulas em {SAIDA}")

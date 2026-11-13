@@ -65,10 +65,16 @@ def chunks_da_bula(bula: dict) -> list[dict]:
     for chave, tipo in TIPOS.items():
         secao = f"{b}_{tipo}"
         for ordem, texto in enumerate(quebrar(bula["secoes"].get(chave, ""))):
-            saida.append({
-                "id": f"{secao}_{ordem}", "bula": b, "secao": secao,
-                "tipo": tipo, "ordem": ordem, "texto": texto,
-            })
+            saida.append(
+                {
+                    "id": f"{secao}_{ordem}",
+                    "bula": b,
+                    "secao": secao,
+                    "tipo": tipo,
+                    "ordem": ordem,
+                    "texto": texto,
+                }
+            )
     return saida
 
 

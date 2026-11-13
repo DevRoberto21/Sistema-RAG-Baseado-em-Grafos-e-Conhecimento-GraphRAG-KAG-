@@ -127,8 +127,12 @@ def recuperar_vetorial(driver, pergunta, k=5) -> dict
 Devolve o mesmo formato de `recuperar`:
 
 ```python
-{"seeds": [], "subgrafo": {"nos": [], "arestas": []},
- "trechos": buscar_chunks(driver, embed([pergunta])[0], k), "cypher": None}
+{
+    "seeds": [],
+    "subgrafo": {"nos": [], "arestas": []},
+    "trechos": buscar_chunks(driver, embed([pergunta])[0], k),
+    "cypher": None,
+}
 ```
 
 Pergunta sem nenhum caractere de palavra (`\w`) devolve `trechos = []` sem chamar `embed`, como

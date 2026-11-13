@@ -10,8 +10,12 @@ from graphrag_bulas.avaliacao import (
 )
 from graphrag_bulas.geracao import Resposta
 
-P1 = {"id": "q1", "tipo": "1hop", "fatos": [["tontura"], ["hemorragia", "sangramento"]],
-      "fontes": ["c1"]}
+P1 = {
+    "id": "q1",
+    "tipo": "1hop",
+    "fatos": [["tontura"], ["hemorragia", "sangramento"]],
+    "fontes": ["c1"],
+}
 PS = {"id": "q2", "tipo": "sem_resposta", "fatos": [], "fontes": []}
 
 
@@ -44,15 +48,16 @@ def test_metricas_linha_com_erro_e_none():
 
 
 def test_validar_gold():
-    perguntas = ([{**P1, "id": f"a{i}"} for i in range(15)]
-                 + [{**P1, "id": f"b{i}", "tipo": "multihop"} for i in range(15)]
-                 + [{**PS, "id": f"c{i}"} for i in range(10)])
+    perguntas = (
+        [{**P1, "id": f"a{i}"} for i in range(15)]
+        + [{**P1, "id": f"b{i}", "tipo": "multihop"} for i in range(15)]
+        + [{**PS, "id": f"c{i}"} for i in range(10)]
+    )
     assert validar_gold({"perguntas": perguntas}, {"c1"}) == []
     erros = validar_gold({"perguntas": perguntas}, set())
     assert any("c1" in e for e in erros)
     erros = validar_gold({"perguntas": perguntas[:-1] + [perguntas[0]]}, {"c1"})
     assert any("repetido" in e for e in erros) and any("sem_resposta" in e for e in erros)
-
 
 
 class LLMFalso:
@@ -82,9 +87,12 @@ def test_rodar_grava_retoma_e_registra_erro(tmp_path):
         chamadas.append((pergunta, modo))
         if pergunta == "ruim":
             raise RuntimeError("boom")
-        return {"resposta": "tontura", "recusou": False, "confianca": 0.9,
-                "trechos": [{"chunk_id": "c1", "citado": True},
-                            {"chunk_id": "c2", "citado": False}]}
+        return {
+            "resposta": "tontura",
+            "recusou": False,
+            "confianca": 0.9,
+            "trechos": [{"chunk_id": "c1", "citado": True}, {"chunk_id": "c2", "citado": False}],
+        }
 
     ps = [{"id": "q1", "pergunta": "boa"}, {"id": "q2", "pergunta": "ruim"}]
     assert rodar(ps, ["rag"], resp, saida) == 2
@@ -97,9 +105,15 @@ def test_rodar_grava_retoma_e_registra_erro(tmp_path):
 
 def test_relatorio_tem_tabelas_e_aviso():
     ps = [P1, PS]
-    linhas = [{"id": "q1", "modo": "rag", "segundos": 2.0, **linha(resposta="tontura sangramento",
-                                                                   citados=["c1"])},
-              {"id": "q2", "modo": "rag", "segundos": 1.0, **linha(recusou=True)}]
+    linhas = [
+        {
+            "id": "q1",
+            "modo": "rag",
+            "segundos": 2.0,
+            **linha(resposta="tontura sangramento", citados=["c1"]),
+        },
+        {"id": "q2", "modo": "rag", "segundos": 1.0, **linha(recusou=True)},
+    ]
     md = relatorio(ps, linhas)
     assert "| rag | 1.000 | 1.000 | 1.000 | 0.000 | 1.000 | 0.000 | 1.5 | 0 |" in md
     assert "sem revisão humana" in md

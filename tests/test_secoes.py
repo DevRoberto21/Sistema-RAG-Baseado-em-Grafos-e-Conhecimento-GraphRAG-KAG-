@@ -38,9 +38,16 @@ Histórico de alteração da bula
 def test_separa_dez_secoes_em_ordem():
     s = separar(unicodedata.normalize("NFD", BULA))  # acentos decompostos
     assert list(s) == [
-        "indicacoes", "resultados_eficacia", "caracteristicas_farmacologicas",
-        "contraindicacoes", "advertencias_precaucoes", "interacoes",
-        "armazenamento", "posologia", "reacoes_adversas", "superdose",
+        "indicacoes",
+        "resultados_eficacia",
+        "caracteristicas_farmacologicas",
+        "contraindicacoes",
+        "advertencias_precaucoes",
+        "interacoes",
+        "armazenamento",
+        "posologia",
+        "reacoes_adversas",
+        "superdose",
     ]
     assert s["indicacoes"] == "Hipertensão."
     assert s["contraindicacoes"] == "Gravidez."  # título sem número

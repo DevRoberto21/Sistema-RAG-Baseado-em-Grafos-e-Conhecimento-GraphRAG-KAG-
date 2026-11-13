@@ -6,18 +6,33 @@ from langchain_core.exceptions import OutputParserException
 from graphrag_bulas import extracao_corpus as ec
 from graphrag_bulas.modelos import Extracao
 
-BOA = Extracao.model_validate({
-    "entidades": [{"id": "cozaar", "label": "Medicamento", "nome": "Cozaar"},
-                  {"id": "tontura", "label": "EfeitoAdverso", "nome": "Tontura"},
-                  {"id": "x", "label": "Populacao", "nome": "X"}],
-    "relacoes": [{"tipo": "PODE_CAUSAR", "origem": "cozaar", "destino": "tontura",
-                  "frequencia": "comum", "confianca": 1.0}],
-})
+BOA = Extracao.model_validate(
+    {
+        "entidades": [
+            {"id": "cozaar", "label": "Medicamento", "nome": "Cozaar"},
+            {"id": "tontura", "label": "EfeitoAdverso", "nome": "Tontura"},
+            {"id": "x", "label": "Populacao", "nome": "X"},
+        ],
+        "relacoes": [
+            {
+                "tipo": "PODE_CAUSAR",
+                "origem": "cozaar",
+                "destino": "tontura",
+                "frequencia": "comum",
+                "confianca": 1.0,
+            }
+        ],
+    }
+)
 
 
 def chunk(i, texto="Tontura: comum."):
-    return {"id": f"bula_cozaar_reacoes_adversas_{i}", "bula": "bula_cozaar",
-            "tipo": "reacoes_adversas", "texto": texto}
+    return {
+        "id": f"bula_cozaar_reacoes_adversas_{i}",
+        "bula": "bula_cozaar",
+        "tipo": "reacoes_adversas",
+        "texto": texto,
+    }
 
 
 class LLMFalso:

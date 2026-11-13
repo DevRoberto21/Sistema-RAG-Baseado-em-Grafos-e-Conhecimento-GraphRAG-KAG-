@@ -16,10 +16,13 @@ def test_quebrar_respeita_limite_e_frases():
 
 
 def test_chunks_ids_estaveis_e_so_secoes_do_schema():
-    bula = {"arquivo": "bula_Renitec.pdf", "secoes": {
-        "advertencias_precaucoes": "Hipotensão. Angioedema.",
-        "superdose": "Fora do schema.",
-    }}
+    bula = {
+        "arquivo": "bula_Renitec.pdf",
+        "secoes": {
+            "advertencias_precaucoes": "Hipotensão. Angioedema.",
+            "superdose": "Fora do schema.",
+        },
+    }
     cs = chunks_da_bula(bula)
     assert [c["id"] for c in cs] == ["bula_renitec_advertencias_0"]
     assert cs[0]["secao"] == "bula_renitec_advertencias"

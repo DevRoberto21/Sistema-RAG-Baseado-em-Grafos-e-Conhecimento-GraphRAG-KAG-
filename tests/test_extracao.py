@@ -11,8 +11,12 @@ from graphrag_bulas.extracao import EXEMPLOS, FOCO, extrair, montar_prompt, vali
 from graphrag_bulas.modelos import RELACOES, Extracao
 
 GOLD = Path(__file__).resolve().parents[1] / "data" / "gold"
-CHUNK = {"id": "bula_cozaar_reacoes_adversas_0", "bula": "bula_cozaar",
-         "tipo": "reacoes_adversas", "texto": "Tontura: comum."}
+CHUNK = {
+    "id": "bula_cozaar_reacoes_adversas_0",
+    "bula": "bula_cozaar",
+    "tipo": "reacoes_adversas",
+    "texto": "Tontura: comum.",
+}
 
 
 class LLMFalso:
@@ -82,24 +86,43 @@ def rel(tipo, origem, destino, **kw):
 
 
 def test_validar_mantem_relacao_valida_e_preenche_desconhecida():
-    e, descartes = validar(_ext([COZAAR, TONTURA], [rel("PODE_CAUSAR", "cozaar", "tontura")]),
-                           "cozaar")
+    e, descartes = validar(
+        _ext([COZAAR, TONTURA], [rel("PODE_CAUSAR", "cozaar", "tontura")]), "cozaar"
+    )
     assert descartes == [] and e.relacoes[0].frequencia == "desconhecida"
 
 
-@pytest.mark.parametrize("entidades,relacao,motivo", [
-    ([COZAAR], rel("PODE_CAUSAR", "cozaar", "tontura"), "ponta fora"),
-    ([COZAAR, {"id": "hipertensao", "label": "Condicao", "nome": "H"}],
-     rel("PODE_CAUSAR", "cozaar", "hipertensao"), "fora do schema"),
-    ([COZAAR, {"id": "adulto", "label": "Populacao", "nome": "Adulto"}],
-     rel("CONTRAINDICADO_EM", "cozaar", "adulto"), "Populacao"),
-    ([COZAAR, {"id": "losartana_potassica", "label": "PrincipioAtivo", "nome": "L"}],
-     rel("CONTRAINDICADO_EM", "cozaar", "losartana_potassica"), "fora do schema"),
-    ([{"id": "renitec", "label": "Medicamento", "nome": "Renitec"}, TONTURA],
-     rel("PODE_CAUSAR", "renitec", "tontura"), "não é o da bula"),
-    ([{"id": "losartana", "label": "PrincipioAtivo", "nome": "Losartana"}],
-     rel("INTERAGE_COM", "losartana", "losartana"), "laço"),
-])
+@pytest.mark.parametrize(
+    "entidades,relacao,motivo",
+    [
+        ([COZAAR], rel("PODE_CAUSAR", "cozaar", "tontura"), "ponta fora"),
+        (
+            [COZAAR, {"id": "hipertensao", "label": "Condicao", "nome": "H"}],
+            rel("PODE_CAUSAR", "cozaar", "hipertensao"),
+            "fora do schema",
+        ),
+        (
+            [COZAAR, {"id": "adulto", "label": "Populacao", "nome": "Adulto"}],
+            rel("CONTRAINDICADO_EM", "cozaar", "adulto"),
+            "Populacao",
+        ),
+        (
+            [COZAAR, {"id": "losartana_potassica", "label": "PrincipioAtivo", "nome": "L"}],
+            rel("CONTRAINDICADO_EM", "cozaar", "losartana_potassica"),
+            "fora do schema",
+        ),
+        (
+            [{"id": "renitec", "label": "Medicamento", "nome": "Renitec"}, TONTURA],
+            rel("PODE_CAUSAR", "renitec", "tontura"),
+            "não é o da bula",
+        ),
+        (
+            [{"id": "losartana", "label": "PrincipioAtivo", "nome": "Losartana"}],
+            rel("INTERAGE_COM", "losartana", "losartana"),
+            "laço",
+        ),
+    ],
+)
 def test_validar_descarta_fora_do_schema(entidades, relacao, motivo):
     e, descartes = validar(_ext(entidades, [relacao]), "cozaar")
     assert e.relacoes == [] and e.entidades == []
@@ -107,13 +130,18 @@ def test_validar_descarta_fora_do_schema(entidades, relacao, motivo):
 
 
 def test_validar_normaliza_ids_apaga_prop_errada_e_deduplica():
-    ents = [{"id": "Cozaar", "label": "Medicamento", "nome": "Cozaar"},
-            {"id": "Insuficiência Renal", "label": "Condicao", "nome": "Insuficiência renal"}]
-    rels = [rel("CONTRAINDICADO_EM", "Cozaar", "Insuficiência Renal", dose="50 mg"),
-            rel("CONTRAINDICADO_EM", "cozaar", "insuficiencia_renal", confianca=1.0)]
+    ents = [
+        {"id": "Cozaar", "label": "Medicamento", "nome": "Cozaar"},
+        {"id": "Insuficiência Renal", "label": "Condicao", "nome": "Insuficiência renal"},
+    ]
+    rels = [
+        rel("CONTRAINDICADO_EM", "Cozaar", "Insuficiência Renal", dose="50 mg"),
+        rel("CONTRAINDICADO_EM", "cozaar", "insuficiencia_renal", confianca=1.0),
+    ]
     e, descartes = validar(_ext(ents, rels), "cozaar")
     assert [(r.origem, r.destino, r.dose, r.confianca) for r in e.relacoes] == [
-        ("cozaar", "insuficiencia_renal", None, 1.0)]
+        ("cozaar", "insuficiencia_renal", None, 1.0)
+    ]
     assert {x.id for x in e.entidades} == {"cozaar", "insuficiencia_renal"}
     assert any("dose apagada" in d for d in descartes) and any("repetida" in d for d in descartes)
 
@@ -125,21 +153,27 @@ def test_exemplos_passam_na_validacao_sem_descarte():
 
 
 def test_validar_corrige_populacao_e_ponta_medicamento():
-    ents = [COZAAR, {"id": "Gravidez", "label": "Populacao", "nome": "Gravidez"},
-            {"id": "varfarina", "label": "PrincipioAtivo", "nome": "Varfarina"},
-            {"id": "alisquireno", "label": "PrincipioAtivo", "nome": "Alisquireno"},
-            {"id": "bra", "label": "ClasseTerapeutica", "nome": "BRA"}]
-    rels = [rel("CONTRAINDICADO_EM", "cozaar", "Gravidez"),
-            rel("INTERAGE_COM", "cozaar", "varfarina"),
-            rel("CONTRAINDICADO_EM", "cozaar", "alisquireno"),
-            rel("PERTENCE_A", "cozaar", "bra")]
+    ents = [
+        COZAAR,
+        {"id": "Gravidez", "label": "Populacao", "nome": "Gravidez"},
+        {"id": "varfarina", "label": "PrincipioAtivo", "nome": "Varfarina"},
+        {"id": "alisquireno", "label": "PrincipioAtivo", "nome": "Alisquireno"},
+        {"id": "bra", "label": "ClasseTerapeutica", "nome": "BRA"},
+    ]
+    rels = [
+        rel("CONTRAINDICADO_EM", "cozaar", "Gravidez"),
+        rel("INTERAGE_COM", "cozaar", "varfarina"),
+        rel("CONTRAINDICADO_EM", "cozaar", "alisquireno"),
+        rel("PERTENCE_A", "cozaar", "bra"),
+    ]
     e, descartes = validar(_ext(ents, rels), "cozaar")
     assert descartes == []
     assert {(r.tipo, r.origem, r.destino, r.gravidade) for r in e.relacoes} == {
         ("CONTRAINDICADO_EM", "cozaar", "gestante", None),
         ("INTERAGE_COM", "losartana", "varfarina", "desconhecida"),
         ("INTERAGE_COM", "losartana", "alisquireno", "grave"),
-        ("PERTENCE_A", "losartana", "bra", None)}
+        ("PERTENCE_A", "losartana", "bra", None),
+    }
 
 
 def test_validar_descarta_contraindicacao_sem_proibicao_no_chunk():

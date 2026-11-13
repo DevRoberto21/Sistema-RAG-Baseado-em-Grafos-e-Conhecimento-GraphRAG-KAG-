@@ -90,10 +90,22 @@ def rodar(chunks, llm, modelo, max_chamadas=None, pausa=0.0, dormir=time.sleep):
                 continue
             arq.write_text(bruta.model_dump_json())
         limpa, descartes = validar(bruta, chunk["bula"].removeprefix("bula_"), chunk)
-        log.info("[%d/%d] %s: %d relações, %d descartes", i, len(chunks), chunk["id"],
-                 len(limpa.relacoes), len(descartes))
-        linhas.append({"chunk_id": chunk["id"], "bula": chunk["bula"], **limpa.model_dump(),
-                       "descartes": descartes})
+        log.info(
+            "[%d/%d] %s: %d relações, %d descartes",
+            i,
+            len(chunks),
+            chunk["id"],
+            len(limpa.relacoes),
+            len(descartes),
+        )
+        linhas.append(
+            {
+                "chunk_id": chunk["id"],
+                "bula": chunk["bula"],
+                **limpa.model_dump(),
+                "descartes": descartes,
+            }
+        )
     return linhas, conta
 
 
@@ -105,8 +117,9 @@ def main(argv=None):
     p.add_argument("--pausa", type=float, default=0.0, help="segundos entre chamadas")
     p.add_argument("--modelo", default=config.LLM_MODEL, help="modelo só da extração")
     a = p.parse_args(argv)
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s",
-                        datefmt="%H:%M:%S")
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S"
+    )
     for ruido in ("google_genai", "httpx"):  # "AFC is enabled..." e uma linha por request
         logging.getLogger(ruido).setLevel(logging.WARNING)
 

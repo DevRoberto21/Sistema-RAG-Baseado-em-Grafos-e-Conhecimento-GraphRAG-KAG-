@@ -9,12 +9,22 @@ from typing import Literal, get_args
 from pydantic import BaseModel, Field
 
 Label = Literal[
-    "Medicamento", "PrincipioAtivo", "ClasseTerapeutica", "Condicao",
-    "EfeitoAdverso", "Fabricante", "Populacao",
+    "Medicamento",
+    "PrincipioAtivo",
+    "ClasseTerapeutica",
+    "Condicao",
+    "EfeitoAdverso",
+    "Fabricante",
+    "Populacao",
 ]
 TipoRelacao = Literal[
-    "CONTEM", "PERTENCE_A", "INDICADO_PARA", "CONTRAINDICADO_EM",
-    "PODE_CAUSAR", "INTERAGE_COM", "FABRICADO_POR",
+    "CONTEM",
+    "PERTENCE_A",
+    "INDICADO_PARA",
+    "CONTRAINDICADO_EM",
+    "PODE_CAUSAR",
+    "INTERAGE_COM",
+    "FABRICADO_POR",
 ]
 Frequencia = Literal["muito_comum", "comum", "incomum", "rara", "muito_rara", "desconhecida"]
 Gravidade = Literal["grave", "moderada", "leve", "desconhecida"]
