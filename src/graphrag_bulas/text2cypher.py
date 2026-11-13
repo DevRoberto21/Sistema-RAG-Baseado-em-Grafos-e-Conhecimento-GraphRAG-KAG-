@@ -6,9 +6,8 @@ Spec: docs/superpowers/specs/2026-10-28-e5-text2cypher-design.md
 import logging
 import re
 
-from pydantic import BaseModel, Field
-
 from neo4j import READ_ACCESS, unit_of_work
+from pydantic import BaseModel, Field
 
 log = logging.getLogger(__name__)
 

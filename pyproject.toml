@@ -38,5 +38,9 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 
+[tool.ruff.lint.isort]
+# pasta local neo4j/ (dados do Docker, ignorada no git) fazia o ruff tratar o pacote como first-party
+known-third-party = ["neo4j"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

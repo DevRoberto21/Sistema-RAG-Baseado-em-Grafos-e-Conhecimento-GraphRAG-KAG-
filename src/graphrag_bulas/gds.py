@@ -6,9 +6,8 @@ Spec: docs/superpowers/specs/2026-10-28-e5-gds-modo-rag-design.md
 from itertools import combinations
 from uuid import uuid4
 
-from neo4j.exceptions import Neo4jError
-
 from neo4j import Query
+from neo4j.exceptions import Neo4jError
 
 MAX_MEDICAMENTOS = 3
 # Ligação entre remédios via princípio ativo, classe e interação (PLANO_EQUIPE, E5.4).
