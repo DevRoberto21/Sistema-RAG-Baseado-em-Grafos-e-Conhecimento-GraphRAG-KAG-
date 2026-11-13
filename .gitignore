@@ -13,3 +13,6 @@ neo4j/
 entrega/
 scripts/gerar_slides.py
 .archify/
+
+# Planejamento da equipe (fica só local)
+planejamento/
